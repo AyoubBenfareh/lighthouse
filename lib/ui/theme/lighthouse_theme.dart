@@ -13,6 +13,7 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Warm-neutral ground, ink, brand, glow, and feedback colors. Fitzgerald
 /// category fills live in board `color_key` JSON, not here (they are clinical
@@ -50,6 +51,34 @@ abstract final class LhColors {
 
   /// Ink at a given opacity, for hairline shadows.
   static Color inkAlpha(double a) => ink.withValues(alpha: a);
+}
+
+/// System bar (status + navigation) styling for edge-to-edge.
+///
+/// Android 15 (API 35+) enforces edge-to-edge: the app draws behind the system
+/// bars and the legacy bar-color APIs are ignored. The app is a single light
+/// theme, so the cream ground shows behind both bars; we make the bars
+/// transparent and pin their icons dark so the glyphs stay legible on cream.
+/// On API 35+ the transparency is forced anyway; we set it (and the icon
+/// brightness) for older versions too so the look is identical everywhere.
+///
+/// Applied once globally in `main()` AND as [AppBarTheme.systemOverlayStyle].
+/// A Material AppBar re-applies its own overlay style on every build but only
+/// sets the status-bar fields, so wiring the same style into the AppBar theme
+/// keeps the navigation-bar fields from being dropped on screens that have an
+/// app bar.
+abstract final class LhSystemUi {
+  static const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark, // Android: dark icons on cream
+    statusBarBrightness: Brightness.light, // iOS: light ground -> dark glyphs
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    // Flat brand look, no scrim: screen content is inset by SafeArea, so the
+    // cream ground (not dark content) sits behind the bar and dark icons read.
+    systemNavigationBarContrastEnforced: false,
+  );
 }
 
 /// Corner radii (logical px).
@@ -248,6 +277,9 @@ ThemeData buildLighthouseTheme({required String fontFamily}) {
       centerTitle: false,
       titleTextStyle: LhText.screenTitle,
       iconTheme: IconThemeData(color: LhColors.ink, size: 28),
+      // Edge-to-edge: dark status-bar icons over the cream app bar, and keep the
+      // navigation-bar fields so an app-bar rebuild does not drop them.
+      systemOverlayStyle: LhSystemUi.overlayStyle,
     ),
     iconTheme: const IconThemeData(color: LhColors.ink2, size: 28),
     // FilledButton -> primary (brown); FilledButton.tonal -> secondaryContainer

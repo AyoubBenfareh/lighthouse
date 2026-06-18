@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,6 +32,17 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       crashCapture.install();
+
+      // Android 15 (API 35+) enforces edge-to-edge: the app draws behind the
+      // status and navigation bars. Opt in explicitly (Flutter also defaults to
+      // edge-to-edge on API 29+, but pinning it is version-independent) and set
+      // transparent system bars with dark icons for the cream ground. Per-screen
+      // insets are handled by SafeArea and the Material AppBar; the overlay style
+      // (and the matching AppBarTheme entry) lives in LhSystemUi.overlayStyle.
+      unawaited(
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge),
+      );
+      SystemChrome.setSystemUIOverlayStyle(LhSystemUi.overlayStyle);
 
       // Surface the bundled font + TTS-provider licences on the in-app
       // "Open-source licences" page alongside the auto-collected package
