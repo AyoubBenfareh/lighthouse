@@ -834,6 +834,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otaCheckedJustNow => 'Checked just now';
 
   @override
+  String otaLastChecked(String when) {
+    return 'Last checked: $when';
+  }
+
+  @override
+  String get otaWhenJustNow => 'just now';
+
+  @override
+  String get otaWhenToday => 'today';
+
+  @override
+  String get otaWhenYesterday => 'yesterday';
+
+  @override
   String get feedbackThanksTitle => 'Thank you. Your message is on its way.';
 
   @override

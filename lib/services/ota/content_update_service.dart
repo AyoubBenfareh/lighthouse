@@ -24,6 +24,7 @@ import 'content_http_client.dart';
 import 'content_manifest.dart';
 import 'content_overlay_store.dart';
 import 'manifest_signature_verifier.dart';
+import 'ota_last_checked_store.dart';
 
 enum UpdateStatus {
   /// The applied content version already matches the server.
@@ -63,9 +64,11 @@ class ContentUpdateService {
     required ContentOverlayStore store,
     required ManifestSignatureVerifier verifier,
     this.appBuild = '',
+    OtaLastCheckedStore? lastCheckedStore,
   })  : _http = httpClient,
         _store = store,
-        _verifier = verifier;
+        _verifier = verifier,
+        _lastChecked = lastCheckedStore;
 
   /// The content root, e.g. `https://.../content`. Null/empty means OTA is not
   /// configured yet (deploy deferred), so [check] is a clean no-op.
@@ -86,6 +89,11 @@ class ContentUpdateService {
   final ContentHttpClient _http;
   final ContentOverlayStore _store;
   final ManifestSignatureVerifier _verifier;
+
+  /// Local-only "last checked" timestamp store (ADR 0017). Optional: when null
+  /// (e.g. pure unit tests of the check/apply logic), no timestamp is recorded
+  /// and [lastCheckedAt] returns null. Production always wires one.
+  final OtaLastCheckedStore? _lastChecked;
 
   static const String _manifestName = 'manifest.json';
   static const String _signatureName = 'manifest.json.sig';
@@ -111,6 +119,14 @@ class ContentUpdateService {
             message: 'manifest signature verification failed');
       }
       final manifest = ContentManifest.parse(utf8.decode(manifestBytes));
+      // The server was reached and returned a valid, signed manifest. Record
+      // the check time locally so the screen can show "Last checked: <time>"
+      // instead of "never" (ADR 0017). This covers every server-reached
+      // outcome below (up-to-date / available / incompatible) but NOT
+      // notConfigured, an HTTP error, or a signature/parse failure: those
+      // return before this line, so "never" stays truthful until a real check
+      // succeeds. Local-only, never transmitted.
+      await _lastChecked?.write(DateTime.now());
       if (!_isCompatible(manifest.minAppVersion)) {
         return UpdateCheck(UpdateStatus.incompatible, manifest: manifest);
       }
@@ -180,6 +196,10 @@ class ContentUpdateService {
       files: files,
     );
   }
+
+  /// When the parent last ran a server-reached check on this device, or null if
+  /// none has happened. Local-only (ADR 0017); never transmitted.
+  Future<DateTime?> lastCheckedAt() async => _lastChecked?.read();
 
   bool _isCompatible(String? minAppVersion) {
     if (minAppVersion == null || minAppVersion.isEmpty) return true;

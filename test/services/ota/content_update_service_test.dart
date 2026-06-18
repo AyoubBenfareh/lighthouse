@@ -9,6 +9,8 @@ import 'package:lighthouse/services/ota/content_manifest.dart';
 import 'package:lighthouse/services/ota/content_overlay_store.dart';
 import 'package:lighthouse/services/ota/content_update_service.dart';
 import 'package:lighthouse/services/ota/manifest_signature_verifier.dart';
+import 'package:lighthouse/services/ota/ota_last_checked_store.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class _FakeHttp implements ContentHttpClient {
   _FakeHttp(this.responses);
@@ -24,6 +26,10 @@ class _FakeHttp implements ContentHttpClient {
 const _base = 'https://ota.example/content';
 
 void main() {
+  // SharedPreferences mock (used by the "last checked" persistence tests below)
+  // needs the test binding.
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late Directory tmp;
   late ContentOverlayStore store;
   late SimpleKeyPair keyPair;
@@ -80,6 +86,7 @@ void main() {
     String appBuild = '',
     List<String>? trust,
     String? baseUrl = _base,
+    OtaLastCheckedStore? lastCheckedStore,
   }) =>
       ContentUpdateService(
         baseUrl: baseUrl,
@@ -90,6 +97,7 @@ void main() {
         verifier: ManifestSignatureVerifier(
           trustedPublicKeysBase64: trust ?? [publicKeyB64],
         ),
+        lastCheckedStore: lastCheckedStore,
       );
 
   test('available -> apply downloads, verifies, and applies the overlay',
@@ -287,6 +295,111 @@ void main() {
 
     test('does not throw on a garbage build segment', () {
       expect(() => compareAppVersion('0.1.0+!!', '0.1.0+8'), returnsNormally);
+    });
+  });
+
+  group('records "last checked" on server-reached outcomes (P2)', () {
+    setUp(() => SharedPreferences.setMockInitialValues(<String, Object>{}));
+
+    OtaLastCheckedStore freshStore() =>
+        OtaLastCheckedStore(); // backed by the mocked SharedPreferences
+
+    test('lastCheckedAt is null before any check', () async {
+      final lc = freshStore();
+      final svc = _service(const {}, lastCheckedStore: lc);
+      expect(await svc.lastCheckedAt(), isNull);
+    });
+
+    test('upToDate records the check time', () async {
+      await store.apply(
+        contentVersion: 'v1',
+        sequence: 1,
+        files: {'boards/x.json': utf8.encode('v1')},
+      );
+      final lc = freshStore();
+      final svc = _service(
+        await _serve(
+            version: 'v1',
+            sequence: 1,
+            files: {'boards/x.json': utf8.encode('v1')}),
+        lastCheckedStore: lc,
+      );
+      final before = DateTime.now();
+      expect((await svc.check()).status, UpdateStatus.upToDate);
+      final at = await svc.lastCheckedAt();
+      expect(at, isNotNull);
+      expect(at!.isBefore(before.subtract(const Duration(seconds: 5))), isFalse,
+          reason: 'the recorded time is "now", not stale');
+    });
+
+    test('available records the check time', () async {
+      final lc = freshStore();
+      final svc = _service(
+        await _serve(
+            version: 'v1', files: {'boards/x.json': utf8.encode('v1')}),
+        lastCheckedStore: lc,
+      );
+      expect((await svc.check()).status, UpdateStatus.available);
+      expect(await svc.lastCheckedAt(), isNotNull);
+    });
+
+    test('incompatible records the check time (the server was reached)',
+        () async {
+      final lc = freshStore();
+      final svc = _service(
+        await _serve(
+            version: 'v1',
+            files: {'boards/x.json': utf8.encode('x')},
+            minAppVersion: '2.0.0'),
+        appVersion: '1.5.0',
+        lastCheckedStore: lc,
+      );
+      expect((await svc.check()).status, UpdateStatus.incompatible);
+      expect(await svc.lastCheckedAt(), isNotNull);
+    });
+
+    test('notConfigured does NOT record a time (server never contacted)',
+        () async {
+      final lc = freshStore();
+      final svc = _service(const {}, baseUrl: '', lastCheckedStore: lc);
+      expect((await svc.check()).status, UpdateStatus.notConfigured);
+      expect(await svc.lastCheckedAt(), isNull);
+    });
+
+    test('an HTTP error does NOT record a time', () async {
+      final lc = freshStore();
+      final svc = _service(const {}, lastCheckedStore: lc); // 404 on manifest
+      expect((await svc.check()).status, UpdateStatus.error);
+      expect(await svc.lastCheckedAt(), isNull);
+    });
+
+    test('a signature failure does NOT record a time (no valid manifest)',
+        () async {
+      final other = base64.encode(
+          (await (await Ed25519().newKeyPair()).extractPublicKey()).bytes);
+      final lc = freshStore();
+      final svc = _service(
+        await _serve(
+            version: 'v1', files: {'boards/x.json': utf8.encode('x')}),
+        trust: [other],
+        lastCheckedStore: lc,
+      );
+      expect((await svc.check()).status, UpdateStatus.error);
+      expect(await svc.lastCheckedAt(), isNull);
+    });
+
+    test('persists across a fresh service/store instance (cold restart)',
+        () async {
+      // First service records the time...
+      final svc1 = _service(
+        await _serve(
+            version: 'v1', files: {'boards/x.json': utf8.encode('v1')}),
+        lastCheckedStore: freshStore(),
+      );
+      await svc1.check();
+      // ...a brand-new service + store (same mocked prefs) still sees it.
+      final svc2 = _service(const {}, lastCheckedStore: freshStore());
+      expect(await svc2.lastCheckedAt(), isNotNull);
     });
   });
 }

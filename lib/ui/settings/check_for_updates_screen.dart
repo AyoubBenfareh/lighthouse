@@ -30,6 +30,23 @@ class _CheckForUpdatesScreenState extends ConsumerState<CheckForUpdatesScreen> {
   UpdateCheck? _result;
   bool _applied = false;
 
+  /// When the parent last ran a server-reached check on this device (persisted
+  /// locally, ADR 0017). Loaded on entry; null means "never on this device".
+  DateTime? _lastChecked;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLastChecked();
+  }
+
+  Future<void> _loadLastChecked() async {
+    final service = await ref.read(contentUpdateServiceProvider.future);
+    final when = await service.lastCheckedAt();
+    if (!mounted) return;
+    setState(() => _lastChecked = when);
+  }
+
   Future<void> _check() async {
     setState(() {
       _busy = true;
@@ -43,6 +60,9 @@ class _CheckForUpdatesScreenState extends ConsumerState<CheckForUpdatesScreen> {
       _busy = false;
       _result = result;
     });
+    // Refresh the persisted timestamp so backing out and re-entering (or the
+    // idle line after this result clears) reflects this check.
+    await _loadLastChecked();
   }
 
   Future<void> _apply(ContentManifest manifest) async {
@@ -103,7 +123,11 @@ class _CheckForUpdatesScreenState extends ConsumerState<CheckForUpdatesScreen> {
               ] else if (_result != null)
                 _resultView(l10n, _result!)
               else if (showIdle)
-                Text(l10n.otaLastCheckedNever,
+                Text(
+                    _lastChecked == null
+                        ? l10n.otaLastCheckedNever
+                        : l10n.otaLastChecked(
+                            _relativeLastChecked(context, l10n, _lastChecked!)),
                     style: const TextStyle(
                         fontFamily: 'Atkinson Hyperlegible',
                         fontSize: 16,
@@ -113,6 +137,22 @@ class _CheckForUpdatesScreenState extends ConsumerState<CheckForUpdatesScreen> {
         ),
       ),
     );
+  }
+
+  /// A localized relative time for the idle "Last checked" line: "just now"
+  /// within the last minute, then "today" / "yesterday", else a locale-aware
+  /// short date. Kept on-device; this value is never transmitted (ADR 0017).
+  String _relativeLastChecked(
+      BuildContext context, AppLocalizations l10n, DateTime when) {
+    final now = DateTime.now();
+    if (now.difference(when).inMinutes < 1) return l10n.otaWhenJustNow;
+    bool sameDay(DateTime a, DateTime b) =>
+        a.year == b.year && a.month == b.month && a.day == b.day;
+    if (sameDay(now, when)) return l10n.otaWhenToday;
+    if (sameDay(now.subtract(const Duration(days: 1)), when)) {
+      return l10n.otaWhenYesterday;
+    }
+    return MaterialLocalizations.of(context).formatShortDate(when);
   }
 
   Widget _resultView(AppLocalizations l10n, UpdateCheck result) {

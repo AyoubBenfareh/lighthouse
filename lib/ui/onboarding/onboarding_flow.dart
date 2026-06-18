@@ -94,7 +94,7 @@ class _OnboardingFlowState extends ConsumerState<OnboardingFlow> {
                 children: _pages,
               ),
             ),
-            _NavBar(
+            OnboardingNavBar(
               isFirst: _page == 0,
               isLast: _isLastPage,
               onBack: _back,
@@ -142,8 +142,10 @@ class _StepDots extends StatelessWidget {
   }
 }
 
-class _NavBar extends StatelessWidget {
-  const _NavBar({
+@visibleForTesting
+class OnboardingNavBar extends StatelessWidget {
+  const OnboardingNavBar({
+    super.key,
     required this.isFirst,
     required this.isLast,
     required this.onBack,
@@ -167,49 +169,59 @@ class _NavBar extends StatelessWidget {
         border: Border(top: BorderSide(color: LhColors.line)),
       ),
       padding: const EdgeInsets.fromLTRB(28, 14, 28, 18),
-      child: Row(
-        children: [
-          if (!isFirst)
-            TextButton(onPressed: onBack, child: Text(l10n.back))
-          else
-            const SizedBox.shrink(),
-          const Spacer(),
-          // Done is available on EVERY screen (ADR 0003 § Onboarding): a parent
-          // can finish at any point. Before the last screen it reads "Skip"
-          // (text) beside the brown primary "Next"; the last screen's primary
-          // is "Start using Lighthouse".
-          if (!isLast) ...[
-            TextButton(onPressed: onDone, child: Text(l10n.skip)),
-            const SizedBox(width: 8),
-            FilledButton(onPressed: onNext, child: Text(l10n.next)),
-          ] else ...[
-            // End of first run: offer the guided tour (ADR 0020). "Skip, go to
-            // the board" just completes onboarding; "Take the quick tour"
-            // completes it and starts the tour on the board.
-            Flexible(
-              child: FilledButton.tonal(
-                onPressed: onDone,
-                child: Text(
-                  l10n.tourSkipToBoard,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Flexible(
-              child: FilledButton(
-                onPressed: onTakeTour,
-                child: Text(
-                  l10n.tourTakeQuick,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
+      child: isLast ? _lastScreenActions(l10n) : _stepActions(l10n),
+    );
+  }
+
+  // Before the last screen: a short "Skip" (text, finishes onboarding) beside
+  // the brown primary "Next". Done is available on EVERY screen (ADR 0003 §
+  // Onboarding): a parent can finish at any point. Two short labels share one
+  // row comfortably, so this layout is unchanged.
+  Widget _stepActions(AppLocalizations l10n) {
+    return Row(
+      children: [
+        if (!isFirst)
+          TextButton(onPressed: onBack, child: Text(l10n.back))
+        else
+          const SizedBox.shrink(),
+        const Spacer(),
+        TextButton(onPressed: onDone, child: Text(l10n.skip)),
+        const SizedBox(width: 8),
+        FilledButton(onPressed: onNext, child: Text(l10n.next)),
+      ],
+    );
+  }
+
+  // End of first run (ADR 0020): offer the guided tour. Both CTAs are long
+  // ("Take the quick tour" / "Skip, go to the board"), and longer still in
+  // es/ar or at large Dynamic Type. Side-by-side, after Back + Spacer the row
+  // split three ways and each button got ~1/3 of the width, ellipsizing to
+  // "Ta..." / "Sk...". Stack them full-width instead (primary on top), so the
+  // labels are never truncated and the recommended action reads clearly; Back
+  // sits above the stack. The labels wrap rather than clip, so large text
+  // grows the buttons instead of cutting words.
+  Widget _lastScreenActions(AppLocalizations l10n) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (!isFirst)
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton(onPressed: onBack, child: Text(l10n.back)),
+          ),
+        // "Take the quick tour" completes onboarding and starts the tour on the
+        // board; "Skip, go to the board" just completes onboarding.
+        FilledButton(
+          onPressed: onTakeTour,
+          child: Text(l10n.tourTakeQuick, textAlign: TextAlign.center),
+        ),
+        const SizedBox(height: 10),
+        FilledButton.tonal(
+          onPressed: onDone,
+          child: Text(l10n.tourSkipToBoard, textAlign: TextAlign.center),
+        ),
+      ],
     );
   }
 }

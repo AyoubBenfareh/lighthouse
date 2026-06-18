@@ -28,5 +28,8 @@ final contentUpdateServiceProvider =
     verifier: ManifestSignatureVerifier(
       trustedPublicKeysBase64: kOtaTrustedPublicKeys,
     ),
+    // Local-only "last checked" timestamp (ADR 0017): never transmitted, not
+    // child data, lives in the prefs store the app already uses.
+    lastCheckedStore: OtaLastCheckedStore(),
   );
 });

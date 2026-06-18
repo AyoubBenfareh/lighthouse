@@ -1582,6 +1582,30 @@ abstract class AppLocalizations {
   /// **'Checked just now'**
   String get otaCheckedJustNow;
 
+  /// Idle line on the Check for updates screen when a check has happened before. {when} is a localized relative time (just now / today / yesterday / a short date).
+  ///
+  /// In en, this message translates to:
+  /// **'Last checked: {when}'**
+  String otaLastChecked(String when);
+
+  /// No description provided for @otaWhenJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get otaWhenJustNow;
+
+  /// No description provided for @otaWhenToday.
+  ///
+  /// In en, this message translates to:
+  /// **'today'**
+  String get otaWhenToday;
+
+  /// No description provided for @otaWhenYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'yesterday'**
+  String get otaWhenYesterday;
+
   /// No description provided for @feedbackThanksTitle.
   ///
   /// In en, this message translates to:

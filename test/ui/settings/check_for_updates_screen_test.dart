@@ -34,11 +34,22 @@ class _FakeUpdateService extends ContentUpdateService {
   final UpdateCheck _check;
   final void Function()? onApply;
 
+  /// What [lastCheckedAt] reports. Starts null (never checked) so the widget
+  /// tests never touch SharedPreferences; a check() flips it to "now".
+  DateTime? lastChecked;
+
   @override
-  Future<UpdateCheck> check() async => _check;
+  Future<UpdateCheck> check() async {
+    // Mirror production: a server-reached check records the time locally.
+    lastChecked = DateTime.now();
+    return _check;
+  }
 
   @override
   Future<void> apply(ContentManifest manifest) async => onApply?.call();
+
+  @override
+  Future<DateTime?> lastCheckedAt() async => lastChecked;
 }
 
 const _manifest = ContentManifest(
@@ -136,5 +147,45 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('newer version of Lighthouse'), findsOneWidget);
+  });
+
+  testWidgets('idle shows "never" before any check on this device',
+      (tester) async {
+    await tester.pumpWidget(
+      _host(_FakeUpdateService(const UpdateCheck(UpdateStatus.upToDate))),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Last checked: never on this device.'), findsOneWidget);
+  });
+
+  testWidgets(
+      'after a successful check, re-entering shows the stored time, not "never"',
+      (tester) async {
+    // P2 regression: the result used to live only in transient widget state, so
+    // backing out and re-entering reverted to "never on this device" even right
+    // after a successful check. The timestamp now persists in the service.
+    final service = _FakeUpdateService(const UpdateCheck(UpdateStatus.upToDate));
+
+    // First entry: nothing checked yet on this device.
+    await tester.pumpWidget(_host(service));
+    await tester.pumpAndSettle();
+    expect(find.text('Last checked: never on this device.'), findsOneWidget);
+
+    // Run a check (server reached -> records the time locally).
+    await tester.tap(find.byKey(const ValueKey('ota_check_now')));
+    await tester.pumpAndSettle();
+    expect(find.text('You are up to date.'), findsOneWidget);
+
+    // Back out (dispose the screen) and re-enter: a fresh screen instance runs
+    // initState and reads the stored time. Unmounting first is what makes this
+    // a real re-entry; re-pumping the same tree would just reuse the State.
+    await tester.pumpWidget(const SizedBox());
+    await tester.pumpAndSettle();
+    await tester.pumpWidget(_host(service));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Last checked: just now'), findsOneWidget);
+    expect(find.text('Last checked: never on this device.'), findsNothing);
   });
 }

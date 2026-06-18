@@ -515,6 +515,16 @@
   "showPictogramOnTileSubtitle": "Turn off to show words only",
   "otaLastCheckedNever": "Last checked: never on this device.",
   "otaCheckedJustNow": "Checked just now",
+  "otaLastChecked": "Last checked: {when}",
+  "@otaLastChecked": {
+    "description": "Idle line on the Check for updates screen when a check has happened before. {when} is a localized relative time (just now / today / yesterday / a short date).",
+    "placeholders": {
+      "when": { "type": "String" }
+    }
+  },
+  "otaWhenJustNow": "just now",
+  "otaWhenToday": "today",
+  "otaWhenYesterday": "yesterday",
   "feedbackThanksTitle": "Thank you. Your message is on its way.",
   "feedbackThanksBody": "A real person at Kinder Horizon reads every note. If you left an email, we will reply when we can. Lighthouse is built by a small nonprofit team, and your words genuinely shape what we fix next.",
   "feedbackSendAnother": "Send another",

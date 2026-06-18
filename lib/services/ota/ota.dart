@@ -7,3 +7,4 @@ export 'content_overlay_store.dart';
 export 'content_update_service.dart';
 export 'manifest_signature_verifier.dart';
 export 'ota_config.dart';
+export 'ota_last_checked_store.dart';

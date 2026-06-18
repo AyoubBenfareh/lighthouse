@@ -828,6 +828,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get otaCheckedJustNow => 'تم الفحص للتو';
 
   @override
+  String otaLastChecked(String when) {
+    return 'آخر فحص: $when';
+  }
+
+  @override
+  String get otaWhenJustNow => 'للتو';
+
+  @override
+  String get otaWhenToday => 'اليوم';
+
+  @override
+  String get otaWhenYesterday => 'أمس';
+
+  @override
   String get feedbackThanksTitle => 'شكرًا لك. رسالتك في طريقها إلينا.';
 
   @override
