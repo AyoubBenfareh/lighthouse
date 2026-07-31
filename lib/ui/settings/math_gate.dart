@@ -131,25 +131,39 @@ class _MathGateState extends ConsumerState<MathGate> {
             const SizedBox(height: 8),
             Text(l10n.mathGateBody, style: LhText.body.copyWith(color: LhColors.ink2)),
             const SizedBox(height: 18),
-            Row(
-              children: [
-                KeyedSubtree(
-                  key: _eqKey,
-                  child: Text(
-                    // Western digits, matching the keypad (not Arabic-Indic).
-                    l10n.mathGateEquation('$_a', '$_b'),
-                    style: const TextStyle(
-                      fontFamily: 'Atkinson Hyperlegible',
-                      fontSize: 34,
-                      fontWeight: FontWeight.w700,
-                      color: LhColors.ink,
-                      fontFeatures: [FontFeature.tabularFigures()],
+            // The equation + answer box are sized for a tablet; on a narrow
+            // phone their natural width exceeds the dialog and the row clips
+            // (the first operand in RTL, the answer box in LTR). Scale the whole
+            // unit down to fit. scaleDown never enlarges, so tablets are
+            // untouched; full-width gives FittedBox a bound to measure against;
+            // start alignment hugs the leading edge in both text directions.
+            SizedBox(
+              width: double.infinity,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: AlignmentDirectional.centerStart,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    KeyedSubtree(
+                      key: _eqKey,
+                      child: Text(
+                        // Western digits, matching the keypad (not Arabic-Indic).
+                        l10n.mathGateEquation('$_a', '$_b'),
+                        style: const TextStyle(
+                          fontFamily: 'Atkinson Hyperlegible',
+                          fontSize: 34,
+                          fontWeight: FontWeight.w700,
+                          color: LhColors.ink,
+                          fontFeatures: [FontFeature.tabularFigures()],
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 14),
+                    _AnswerDisplay(entry: _entry),
+                  ],
                 ),
-                const SizedBox(width: 14),
-                _AnswerDisplay(entry: _entry),
-              ],
+              ),
             ),
             if (_errorText != null) ...[
               const SizedBox(height: 10),
@@ -167,14 +181,19 @@ class _MathGateState extends ConsumerState<MathGate> {
               child: _Keypad(onDigit: _pressDigit, onBackspace: _backspace),
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            // OverflowBar (not a plain Row) so the two actions stack vertically
+            // instead of overflowing when the localized labels are too wide for
+            // a narrow phone dialog (e.g. Arabic, or large Dynamic Type).
+            OverflowBar(
+              alignment: MainAxisAlignment.end,
+              overflowAlignment: OverflowBarAlignment.end,
+              spacing: 8,
+              overflowSpacing: 4,
               children: [
                 TextButton(
                   onPressed: () => Navigator.of(context).maybePop(),
                   child: Text(l10n.cancel),
                 ),
-                const SizedBox(width: 8),
                 FilledButton(
                   key: const ValueKey('mathgate_continue'),
                   onPressed: _entry.isEmpty ? null : _submit,

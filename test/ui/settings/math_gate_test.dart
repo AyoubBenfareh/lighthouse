@@ -122,4 +122,40 @@ void main() {
     expect(unlocked, isTrue,
         reason: 'the parental math gate must work identically under ar/RTL');
   });
+
+  // Regression: on a narrow PHONE-width dialog the equation + answer-box row
+  // overflowed and clipped (the answer box in LTR, the first operand in RTL).
+  // It must now scale to fit with no overflow. The tests above use a 1000pt
+  // surface, which is why this went unseen; a real Dialog on a phone is ~250pt
+  // wide. Guards the FittedBox around the equation row in math_gate.dart.
+  for (final locale in const [Locale('en'), Locale('ar')]) {
+    testWidgets(
+        'equation row fits a narrow phone dialog without overflow (${locale.languageCode})',
+        (tester) async {
+      tester.view.physicalSize = const Size(330, 720);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.reset);
+
+      await tester.pumpWidget(localizedApp(
+        // Widest single-digit sum, 9 + 8 = ? (17), to stress the row width.
+        Dialog(
+          child: MathGate(
+            questionSeed: (a: 9, b: 8),
+            onUnlocked: () {},
+          ),
+        ),
+        locale: locale,
+      ));
+      await tester.pump();
+
+      expect(tester.takeException(), isNull,
+          reason: 'the equation + answer box must scale to fit a phone-width '
+              'dialog, not overflow and clip');
+      expect(find.byType(MathGate), findsOneWidget);
+      // Equation rendered (contains the "+"; the "= ?" glyph is locale-specific,
+      // Arabic uses U+061F), and the keypad rendered.
+      expect(find.textContaining('9 + 8'), findsOneWidget);
+      expect(find.byKey(const ValueKey('mathkey_9')), findsOneWidget);
+    });
+  }
 }

@@ -89,6 +89,7 @@ docs/azure-deploy-state.md
 /integration_test/feedback_landing_test.dart
 /integration_test/sendflow_test.dart
 /integration_test/sendflow_ipad_test.dart
+/integration_test/math_gate_proof_test.dart
 
 # Cold-start prior generator build outputs (ADR 0003). Regenerable from the
 # committed tool (build_prior.py + prior/ + data/); the SHIPPED, tracked copies
