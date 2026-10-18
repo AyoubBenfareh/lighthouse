@@ -29,7 +29,9 @@
       "voice_out_es": "leer",
       "voice_out_ar": "يَقْرَأ",
       "label_de": "Lesen",
-      "voice_out_de": "lesen"
+      "voice_out_de": "lesen",
+      "label_ar_dz": "نقرا",
+      "voice_out_ar_dz": "حاب نقرا"
     },
     {
       "id": "btn_act_draw",
@@ -48,7 +50,9 @@
       "voice_out_es": "dibujar",
       "voice_out_ar": "يَرْسُم",
       "label_de": "Malen",
-      "voice_out_de": "malen"
+      "voice_out_de": "malen",
+      "label_ar_dz": "نرسم",
+      "voice_out_ar_dz": "حاب نرسم"
     },
     {
       "id": "btn_act_color",
@@ -67,7 +71,9 @@
       "voice_out_es": "colorear",
       "voice_out_ar": "يُلَوِّن",
       "label_de": "Ausmalen",
-      "voice_out_de": "ausmalen"
+      "voice_out_de": "ausmalen",
+      "label_ar_dz": "يلون",
+      "voice_out_ar_dz": "يُلَوِّن"
     },
     {
       "id": "btn_act_paint",
@@ -86,7 +92,9 @@
       "voice_out_es": "pintar",
       "voice_out_ar": "يَدْهُن",
       "label_de": "Pinseln",
-      "voice_out_de": "pinseln"
+      "voice_out_de": "pinseln",
+      "label_ar_dz": "يدهن",
+      "voice_out_ar_dz": "يَدْهُن"
     },
     {
       "id": "btn_act_sing",
@@ -105,7 +113,9 @@
       "voice_out_es": "cantar",
       "voice_out_ar": "يُغَنِّي",
       "label_de": "Singen",
-      "voice_out_de": "singen"
+      "voice_out_de": "singen",
+      "label_ar_dz": "يغني",
+      "voice_out_ar_dz": "يُغَنِّي"
     },
     {
       "id": "btn_act_dance",
@@ -124,7 +134,9 @@
       "voice_out_es": "bailar",
       "voice_out_ar": "يَرْقُص",
       "label_de": "Tanzen",
-      "voice_out_de": "tanzen"
+      "voice_out_de": "tanzen",
+      "label_ar_dz": "يرقص",
+      "voice_out_ar_dz": "يَرْقُص"
     },
     {
       "id": "btn_act_swim",
@@ -143,7 +155,9 @@
       "voice_out_es": "nadar",
       "voice_out_ar": "يَسْبَح",
       "label_de": "Schwimmen",
-      "voice_out_de": "schwimmen"
+      "voice_out_de": "schwimmen",
+      "label_ar_dz": "يسبح",
+      "voice_out_ar_dz": "يَسْبَح"
     },
     {
       "id": "btn_act_run",
@@ -162,7 +176,9 @@
       "voice_out_es": "correr",
       "voice_out_ar": "يَجْرِي",
       "label_de": "Rennen",
-      "voice_out_de": "rennen"
+      "voice_out_de": "rennen",
+      "label_ar_dz": "نجري",
+      "voice_out_ar_dz": "نجري"
     },
     {
       "id": "btn_act_jump",
@@ -181,7 +197,9 @@
       "voice_out_es": "saltar",
       "voice_out_ar": "يَقْفِز",
       "label_de": "Hüpfen",
-      "voice_out_de": "hüpfen"
+      "voice_out_de": "hüpfen",
+      "label_ar_dz": "يقفز",
+      "voice_out_ar_dz": "يَقْفِز"
     },
     {
       "id": "btn_act_ride",
@@ -200,7 +218,9 @@
       "voice_out_es": "montar",
       "voice_out_ar": "يَرْكَب",
       "label_de": "Fahren",
-      "voice_out_de": "fahren"
+      "voice_out_de": "fahren",
+      "label_ar_dz": "يركب",
+      "voice_out_ar_dz": "يَرْكَب"
     },
     {
       "id": "btn_act_build",
@@ -219,7 +239,9 @@
       "voice_out_es": "construir",
       "voice_out_ar": "يَبْنِي",
       "label_de": "Bauen",
-      "voice_out_de": "bauen"
+      "voice_out_de": "bauen",
+      "label_ar_dz": "يبني",
+      "voice_out_ar_dz": "يَبْنِي"
     },
     {
       "id": "btn_act_watch",
@@ -238,7 +260,9 @@
       "voice_out_es": "ver televisión",
       "voice_out_ar": "مُشَاهَدَةُ التِّلْفَاز",
       "label_de": "Schauen",
-      "voice_out_de": "schauen"
+      "voice_out_de": "schauen",
+      "label_ar_dz": "نتفرج",
+      "voice_out_ar_dz": "نتفرج التيليفزيون"
     },
     {
       "id": "btn_act_listen",
@@ -257,7 +281,9 @@
       "voice_out_es": "escuchar",
       "voice_out_ar": "يَسْتَمِع",
       "label_de": "Zuhören",
-      "voice_out_de": "zuhören"
+      "voice_out_de": "zuhören",
+      "label_ar_dz": "يستمع",
+      "voice_out_ar_dz": "يَسْتَمِع"
     },
     {
       "id": "btn_act_cook",
@@ -276,7 +302,9 @@
       "voice_out_es": "cocinar",
       "voice_out_ar": "يَطْبُخ",
       "label_de": "Kochen",
-      "voice_out_de": "kochen"
+      "voice_out_de": "kochen",
+      "label_ar_dz": "يطبخ",
+      "voice_out_ar_dz": "يَطْبُخ"
     },
     {
       "id": "btn_act_walk",
@@ -295,7 +323,9 @@
       "voice_out_es": "caminar",
       "voice_out_ar": "يَمْشِي",
       "label_de": "Spazieren",
-      "voice_out_de": "spazieren"
+      "voice_out_de": "spazieren",
+      "label_ar_dz": "نتمشى",
+      "voice_out_ar_dz": "نتمشى"
     },
     {
       "id": "btn_act_sleep",
@@ -314,8 +344,11 @@
       "voice_out_es": "dormir",
       "voice_out_ar": "يَنَام",
       "label_de": "Schlafen",
-      "voice_out_de": "schlafen"
+      "voice_out_de": "schlafen",
+      "label_ar_dz": "نرقد",
+      "voice_out_ar_dz": "حاب نرقد"
     }
   ],
-  "board_name_de": "Aktivitäten"
+  "board_name_de": "Aktivitäten",
+  "board_name_ar_dz": "الأنشطة واللعب"
 }

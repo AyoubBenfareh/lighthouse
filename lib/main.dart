@@ -223,7 +223,8 @@ class _BoardScreen extends ConsumerWidget {
                 )
               : null,
           title: Text(
-            board?.boardNameFor(Localizations.localeOf(context).languageCode) ??
+            board?.boardNameFor(
+                    LocaleRegistry.codeForLocale(Localizations.localeOf(context))) ??
                 'Lighthouse AAC',
           ),
           actions: [
@@ -405,8 +406,9 @@ class _BoardView extends ConsumerWidget {
     }
 
     final locale = Localizations.localeOf(context);
-    final label = button.labelFor(locale.languageCode);
-    final voice = button.voiceOutFor(locale.languageCode) ?? '';
+    final langCode = LocaleRegistry.codeForLocale(locale);
+    final label = button.labelFor(langCode);
+    final voice = button.voiceOutFor(langCode) ?? '';
 
     switch (mode) {
       case TtsMode.on:
@@ -478,7 +480,8 @@ class _BoardView extends ConsumerWidget {
     unawaited(_recordTap(ref, button));
 
     final locale = Localizations.localeOf(context);
-    final voice = button.voiceOutFor(locale.languageCode) ?? '';
+    final langCode = LocaleRegistry.codeForLocale(locale);
+    final voice = button.voiceOutFor(langCode) ?? '';
 
     // The long-press is the communication act in On-request mode, so it is also
     // what commits to the sentence bar (ADR 0010): a word accumulates, a phrase

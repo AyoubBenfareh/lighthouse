@@ -29,7 +29,9 @@
       "voice_out_es": "cabeza",
       "voice_out_ar": "رَأْس",
       "label_de": "Kopf",
-      "voice_out_de": "Kopf"
+      "voice_out_de": "Kopf",
+      "label_ar_dz": "رأس",
+      "voice_out_ar_dz": "رَأْس"
     },
     {
       "id": "btn_body_hair",
@@ -48,7 +50,9 @@
       "voice_out_es": "pelo",
       "voice_out_ar": "شَعْر",
       "label_de": "Haare",
-      "voice_out_de": "Haare"
+      "voice_out_de": "Haare",
+      "label_ar_dz": "شعر",
+      "voice_out_ar_dz": "شَعْر"
     },
     {
       "id": "btn_body_eye",
@@ -67,7 +71,9 @@
       "voice_out_es": "ojo",
       "voice_out_ar": "عَيْن",
       "label_de": "Auge",
-      "voice_out_de": "Auge"
+      "voice_out_de": "Auge",
+      "label_ar_dz": "عين",
+      "voice_out_ar_dz": "عَيْن"
     },
     {
       "id": "btn_body_ear",
@@ -86,7 +92,9 @@
       "voice_out_es": "oreja",
       "voice_out_ar": "أُذُن",
       "label_de": "Ohr",
-      "voice_out_de": "Ohr"
+      "voice_out_de": "Ohr",
+      "label_ar_dz": "أذن",
+      "voice_out_ar_dz": "أُذُن"
     },
     {
       "id": "btn_body_nose",
@@ -105,7 +113,9 @@
       "voice_out_es": "nariz",
       "voice_out_ar": "أَنْف",
       "label_de": "Nase",
-      "voice_out_de": "Nase"
+      "voice_out_de": "Nase",
+      "label_ar_dz": "أنف",
+      "voice_out_ar_dz": "أَنْف"
     },
     {
       "id": "btn_body_mouth",
@@ -124,7 +134,9 @@
       "voice_out_es": "boca",
       "voice_out_ar": "فَم",
       "label_de": "Mund",
-      "voice_out_de": "Mund"
+      "voice_out_de": "Mund",
+      "label_ar_dz": "فم",
+      "voice_out_ar_dz": "فَم"
     },
     {
       "id": "btn_body_teeth",
@@ -143,7 +155,9 @@
       "voice_out_es": "dientes",
       "voice_out_ar": "أَسْنَان",
       "label_de": "Zähne",
-      "voice_out_de": "Zähne"
+      "voice_out_de": "Zähne",
+      "label_ar_dz": "أسنان",
+      "voice_out_ar_dz": "أَسْنَان"
     },
     {
       "id": "btn_body_hand",
@@ -162,7 +176,9 @@
       "voice_out_es": "mano",
       "voice_out_ar": "يَد",
       "label_de": "Hand",
-      "voice_out_de": "Hand"
+      "voice_out_de": "Hand",
+      "label_ar_dz": "يد",
+      "voice_out_ar_dz": "يَد"
     },
     {
       "id": "btn_body_finger",
@@ -181,7 +197,9 @@
       "voice_out_es": "dedo",
       "voice_out_ar": "إِصْبَع",
       "label_de": "Finger",
-      "voice_out_de": "finger"
+      "voice_out_de": "finger",
+      "label_ar_dz": "إصبع",
+      "voice_out_ar_dz": "إِصْبَع"
     },
     {
       "id": "btn_body_arm",
@@ -200,7 +218,9 @@
       "voice_out_es": "brazo",
       "voice_out_ar": "ذِرَاع",
       "label_de": "Arm",
-      "voice_out_de": "Arm"
+      "voice_out_de": "Arm",
+      "label_ar_dz": "ذراع",
+      "voice_out_ar_dz": "ذِرَاع"
     },
     {
       "id": "btn_body_tummy",
@@ -219,7 +239,9 @@
       "voice_out_es": "barriga",
       "voice_out_ar": "بَطْن",
       "label_de": "Bauch",
-      "voice_out_de": "Bauch"
+      "voice_out_de": "Bauch",
+      "label_ar_dz": "بطن",
+      "voice_out_ar_dz": "بَطْن"
     },
     {
       "id": "btn_body_back",
@@ -238,7 +260,9 @@
       "voice_out_es": "espalda",
       "voice_out_ar": "ظَهْر",
       "label_de": "Rücken",
-      "voice_out_de": "Rücken"
+      "voice_out_de": "Rücken",
+      "label_ar_dz": "ظهر",
+      "voice_out_ar_dz": "ظَهْر"
     },
     {
       "id": "btn_body_leg",
@@ -257,7 +281,9 @@
       "voice_out_es": "pierna",
       "voice_out_ar": "سَاق",
       "label_de": "Bein",
-      "voice_out_de": "Bein"
+      "voice_out_de": "Bein",
+      "label_ar_dz": "ساق",
+      "voice_out_ar_dz": "سَاق"
     },
     {
       "id": "btn_body_knee",
@@ -276,7 +302,9 @@
       "voice_out_es": "rodilla",
       "voice_out_ar": "رُكْبَة",
       "label_de": "Knee",
-      "voice_out_de": "knee"
+      "voice_out_de": "knee",
+      "label_ar_dz": "ركبة",
+      "voice_out_ar_dz": "رُكْبَة"
     },
     {
       "id": "btn_body_foot",
@@ -295,7 +323,9 @@
       "voice_out_es": "pie",
       "voice_out_ar": "قَدَم",
       "label_de": "Fuß",
-      "voice_out_de": "Fuß"
+      "voice_out_de": "Fuß",
+      "label_ar_dz": "قدم",
+      "voice_out_ar_dz": "قَدَم"
     },
     {
       "id": "btn_body_toe",
@@ -314,8 +344,11 @@
       "voice_out_es": "dedo del pie",
       "voice_out_ar": "إِصْبَعُ الْقَدَم",
       "label_de": "Toe",
-      "voice_out_de": "toe"
+      "voice_out_de": "toe",
+      "label_ar_dz": "إصبع القدم",
+      "voice_out_ar_dz": "إِصْبَعُ الْقَدَم"
     }
   ],
-  "board_name_de": "Körper"
+  "board_name_de": "Körper",
+  "board_name_ar_dz": "الجسم"
 }

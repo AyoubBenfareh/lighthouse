@@ -29,7 +29,9 @@
       "voice_out_es": "abuela",
       "voice_out_ar": "جَدَّة",
       "label_de": "Oma",
-      "voice_out_de": "Oma"
+      "voice_out_de": "Oma",
+      "label_ar_dz": "جدة",
+      "voice_out_ar_dz": "جَدَّة"
     },
     {
       "id": "btn_people_grandpa",
@@ -48,7 +50,9 @@
       "voice_out_es": "abuelo",
       "voice_out_ar": "جَدّ",
       "label_de": "Opa",
-      "voice_out_de": "Opa"
+      "voice_out_de": "Opa",
+      "label_ar_dz": "جد",
+      "voice_out_ar_dz": "جَدّ"
     },
     {
       "id": "btn_people_sister",
@@ -67,7 +71,9 @@
       "voice_out_es": "hermana",
       "voice_out_ar": "أُخْت",
       "label_de": "Schwester",
-      "voice_out_de": "Schwester"
+      "voice_out_de": "Schwester",
+      "label_ar_dz": "أخت",
+      "voice_out_ar_dz": "أُخْت"
     },
     {
       "id": "btn_people_brother",
@@ -86,7 +92,9 @@
       "voice_out_es": "hermano",
       "voice_out_ar": "أَخ",
       "label_de": "Bruder",
-      "voice_out_de": "Bruder"
+      "voice_out_de": "Bruder",
+      "label_ar_dz": "أخ",
+      "voice_out_ar_dz": "أَخ"
     },
     {
       "id": "btn_people_baby",
@@ -105,7 +113,9 @@
       "voice_out_es": "bebé",
       "voice_out_ar": "طِفْل",
       "label_de": "Baby",
-      "voice_out_de": "Baby"
+      "voice_out_de": "Baby",
+      "label_ar_dz": "طفل",
+      "voice_out_ar_dz": "طِفْل"
     },
     {
       "id": "btn_people_friend",
@@ -124,7 +134,9 @@
       "voice_out_es": "amigo",
       "voice_out_ar": "صَدِيق",
       "label_de": "Freund",
-      "voice_out_de": "Freund"
+      "voice_out_de": "Freund",
+      "label_ar_dz": "صديق",
+      "voice_out_ar_dz": "صَدِيق"
     },
     {
       "id": "btn_people_teacher",
@@ -143,7 +155,9 @@
       "voice_out_es": "maestro",
       "voice_out_ar": "مُعَلِّم",
       "label_de": "Lehrer",
-      "voice_out_de": "Lehrer"
+      "voice_out_de": "Lehrer",
+      "label_ar_dz": "معلم",
+      "voice_out_ar_dz": "مُعَلِّم"
     },
     {
       "id": "btn_people_nurse",
@@ -162,7 +176,9 @@
       "voice_out_es": "enfermera",
       "voice_out_ar": "مُمَرِّضَة",
       "label_de": "Krankenpfleger",
-      "voice_out_de": "Krankenpfleger"
+      "voice_out_de": "Krankenpfleger",
+      "label_ar_dz": "ممرضة",
+      "voice_out_ar_dz": "مُمَرِّضَة"
     },
     {
       "id": "btn_people_boy",
@@ -181,7 +197,9 @@
       "voice_out_es": "niño",
       "voice_out_ar": "وَلَد",
       "label_de": "Junge",
-      "voice_out_de": "Junge"
+      "voice_out_de": "Junge",
+      "label_ar_dz": "ولد",
+      "voice_out_ar_dz": "وَلَد"
     },
     {
       "id": "btn_people_girl",
@@ -200,7 +218,9 @@
       "voice_out_es": "niña",
       "voice_out_ar": "بِنْت",
       "label_de": "Mädchen",
-      "voice_out_de": "Mädchen"
+      "voice_out_de": "Mädchen",
+      "label_ar_dz": "بنت",
+      "voice_out_ar_dz": "بِنْت"
     },
     {
       "id": "btn_people_aunt",
@@ -219,7 +239,9 @@
       "voice_out_es": "tía",
       "voice_out_ar": "خَالَة",
       "label_de": "Tante",
-      "voice_out_de": "Tante"
+      "voice_out_de": "Tante",
+      "label_ar_dz": "خالة",
+      "voice_out_ar_dz": "خَالَة"
     },
     {
       "id": "btn_people_uncle",
@@ -238,7 +260,9 @@
       "voice_out_es": "tío",
       "voice_out_ar": "عَمّ",
       "label_de": "Onkel",
-      "voice_out_de": "Onkel"
+      "voice_out_de": "Onkel",
+      "label_ar_dz": "عم",
+      "voice_out_ar_dz": "عَمّ"
     },
     {
       "id": "btn_people_family",
@@ -257,7 +281,9 @@
       "voice_out_es": "familia",
       "voice_out_ar": "عَائِلَة",
       "label_de": "Familie",
-      "voice_out_de": "Familie"
+      "voice_out_de": "Familie",
+      "label_ar_dz": "عائلة",
+      "voice_out_ar_dz": "عَائِلَة"
     },
     {
       "id": "btn_people_doctor",
@@ -276,7 +302,9 @@
       "voice_out_es": "doctor",
       "voice_out_ar": "طَبِيب",
       "label_de": "Arzt",
-      "voice_out_de": "Arzt"
+      "voice_out_de": "Arzt",
+      "label_ar_dz": "طبيب",
+      "voice_out_ar_dz": "طَبِيب"
     },
     {
       "id": "btn_people_neighbor",
@@ -295,8 +323,11 @@
       "voice_out_es": "vecino",
       "voice_out_ar": "جَار",
       "label_de": "Nachbar",
-      "voice_out_de": "Nachbar"
+      "voice_out_de": "Nachbar",
+      "label_ar_dz": "جار",
+      "voice_out_ar_dz": "جَار"
     }
   ],
-  "board_name_de": "Personen"
+  "board_name_de": "Personen",
+  "board_name_ar_dz": "الناس والعائلة"
 }

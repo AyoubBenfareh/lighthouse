@@ -10,6 +10,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../i18n/locale_registry.dart';
 import '../logic/logic.dart';
 import '../models/models.dart';
 import '../services/symbols/symbols.dart';
@@ -92,7 +93,8 @@ class _FavTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final label = button.labelFor(Localizations.localeOf(context).languageCode);
+    final label = button.labelFor(
+        LocaleRegistry.codeForLocale(Localizations.localeOf(context)));
     // Mirror the grid tile: show the pictogram unless it is turned off / absent,
     // and keep the label whenever the word setting allows OR no pictogram is
     // shown, so a favourite is never blank (the star marker is not a pictogram).

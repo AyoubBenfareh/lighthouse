@@ -107,6 +107,8 @@ class ProfileStore {
     await p.setString(_keyProfiles, encoded);
   }
 
+  static int _idCounter = 0;
+
   /// Creates a new profile with a generated unique ID.
   Future<UserProfile> createProfile({
     required String name,
@@ -118,7 +120,7 @@ class ProfileStore {
   }) async {
     await listProfiles();
     final now = DateTime.now();
-    final id = 'prof_${now.millisecondsSinceEpoch}';
+    final id = 'prof_${now.microsecondsSinceEpoch}_${_idCounter++}';
     final profile = UserProfile(
       id: id,
       name: name,

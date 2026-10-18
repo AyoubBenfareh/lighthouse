@@ -14,6 +14,7 @@ library;
 
 import 'package:flutter/material.dart';
 
+import '../i18n/locale_registry.dart';
 import '../logic/logic.dart';
 import '../models/models.dart';
 import '../services/symbols/symbols.dart';
@@ -59,7 +60,8 @@ class _AACButtonTileState extends State<AACButtonTile> {
   @override
   Widget build(BuildContext context) {
     final button = widget.button;
-    final languageCode = Localizations.localeOf(context).languageCode;
+    final languageCode =
+        LocaleRegistry.codeForLocale(Localizations.localeOf(context));
     final label = button.labelFor(languageCode);
     final fill = resolveCategoryColor(
       button.category,

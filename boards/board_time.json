@@ -29,7 +29,9 @@
       "voice_out_es": "ahora",
       "voice_out_ar": "الْآن",
       "label_de": "Jetzt",
-      "voice_out_de": "jetzt"
+      "voice_out_de": "jetzt",
+      "label_ar_dz": "الآن",
+      "voice_out_ar_dz": "الْآن"
     },
     {
       "id": "btn_time_later",
@@ -48,7 +50,9 @@
       "voice_out_es": "más tarde",
       "voice_out_ar": "لَاحِقًا",
       "label_de": "Später",
-      "voice_out_de": "später"
+      "voice_out_de": "später",
+      "label_ar_dz": "لاحقا",
+      "voice_out_ar_dz": "لَاحِقًا"
     },
     {
       "id": "btn_time_today",
@@ -67,7 +71,9 @@
       "voice_out_es": "hoy",
       "voice_out_ar": "الْيَوْم",
       "label_de": "Heute",
-      "voice_out_de": "heute"
+      "voice_out_de": "heute",
+      "label_ar_dz": "اليوم",
+      "voice_out_ar_dz": "الْيَوْم"
     },
     {
       "id": "btn_time_tomorrow",
@@ -86,7 +92,9 @@
       "voice_out_es": "mañana",
       "voice_out_ar": "غَدًا",
       "label_de": "Morgen",
-      "voice_out_de": "morgen"
+      "voice_out_de": "morgen",
+      "label_ar_dz": "غدا",
+      "voice_out_ar_dz": "غَدًا"
     },
     {
       "id": "btn_time_yesterday",
@@ -105,7 +113,9 @@
       "voice_out_es": "ayer",
       "voice_out_ar": "أَمْس",
       "label_de": "Gestern",
-      "voice_out_de": "gestern"
+      "voice_out_de": "gestern",
+      "label_ar_dz": "أمس",
+      "voice_out_ar_dz": "أَمْس"
     },
     {
       "id": "btn_time_morning",
@@ -124,7 +134,9 @@
       "voice_out_es": "la mañana",
       "voice_out_ar": "صَبَاح",
       "label_de": "Morgens",
-      "voice_out_de": "morgens"
+      "voice_out_de": "morgens",
+      "label_ar_dz": "صباح",
+      "voice_out_ar_dz": "صَبَاح"
     },
     {
       "id": "btn_time_afternoon",
@@ -143,7 +155,9 @@
       "voice_out_es": "tarde",
       "voice_out_ar": "بَعْدَ الظُّهْر",
       "label_de": "Nachmittags",
-      "voice_out_de": "nachmittags"
+      "voice_out_de": "nachmittags",
+      "label_ar_dz": "بعد الظهر",
+      "voice_out_ar_dz": "بَعْدَ الظُّهْر"
     },
     {
       "id": "btn_time_night",
@@ -162,7 +176,9 @@
       "voice_out_es": "noche",
       "voice_out_ar": "لَيْل",
       "label_de": "Nachts",
-      "voice_out_de": "nachts"
+      "voice_out_de": "nachts",
+      "label_ar_dz": "ليل",
+      "voice_out_ar_dz": "لَيْل"
     },
     {
       "id": "btn_time_before",
@@ -181,7 +197,9 @@
       "voice_out_es": "antes",
       "voice_out_ar": "قَبْل",
       "label_de": "Vorher",
-      "voice_out_de": "vorher"
+      "voice_out_de": "vorher",
+      "label_ar_dz": "قبل",
+      "voice_out_ar_dz": "قَبْل"
     },
     {
       "id": "btn_time_day",
@@ -200,7 +218,9 @@
       "voice_out_es": "día",
       "voice_out_ar": "يَوْم",
       "label_de": "Tag",
-      "voice_out_de": "Tag"
+      "voice_out_de": "Tag",
+      "label_ar_dz": "يوم",
+      "voice_out_ar_dz": "يَوْم"
     },
     {
       "id": "btn_time_week",
@@ -219,7 +239,9 @@
       "voice_out_es": "semana",
       "voice_out_ar": "أُسْبُوع",
       "label_de": "Woche",
-      "voice_out_de": "Woche"
+      "voice_out_de": "Woche",
+      "label_ar_dz": "أسبوع",
+      "voice_out_ar_dz": "أُسْبُوع"
     },
     {
       "id": "btn_time_weekend",
@@ -238,7 +260,9 @@
       "voice_out_es": "fin de semana",
       "voice_out_ar": "عُطْلَةُ الْأُسْبُوع",
       "label_de": "Wochenende",
-      "voice_out_de": "Wochenende"
+      "voice_out_de": "Wochenende",
+      "label_ar_dz": "عطلة الأسبوع",
+      "voice_out_ar_dz": "عُطْلَةُ الْأُسْبُوع"
     },
     {
       "id": "btn_time_minute",
@@ -257,7 +281,9 @@
       "voice_out_es": "minuto",
       "voice_out_ar": "دَقِيقَة",
       "label_de": "Minute",
-      "voice_out_de": "Minute"
+      "voice_out_de": "Minute",
+      "label_ar_dz": "دقيقة",
+      "voice_out_ar_dz": "دَقِيقَة"
     },
     {
       "id": "btn_time_late",
@@ -276,8 +302,11 @@
       "voice_out_es": "tarde",
       "voice_out_ar": "مُتَأَخِّر",
       "label_de": "Spät",
-      "voice_out_de": "spät"
+      "voice_out_de": "spät",
+      "label_ar_dz": "متأخر",
+      "voice_out_ar_dz": "مُتَأَخِّر"
     }
   ],
-  "board_name_de": "Zeit"
+  "board_name_de": "Zeit",
+  "board_name_ar_dz": "الوقت والزمان"
 }
