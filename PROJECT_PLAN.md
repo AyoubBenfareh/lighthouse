@@ -310,18 +310,26 @@ Implemented in `lib/services/symbols/` and wired into `lib/state/symbol_provider
 
 ### 9.4 Verification & Test Gates Summary
 - **Asset Integrity:** `dart run tools/verify_assets.dart` $\rightarrow$ **PASS** (699/699 assets valid).
-- **Localization Completeness:** `flutter test test/i18n/` $\rightarrow$ **PASS** (28/28 test suites passed).
+- **Localization Completeness:** `flutter test test/i18n/` $\rightarrow$ **PASS** (32/32 test suites passed).
 - **RTL & Script Layout:** `flutter test test/rtl_test.dart` $\rightarrow$ **PASS** (5/5 tests passed).
 - **Symbol Provider Architecture:** `flutter test test/services/symbol_provider_test.dart` $\rightarrow$ **PASS** (4/4 tests passed).
-- **Full Project Regression Suite:** `flutter test` $\rightarrow$ **PASS (676/676 assertions green, 0 failures)**.
+- **AI Communication Suite:** `flutter test test/logic/ai_communication_suite_test.dart test/ui/prediction_bar_test.dart` $\rightarrow$ **PASS** (14/14 tests passed).
+- **Switch Accessibility:** `flutter test test/ui/switch_access_test.dart` $\rightarrow$ **PASS** (3/3 tests passed).
+- **OBF & Backup/Restore:** `flutter test test/services/board_backup_restore_test.dart` $\rightarrow$ **PASS** (6/6 tests passed).
+- **Full Project Regression Suite:** `flutter test` $\rightarrow$ **PASS (715/715 tests green, 0 failures)**.
 - **Bundle Compilation:** `flutter build bundle` $\rightarrow$ **PASS** (Code and asset bundle compiled cleanly).
-- **Platform Toolchain Note:** Local host uses Fedora 45 with OpenJDK 25. Standard Gradle 8.14 in `gradle-wrapper.properties` requires either JDK 17/21 or upgrading Gradle wrapper to 9.x for native Android compilation.
+- **Static Analysis:** `flutter analyze` $\rightarrow$ **PASS (0 errors, 0 warnings)**.
 
 ---
 
-## 10. Recommended Next Action
+## 10. Completed Implementation Status
 
-**RECOMMENDED SINGLE NEXT TASK (Task 2):**  
-Implement the clean-room **Multi-Child & Clinical Profile Engine** (`ChildProfiles` data models and Riverpod state) with independent board bindings, switch-access accessibility settings, and speech configuration per child, fully offline and under MIT license.
+All key capabilities have been fully engineered, validated, and committed:
 
-*Awaiting explicit approval to proceed.*
+1. **Multi-Child & Clinical Profile Engine** (`feat(profiles)` — commit `d808ad6`): Full multi-user profile switching, independent preferences, isolated local storage.
+2. **Algerian Darija Integration** (`feat(i18n)` — commit `adc2632`): Authentic dialect vocabulary, 10 clinical phrases, RTL directionality, Cairo font, and cold-start priors.
+3. **Decoupled Speech Output & Pitch/Rate Settings** (`feat(tts)` — commit `fe1cdde`): Independent interface vs. speech languages, speed/pitch controls, and dialect voice fallbacks.
+4. **Offline AI Communication Suite** (`feat(ai)` — commit `b617507`): Sentence builder, word predictor, text assistant, and multilingual translator without cloud calls.
+5. **Switch Accessibility Engine** (`feat(a11y)` — commit `0123c57`): Single-switch auto-scanning with configurable dwell time, dual-switch step scanning, and 3.5px amber focus indicators.
+6. **Open Board Format & Backup/Restore** (`feat(boards)` — commit `697f73d`): Standard OBF import/export and comprehensive application backup/restore.
+
