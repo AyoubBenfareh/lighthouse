@@ -189,7 +189,7 @@ void main() {
       (tester) async {
     await tester.pumpWidget(_host(container, hideIcon: true));
     container.read(utteranceProvider.notifier).append(
-          _verb('want', iconUri: 'assets/arasaac/verbs/want.png'),
+          _verb('want', iconUri: 'assets/symbols/verbs/want.png'),
         );
     await tester.pump();
     expect(find.text('want'), findsOneWidget);
@@ -201,7 +201,7 @@ void main() {
       (tester) async {
     await tester.pumpWidget(_host(container, hideText: true));
     container.read(utteranceProvider.notifier).append(
-          _verb('want', iconUri: 'assets/arasaac/verbs/want.png'),
+          _verb('want', iconUri: 'assets/symbols/verbs/want.png'),
         );
     await tester.pump();
     expect(find.text('want'), findsNothing);

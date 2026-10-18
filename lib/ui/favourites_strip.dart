@@ -7,13 +7,12 @@
 /// sentence bar + feed the bandit).
 library;
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../logic/logic.dart';
 import '../models/models.dart';
+import '../services/symbols/symbols.dart';
 import '../state/state.dart';
 import 'theme/lighthouse_theme.dart';
 
@@ -159,15 +158,12 @@ class _FavIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const onError = _shrink;
-    if (uri.startsWith('assets/')) {
-      return Image.asset(uri, height: 44, fit: BoxFit.contain,
-          semanticLabel: label, errorBuilder: onError);
-    }
-    return Image.file(File(uri), height: 44, fit: BoxFit.contain,
-        semanticLabel: label, errorBuilder: onError);
+    return CompositeSymbolProvider.defaultInstance.buildSymbol(
+      context,
+      uri: uri,
+      label: label,
+      height: 44,
+      fit: BoxFit.contain,
+    );
   }
-
-  static Widget _shrink(BuildContext c, Object e, StackTrace? s) =>
-      const SizedBox.shrink();
 }

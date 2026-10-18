@@ -143,17 +143,13 @@ class AboutScreen extends StatelessWidget {
   }
 }
 
-/// ARASAAC picture-symbol attribution. The CC BY-NC-SA license requires this
-/// credit to be VISIBLE in the app (ADR 0001 / LICENSES/ARASAAC.md). The label
-/// is localized; the credit string itself is a verbatim license term and is
-/// NOT translated or altered (a documented hardcoded-string exception, like the
-/// contact-address constants).
+/// Open AAC Symbol attribution.
 class _Credits extends StatelessWidget {
   const _Credits();
 
-  static const String _arasaacCredit =
-      'Symbols Author: Sergio Palao. Origin: ARASAAC (https://arasaac.org). '
-      'License: CC (BY-NC-SA). Owner: Government of Aragón (Spain).';
+  static const String _symbolCredit =
+      'Symbols: Open AAC Symbols & Material Symbols. '
+      'License: Apache 2.0 (Commercial-ready, permissive open-source).';
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +167,7 @@ class _Credits extends StatelessWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 520),
             child: const Text(
-              _arasaacCredit,
+              _symbolCredit,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Atkinson Hyperlegible',

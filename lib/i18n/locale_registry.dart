@@ -111,6 +111,14 @@ class LocaleRegistry {
       nativeName: 'Español',
     ),
     LocaleSpec(
+      code: 'de',
+      direction: TextDirection.ltr,
+      ttsStrategy: TtsStrategy.systemOnly,
+      reviewStatus: ReviewStatus.provisional,
+      englishName: 'German',
+      nativeName: 'Deutsch',
+    ),
+    LocaleSpec(
       code: 'ar',
       direction: TextDirection.rtl,
       // Bundled clips primary (ADR 0008): many Android devices ship no Arabic

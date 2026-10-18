@@ -23,11 +23,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/ball.png",
+      "icon_uri": "assets/symbols/things/ball.png",
       "label_es": "pelota",
       "label_ar": "كرة",
       "voice_out_es": "pelota",
-      "voice_out_ar": "كُرَة"
+      "voice_out_ar": "كُرَة",
+      "label_de": "Ball",
+      "voice_out_de": "Ball"
     },
     {
       "id": "btn_things_book",
@@ -40,11 +42,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/book.png",
+      "icon_uri": "assets/symbols/things/book.png",
       "label_es": "libro",
       "label_ar": "كتاب",
       "voice_out_es": "libro",
-      "voice_out_ar": "كِتَاب"
+      "voice_out_ar": "كِتَاب",
+      "label_de": "Buch",
+      "voice_out_de": "Buch"
     },
     {
       "id": "btn_things_toy",
@@ -57,11 +61,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/toy.png",
+      "icon_uri": "assets/symbols/things/toy.png",
       "label_es": "juguete",
       "label_ar": "لعبة",
       "voice_out_es": "juguete",
-      "voice_out_ar": "لُعْبَة"
+      "voice_out_ar": "لُعْبَة",
+      "label_de": "Spielzeug",
+      "voice_out_de": "Spielzeug"
     },
     {
       "id": "btn_things_blocks",
@@ -74,11 +80,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/blocks.png",
+      "icon_uri": "assets/symbols/things/blocks.png",
       "label_es": "bloques",
       "label_ar": "مكعبات",
       "voice_out_es": "bloques",
-      "voice_out_ar": "مُكَعَّبَات"
+      "voice_out_ar": "مُكَعَّبَات",
+      "label_de": "Bauklötze",
+      "voice_out_de": "Bauklötze"
     },
     {
       "id": "btn_things_doll",
@@ -91,11 +99,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/doll.png",
+      "icon_uri": "assets/symbols/things/doll.png",
       "label_es": "muñeca",
       "label_ar": "دمية",
       "voice_out_es": "muñeca",
-      "voice_out_ar": "دُمْيَة"
+      "voice_out_ar": "دُمْيَة",
+      "label_de": "Puppe",
+      "voice_out_de": "Puppe"
     },
     {
       "id": "btn_things_car",
@@ -108,11 +118,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/car.png",
+      "icon_uri": "assets/symbols/things/car.png",
       "label_es": "carro",
       "label_ar": "سيارة",
       "voice_out_es": "carro",
-      "voice_out_ar": "سَيَّارَة"
+      "voice_out_ar": "سَيَّارَة",
+      "label_de": "Auto",
+      "voice_out_de": "Auto"
     },
     {
       "id": "btn_things_phone",
@@ -125,11 +137,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/phone.png",
+      "icon_uri": "assets/symbols/things/phone.png",
       "label_es": "teléfono",
       "label_ar": "هاتف",
       "voice_out_es": "teléfono",
-      "voice_out_ar": "هَاتِف"
+      "voice_out_ar": "هَاتِف",
+      "label_de": "Telefon",
+      "voice_out_de": "Telefon"
     },
     {
       "id": "btn_things_tablet",
@@ -142,11 +156,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/tablet.png",
+      "icon_uri": "assets/symbols/things/tablet.png",
       "label_es": "tableta",
       "label_ar": "جهاز لوحي",
       "voice_out_es": "tableta",
-      "voice_out_ar": "جِهَازٌ لَوْحِي"
+      "voice_out_ar": "جِهَازٌ لَوْحِي",
+      "label_de": "Tablet",
+      "voice_out_de": "Tablet"
     },
     {
       "id": "btn_things_tv",
@@ -159,11 +175,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/tv.png",
+      "icon_uri": "assets/symbols/things/tv.png",
       "label_es": "televisión",
       "label_ar": "تلفاز",
       "voice_out_es": "televisión",
-      "voice_out_ar": "تِلْفَاز"
+      "voice_out_ar": "تِلْفَاز",
+      "label_de": "Fernseher",
+      "voice_out_de": "Fernseher"
     },
     {
       "id": "btn_things_blanket",
@@ -176,11 +194,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/blanket.png",
+      "icon_uri": "assets/symbols/things/blanket.png",
       "label_es": "manta",
       "label_ar": "بطانية",
       "voice_out_es": "manta",
-      "voice_out_ar": "بَطَّانِيَة"
+      "voice_out_ar": "بَطَّانِيَة",
+      "label_de": "Decke",
+      "voice_out_de": "Decke"
     },
     {
       "id": "btn_things_cup",
@@ -193,11 +213,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/cup.png",
+      "icon_uri": "assets/symbols/things/cup.png",
       "label_es": "taza",
       "label_ar": "كوب",
       "voice_out_es": "taza",
-      "voice_out_ar": "كُوب"
+      "voice_out_ar": "كُوب",
+      "label_de": "Becher",
+      "voice_out_de": "Becher"
     },
     {
       "id": "btn_things_spoon",
@@ -210,11 +232,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/spoon.png",
+      "icon_uri": "assets/symbols/things/spoon.png",
       "label_es": "cuchara",
       "label_ar": "ملعقة",
       "voice_out_es": "cuchara",
-      "voice_out_ar": "مِلْعَقَة"
+      "voice_out_ar": "مِلْعَقَة",
+      "label_de": "Löffel",
+      "voice_out_de": "Löffel"
     },
     {
       "id": "btn_things_shoes",
@@ -227,11 +251,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/shoes.png",
+      "icon_uri": "assets/symbols/things/shoes.png",
       "label_es": "zapatos",
       "label_ar": "حذاء",
       "voice_out_es": "zapatos",
-      "voice_out_ar": "حِذَاء"
+      "voice_out_ar": "حِذَاء",
+      "label_de": "Schuhe",
+      "voice_out_de": "Schuhe"
     },
     {
       "id": "btn_things_hat",
@@ -244,11 +270,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/hat.png",
+      "icon_uri": "assets/symbols/things/hat.png",
       "label_es": "gorra",
       "label_ar": "قبعة",
       "voice_out_es": "gorra",
-      "voice_out_ar": "قُبَّعَة"
+      "voice_out_ar": "قُبَّعَة",
+      "label_de": "Mütze",
+      "voice_out_de": "Mütze"
     },
     {
       "id": "btn_things_crayon",
@@ -261,11 +289,13 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/crayon.png",
+      "icon_uri": "assets/symbols/things/crayon.png",
       "label_es": "crayón",
       "label_ar": "قلم تلوين",
       "voice_out_es": "crayón",
-      "voice_out_ar": "قَلَمُ تَلْوِين"
+      "voice_out_ar": "قَلَمُ تَلْوِين",
+      "label_de": "Buntstift",
+      "voice_out_de": "Buntstift"
     },
     {
       "id": "btn_things_bubbles",
@@ -278,11 +308,14 @@
       },
       "category": "things",
       "base_weight": 0.5,
-      "icon_uri": "assets/arasaac/things/bubbles.png",
+      "icon_uri": "assets/symbols/things/bubbles.png",
       "label_es": "burbujas",
       "label_ar": "فقاعات",
       "voice_out_es": "burbujas",
-      "voice_out_ar": "فُقَّاعَات"
+      "voice_out_ar": "فُقَّاعَات",
+      "label_de": "Seifenblasen",
+      "voice_out_de": "Seifenblasen"
     }
-  ]
+  ],
+  "board_name_de": "Dinge"
 }

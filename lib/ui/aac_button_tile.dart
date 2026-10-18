@@ -12,12 +12,11 @@
 /// falls back to text rather than a broken-image glyph.
 library;
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import '../logic/logic.dart';
 import '../models/models.dart';
+import '../services/symbols/symbols.dart';
 import 'theme/lighthouse_theme.dart';
 
 class AACButtonTile extends StatefulWidget {
@@ -222,28 +221,11 @@ class _ButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Bundled pictograms are asset paths ("assets/..."); parent-authored
-    // custom buttons (ADR 0012) carry an absolute file path. A missing image
-    // falls back to the text-only layout: a broken-image icon would be worse
-    // than no icon for a non-speaking child.
-    const onError = _iconError;
-    if (uri.startsWith('assets/')) {
-      return Image.asset(
-        uri,
-        fit: BoxFit.contain,
-        semanticLabel: label,
-        errorBuilder: onError,
-      );
-    }
-    return Image.file(
-      File(uri),
+    return CompositeSymbolProvider.defaultInstance.buildSymbol(
+      context,
+      uri: uri,
+      label: label,
       fit: BoxFit.contain,
-      semanticLabel: label,
-      errorBuilder: onError,
     );
   }
-
-  static Widget _iconError(
-          BuildContext context, Object error, StackTrace? stack) =>
-      const SizedBox.shrink();
 }

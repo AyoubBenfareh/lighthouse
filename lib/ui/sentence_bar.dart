@@ -7,14 +7,13 @@
 /// speaks the sentence, a large forgiving target.
 library;
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
 import '../logic/logic.dart';
 import '../models/models.dart';
+import '../services/symbols/symbols.dart';
 import '../state/state.dart';
 import 'theme/lighthouse_theme.dart';
 
@@ -383,11 +382,14 @@ class _ChipIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget onError(BuildContext _, Object __, StackTrace? ___) =>
-        const SizedBox.shrink();
-    final image = uri.startsWith('assets/')
-        ? Image.asset(uri, width: size, height: size, fit: BoxFit.contain, errorBuilder: onError)
-        : Image.file(File(uri), width: size, height: size, fit: BoxFit.contain, errorBuilder: onError);
+    final image = CompositeSymbolProvider.defaultInstance.buildSymbol(
+      context,
+      uri: uri,
+      label: '',
+      width: size,
+      height: size,
+      fit: BoxFit.contain,
+    );
     return Container(
       width: size,
       height: size,
