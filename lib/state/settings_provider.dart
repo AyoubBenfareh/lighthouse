@@ -103,4 +103,10 @@ class SettingsNotifier extends _$SettingsNotifier {
       state = AsyncData(_current.copyWith(hidePictogram: value));
     }
   }
+
+  Future<void> setEnableAiPrediction(bool value) async {
+    await ref.read(settingsRepositoryProvider).setEnableAiPrediction(value);
+    state = AsyncData(_current.copyWith(enableAiPrediction: value));
+  }
 }
+

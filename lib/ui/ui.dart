@@ -18,4 +18,6 @@ export 'settings/settings.dart';
 export 'tour/first_use_tip.dart';
 export 'tour/tour_controller.dart';
 export 'tour/tour_overlay.dart';
+export 'ai/prediction_bar.dart';
+export 'ai/text_assistant_sheet.dart';
 export 'widgets/restart_widget.dart';

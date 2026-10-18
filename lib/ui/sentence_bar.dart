@@ -14,7 +14,7 @@ import '../i18n/locale_registry.dart';
 import '../l10n/app_localizations.dart';
 import '../logic/logic.dart';
 import '../models/models.dart';
-import '../services/symbols/symbols.dart';
+import '../services/services.dart';
 import '../state/state.dart';
 import 'theme/lighthouse_theme.dart';
 

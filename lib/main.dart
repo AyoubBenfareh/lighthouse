@@ -279,6 +279,8 @@ class _BoardView extends ConsumerWidget {
         settings?.hideTileText ?? SettingsState.defaults.hideTileText;
     final hidePictogram =
         settings?.hidePictogram ?? SettingsState.defaults.hidePictogram;
+    final enableAi =
+        settings?.enableAiPrediction ?? SettingsState.defaults.enableAiPrediction;
     final ttsMode = settings?.ttsMode ?? SettingsState.defaults.ttsMode;
     // Hydrate the custom-voice map (ADR 0019) eagerly so a tap can prefer a
     // parent-recorded clip over TTS without awaiting a load on the hot path.
@@ -321,6 +323,7 @@ class _BoardView extends ConsumerWidget {
             hideIcon: hidePictogram,
           ),
         ),
+        if (enableAi) PredictionBar(board: board),
         if (isHome)
           FavouritesStrip(
             onTap: (button) => _handleTap(context, ref, button),

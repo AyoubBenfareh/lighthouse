@@ -132,9 +132,21 @@ class SettingsAdvancedScreen extends ConsumerWidget {
               trailing: LhRowTrailing.none,
               onTap: () => _confirmAndReset(context, ref),
             ),
+
+            const LhSectionLabel('AI Assistance'),
+            LhSwitchRow(
+              icon: Icons.auto_awesome_outlined,
+              title: 'AI Prediction Bar',
+              subtitle: 'Show offline next-word and sentence builder suggestions',
+              value: settings.enableAiPrediction,
+              onChanged: (v) => ref
+                  .read(settingsNotifierProvider.notifier)
+                  .setEnableAiPrediction(v),
+            ),
           ],
         ),
       ),
+
       ),
     );
   }

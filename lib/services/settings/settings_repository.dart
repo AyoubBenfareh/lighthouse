@@ -40,6 +40,7 @@ class SettingsState {
     this.voiceRate = 1.0,
     this.voicePitch = 1.0,
     this.highContrast = false,
+    this.enableAiPrediction = true,
     required this.autoReturnToHome,
     required this.hideTileText,
     required this.hidePictogram,
@@ -55,6 +56,7 @@ class SettingsState {
     voiceRate: 1.0,
     voicePitch: 1.0,
     highContrast: false,
+    enableAiPrediction: true,
     autoReturnToHome: true,
     hideTileText: false,
     hidePictogram: false,
@@ -80,6 +82,9 @@ class SettingsState {
   /// Accessibility high-contrast theme flag.
   final bool highContrast;
 
+  /// Enable optional offline AI word prediction and sentence assistance strip.
+  final bool enableAiPrediction;
+
   /// After speaking a fringe word inside a sub-board, return to the home board
   /// automatically (WordPower-style; cuts navigation burden and avoids
   /// stranding a child in a folder). Clinician-configurable; default on.
@@ -103,6 +108,7 @@ class SettingsState {
     double? voiceRate,
     double? voicePitch,
     bool? highContrast,
+    bool? enableAiPrediction,
     bool? autoReturnToHome,
     bool? hideTileText,
     bool? hidePictogram,
@@ -120,6 +126,7 @@ class SettingsState {
       voiceRate: voiceRate ?? this.voiceRate,
       voicePitch: voicePitch ?? this.voicePitch,
       highContrast: highContrast ?? this.highContrast,
+      enableAiPrediction: enableAiPrediction ?? this.enableAiPrediction,
       autoReturnToHome: autoReturnToHome ?? this.autoReturnToHome,
       hideTileText: hideTileText ?? this.hideTileText,
       hidePictogram: hidePictogram ?? this.hidePictogram,
@@ -138,6 +145,7 @@ class SettingsRepository {
   static const _keyVoiceRate = 'settings.voice_rate';
   static const _keyVoicePitch = 'settings.voice_pitch';
   static const _keyHighContrast = 'settings.high_contrast';
+  static const _keyEnableAiPrediction = 'settings.enable_ai_prediction';
   static const _keyAutoReturn = 'settings.auto_return_to_home';
   static const _keyHideTileText = 'settings.hide_tile_text';
   static const _keyHidePictogram = 'settings.hide_pictogram';
@@ -167,6 +175,8 @@ class SettingsRepository {
           p.getDouble(_keyVoicePitch) ?? SettingsState.defaults.voicePitch,
       highContrast:
           p.getBool(_keyHighContrast) ?? SettingsState.defaults.highContrast,
+      enableAiPrediction: p.getBool(_keyEnableAiPrediction) ??
+          SettingsState.defaults.enableAiPrediction,
       autoReturnToHome: p.getBool(_keyAutoReturn) ??
           SettingsState.defaults.autoReturnToHome,
       hideTileText: p.getBool(_keyHideTileText) ??
@@ -237,5 +247,10 @@ class SettingsRepository {
   Future<void> setHighContrast(bool value) async {
     final p = await _prefs();
     await p.setBool(_keyHighContrast, value);
+  }
+
+  Future<void> setEnableAiPrediction(bool value) async {
+    final p = await _prefs();
+    await p.setBool(_keyEnableAiPrediction, value);
   }
 }

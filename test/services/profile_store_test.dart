@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lighthouse/models/user_profile.dart';
 import 'package:lighthouse/services/profile/profile_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,12 +21,14 @@ void main() {
   test('ProfileStore creates, switches, and persists multiple profiles', () async {
     final store = ProfileStore();
     final prof1 = await store.createProfile(name: 'Maya', voiceRate: 0.9);
+    expect(prof1.name, 'Maya');
     final prof2 = await store.createProfile(
       name: 'Karim',
       interfaceLocale: 'ar',
       speechLocale: 'ar-DZ',
       highContrast: true,
     );
+
 
     final list = await store.listProfiles();
     expect(list.length, 3); // default + Maya + Karim
