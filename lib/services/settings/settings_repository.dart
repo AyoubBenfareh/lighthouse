@@ -36,6 +36,10 @@ class SettingsState {
     required this.glowStyle,
     required this.hitboxMagnitude,
     required this.localeOverride,
+    this.speechLocaleOverride,
+    this.voiceRate = 1.0,
+    this.voicePitch = 1.0,
+    this.highContrast = false,
     required this.autoReturnToHome,
     required this.hideTileText,
     required this.hidePictogram,
@@ -47,6 +51,10 @@ class SettingsState {
     glowStyle: GlowStyle.halo,
     hitboxMagnitude: HitboxMagnitude.subtle,
     localeOverride: null,
+    speechLocaleOverride: null,
+    voiceRate: 1.0,
+    voicePitch: 1.0,
+    highContrast: false,
     autoReturnToHome: true,
     hideTileText: false,
     hidePictogram: false,
@@ -56,8 +64,21 @@ class SettingsState {
   final GlowStyle glowStyle;
   final HitboxMagnitude hitboxMagnitude;
 
-  /// Two-letter ISO 639-1 code (en, ar, es). null means "follow system".
+  /// Interface language override (e.g. 'en', 'ar', 'ar_dz', 'de'). null means "follow system".
   final String? localeOverride;
+
+  /// Speech-output language override independent of interface language.
+  /// null means "match interface language".
+  final String? speechLocaleOverride;
+
+  /// Speech rate multiplier (0.5 to 2.0).
+  final double voiceRate;
+
+  /// Speech pitch multiplier (0.5 to 2.0).
+  final double voicePitch;
+
+  /// Accessibility high-contrast theme flag.
+  final bool highContrast;
 
   /// After speaking a fringe word inside a sub-board, return to the home board
   /// automatically (WordPower-style; cuts navigation burden and avoids
@@ -65,17 +86,10 @@ class SettingsState {
   /// See ADR 0009.
   final bool autoReturnToHome;
 
-  /// Hide the text label under each tile, leaving only the pictogram. Default
-  /// off (text shows). Clinician-configurable: a symbol-only grid suits
-  /// pre-literate children or reduces reliance on text for some learners.
+  /// Hide the text label under each tile, leaving only the pictogram.
   final bool hideTileText;
 
-  /// Hide the pictogram on each tile, leaving only the text label. Default off
-  /// (pictogram shows). The complement of [hideTileText]: a text-only grid
-  /// suits literate AAC users. INVARIANT: [hideTileText] and [hidePictogram]
-  /// are never both true (a blank tile is unusable); the settings notifier
-  /// enforces this by forcing the other back on. See
-  /// [[project-lighthouse-board-engine]].
+  /// Hide the pictogram on each tile, leaving only the text label.
   final bool hidePictogram;
 
   SettingsState copyWith({
@@ -84,6 +98,11 @@ class SettingsState {
     HitboxMagnitude? hitboxMagnitude,
     String? localeOverride,
     bool clearLocaleOverride = false,
+    String? speechLocaleOverride,
+    bool clearSpeechLocaleOverride = false,
+    double? voiceRate,
+    double? voicePitch,
+    bool? highContrast,
     bool? autoReturnToHome,
     bool? hideTileText,
     bool? hidePictogram,
@@ -95,6 +114,12 @@ class SettingsState {
       localeOverride: clearLocaleOverride
           ? null
           : (localeOverride ?? this.localeOverride),
+      speechLocaleOverride: clearSpeechLocaleOverride
+          ? null
+          : (speechLocaleOverride ?? this.speechLocaleOverride),
+      voiceRate: voiceRate ?? this.voiceRate,
+      voicePitch: voicePitch ?? this.voicePitch,
+      highContrast: highContrast ?? this.highContrast,
       autoReturnToHome: autoReturnToHome ?? this.autoReturnToHome,
       hideTileText: hideTileText ?? this.hideTileText,
       hidePictogram: hidePictogram ?? this.hidePictogram,
@@ -109,6 +134,10 @@ class SettingsRepository {
   static const _keyGlow = 'settings.glow_style';
   static const _keyHit = 'settings.hitbox_magnitude';
   static const _keyLocale = 'settings.locale_override';
+  static const _keySpeechLocale = 'settings.speech_locale_override';
+  static const _keyVoiceRate = 'settings.voice_rate';
+  static const _keyVoicePitch = 'settings.voice_pitch';
+  static const _keyHighContrast = 'settings.high_contrast';
   static const _keyAutoReturn = 'settings.auto_return_to_home';
   static const _keyHideTileText = 'settings.hide_tile_text';
   static const _keyHidePictogram = 'settings.hide_pictogram';
@@ -132,6 +161,12 @@ class SettingsRepository {
       hitboxMagnitude: HitboxMagnitude.tryParse(p.getString(_keyHit)) ??
           SettingsState.defaults.hitboxMagnitude,
       localeOverride: p.getString(_keyLocale),
+      speechLocaleOverride: p.getString(_keySpeechLocale),
+      voiceRate: p.getDouble(_keyVoiceRate) ?? SettingsState.defaults.voiceRate,
+      voicePitch:
+          p.getDouble(_keyVoicePitch) ?? SettingsState.defaults.voicePitch,
+      highContrast:
+          p.getBool(_keyHighContrast) ?? SettingsState.defaults.highContrast,
       autoReturnToHome: p.getBool(_keyAutoReturn) ??
           SettingsState.defaults.autoReturnToHome,
       hideTileText: p.getBool(_keyHideTileText) ??
@@ -178,5 +213,29 @@ class SettingsRepository {
     } else {
       await p.setString(_keyLocale, code);
     }
+  }
+
+  Future<void> setSpeechLocaleOverride(String? code) async {
+    final p = await _prefs();
+    if (code == null) {
+      await p.remove(_keySpeechLocale);
+    } else {
+      await p.setString(_keySpeechLocale, code);
+    }
+  }
+
+  Future<void> setVoiceRate(double rate) async {
+    final p = await _prefs();
+    await p.setDouble(_keyVoiceRate, rate);
+  }
+
+  Future<void> setVoicePitch(double pitch) async {
+    final p = await _prefs();
+    await p.setDouble(_keyVoicePitch, pitch);
+  }
+
+  Future<void> setHighContrast(bool value) async {
+    final p = await _prefs();
+    await p.setBool(_keyHighContrast, value);
   }
 }

@@ -405,27 +405,23 @@ class _BoardView extends ConsumerWidget {
       unawaited(_recordTap(ref, button));
     }
 
-    final locale = Localizations.localeOf(context);
-    final langCode = LocaleRegistry.codeForLocale(locale);
-    final label = button.labelFor(langCode);
-    final voice = button.voiceOutFor(langCode) ?? '';
+    final uiLocale = Localizations.localeOf(context);
+    final uiLangCode = LocaleRegistry.codeForLocale(uiLocale);
+
+    final speechCode = settings.speechLocaleOverride ?? uiLangCode;
+    final speechSpec = LocaleRegistry.specForCode(speechCode);
+    final speechLocale = speechSpec?.locale ?? uiLocale;
+
+    final label = button.labelFor(uiLangCode);
+    final voice = button.voiceOutFor(speechCode) ?? '';
 
     switch (mode) {
       case TtsMode.on:
-        // Commit to the bar BEFORE awaiting speech. The word lands in the
-        // sentence bar (ADR 0010) regardless of the audio outcome: on iOS an
-        // interrupted system-TTS utterance can leave the awaited speak future
-        // unresolved, which previously left this commit unreachable and silently
-        // dropped the word from the composed sentence (item 3). A PHRASE button
-        // is a complete utterance on its own, so commit() leaves the bar
-        // untouched. The composed sentence is replayed later from the bar.
         ref.read(utteranceProvider.notifier).commit(button);
         if (voice.isNotEmpty) {
-          await _speakTimeboxed(ref, button, voice, locale);
+          await _speakTimeboxed(ref, button, voice, speechLocale);
         }
       case TtsMode.off:
-        // A silent selection still counts as a communication act and still
-        // builds the sentence.
         ref.read(utteranceProvider.notifier).commit(button);
       case TtsMode.onRequest:
         // Tap is silent; the long-press is the communication act. Do not
@@ -479,18 +475,18 @@ class _BoardView extends ConsumerWidget {
     // surfaced through a different gesture. Same bandit + log update.
     unawaited(_recordTap(ref, button));
 
-    final locale = Localizations.localeOf(context);
-    final langCode = LocaleRegistry.codeForLocale(locale);
-    final voice = button.voiceOutFor(langCode) ?? '';
+    final uiLocale = Localizations.localeOf(context);
+    final uiLangCode = LocaleRegistry.codeForLocale(uiLocale);
 
-    // The long-press is the communication act in On-request mode, so it is also
-    // what commits to the sentence bar (ADR 0010): a word accumulates, a phrase
-    // speaks standalone and leaves the bar untouched. Commit BEFORE awaiting
-    // speech so a hung iOS system-TTS future cannot drop the word (item 3).
+    final speechCode = settings.speechLocaleOverride ?? uiLangCode;
+    final speechSpec = LocaleRegistry.specForCode(speechCode);
+    final speechLocale = speechSpec?.locale ?? uiLocale;
+    final voice = button.voiceOutFor(speechCode) ?? '';
+
     ref.read(utteranceProvider.notifier).commit(button);
 
     if (voice.isNotEmpty) {
-      await _speakTimeboxed(ref, button, voice, locale);
+      await _speakTimeboxed(ref, button, voice, speechLocale);
     }
 
     if (!context.mounted) return;

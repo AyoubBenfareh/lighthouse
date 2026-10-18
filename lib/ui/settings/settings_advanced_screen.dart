@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../i18n/locale_registry.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/services.dart';
 import '../../state/state.dart';
@@ -40,8 +41,39 @@ class SettingsAdvancedScreen extends ConsumerWidget {
               subtitle: _ttsLabel(l10n, settings.ttsMode),
               onTap: () => _pickTts(context, ref, settings.ttsMode),
             ),
+            LhSettingsRow(
+              icon: Icons.translate_rounded,
+              title: 'Speech Output Language',
+              subtitle: settings.speechLocaleOverride == null
+                  ? 'Matches interface language'
+                  : (LocaleRegistry.specForCode(settings.speechLocaleOverride!)
+                          ?.nativeName ??
+                      settings.speechLocaleOverride!),
+              onTap: () => _pickSpeechLocale(context, ref, settings.speechLocaleOverride),
+            ),
+            LhSettingsRow(
+              icon: Icons.speed_rounded,
+              title: 'Speech Speed',
+              subtitle: '${(settings.voiceRate * 100).toInt()}%',
+              onTap: () => _showRateDialog(context, ref, settings.voiceRate),
+            ),
+            LhSettingsRow(
+              icon: Icons.graphic_eq_rounded,
+              title: 'Speech Pitch',
+              subtitle: '${(settings.voicePitch * 100).toInt()}%',
+              onTap: () => _showPitchDialog(context, ref, settings.voicePitch),
+            ),
 
             LhSectionLabel(l10n.sectionVisual),
+            LhSwitchRow(
+              icon: Icons.contrast_rounded,
+              title: 'High-Contrast Board',
+              subtitle: 'Enhanced contrast borders for visual clarity',
+              value: settings.highContrast,
+              onChanged: (v) => ref
+                  .read(settingsNotifierProvider.notifier)
+                  .setHighContrast(v),
+            ),
             LhSettingsRow(
               icon: Icons.auto_awesome_rounded,
               title: l10n.glowStyle,
@@ -254,6 +286,133 @@ class SettingsAdvancedScreen extends ConsumerWidget {
         duration: const Duration(seconds: 2),
         content: Text(
             ok ? l10n.learnedStateCleared : l10n.couldNotClearLearnedState),
+      ),
+    );
+  }
+
+  Future<void> _pickSpeechLocale(
+      BuildContext context, WidgetRef ref, String? current) async {
+    final options = <({String? code, String label})>[
+      (code: null, label: 'Match interface language'),
+      for (final s in LocaleRegistry.all)
+        (code: s.code, label: '${s.nativeName} (${s.englishName})'),
+    ];
+
+    final chosen = await showDialog<String?>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        title: const Text('Speech Output Language'),
+        children: [
+          for (final opt in options)
+            SimpleDialogOption(
+              onPressed: () => Navigator.of(ctx).pop(opt.code),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      opt.label,
+                      style: TextStyle(
+                        fontWeight:
+                            opt.code == current ? FontWeight.bold : FontWeight.normal,
+                        color: opt.code == current ? LhColors.brown : LhColors.ink,
+                      ),
+                    ),
+                  ),
+                  if (opt.code == current)
+                    const Icon(Icons.check, color: LhColors.brown, size: 20),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+
+    // If dismissed via outside tap, chosen is null, but we need to know if null was tapped
+    // To handle explicit 'Match interface language' choice cleanly:
+    await ref
+        .read(settingsNotifierProvider.notifier)
+        .setSpeechLocaleOverride(chosen);
+  }
+
+  void _showRateDialog(BuildContext context, WidgetRef ref, double currentRate) {
+    double rate = currentRate;
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setState) => AlertDialog(
+          title: const Text('Speech Speed'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('${(rate * 100).toInt()}%',
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Slider(
+                value: rate,
+                min: 0.5,
+                max: 2.0,
+                divisions: 15,
+                onChanged: (v) => setState(() => rate = v),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () async {
+                await ref
+                    .read(settingsNotifierProvider.notifier)
+                    .setVoiceRate(rate);
+                if (ctx.mounted) Navigator.of(ctx).pop();
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showPitchDialog(
+      BuildContext context, WidgetRef ref, double currentPitch) {
+    double pitch = currentPitch;
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setState) => AlertDialog(
+          title: const Text('Speech Pitch'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('${(pitch * 100).toInt()}%',
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Slider(
+                value: pitch,
+                min: 0.5,
+                max: 2.0,
+                divisions: 15,
+                onChanged: (v) => setState(() => pitch = v),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () async {
+                await ref
+                    .read(settingsNotifierProvider.notifier)
+                    .setVoicePitch(pitch);
+                if (ctx.mounted) Navigator.of(ctx).pop();
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        ),
       ),
     );
   }

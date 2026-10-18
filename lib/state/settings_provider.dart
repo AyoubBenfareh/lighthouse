@@ -48,6 +48,29 @@ class SettingsNotifier extends _$SettingsNotifier {
     ));
   }
 
+  Future<void> setSpeechLocaleOverride(String? code) async {
+    await ref.read(settingsRepositoryProvider).setSpeechLocaleOverride(code);
+    state = AsyncData(_current.copyWith(
+      speechLocaleOverride: code,
+      clearSpeechLocaleOverride: code == null,
+    ));
+  }
+
+  Future<void> setVoiceRate(double rate) async {
+    await ref.read(settingsRepositoryProvider).setVoiceRate(rate);
+    state = AsyncData(_current.copyWith(voiceRate: rate));
+  }
+
+  Future<void> setVoicePitch(double pitch) async {
+    await ref.read(settingsRepositoryProvider).setVoicePitch(pitch);
+    state = AsyncData(_current.copyWith(voicePitch: pitch));
+  }
+
+  Future<void> setHighContrast(bool value) async {
+    await ref.read(settingsRepositoryProvider).setHighContrast(value);
+    state = AsyncData(_current.copyWith(highContrast: value));
+  }
+
   Future<void> setAutoReturnToHome(bool value) async {
     await ref.read(settingsRepositoryProvider).setAutoReturnToHome(value);
     state = AsyncData(_current.copyWith(autoReturnToHome: value));

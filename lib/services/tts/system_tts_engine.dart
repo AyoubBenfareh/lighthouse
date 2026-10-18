@@ -25,26 +25,40 @@ class SystemTTSEngine implements TTSEngine {
   final FlutterTts _backend;
   String? _currentLanguageTag;
 
+  Future<void> setRate(double rate) async {
+    await _backend.setSpeechRate(rate.clamp(0.1, 2.0));
+  }
+
+  Future<void> setPitch(double pitch) async {
+    await _backend.setPitch(pitch.clamp(0.5, 2.0));
+  }
+
+  /// Returns true if an exact dialect voice (e.g. ar-DZ) exists on device,
+  /// or false when falling back to a general base voice (e.g. ar).
+  Future<bool> hasExactVoiceFor(Locale locale) async {
+    try {
+      final available = await _backend.getLanguages;
+      if (available is! List) return false;
+      final tag = _bcp47Tag(locale).toLowerCase();
+      for (final entry in available) {
+        if (entry?.toString().toLowerCase() == tag) return true;
+      }
+    } catch (_) {}
+    return false;
+  }
+
   @override
   Future<void> speak(String text, {required Locale locale}) async {
     final tag = _bcp47Tag(locale);
     if (tag != _currentLanguageTag) {
-      await _backend.setLanguage(tag);
+      final res = await _backend.setLanguage(tag);
+      if (res != 1 && locale.countryCode != null) {
+        // Fallback to base language (e.g. ar-DZ -> ar)
+        await _backend.setLanguage(locale.languageCode);
+      }
       _currentLanguageTag = tag;
     }
     // Latest-wins: stop any in-flight utterance before starting this one.
-    // We set awaitSpeakCompletion(true) above, and flutter_tts 4.2.5's Android
-    // plugin DISCARDS a speak() that arrives while a previous awaited utterance
-    // is still speaking (its "speak" handler returns success(0) and plays
-    // nothing). So a child tapping a second system-voice tile (a custom button
-    // with no recording, or any word with no bundled clip) before the first
-    // finished would hear silence, with the tile still animating: a silent
-    // failure. Calling stop() first clears the in-flight utterance AND resolves
-    // its pending future (the plugin's "stop" handler completes speakResult),
-    // so this tap always speaks. This mirrors the supersede-on-tap behavior the
-    // bundled engine already has (BundledAudioTTSEngine, via its generation
-    // token) and the custom-recording path in main._speakSafely. See ADR 0004
-    // and ADR 0010.
     await _backend.stop();
     await _backend.speak(text);
   }

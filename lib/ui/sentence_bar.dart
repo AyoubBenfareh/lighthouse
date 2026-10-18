@@ -10,6 +10,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../i18n/locale_registry.dart';
 import '../l10n/app_localizations.dart';
 import '../logic/logic.dart';
 import '../models/models.dart';
@@ -182,18 +183,25 @@ class SentenceBar extends ConsumerWidget {
     // it re-speaks token-by-token so ONE bad token can never abort the whole
     // replay and leave the child's highest-stakes act silent (item 3).
     Future<void> speakRun(List<AACButton> run) async {
-      final words = composeUtteranceTokens(run, locale.languageCode);
+      final settings = ref.read(settingsNotifierProvider).valueOrNull ??
+          SettingsState.defaults;
+      final uiLangCode = LocaleRegistry.codeForLocale(locale);
+      final speechCode = settings.speechLocaleOverride ?? uiLangCode;
+      final speechSpec = LocaleRegistry.specForCode(speechCode);
+      final effectiveSpeechLocale = speechSpec?.locale ?? locale;
+
+      final words = composeUtteranceTokens(run, speechCode);
       if (words.isEmpty || superseded()) return;
       try {
         await engine
-            .speakSequence(words, locale: locale)
+            .speakSequence(words, locale: effectiveSpeechLocale)
             .timeout(_replayTokenTimeout, onTimeout: () {});
       } catch (_) {
         for (final w in words) {
           if (superseded()) return;
           try {
             await engine
-                .speakSequence([w], locale: locale)
+                .speakSequence([w], locale: effectiveSpeechLocale)
                 .timeout(_replayTokenTimeout, onTimeout: () {});
           } catch (_) {/* skip the one bad token, never the whole sentence */}
         }
@@ -289,7 +297,8 @@ class _ChipStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final languageCode = Localizations.localeOf(context).languageCode;
+    final languageCode =
+        LocaleRegistry.codeForLocale(Localizations.localeOf(context));
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(vertical: compact ? 2 : 4, horizontal: 2),
