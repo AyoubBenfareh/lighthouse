@@ -6,10 +6,13 @@
 /// (Pack Loader, Phase 1 follow-up).
 library;
 
+export 'backup/aac_backup_service.dart';
 export 'board_loader.dart';
 export 'board_pack_exporter.dart';
 export 'board_pack_importer.dart';
 export 'board_registry.dart';
+export 'obf/open_board_format.dart';
+
 export 'crash/crash.dart';
 export 'custom/custom_button_store.dart';
 export 'feedback/feedback.dart';
