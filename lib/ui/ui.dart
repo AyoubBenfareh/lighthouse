@@ -20,4 +20,5 @@ export 'tour/tour_controller.dart';
 export 'tour/tour_overlay.dart';
 export 'ai/prediction_bar.dart';
 export 'ai/text_assistant_sheet.dart';
+export 'a11y/switch_scanner.dart';
 export 'widgets/restart_widget.dart';

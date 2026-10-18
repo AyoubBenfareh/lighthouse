@@ -143,9 +143,27 @@ class SettingsAdvancedScreen extends ConsumerWidget {
                   .read(settingsNotifierProvider.notifier)
                   .setEnableAiPrediction(v),
             ),
+
+            const LhSectionLabel('Switch Accessibility'),
+            LhSettingsRow(
+              icon: Icons.accessibility_new_outlined,
+              title: 'Access Method',
+              subtitle: 'Input mode for physical switches and motor scanning',
+              trailing: LhRowTrailing.text(_accessMethodLabel(settings.accessMethod)),
+              onTap: () => _pickAccessMethod(context, ref, settings.accessMethod),
+            ),
+            if (settings.accessMethod == AccessMethod.switchSingle)
+              LhSettingsRow(
+                icon: Icons.timer_outlined,
+                title: 'Auto-Scan Dwell Time',
+                subtitle: 'Duration to highlight each tile before advancing',
+                trailing: LhRowTrailing.text('${settings.switchDwellMs} ms'),
+                onTap: () => _pickDwellTime(context, ref, settings.switchDwellMs),
+              ),
           ],
         ),
       ),
+
 
       ),
     );
@@ -428,4 +446,62 @@ class SettingsAdvancedScreen extends ConsumerWidget {
       ),
     );
   }
+
+  static String _accessMethodLabel(AccessMethod method) => switch (method) {
+        AccessMethod.directTouch => 'Direct Touch',
+        AccessMethod.switchSingle => 'Single-Switch (Auto Scan)',
+        AccessMethod.switchDual => 'Dual-Switch (Step & Select)',
+      };
+
+  void _pickAccessMethod(
+      BuildContext context, WidgetRef ref, AccessMethod current) {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        title: const Text('Select Access Method'),
+        children: [
+          for (final method in AccessMethod.values)
+            RadioListTile<AccessMethod>(
+              title: Text(_accessMethodLabel(method)),
+              value: method,
+              groupValue: current,
+              onChanged: (val) async {
+                if (val != null) {
+                  await ref
+                      .read(settingsNotifierProvider.notifier)
+                      .setAccessMethod(val);
+                  if (ctx.mounted) Navigator.of(ctx).pop();
+                }
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  void _pickDwellTime(BuildContext context, WidgetRef ref, int currentMs) {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        title: const Text('Auto-Scan Dwell Time'),
+        children: [
+          for (final ms in const [500, 750, 1000, 1500, 2000])
+            RadioListTile<int>(
+              title: Text('$ms milliseconds'),
+              value: ms,
+              groupValue: currentMs,
+              onChanged: (val) async {
+                if (val != null) {
+                  await ref
+                      .read(settingsNotifierProvider.notifier)
+                      .setSwitchDwellMs(val);
+                  if (ctx.mounted) Navigator.of(ctx).pop();
+                }
+              },
+            ),
+        ],
+      ),
+    );
+  }
 }
+

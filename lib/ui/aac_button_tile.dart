@@ -28,6 +28,7 @@ class AACButtonTile extends StatefulWidget {
     this.onLongPress,
     this.hideText = false,
     this.hideIcon = false,
+    this.isSwitchFocused = false,
     super.key,
   });
 
@@ -35,6 +36,8 @@ class AACButtonTile extends StatefulWidget {
   final Map<String, String> colorKey;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
+  final bool isSwitchFocused;
+
 
   /// When true, render the pictogram only and omit the text label (symbol-only
   /// mode, clinician setting). The Semantics label is kept regardless, so
@@ -145,17 +148,20 @@ class _AACButtonTileState extends State<AACButtonTile> {
                       ],
                     ),
                   ),
-                  // 1.5px edge border painted over the fill edge.
+                  // 1.5px edge border painted over the fill edge, or 3.5px amber focus ring when switch scanning.
                   Positioned.fill(
                     child: IgnorePointer(
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: LhRadii.tileR,
-                          border: Border.all(color: edge, width: 1.5),
+                          border: widget.isSwitchFocused
+                              ? Border.all(color: LhColors.amber, width: 3.5)
+                              : Border.all(color: edge, width: 1.5),
                         ),
                       ),
                     ),
                   ),
+
                   // Folder dog-ear chip (top-trailing, mirrors under RTL).
                   if (isFolder)
                     const PositionedDirectional(

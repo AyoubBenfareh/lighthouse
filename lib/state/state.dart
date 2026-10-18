@@ -27,7 +27,9 @@ export 'profile_provider.dart';
 export 'replay_generation_provider.dart';
 export 'settings_provider.dart';
 export 'symbol_provider.dart';
+export 'switch_access_provider.dart';
 export 'tap_queue_provider.dart';
 export 'tts_provider.dart';
 export 'utterance_provider.dart';
 export 'wifi_provider.dart';
+

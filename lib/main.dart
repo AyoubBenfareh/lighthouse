@@ -311,6 +311,15 @@ class _BoardView extends ConsumerWidget {
     );
     final l10n = AppLocalizations.of(context);
 
+    final switchFocusIndex = ref.watch(switchFocusIndexProvider);
+    final isSwitchActive = ref.watch(isSwitchAccessEnabledProvider);
+    final String? focusedButtonId = (isSwitchActive &&
+            board.buttons.isNotEmpty &&
+            switchFocusIndex >= 0 &&
+            switchFocusIndex < board.buttons.length)
+        ? board.buttons[switchFocusIndex].id
+        : null;
+
     return Column(
       children: [
         // tourSentenceKey / tourBoardKey mark the guided-tour spotlight targets
@@ -341,44 +350,53 @@ class _BoardView extends ConsumerWidget {
         Expanded(
           child: KeyedSubtree(
             key: tourBoardKey,
-            child: () {
-            final grid = AACGrid(
+            child: SwitchScanner(
               board: board,
-              glow: glow,
-              glowStyle: glowStyle,
-              hitboxMagnitude: hitboxMagnitude,
-              hideTileText: hideTileText,
-              hidePictogram: hidePictogram,
-              columns: sizing.columns,
-              scroll: sizing.scrolls,
-              // Home fills the screen; a sub-board keeps its tiles large and
-              // top-aligned with calm space below (handoff sub-board rule). In
-              // scroll mode (phone / small tablet) the board reflows +
-              // scrolls, so top-align does not apply.
-              topAlign: !isHome && !sizing.scrolls,
-              onButtonTap: (button) => _handleTap(context, ref, button),
-              // Only wire long-press in On-request mode. A non-null callback
-              // makes a LongPressGestureRecognizer join the gesture arena on
-              // every tile, so a >=500 ms press-and-hold cancels the tap and
-              // fires a handler that no-ops in on/off/als modes: a silently dead
-              // communication act for a common motor profile (item 7). null in
-              // those modes lets a held press still register as a normal tap.
-              onButtonLongPress: ttsMode == TtsMode.onRequest
-                  ? (button) => _handleLongPress(context, ref, button)
-                  : null,
-            );
-            // On a scrolling board, show a "more words" cue ONLY while there
-            // are rows below the current scroll position; it hides at the
-            // bottom (and never shows if the board fits). A tablet's filled
-            // board never scrolls, so no cue.
-            return sizing.scrolls
-                ? _ScrollHintedBoard(cueText: l10n.boardScrollHint, child: grid)
-                : grid;
-          }(),
+              onSelect: (button) => _handleTap(context, ref, button),
+              child: Builder(
+                builder: (context) {
+                  final grid = AACGrid(
+                    board: board,
+                    focusedButtonId: focusedButtonId,
+                    glow: glow,
+                    glowStyle: glowStyle,
+                    hitboxMagnitude: hitboxMagnitude,
+                    hideTileText: hideTileText,
+                    hidePictogram: hidePictogram,
+                    columns: sizing.columns,
+                    scroll: sizing.scrolls,
+                    // Home fills the screen; a sub-board keeps its tiles large and
+                    // top-aligned with calm space below (handoff sub-board rule). In
+                    // scroll mode (phone / small tablet) the board reflows +
+                    // scrolls, so top-align does not apply.
+                    topAlign: !isHome && !sizing.scrolls,
+                    onButtonTap: (button) => _handleTap(context, ref, button),
+                    // Only wire long-press in On-request mode. A non-null callback
+                    // makes a LongPressGestureRecognizer join the gesture arena on
+                    // every tile, so a >=500 ms press-and-hold cancels the tap and
+                    // fires a handler that no-ops in on/off/als modes: a silently dead
+                    // communication act for a common motor profile (item 7). null in
+                    // those modes lets a held press still register as a normal tap.
+                    onButtonLongPress: ttsMode == TtsMode.onRequest
+                        ? (button) => _handleLongPress(context, ref, button)
+                        : null,
+                  );
+                  // On a scrolling board, show a "more words" cue ONLY while there
+                  // are rows below the current scroll position; it hides at the
+                  // bottom (and never shows if the board fits). A tablet's filled
+                  // board never scrolls, so no cue.
+                  return sizing.scrolls
+                      ? _ScrollHintedBoard(
+                          cueText: l10n.boardScrollHint, child: grid)
+                      : grid;
+                },
+              ),
+            ),
           ),
         ),
       ],
     );
+
   }
 
   Future<void> _handleTap(

@@ -108,5 +108,16 @@ class SettingsNotifier extends _$SettingsNotifier {
     await ref.read(settingsRepositoryProvider).setEnableAiPrediction(value);
     state = AsyncData(_current.copyWith(enableAiPrediction: value));
   }
+
+  Future<void> setAccessMethod(AccessMethod method) async {
+    await ref.read(settingsRepositoryProvider).setAccessMethod(method);
+    state = AsyncData(_current.copyWith(accessMethod: method));
+  }
+
+  Future<void> setSwitchDwellMs(int ms) async {
+    await ref.read(settingsRepositoryProvider).setSwitchDwellMs(ms);
+    state = AsyncData(_current.copyWith(switchDwellMs: ms));
+  }
 }
+
 

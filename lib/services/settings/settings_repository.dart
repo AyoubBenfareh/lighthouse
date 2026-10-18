@@ -9,11 +9,14 @@ library;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../logic/logic.dart';
+import '../../models/user_profile.dart' show AccessMethod;
 
 // GlowStyle and HitboxMagnitude live in lib/logic/ (domain layer) and
 // are re-exported below so existing imports of services keep working.
 export '../../logic/bandit/glow_style.dart' show GlowStyle;
 export '../../logic/hitbox/hitbox_expansion.dart' show HitboxMagnitude;
+export '../../models/user_profile.dart' show AccessMethod;
+
 
 enum TtsMode {
   on,
@@ -41,6 +44,8 @@ class SettingsState {
     this.voicePitch = 1.0,
     this.highContrast = false,
     this.enableAiPrediction = true,
+    this.accessMethod = AccessMethod.directTouch,
+    this.switchDwellMs = 1000,
     required this.autoReturnToHome,
     required this.hideTileText,
     required this.hidePictogram,
@@ -57,10 +62,13 @@ class SettingsState {
     voicePitch: 1.0,
     highContrast: false,
     enableAiPrediction: true,
+    accessMethod: AccessMethod.directTouch,
+    switchDwellMs: 1000,
     autoReturnToHome: true,
     hideTileText: false,
     hidePictogram: false,
   );
+
 
   final TtsMode ttsMode;
   final GlowStyle glowStyle;
@@ -84,6 +92,12 @@ class SettingsState {
 
   /// Enable optional offline AI word prediction and sentence assistance strip.
   final bool enableAiPrediction;
+
+  /// Accessibility access method (direct touch, single-switch auto scan, dual-switch step scan).
+  final AccessMethod accessMethod;
+
+  /// Switch scanning dwell time in milliseconds (500ms to 2000ms).
+  final int switchDwellMs;
 
   /// After speaking a fringe word inside a sub-board, return to the home board
   /// automatically (WordPower-style; cuts navigation burden and avoids
@@ -109,6 +123,8 @@ class SettingsState {
     double? voicePitch,
     bool? highContrast,
     bool? enableAiPrediction,
+    AccessMethod? accessMethod,
+    int? switchDwellMs,
     bool? autoReturnToHome,
     bool? hideTileText,
     bool? hidePictogram,
@@ -127,12 +143,15 @@ class SettingsState {
       voicePitch: voicePitch ?? this.voicePitch,
       highContrast: highContrast ?? this.highContrast,
       enableAiPrediction: enableAiPrediction ?? this.enableAiPrediction,
+      accessMethod: accessMethod ?? this.accessMethod,
+      switchDwellMs: switchDwellMs ?? this.switchDwellMs,
       autoReturnToHome: autoReturnToHome ?? this.autoReturnToHome,
       hideTileText: hideTileText ?? this.hideTileText,
       hidePictogram: hidePictogram ?? this.hidePictogram,
     );
   }
 }
+
 
 class SettingsRepository {
   SettingsRepository({SharedPreferences? prefs}) : _prefsOverride = prefs;
@@ -146,6 +165,8 @@ class SettingsRepository {
   static const _keyVoicePitch = 'settings.voice_pitch';
   static const _keyHighContrast = 'settings.high_contrast';
   static const _keyEnableAiPrediction = 'settings.enable_ai_prediction';
+  static const _keyAccessMethod = 'settings.access_method';
+  static const _keySwitchDwellMs = 'settings.switch_dwell_ms';
   static const _keyAutoReturn = 'settings.auto_return_to_home';
   static const _keyHideTileText = 'settings.hide_tile_text';
   static const _keyHidePictogram = 'settings.hide_pictogram';
@@ -177,6 +198,9 @@ class SettingsRepository {
           p.getBool(_keyHighContrast) ?? SettingsState.defaults.highContrast,
       enableAiPrediction: p.getBool(_keyEnableAiPrediction) ??
           SettingsState.defaults.enableAiPrediction,
+      accessMethod: AccessMethod.tryParse(p.getString(_keyAccessMethod)),
+      switchDwellMs: p.getInt(_keySwitchDwellMs) ??
+          SettingsState.defaults.switchDwellMs,
       autoReturnToHome: p.getBool(_keyAutoReturn) ??
           SettingsState.defaults.autoReturnToHome,
       hideTileText: p.getBool(_keyHideTileText) ??
@@ -253,4 +277,15 @@ class SettingsRepository {
     final p = await _prefs();
     await p.setBool(_keyEnableAiPrediction, value);
   }
+
+  Future<void> setAccessMethod(AccessMethod method) async {
+    final p = await _prefs();
+    await p.setString(_keyAccessMethod, method.toJson());
+  }
+
+  Future<void> setSwitchDwellMs(int ms) async {
+    final p = await _prefs();
+    await p.setInt(_keySwitchDwellMs, ms);
+  }
 }
+
