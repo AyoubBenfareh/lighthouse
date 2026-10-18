@@ -29,6 +29,7 @@ import 'custom_buttons_screen.dart';
 import 'feedback_screen.dart';
 import 'home_favourites_screen.dart';
 import 'math_gate.dart';
+import 'profiles_screen.dart';
 import 'settings_advanced_screen.dart';
 
 class SettingsPrimaryScreen extends ConsumerWidget {
@@ -55,6 +56,12 @@ class SettingsPrimaryScreen extends ConsumerWidget {
             ),
 
             LhSectionLabel(l10n.sectionYourChildsBoard),
+            LhSettingsRow(
+              icon: Icons.people_outline_rounded,
+              title: 'User Profiles',
+              subtitle: 'Switch or manage communicator profiles',
+              onTap: () => _openGated(context, const ProfilesScreen()),
+            ),
             LhSettingsRow(
               icon: Icons.star_outline_rounded,
               title: l10n.homeFavouritesTitle,

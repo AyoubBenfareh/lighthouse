@@ -23,6 +23,7 @@ export 'voice/custom_voice_store.dart';
 export 'network/network.dart';
 export 'onboarding/onboarding.dart';
 export 'ota/ota.dart';
+export 'profile/profile_store.dart';
 export 'settings/settings.dart';
 export 'symbols/symbols.dart';
 export 'tts/bundled_audio_tts_engine.dart';
