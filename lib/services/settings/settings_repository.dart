@@ -43,7 +43,7 @@ class SettingsState {
     this.voiceRate = 1.0,
     this.voicePitch = 1.0,
     this.highContrast = false,
-    this.enableAiPrediction = true,
+    this.enableAiPrediction = false,
     this.accessMethod = AccessMethod.directTouch,
     this.switchDwellMs = 1000,
     required this.autoReturnToHome,
@@ -61,13 +61,14 @@ class SettingsState {
     voiceRate: 1.0,
     voicePitch: 1.0,
     highContrast: false,
-    enableAiPrediction: true,
+    enableAiPrediction: false,
     accessMethod: AccessMethod.directTouch,
     switchDwellMs: 1000,
     autoReturnToHome: true,
     hideTileText: false,
     hidePictogram: false,
   );
+
 
 
   final TtsMode ttsMode;

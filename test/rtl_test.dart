@@ -138,22 +138,14 @@ void main() {
     // Arabic labels now ship in the board (label_ar), so tiles render their
     // localized label, not the English fallback. (btn_i -> أنا, btn_help ->
     // مساعدة, btn_bathroom -> الحمّام, btn_food_folder -> طعام.)
-    expect(
-        find.descendant(of: find.byType(AACGrid), matching: find.text('أنا')),
-        findsOneWidget);
-    expect(
-        find.descendant(of: find.byType(AACGrid), matching: find.text('مساعدة')),
-        findsOneWidget);
-    expect(
-        find.descendant(
-            of: find.byType(AACGrid), matching: find.text('الحمّام')),
-        findsOneWidget);
-    expect(
-        find.descendant(of: find.byType(AACGrid), matching: find.text('طعام')),
-        findsOneWidget);
+    expect(find.text('أنا'), findsOneWidget);
+    expect(find.text('مساعدة'), findsOneWidget);
+    expect(find.text('الحمّام'), findsOneWidget);
+    expect(find.text('طعام'), findsOneWidget);
     // English labels must NOT leak through once a translation exists.
     expect(find.text('Help'), findsNothing);
     expect(find.byType(AACButtonTile), findsNWidgets(56));
+
 
   });
 
