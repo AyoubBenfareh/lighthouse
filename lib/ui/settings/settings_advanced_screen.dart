@@ -148,21 +148,22 @@ class SettingsAdvancedScreen extends ConsumerWidget {
             LhSettingsRow(
               icon: Icons.accessibility_new_outlined,
               title: 'Access Method',
-              subtitle: 'Input mode for physical switches and motor scanning',
-              trailing: LhRowTrailing.text(_accessMethodLabel(settings.accessMethod)),
+              subtitle: 'Current: ${_accessMethodLabel(settings.accessMethod)}',
+              trailing: LhRowTrailing.chevron,
               onTap: () => _pickAccessMethod(context, ref, settings.accessMethod),
             ),
             if (settings.accessMethod == AccessMethod.switchSingle)
               LhSettingsRow(
                 icon: Icons.timer_outlined,
                 title: 'Auto-Scan Dwell Time',
-                subtitle: 'Duration to highlight each tile before advancing',
-                trailing: LhRowTrailing.text('${settings.switchDwellMs} ms'),
+                subtitle: 'Current: ${settings.switchDwellMs} ms',
+                trailing: LhRowTrailing.chevron,
                 onTap: () => _pickDwellTime(context, ref, settings.switchDwellMs),
               ),
           ],
         ),
       ),
+
 
 
       ),
