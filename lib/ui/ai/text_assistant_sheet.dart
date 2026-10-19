@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../i18n/locale_registry.dart';
+import '../../l10n/app_localizations.dart';
 import '../../logic/ai/ai.dart';
 import '../../models/models.dart';
 import '../../state/state.dart';
@@ -75,6 +76,7 @@ class _TextAssistantSheetState extends State<TextAssistantSheet> {
       builder: (context, ref, _) {
         final locale = Localizations.localeOf(context);
         final langCode = LocaleRegistry.codeForLocale(locale);
+        final l10n = AppLocalizations.of(context);
 
         return SafeArea(
           child: Padding(
@@ -87,15 +89,16 @@ class _TextAssistantSheetState extends State<TextAssistantSheet> {
                   children: [
                     const Icon(Icons.auto_awesome, color: LhColors.amber),
                     const SizedBox(width: 8),
-                    const Text(
-                      'AI Text Assistant & Translator',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: LhColors.ink,
+                    Expanded(
+                      child: Text(
+                        l10n.aiAssistantTitle,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: LhColors.ink,
+                        ),
                       ),
                     ),
-                    const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.close),
                       onPressed: () => Navigator.of(context).pop(),
@@ -107,7 +110,7 @@ class _TextAssistantSheetState extends State<TextAssistantSheet> {
                   controller: _controller,
                   autofocus: true,
                   decoration: InputDecoration(
-                    hintText: 'Type words, shorthand, or incomplete phrase...',
+                    hintText: l10n.aiAssistantInputHint,
                     filled: true,
                     fillColor: LhColors.cream,
                     border: OutlineInputBorder(
@@ -129,9 +132,9 @@ class _TextAssistantSheetState extends State<TextAssistantSheet> {
                 ),
                 if (_suggestions.isNotEmpty) ...[
                   const SizedBox(height: 14),
-                  const Text(
-                    'Sentence Suggestions (Tap to speak or copy):',
-                    style: TextStyle(
+                  Text(
+                    l10n.aiSuggestionsHeader,
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: LhColors.ink2,
@@ -157,7 +160,7 @@ class _TextAssistantSheetState extends State<TextAssistantSheet> {
                         ),
                         trailing: IconButton(
                           icon: const Icon(Icons.volume_up, color: LhColors.brown),
-                          tooltip: 'Speak sentence',
+                          tooltip: l10n.speakSentence,
                           onPressed: () async {
                             final tts = ref.read(ttsEngineProvider);
                             await tts.speak(suggestion, locale: locale);
@@ -171,18 +174,18 @@ class _TextAssistantSheetState extends State<TextAssistantSheet> {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    const Text('Translate to: ',
-                        style: TextStyle(fontSize: 13, color: LhColors.ink2)),
+                    Text(l10n.translateTo,
+                        style: const TextStyle(fontSize: 13, color: LhColors.ink2)),
                     DropdownButton<String>(
                       value: _targetLang,
                       underline: const SizedBox(),
                       items: const [
                         DropdownMenuItem(
-                            value: 'ar_dz', child: Text('Algerian Darija')),
+                            value: 'ar_dz', child: Text('Algerian Darija (الدارجة)')),
                         DropdownMenuItem(
-                            value: 'ar', child: Text('Arabic (Standard)')),
+                            value: 'ar', child: Text('العربية (Standard)')),
                         DropdownMenuItem(
-                            value: 'de', child: Text('German')),
+                            value: 'de', child: Text('Deutsch')),
                         DropdownMenuItem(
                             value: 'en', child: Text('English')),
                       ],

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
 import '../../services/settings/settings_repository.dart';
 import '../../state/settings_provider.dart';
@@ -180,9 +181,12 @@ class _SwitchScannerState extends ConsumerState<SwitchScanner> {
                         ),
                       ),
                       icon: const Icon(Icons.arrow_forward, size: 24),
-                      label: const Text(
-                        'STEP (Space)',
-                        style: TextStyle(
+                      label: Text(
+                        Localizations.of<AppLocalizations>(
+                                    context, AppLocalizations)
+                                ?.switchStep ??
+                            'STEP (Space)',
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       onPressed: _stepForward,
@@ -202,9 +206,12 @@ class _SwitchScannerState extends ConsumerState<SwitchScanner> {
                       ),
                       icon: const Icon(Icons.check_circle_outline,
                           size: 24, color: LhColors.brown),
-                      label: const Text(
-                        'SELECT (Enter)',
-                        style: TextStyle(
+                      label: Text(
+                        Localizations.of<AppLocalizations>(
+                                    context, AppLocalizations)
+                                ?.switchSelect ??
+                            'SELECT (Enter)',
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       onPressed: _activateSelection,

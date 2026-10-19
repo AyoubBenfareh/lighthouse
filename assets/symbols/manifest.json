@@ -15,7 +15,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/read.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e08ebb09083efb6b96382b8345e02327632cba9ee637c026f5a502e186e2f2d3"
+      "sha256": "6d13e89b766ed6b231f4af049a1b42bc4849247c0a73089ea33ad5b242b06bf0"
     },
     {
       "button_id": "btn_act_draw",
@@ -23,7 +23,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/draw.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "5864ed9730c09dc9b8dd00648915c99f74769cb3f3d28c87fc27272a52b32dd5"
+      "sha256": "d8f24dc516e7ceb267efe26bb90b467a141d9a421331bb8377d7827c55f5e7bb"
     },
     {
       "button_id": "btn_act_color",
@@ -31,7 +31,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/color.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4dc051c09cebff1b0e5b79bc94f69f6c5194184d68e29181dae2c6f77c8a3407"
+      "sha256": "f6d9492a08486f18750222f2d05d46cdbec39c41e222bf6c5f96aa10bc5c35f4"
     },
     {
       "button_id": "btn_act_paint",
@@ -39,7 +39,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/paint.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "68f12ffe311ec001eb9cd51e925617f98b42675619b2e104e99511c5d11bdd21"
+      "sha256": "df291b58a2a464b690715bc9094e90ed63844409249a219e9df69dd79490925d"
     },
     {
       "button_id": "btn_act_sing",
@@ -47,7 +47,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/sing.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "399f1b7e0c765429136e17c657bb073404370c553e49546731d0443c2af3f12d"
+      "sha256": "458ab65178f9ffa3c481e33b9f0102b5a870e3e6743e23e44633cd388cfd6357"
     },
     {
       "button_id": "btn_act_dance",
@@ -55,7 +55,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/dance.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "92fbe43f3caf4822ee5819dea78d8b334fe58435c7769ec9237e2a5a212b5fa7"
+      "sha256": "c42c4f9e6f15c4f6a9a4abeb886b2187848b773890377c05098094cc8b256171"
     },
     {
       "button_id": "btn_act_swim",
@@ -63,7 +63,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/swim.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e070c5002001a3414d6e16164622152d9a5b2440239e9b3ca57a2e05f6da1767"
+      "sha256": "0bf757c2446cd9279c1308234afe93d3f92a3fc13e88d102cb817ea05e374dc9"
     },
     {
       "button_id": "btn_act_run",
@@ -71,7 +71,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/run.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0e77511027414888721b5bd842cbc14aadb2992fb4f3ce41d4af9de50e54f7d8"
+      "sha256": "1db30990c9d8e2d3c37f4c7d0bdf4717342712d7984d90bd85c754581d94dce4"
     },
     {
       "button_id": "btn_act_jump",
@@ -79,7 +79,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/jump.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "83be6c484592d11a75009096a6bfc32a7fe6148022b878a8220e6cdfa7fe6914"
+      "sha256": "d8130c13975b2be1dd481393a52b5126ff2400ea40a2ffb34bd8aa2bb35fd713"
     },
     {
       "button_id": "btn_act_ride",
@@ -87,7 +87,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/ride.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "080805ecc36e1e61976b0f286a5e2033606f475cb8c3bbd5bb9245d93ae915a4"
+      "sha256": "4afa00e3b994af93c2df4b304ca9649974339cbbe6bee22a8f9e0d8ce18c05bd"
     },
     {
       "button_id": "btn_act_build",
@@ -95,7 +95,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/build.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4c5d1d35f6598d12af8304daabf78d2c9d4ba5b28c9bfdc62759910f483aaaed"
+      "sha256": "93d5cdcb08ac33a1c0b3fc2bf86e9137331382a0bfc568fafedec90e3a505ad6"
     },
     {
       "button_id": "btn_act_watch",
@@ -103,7 +103,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/watch.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "021f4366ac8b3c7936484d1d2dc5b7f292b0a3d88b226c3561128a6f44761a12"
+      "sha256": "ce6358233878bbdc80abdbe3ff0e9cb674b54699eaf61d3100d73a39869bf5f2"
     },
     {
       "button_id": "btn_act_listen",
@@ -111,7 +111,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/listen.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "affb54214b42aab1c3952d790e15180d1bd86269f7ede9c18a1834ce4b4d17ab"
+      "sha256": "2b4cc5394b648ca6b762a6ff82863d11017d4631932c0f630500c38e97757a14"
     },
     {
       "button_id": "btn_act_cook",
@@ -119,7 +119,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/cook.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "8dd685a9e090a0f901dcf3ded4e30544c6bb6d341ebe876b6c57ff7223e21444"
+      "sha256": "58f49771f01c71b5ad8d249520026c040ff04d6e848dde894a884ef5adc4e1b5"
     },
     {
       "button_id": "btn_act_walk",
@@ -127,7 +127,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/walk.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "47063394d1c88150f7e902a9b00d4f2b4331910e2572d7b84d25ed27d1602ee5"
+      "sha256": "66f18443e5bb4e108c3426113260d0d17713e6db4885d86e9019c1604ef205b4"
     },
     {
       "button_id": "btn_act_sleep",
@@ -135,7 +135,7 @@
       "fitzgerald_category": "activity",
       "icon_uri": "assets/symbols/activities/sleep.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "6257a832dc8b20e7632ed224321549a804794d5062c83faf91fb715d11f83935"
+      "sha256": "9ae71ac6d311768fed84fa342c811eeddc3bff6e73ffb705bfc317e95f0d2932"
     },
     {
       "button_id": "btn_body_head",
@@ -143,7 +143,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/head.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "c05bcde6a7bb0299097d7caf9d9020d157956a75af60634a937060c30e5864b3"
+      "sha256": "9a6f386d917b55a7722e691deb732b6c32f2181c7d71256933fa7faac075d297"
     },
     {
       "button_id": "btn_body_hair",
@@ -151,7 +151,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/hair.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ec4b0f517253ae1e091833deaa0d468793366559ca8b3a7501795730d9ca210e"
+      "sha256": "78e78e6ad37a74e167cc480f822d3b044b13410b4c23312b1d3b760d020b5417"
     },
     {
       "button_id": "btn_body_eye",
@@ -159,7 +159,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/eye.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "923f0463ca26b07ef689ee6f269d20b1fe1a4751b390acc5a785d1bf9b6d8739"
+      "sha256": "1f502d5da713afee14e3e010dbb97471ae711fa21c2e6c73f408c878ec5ab712"
     },
     {
       "button_id": "btn_body_ear",
@@ -167,7 +167,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/ear.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e8ff14eccbe1b00d10c181b668f396d88f3cb477a6dad87ec104c851e2138486"
+      "sha256": "80b755204d100cba874afae4ee5eed27bc181e007c079a62b3f65ba6b39e84fa"
     },
     {
       "button_id": "btn_body_nose",
@@ -175,7 +175,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/nose.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1c2ec47e160537a80fe9c405579bc0e305f7aaef3d50de651332a37d7887765f"
+      "sha256": "3aba952763344878d4cdf8bdab371e89828a838d193a6992cf808566f6043e47"
     },
     {
       "button_id": "btn_body_mouth",
@@ -183,7 +183,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/mouth.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "cf93c2f281c7ee825c2681919ddec4fd70afd418f8cec768c8803e7290cac282"
+      "sha256": "1878e9a38e3cf04bdb37ad10e0de1a8801d02976b30a75d1aabb14008091420d"
     },
     {
       "button_id": "btn_body_teeth",
@@ -191,7 +191,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/teeth.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "93a508cc0a8107a73af81fccdd7214a3997cd5447203469e4f77600b09d8da85"
+      "sha256": "c40c5a57acabf8ad3855720551217fcd38790b6b44738c4379d47ab796c268dc"
     },
     {
       "button_id": "btn_body_hand",
@@ -199,7 +199,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/hand.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "8e9a1c434a7625a724e6d079c8b5a3fa25ceb18380c21b4357b8c65f6addbca1"
+      "sha256": "54e29be2328a5834256558ec853f3f94fa71ab2ece2beb25f61bcf8114c71b60"
     },
     {
       "button_id": "btn_body_finger",
@@ -207,7 +207,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/finger.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ec11c622e337c85758b97ad22622bfedec7a8086b948ba86253675251139ac8e"
+      "sha256": "54e29be2328a5834256558ec853f3f94fa71ab2ece2beb25f61bcf8114c71b60"
     },
     {
       "button_id": "btn_body_arm",
@@ -215,7 +215,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/arm.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "3604016386a3da5da698aae12fd4071f14d6af9caa5d45f03d43c77259c2055d"
+      "sha256": "b6bd2f7110b4adff1a4505a2bdeae1e6fcbedae9959ba6c9671f74c9e2bb943a"
     },
     {
       "button_id": "btn_body_tummy",
@@ -223,7 +223,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/tummy.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "adf426d21c90559e06703bb5e08e424ba2fed05f9a3a7cc9a9a83948f350b47e"
+      "sha256": "1929c74ea5793b107d3ed81758b726fb8101e5a59084fdda64882eed7e506609"
     },
     {
       "button_id": "btn_body_back",
@@ -231,7 +231,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/back.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "19d34db8ee35b5d5cde73bce045c7d6155b0a5211f9e5dbd045f9431a0490335"
+      "sha256": "6765d5097846aaf763cdd24cc2cbddec7f812a25ea33d95909a5a6cdfdcc4389"
     },
     {
       "button_id": "btn_body_leg",
@@ -239,7 +239,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/leg.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e3c371427b55c2ccf7fa5a8593b4ab1ca18620eef86f82f6d63afbe1f0ec0708"
+      "sha256": "a33d3c14f3adbc6267c330d47596d0b14a6da32a335de47b0956579f2b4e8fd1"
     },
     {
       "button_id": "btn_body_knee",
@@ -247,7 +247,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/knee.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "c1cf79b27e0510f5daab32b9e5cb2fb0b5d2b28b998d38e10e7e0bf944320f91"
+      "sha256": "bc30b0ae406e163dd3ec8a6f88c12a7d56fec8eafe08d8d0fe20cd9b51eae710"
     },
     {
       "button_id": "btn_body_foot",
@@ -255,7 +255,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/foot.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "7e9940d7e57a9d08f3b0375d12d787aa0ef63b82fd386a37c5b087ad44f71bc4"
+      "sha256": "f2c5c86e1387e187bd81dc7961b319d0cd505730a7fed65dd8fddc6799af5a17"
     },
     {
       "button_id": "btn_body_toe",
@@ -263,7 +263,7 @@
       "fitzgerald_category": "body",
       "icon_uri": "assets/symbols/body/toe.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "10765c4823846c61a4f8a42119369c3174959a7db1513fda6b2a53a1add4febb"
+      "sha256": "be7e0b69e6a76058d8015c0c86277faffb9f72b43a4d07d7c4f0ef6d571a2469"
     },
     {
       "button_id": "btn_feel_angry",
@@ -271,7 +271,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/angry.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0f2577d92c2fcb2204d3286e0eb3d3025375ebc4f314cdfc2f74fb1f7fce8372"
+      "sha256": "0e52fad236fadefe8d48bf8d44927c5cb22a20071d4f2ed81ac5a20735e9df3d"
     },
     {
       "button_id": "btn_feel_excited",
@@ -279,7 +279,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/excited.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "5686b678a1282ad9a26300b09ef96b3899cb7325f0d5f552b9decf78d29ef7b3"
+      "sha256": "057e644bbb313d2216aef078914f95c2231a9b3b585671c5a611204efe2a4f43"
     },
     {
       "button_id": "btn_feel_frustrated",
@@ -287,7 +287,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/frustrated.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e1b6d39bc3a9d79b1e661e9cf0b5bbde8a5759392bf36c7d6ca2bb11ff856f3b"
+      "sha256": "683bb2e64bec1800c944a09ffb952d4d2e6a9e0633ec5ab07dcc270e06b2ac06"
     },
     {
       "button_id": "btn_feel_calm",
@@ -295,7 +295,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/calm.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "81c348a127a4bfabd69a9319f3f1b459e35176cc9927c41815b8ce1f95221794"
+      "sha256": "91dd2d6873301e5ea55c1dab66cfa5f703c82b40af139dcf88075710a29ef603"
     },
     {
       "button_id": "btn_feel_sick",
@@ -303,7 +303,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/sick.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "94b96ce296ad626c4e8fad88d3cf498dd5a88d6dfbabc30013f06c5aed9a2c4d"
+      "sha256": "5c1b2b6fddcb8534f73968333bb10f26bce85b5a51a94e39033554135db99c98"
     },
     {
       "button_id": "btn_feel_bored",
@@ -311,7 +311,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/bored.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d499588512815e783cb8ce3c25f38e99d224846b2e913ef8461f9ae6252f71d2"
+      "sha256": "a94c712839519083cf306ef011a2f47d164debacae9dbe75584d0a9a51e89cd9"
     },
     {
       "button_id": "btn_feel_silly",
@@ -319,7 +319,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/silly.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "92740a057b2efd0b50925c96446c6b143724d2e1f8bd2bc31779d1989d560494"
+      "sha256": "9fc6f90258c2a2e6adcdb8e67111ce8bbbbf620b6afb0923a44284ec798204b8"
     },
     {
       "button_id": "btn_feel_surprised",
@@ -327,7 +327,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/surprised.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "31ea1b91310ff7c48452304d08ced4ba407658dc2cc03db4ccb5c8a31bb81b42"
+      "sha256": "82f6e2556b8acb1073d1c8ea74f530115e3d7a5021fb9c21bc83250f6bb15133"
     },
     {
       "button_id": "btn_feel_proud",
@@ -335,7 +335,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/proud.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "3925f97d445785ac4c55e3671530323573fea65c97270024ae1c749e253c9f45"
+      "sha256": "6a6266b2cc887cc8da07bae7a62882a6267ecbea3e6a24011827679419ad8162"
     },
     {
       "button_id": "btn_feel_nervous",
@@ -343,7 +343,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/nervous.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "89c4fec3ea457b0aec2211314b707be9a07165ae53a0143a398f45e228557943"
+      "sha256": "6fac4a16a87bec68cf720660d5d3d37fcac436ddb514655abcadbb818118bb52"
     },
     {
       "button_id": "btn_feel_lonely",
@@ -351,7 +351,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/lonely.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0db9e893660c68c90fc2cf9379b300628e84c3f87618e62ee015c8dd2618dc26"
+      "sha256": "5563e9b4956e7ec9fe47e98a7948acda6a1de520c63661f1a64c1b78f2880e4f"
     },
     {
       "button_id": "btn_feel_confused",
@@ -359,7 +359,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/confused.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0868d6bde60a0f16ef9a597a5ed6666913cbe0751c02dbb9f43d8c578534839a"
+      "sha256": "7c31cc795182587defdbec01054924f3bd2d5972ab86ac7b6539cc93356829fb"
     },
     {
       "button_id": "btn_feel_shy",
@@ -367,7 +367,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/shy.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "58316c04988254dd4b2f22d00104e26348fccffa352170385168528916412d55"
+      "sha256": "f1805ee266fe50790e26bd10a3adf2cb8ea03a9ee78b1c0175394bf8fd22cb4a"
     },
     {
       "button_id": "btn_feel_worried",
@@ -375,7 +375,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/worried.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "029bd76a28f2e787ae5758d376fc1abc6593efcdda91e3fff3dd56ae9db51eda"
+      "sha256": "789c5589ce3b49e4157744866815c59f7c3deeb8a3a4486e1a492b8330223ebf"
     },
     {
       "button_id": "btn_feel_okay",
@@ -383,7 +383,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/okay.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "a6c67dfb6616305ad909200c795422719890f7ed156229c0b3a5e48ed3c4b8a4"
+      "sha256": "5154bbfc315ad020640463bf507077e7d1d010d428d6be23306765d8569bfc0d"
     },
     {
       "button_id": "btn_feel_love",
@@ -391,7 +391,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/love.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0ce5963b5e827e35aff462677477e5db5970f18a5a601976f776312c268ab983"
+      "sha256": "a903c28724830394b4a26520346597ff3f79c2e31495ff714faa98b145f0fec8"
     },
     {
       "button_id": "btn_food_milk",
@@ -399,7 +399,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/milk.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e0927de151b6ab4097b4a0217fbcccf61b17698f94bba692b070526400f8a04f"
+      "sha256": "3041935f7987e4e9b53fce77f344af96417fd874e6b24cd1ecdad2e292e6c79c"
     },
     {
       "button_id": "btn_food_juice",
@@ -407,7 +407,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/juice.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "b7242dc8f89b5c2e9e3dae77131c8e3e77878b8d070ff76cbcd08db37c5183bb"
+      "sha256": "7e646bdd30109ba3f2dc0c7586e28a6f83f92d0a243c90465965afdcc061321d"
     },
     {
       "button_id": "btn_food_apple",
@@ -415,7 +415,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/apple.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "768df2584b05d4b4cf6ef31c4172073fec3a602bfec4c0c16a9fa3617e2c123f"
+      "sha256": "4bd4729a425eaccf2904a533b21bdf263091f5763a6ea198c050b34f1d82bd1e"
     },
     {
       "button_id": "btn_food_banana",
@@ -423,7 +423,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/banana.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "8d470ab8777e2cb15d90712254cd84f5c3a65926ac4e1e77cdc9a23b4bb308ee"
+      "sha256": "1710e77c28fc81e282deb944f0612e834ccfedeac2f674149c41d9b3b9523feb"
     },
     {
       "button_id": "btn_food_cookie",
@@ -431,7 +431,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/cookie.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4bac7755f7dc7682b0d4f14d1a2dbb0690fe1a6f45812fe408ed1fe8a8fe73f5"
+      "sha256": "a010304b226c6ef25b1267888b50939196d4d01727bcb7d75641f36665500984"
     },
     {
       "button_id": "btn_food_cracker",
@@ -439,7 +439,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/cracker.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "6bffd7153680fd6ab3a82537cba1bf2c44cb647acf2bb814977e439ec143286b"
+      "sha256": "95aa4f35bf3dcabf49abecc1e53e9802061b8f5e788b33bebf06dd6004e044e4"
     },
     {
       "button_id": "btn_food_bread",
@@ -447,7 +447,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/bread.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1d244a3c0a60b8d0f7e7a43945d39b1b25abfcda06359fdbb6ef774719b04dd4"
+      "sha256": "68062255bb0f73790bd8f3e86d5b721bede8f305e2299abdefb55403a9250594"
     },
     {
       "button_id": "btn_food_cheese",
@@ -455,7 +455,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/cheese.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "c51b6d1fed50ffb72c55310e6173b8e8454bf2bd4b84c30ab43b6a06a00e7a44"
+      "sha256": "b6b7522fbf769d2746e1a02138dea1053a5bc6b53182994a94f138a91afdd839"
     },
     {
       "button_id": "btn_food_yogurt",
@@ -463,7 +463,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/yogurt.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d1a44c035f275e0d8b69433be9b30881fa5b55e34c32bfd3bf662bcdd032136b"
+      "sha256": "07a93e3fb8232ff3144f83a7bf97641f3b93557dcc4eee7a63c9ba7369d26a67"
     },
     {
       "button_id": "btn_food_cereal",
@@ -471,7 +471,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/cereal.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "3e6a326a6c3bb55f642eb2b5a63141becfde14bb41194d65399a081743fef48f"
+      "sha256": "53dbb71b4b3ab9f8001d6fa08f65a67000d5b3eea561da117558217d2c21e914"
     },
     {
       "button_id": "btn_food_pizza",
@@ -479,7 +479,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/pizza.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ea0a7712070435f3b677f542dbc4ff529cf3195e89bd8f4e67f84ec61618c4b0"
+      "sha256": "28e2669f16fc94a8a4e983fda79cdac7b9098ef4e6ba1bb38d26d2094fbc7572"
     },
     {
       "button_id": "btn_food_chicken",
@@ -487,7 +487,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/chicken.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "65269fcbf86ea725519304ef0566f141e8dcf6c67a10f753ed41bb96cafb7f25"
+      "sha256": "354d6a794f2f738c4883604d6edfb9a7418012719d0b95a7ccf07bc17cfd5516"
     },
     {
       "button_id": "btn_food_rice",
@@ -495,7 +495,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/rice.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "25f77a7f5250b690088d873c7fada83abf12d19b3ee977d311f51892c0af51a5"
+      "sha256": "ecd316d2b401a40fb443b2315d8f9280334ec037ee3a885cecdc6fedb10b371a"
     },
     {
       "button_id": "btn_food_egg",
@@ -503,7 +503,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/egg.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f5b2fcea441093edbdb6a8f84342a746c04f9c42efae9949a271919765029d3f"
+      "sha256": "09856df212c7169a26cc66e22370e6bf19dedc152108222e53ee4d38057ea1a4"
     },
     {
       "button_id": "btn_food_grapes",
@@ -511,7 +511,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/grapes.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "bd02039e0903467a235ada1496d751fbc0624b39f6e3fca68665a5ec4aef48ac"
+      "sha256": "1b4eef39d0c601b694d05b76f8c2a31f8e05538fd743e8937e25755a943e9d74"
     },
     {
       "button_id": "btn_food_ice_cream",
@@ -519,7 +519,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/ice_cream.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f5c5625e6ed6e6509f47dfb7a2f7def1cbcbb57f48342936af414a1cea9ea8e3"
+      "sha256": "b21e80ae5b22697505a0e3da4f8c4aa09a1590451aec197ae8d0f6578d5b4227"
     },
     {
       "button_id": "btn_people_grandma",
@@ -527,7 +527,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/grandma.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e7f2b3fd923cfc7df8f381a28cef716f266e542b2987bb2a3da986ccafb3ca53"
+      "sha256": "49ed4bc9f2418459d16b47162efdc758d08a09bbde5337fe5b8d93ed7739064d"
     },
     {
       "button_id": "btn_people_grandpa",
@@ -535,7 +535,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/grandpa.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "6a30b6444846a2011bdfcd560675ea5ff83c2c6674e37680b1bdc3b65a50aee5"
+      "sha256": "1100564103b00ff25e54ff7c4232a6ddd0f2dcdd614bd56fe117c347912542df"
     },
     {
       "button_id": "btn_people_sister",
@@ -543,7 +543,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/sister.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e3c2bbb4a3e17e9dca828e6615479564faa92913bcec1ce9635b87bb6d4a88a3"
+      "sha256": "de4d8a40d0ba81c342b71e37d693fa521302e13fbcb03711dd98744a9c621433"
     },
     {
       "button_id": "btn_people_brother",
@@ -551,7 +551,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/brother.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f8d31e116c702d8f0c61f623bf88fe2310afc1f8b25d9134eb964e398574ff68"
+      "sha256": "cd33f1e5a02f068aee13f39af3c4f65c8d6b623640504ebfdd270c6009b4d788"
     },
     {
       "button_id": "btn_people_baby",
@@ -559,7 +559,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/baby.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "7718752d6089dfa395a592dc8a4e53fcf4a35e2740b477714dbde1b5f66e1721"
+      "sha256": "dd4fdcf86dedd99e39cc8b35af80c49f2723d4571171ebcbf957f4c0ae95fbf9"
     },
     {
       "button_id": "btn_people_friend",
@@ -567,7 +567,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/friend.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1ee3d883202000fba61d0f989dd974f8131e9729f3ef0d6fe14463c387980c73"
+      "sha256": "6ee1140545f50b524ed990b9286f9b45e6c8a7240d55e2b7e3895b449170c183"
     },
     {
       "button_id": "btn_people_teacher",
@@ -575,7 +575,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/teacher.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "7aacdab1d49966185cfc1ca14b8585d69afac038a0cac57f9efd91d6b77fdfb8"
+      "sha256": "6307a37c93a278d8b8749b6b84b3e0fc712fc241e86c0cd669583b5bb4413e18"
     },
     {
       "button_id": "btn_people_nurse",
@@ -583,7 +583,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/nurse.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e768444c81077ef34220e6a8295e260506787a35613df44086daea5c8734a2b3"
+      "sha256": "25bb8516e048c6685728fdb5d01cf7edc1e2b66d70d7bba85566f5edc08a6ef4"
     },
     {
       "button_id": "btn_people_boy",
@@ -591,7 +591,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/boy.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "210c0a3b5f12d5df750e52897f79882e9376812e067bbb6b62513d78bafae57e"
+      "sha256": "e25739c5b58a51726a307e731b6076b876fc7fc7559b8e46eaf33589430c8daa"
     },
     {
       "button_id": "btn_people_girl",
@@ -599,7 +599,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/girl.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ad53db18d4bbde9284faeb7bcf9a9eabf656655076512a1f1b56255f7743f28b"
+      "sha256": "15cddf09ba3ebdb643062426b37704eea5b58fb107ee4062d073d5c64bdfec78"
     },
     {
       "button_id": "btn_people_aunt",
@@ -607,7 +607,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/aunt.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "503562a06a54307cf79e62b3f4651116ffdbc237d88b3a31d90286a8ce1abbbe"
+      "sha256": "98cb63d5af3a422b0e13ddadc3b8f28afeae9c3bb46cfa3ccd9dcab15c8b9974"
     },
     {
       "button_id": "btn_people_uncle",
@@ -615,7 +615,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/uncle.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "570879bea07ed59644b97b65173c1b8f79004f570e3170a48ddc05ee93799438"
+      "sha256": "d2d9250462d9f689d7b69a28ce60df76a173506d66ae8667f705b312a1db7726"
     },
     {
       "button_id": "btn_people_family",
@@ -623,7 +623,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/family.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e771ba8f5eb133c5f6bf716d43da0202598a29b5f7a8ddfdde6633ef8bb6b444"
+      "sha256": "1a55f6538e2debca9ef48b9dc9b74da1eacafd61fe598db824773fb731979106"
     },
     {
       "button_id": "btn_people_doctor",
@@ -631,7 +631,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/doctor.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0b21103f35221633d1bd259febaa1ee38eed4ac57a909296fd1c9dddd3cb79e7"
+      "sha256": "d57d17e1a6e4bb889546994bd10c4ee69f553ebf8056ad3a863b58918674191e"
     },
     {
       "button_id": "btn_people_neighbor",
@@ -639,7 +639,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/neighbor.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4ccdfd25fc643b3de81ef61c212271851d0ba71274ea7224d2a0b199b745f19e"
+      "sha256": "44c8cb85b52ef7f591f50b7355f2cc86cabe6ceb91414c78326316de9becb1cd"
     },
     {
       "button_id": "btn_places_park",
@@ -647,7 +647,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/park.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "47b8376925dca238d73ebc315c9d745aaeaeff4f9b766b09f2176ed2006c6932"
+      "sha256": "ef47b4cac6ab5f0c308ffff4f18bd2eca7574eceafd074b3058455ed7e7c3b84"
     },
     {
       "button_id": "btn_places_store",
@@ -655,7 +655,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/store.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "c99a08a1b222d800b8bb44fabb0c2f2f9c7907bc8d02d035fac59d593a4ef2d9"
+      "sha256": "e449b6c2b33d3c4d0ba11a0b0907e57d6c852bb5f0531b113e826b1c0a2079a5"
     },
     {
       "button_id": "btn_places_restaurant",
@@ -663,7 +663,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/restaurant.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "fd5909a6e3dc05fb0fa654827efb7f8f8a2689dc4c44414130bf02f5000051e3"
+      "sha256": "7b42c7d9dc58d2614339d6156e79b4ddc568e1efb6917d1ee086fd8e362387e9"
     },
     {
       "button_id": "btn_places_doctor",
@@ -671,7 +671,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/doctor.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "2af62bd12e1c331588ec5ab7eb4706ad74a027b087b280611219c09eeadddedf"
+      "sha256": "d57d17e1a6e4bb889546994bd10c4ee69f553ebf8056ad3a863b58918674191e"
     },
     {
       "button_id": "btn_places_hospital",
@@ -679,7 +679,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/hospital.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1aa9d0052389e84cd201315f29ee33a794ff396dd0b54eeaee2d772675fe1e61"
+      "sha256": "550cb6ed2a0b67369c15aec91ad6b8c8eb21b20001863d21e791e1f70a1139a9"
     },
     {
       "button_id": "btn_places_playground",
@@ -687,7 +687,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/playground.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4550111da7003aefdd2cd464eadc9d12d937e8a6ebfb6bab3124ff7deb519beb"
+      "sha256": "cc90be630a9fbf75f2ba6f604f2ba5a9e4258d6533c2b56b08391c10d3a16e41"
     },
     {
       "button_id": "btn_places_beach",
@@ -695,7 +695,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/beach.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f3d66a4766a0c65682403cf2af6a1061bf7d6f494fa49bcdd815f533b35c43fb"
+      "sha256": "fd40b0f3a026493bdc98b746dbf9547ae39e817713393bd0efb69e3675b8314d"
     },
     {
       "button_id": "btn_places_library",
@@ -703,7 +703,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/library.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "71285893c2934fb00f5fb5c55a159265632cf89c03740f6b98737d118d1dc9ac"
+      "sha256": "ac0c166282482de7f346da4d53a30ecc677929c60a1ccb8220db5758907e03a7"
     },
     {
       "button_id": "btn_places_bus",
@@ -711,7 +711,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/bus.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "eaec6fa8929ef8ed99ba6e33d355d734f701954c482522a255b5c612186c50f5"
+      "sha256": "6597172a1b8cafc969b95f7c434717ffb1ebefb425e37d2c466d97e50cf5d82b"
     },
     {
       "button_id": "btn_places_zoo",
@@ -719,7 +719,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/zoo.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f1e1639e7513e30bbad7aeed607eaacef7696c87c3b4e913e66d3fc458ccf143"
+      "sha256": "8b2f352fd5d26f894ea384f99ffdd3bbe809fabf668dadc0b8f01ac3eb95b131"
     },
     {
       "button_id": "btn_places_pool",
@@ -727,7 +727,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/pool.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "cbbca88565faf83122134ada8ac33eb9aa2ae85ddb61bcebaa85d125bd1dd9cc"
+      "sha256": "0bf757c2446cd9279c1308234afe93d3f92a3fc13e88d102cb817ea05e374dc9"
     },
     {
       "button_id": "btn_places_kitchen",
@@ -735,7 +735,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/kitchen.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "170c8b87208018913029cb8cc3a04e9074b1aebd82039613932624f4c24c7894"
+      "sha256": "cc12c7085435fe675ef77c0193d2ce79aa085144bd7c4186e88baa3eaf70fb58"
     },
     {
       "button_id": "btn_places_bedroom",
@@ -743,7 +743,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/bedroom.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0be7f5ce970d33a8dfd3c5a4c100fd8715408106315a41d158f4b402998b6f7b"
+      "sha256": "9ae71ac6d311768fed84fa342c811eeddc3bff6e73ffb705bfc317e95f0d2932"
     },
     {
       "button_id": "btn_places_church",
@@ -751,7 +751,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/church.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f81d27a9c0bba953529c54b81f4f64d1d852e86cae1233e873f80c7fb386d3b4"
+      "sha256": "eb3fb616c206e99d2363bfca8185905c0320cc1c3d6e581d5b746380abf949ef"
     },
     {
       "button_id": "btn_places_gym",
@@ -759,7 +759,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/gym.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "9cfdb1e42281c1147161afd60235992042939387dd3b3b7bed8076434bfd2740"
+      "sha256": "f80ef9dad3d8cc242d2b127bec095175ad03105163875c61473f7a8c600d7b3e"
     },
     {
       "button_id": "btn_things_ball",
@@ -767,7 +767,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/ball.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "474746d0efefe34ca4cabd9f63299fbdebad7e327a18b11afb39655a85eecfef"
+      "sha256": "4198e3f40ac1b2ff097f615378e64c9c89c6267e2619861d0aef6609d83aef43"
     },
     {
       "button_id": "btn_things_book",
@@ -775,7 +775,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/book.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "7046392b31b0aee74f73ea6d36e55ff21dbd89e1b25c384dcbb619384ff24a6c"
+      "sha256": "6d13e89b766ed6b231f4af049a1b42bc4849247c0a73089ea33ad5b242b06bf0"
     },
     {
       "button_id": "btn_things_toy",
@@ -783,7 +783,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/toy.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "385cdf8b1b7699e866beda5d3fc3fd7851882558c434efa4978706ba11218cb1"
+      "sha256": "a816f6f0638a4b2905aa304041d4a2aec6636fa04eb77454c4088445cf3fd5e1"
     },
     {
       "button_id": "btn_things_blocks",
@@ -791,7 +791,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/blocks.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "737ef228e1eec31e0bc36e4c89a5e4bd2543b2f816127425a56f01099e4b562e"
+      "sha256": "93d5cdcb08ac33a1c0b3fc2bf86e9137331382a0bfc568fafedec90e3a505ad6"
     },
     {
       "button_id": "btn_things_doll",
@@ -799,7 +799,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/doll.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "608e8c83a47ad0df607b9353590e6fe865b85b3b20bc34af5258d5d66448eb3c"
+      "sha256": "a816f6f0638a4b2905aa304041d4a2aec6636fa04eb77454c4088445cf3fd5e1"
     },
     {
       "button_id": "btn_things_car",
@@ -807,7 +807,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/car.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "7fbd3d396a8bb6e886720093517091520b67a60b3895caca18f277323f6f90bc"
+      "sha256": "5b85171305b2fa90f0bbf0020a6c00792da18430b76cbde8b68662958a378165"
     },
     {
       "button_id": "btn_things_phone",
@@ -815,7 +815,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/phone.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "b52990a2654c6fdb4bddc536dba995dfcf6eeabc872a473bdc5bb8598843267d"
+      "sha256": "9354f4288444807e3fda6f6b44d8e7ad55384dd20fa401bcb7cd63e8def40174"
     },
     {
       "button_id": "btn_things_tablet",
@@ -823,7 +823,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/tablet.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "a6c213c40ab0e213003c9a2a15a37e4475833c1273d66613772c542d32c9b223"
+      "sha256": "0b33bdd215f6f20479098888a7e409a61521e9d8d5381f563a2b160e95dbb987"
     },
     {
       "button_id": "btn_things_tv",
@@ -831,7 +831,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/tv.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "eb04d21199ee7438a3b0cf281c30829052bd37fea54f63b584e49eff6f011a0e"
+      "sha256": "ce6358233878bbdc80abdbe3ff0e9cb674b54699eaf61d3100d73a39869bf5f2"
     },
     {
       "button_id": "btn_things_blanket",
@@ -839,7 +839,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/blanket.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "31fc42d6c639d5b2532ff26c80dc871e240598839a2077135a0586cbc95b0553"
+      "sha256": "637446c1f792d20d80f63ffca976f473fe4cb78fde3e15885ee84d35a297d124"
     },
     {
       "button_id": "btn_things_cup",
@@ -847,7 +847,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/cup.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "9591c4772e861a51a5a258c9847cff4b1f1fda268ce74505c411a860dbdd5b05"
+      "sha256": "aecf45e1ce68295b5c9980925464c38cba33f0c7f176426d0de48f3db21ee285"
     },
     {
       "button_id": "btn_things_spoon",
@@ -855,7 +855,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/spoon.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ca8bdc305a0c6985ddb3494fc1ff7149c45f0bb501e124101b6bd9e3ae9fef95"
+      "sha256": "694980e18bda5cbae73a610cde9161c388739960c98c4ffbe3fbfaeb94f039a7"
     },
     {
       "button_id": "btn_things_shoes",
@@ -863,7 +863,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/shoes.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4c20066a18f333bc60d8891d26858487d03dfd7c3d01f7566cebb16c74660888"
+      "sha256": "9add70822ca3e4022ba434d85b61d0f5ce86ab8c0a5eb3acd3bf65d1427fd2a0"
     },
     {
       "button_id": "btn_things_hat",
@@ -871,7 +871,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/hat.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "c59755d6ff194bce042f1caa79b050ffd024bd422266b1ecde0f3cf650505105"
+      "sha256": "39beecb2ec5669fac3cf2a063a4bb8db0ae543812ce00f4e2e1564fe149ab3e6"
     },
     {
       "button_id": "btn_things_crayon",
@@ -879,7 +879,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/crayon.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "2e6e89b62b95ae0f5978092379ddb638ea0c70718a8cfc9faa4063a131e258b6"
+      "sha256": "d8f24dc516e7ceb267efe26bb90b467a141d9a421331bb8377d7827c55f5e7bb"
     },
     {
       "button_id": "btn_things_bubbles",
@@ -887,7 +887,7 @@
       "fitzgerald_category": "things",
       "icon_uri": "assets/symbols/things/bubbles.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ffc6ca61ab74b827b92290d1faf21acdbe05fddf8e4234fb870548270c43124f"
+      "sha256": "9c8a7e75274b299a3dd74268919280ebbbcc622e683ae972100aa1510c83738e"
     },
     {
       "button_id": "btn_time_now",
@@ -895,7 +895,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/now.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "615ebc27f843d3922ad8494f1c2bb6470292ce2e60d032c2f08ae4d04c301972"
+      "sha256": "6bbf1fca6ee446962a0f7722419c0d6a35d2d718c0b26679bf392373fac3241b"
     },
     {
       "button_id": "btn_time_later",
@@ -903,7 +903,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/later.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "542a0bbf973a281c37623bb776f7880701ab62d6883e843838bf71ee8bf4baff"
+      "sha256": "b3983ba54fb850134a2277ea4095e19138e3664bf9a72eabf24d12474e835cfb"
     },
     {
       "button_id": "btn_time_today",
@@ -911,7 +911,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/today.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "af336f5a1f331b79e492b5b8beb33e2d902cde8f422db202c887a38d45f13e5e"
+      "sha256": "0b6330541d83d5c52087398c0af3ec5fb00643df4225315cb62a82ca3fade403"
     },
     {
       "button_id": "btn_time_tomorrow",
@@ -919,7 +919,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/tomorrow.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "7d9b0a7314247abec31154d2197ef812fa35359bab7ae815662ef3f29681336b"
+      "sha256": "4b1d4dd3953d3c22654cec3b0dffe1b1522092d728be539513174ed0c4c4bb95"
     },
     {
       "button_id": "btn_time_yesterday",
@@ -927,7 +927,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/yesterday.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "dd9b8edddcc8eeec729feaf138372cf00b72d03708d1423f622824a802c9810c"
+      "sha256": "f1778c673f038c286c49138d73debdfbb1e10091c845d61e0475eba7a0f0ea65"
     },
     {
       "button_id": "btn_time_morning",
@@ -935,7 +935,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/morning.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0beadad3ea8511951d5c5ffbcafb0a2084842fee3305d86397a811f76e8e751d"
+      "sha256": "034ad260baacd7034563b559566756f22f3e20a2839f9f282313ac14a1ac5d5d"
     },
     {
       "button_id": "btn_time_afternoon",
@@ -943,7 +943,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/afternoon.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "5138676753f991e26b9057b59ca069b7076796ae62f6b8960e6273580336a6bf"
+      "sha256": "0317e19cc490539e43343489396cd7689e8207244284585b2574450de7b4760b"
     },
     {
       "button_id": "btn_time_night",
@@ -951,7 +951,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/night.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "300a3bda1c1fd794b142def9f659a5a89d2a04f2dab620615f2f59e68545314b"
+      "sha256": "85e12d6d85201cff1382e183e2b1df1bf303b4154496dc044a8db37272059869"
     },
     {
       "button_id": "btn_time_before",
@@ -959,7 +959,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/before.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "96a904c52e69e9334a89fbc15a900c46a2b50a42dab94092754d86b780c0bcba"
+      "sha256": "b3983ba54fb850134a2277ea4095e19138e3664bf9a72eabf24d12474e835cfb"
     },
     {
       "button_id": "btn_time_day",
@@ -967,7 +967,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/day.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d11586af5e2931718a8532171190e361023f746ccb4639c7eb5059f20aa9a87a"
+      "sha256": "034ad260baacd7034563b559566756f22f3e20a2839f9f282313ac14a1ac5d5d"
     },
     {
       "button_id": "btn_time_week",
@@ -975,7 +975,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/week.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f6c8e974300935f92ba9507fb4b6fb310ccccdde2206048846ba042630e3ceaa"
+      "sha256": "fc716899f367e25b28c42f762ee7db8aa1e9d06271c0de1b2feed9552aaf108e"
     },
     {
       "button_id": "btn_time_weekend",
@@ -983,7 +983,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/weekend.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "416a13a81ef02f74cf9e3c6f78fa95ba49c7a849648ca3ee2e844d186a8cebad"
+      "sha256": "0b6330541d83d5c52087398c0af3ec5fb00643df4225315cb62a82ca3fade403"
     },
     {
       "button_id": "btn_time_minute",
@@ -991,7 +991,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/minute.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "07bdcb97ce1f48f793e90a4d7e8ef49316ac160d4b3fb7a61cb92226f37b03c6"
+      "sha256": "6bbf1fca6ee446962a0f7722419c0d6a35d2d718c0b26679bf392373fac3241b"
     },
     {
       "button_id": "btn_time_late",
@@ -999,7 +999,7 @@
       "fitzgerald_category": "time",
       "icon_uri": "assets/symbols/time/late.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1907750ad09ae53eeb64bbe630acf93c958c998074ae5f54362f83d08aa46d5a"
+      "sha256": "6bbf1fca6ee446962a0f7722419c0d6a35d2d718c0b26679bf392373fac3241b"
     },
     {
       "button_id": "btn_i",
@@ -1007,7 +1007,7 @@
       "fitzgerald_category": "pronoun",
       "icon_uri": "assets/symbols/pronouns/i.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "318baa2ac079a37a753fc1abb62b3e22442a72b67916e1d1588b54520cc37d3e"
+      "sha256": "a751a3c2dd83a5f7ee3c8e03a9138ae82c9ddfaf3c7596fd63a752ca67a4d953"
     },
     {
       "button_id": "btn_you",
@@ -1015,7 +1015,7 @@
       "fitzgerald_category": "pronoun",
       "icon_uri": "assets/symbols/pronouns/you.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "9addd1d11f195f7673f3a4c622d33f7686b4e1c7769d02aaf844b055f1ab2b56"
+      "sha256": "f9fbb25941399c894fbcac093d2085ae78d62a269f92de7d21e59f8ab04ab439"
     },
     {
       "button_id": "btn_want",
@@ -1023,7 +1023,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/want.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "5390eba9bed022a8b40128f3218af3ab40c57bf22dcb66cf87d30119dcf2b264"
+      "sha256": "083e01935f1167a41ad570632fa701af9b111d8011d3fa6ce2a5e964614f1963"
     },
     {
       "button_id": "btn_need",
@@ -1031,7 +1031,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/need.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "2f55d985783ac94a9c2cdd270c5a1864356e8b7af817001eee41b3a4a8899857"
+      "sha256": "5f5b6c4dd09b0607e56d28e83e5c8a34433bf21097cd036a0d933b97ade92828"
     },
     {
       "button_id": "btn_like",
@@ -1039,7 +1039,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/like.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "db3bde645ea7a0996c14b11fcff7484844a0e5378dc8c8b9ad4b6e00ce25f2ec"
+      "sha256": "dac6835b582d1792562721398d830a0d2ce4f134832f1fca5a57de5d035c9ee1"
     },
     {
       "button_id": "btn_help",
@@ -1047,7 +1047,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/help.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f19b3ff89361e9d71d23606dba3bd37102ef6a0ef0957487f9b310165904c3ff"
+      "sha256": "658f6238c90b7482629393d78d30c632d0a9d64a787c637d3d51cab41542a061"
     },
     {
       "button_id": "btn_stop",
@@ -1055,7 +1055,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/stop.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d8a11825186ba367c0eb2644b0a76e2bb500c70a049eb79d82a9bdf0dba4201d"
+      "sha256": "737baef1e0c4dd23dddd27fc7890dfa0239302b05f4727ae142a1141b41f6c07"
     },
     {
       "button_id": "btn_more",
@@ -1063,7 +1063,7 @@
       "fitzgerald_category": "modifier",
       "icon_uri": "assets/symbols/modifiers/more.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "8e21eb14596344924c6f1e1dd6da0795cceafbac49dffdcdf0cb1805caffbe19"
+      "sha256": "7c3d5335f0be3a6d93ebd1ae557f6ce2c76b3ec0960f6866ca35f537e4770bf1"
     },
     {
       "button_id": "btn_go",
@@ -1071,7 +1071,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/go.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "096e843e5408a218f6b5cc204f045bda03153445d9d5b9a6100a5ea2e83ea9c6"
+      "sha256": "b730e3cb00e03420d5d41736273cc92233e88cf1e66df2d3b8727a0433d24c0e"
     },
     {
       "button_id": "btn_get",
@@ -1079,7 +1079,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/get.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "06e560a3bfbb3372d2861907086bfcebae8684c7d623838b23f77d7ef058328e"
+      "sha256": "0d218fb86d7aa8ca78aef6e1f528b196f2cad0706e5b5e83e73531f22e1945d1"
     },
     {
       "button_id": "btn_make",
@@ -1087,7 +1087,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/make.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d30872e4f9862b04dfe0d872ddc19f6c32e068e885c038ad0719954a7f8bdb73"
+      "sha256": "d8389db19bfb31c26319e68bd8bd43d5cb67d345a615064b8c19ade04ea2fea8"
     },
     {
       "button_id": "btn_look",
@@ -1095,7 +1095,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/look.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "cc04973956b80bbc559cad9e959c1c9db020c252f7ae61313f5bd69e3fd3917c"
+      "sha256": "794ee6f2b71f6cf3c2584fe1498ca652ea525b91e5895a0b5b9347a6ad9e933f"
     },
     {
       "button_id": "btn_play",
@@ -1103,7 +1103,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/play.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4b67835f518bfcdd8063b5cf2ae4183d3cdbcc82b313f9bcf3551533d2711cc3"
+      "sha256": "8c7e3ea32fbb88ed6a1493960a937ed45c79f27cacdec6c5b034c75f96fdec24"
     },
     {
       "button_id": "btn_eat",
@@ -1111,7 +1111,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/eat.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "24b0b0905e7d28263d205056a2e17c30a8fff36a1552c35c1304f46608e2847b"
+      "sha256": "7b42c7d9dc58d2614339d6156e79b4ddc568e1efb6917d1ee086fd8e362387e9"
     },
     {
       "button_id": "btn_drink",
@@ -1119,7 +1119,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/drink.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1506824188fe5870c35da74f6a75c9538167c22d30590c64cfee2e3428cea02a"
+      "sha256": "7e646bdd30109ba3f2dc0c7586e28a6f83f92d0a243c90465965afdcc061321d"
     },
     {
       "button_id": "btn_open",
@@ -1127,7 +1127,7 @@
       "fitzgerald_category": "verb",
       "icon_uri": "assets/symbols/verbs/open.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "872cf30bb2256e0ded003a8d61045545e9453b5d05a98ff88e3841ff3db63c47"
+      "sha256": "e01fb8f1abbb31ab3f7e4c48952a7d413ae3aca87d2b0616adbdc527a9846c1e"
     },
     {
       "button_id": "btn_yes",
@@ -1135,7 +1135,7 @@
       "fitzgerald_category": "response",
       "icon_uri": "assets/symbols/responses/yes.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e53a45d35a92d0e9bb7e9444b87964c6542ce0ba0483efbbf416975b68b1f295"
+      "sha256": "93516faabdb86a66e0b137ae1ad875d7b1f6d2e958d57fdea6649a03598614b9"
     },
     {
       "button_id": "btn_no",
@@ -1143,7 +1143,7 @@
       "fitzgerald_category": "response",
       "icon_uri": "assets/symbols/responses/no.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "56df59f6f6e47aa241315ed7c628b932390fb42713aad7adef8586f6d94d2441"
+      "sha256": "a9f6a85c55903de811874f03de25f1bb4e26cfcdd7d05a009cc3728c4011d3d9"
     },
     {
       "button_id": "btn_break",
@@ -1151,7 +1151,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/break.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "85f1d5860347cce8793ad55839497f23b86bc366bc1b6ef3ece9c560467384d3"
+      "sha256": "a5b6a33c6d21e93debc41b2d0dc26b793974ca666ec11a92299d61c3dbd96555"
     },
     {
       "button_id": "btn_thankyou",
@@ -1159,7 +1159,7 @@
       "fitzgerald_category": "social",
       "icon_uri": "assets/symbols/social/thank_you.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ebabaf7d87895a146e878a4e0e909dfcab9699848e6267ea2c8e0f5ea240c7ab"
+      "sha256": "658f6238c90b7482629393d78d30c632d0a9d64a787c637d3d51cab41542a061"
     },
     {
       "button_id": "btn_please",
@@ -1167,7 +1167,7 @@
       "fitzgerald_category": "social",
       "icon_uri": "assets/symbols/social/please.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e684f0bda7d8003a28723fca1e7f51b162011345cd06f30e966f6a8f944e5e10"
+      "sha256": "10758e8a4f37cc280227f5970dd8b799360961628ea91a9279c28e12c2443f7c"
     },
     {
       "button_id": "btn_sorry",
@@ -1175,7 +1175,7 @@
       "fitzgerald_category": "social",
       "icon_uri": "assets/symbols/social/sorry.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "15eb383840a188f3930cf82789579f738ff6ef6e1bff26967233d7e23a7b3f67"
+      "sha256": "8ed0bf080800799f112421c9915f2921d5ea90d8385609b941004ff2a2384828"
     },
     {
       "button_id": "btn_good",
@@ -1183,7 +1183,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/good.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ec31ce18451d49199be1474cee4b76ad9999f7d67a4eb5a131fc263aa92f9d3d"
+      "sha256": "21685ec18b65dfa556ec79f8500fa459371ac1fec106a8e95d49b32d9b02c937"
     },
     {
       "button_id": "btn_bad",
@@ -1191,7 +1191,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/bad.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "0c10979d2363f421eb0836a2bbf65cfcf2b59cd96bade80c8d9079aff49730e9"
+      "sha256": "cab836a8fb9864869bd94f7304b8cfad4f1a07783f3f4c9a9c9d753ed81eed2e"
     },
     {
       "button_id": "btn_bathroom",
@@ -1199,7 +1199,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/bathroom.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "693bfb1177ccd0cdaa4b0a8b2a096d26849d4161e228488a09b0587750128d84"
+      "sha256": "b279814a66539eabc26c34180c44fd9eed073670d0347ef7ffe742346098004b"
     },
     {
       "button_id": "btn_water",
@@ -1207,7 +1207,7 @@
       "fitzgerald_category": "food",
       "icon_uri": "assets/symbols/food/water.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1b152ed2dc8cc8117260890f6758cc5101a172085bfd059405f95e13a177ac0d"
+      "sha256": "7e646bdd30109ba3f2dc0c7586e28a6f83f92d0a243c90465965afdcc061321d"
     },
     {
       "button_id": "btn_hungry",
@@ -1215,7 +1215,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/hungry.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "aff8f40c1164dddae2ff769b0fdb1f9e48fce424c648a0a8bbb97a4c6219cc37"
+      "sha256": "0021b19016c6bc26185e3cea45fec954c7f15c957307386bf882ec6aa467300a"
     },
     {
       "button_id": "btn_tired",
@@ -1223,7 +1223,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/tired.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "dd5160b2540499b5af9050c4b618378e5f3bad634dd4ef6634e9b9b5e84ee8d7"
+      "sha256": "9ae71ac6d311768fed84fa342c811eeddc3bff6e73ffb705bfc317e95f0d2932"
     },
     {
       "button_id": "btn_hurt",
@@ -1231,7 +1231,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/hurt.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "e2a7fbb0c895fc988a671635028f679ae941c753a1f360e2818f05ba879ad9ca"
+      "sha256": "c3fa45b754c49c08b5328049fb73088c8b88d486c51b5883b8b267aa465c3bce"
     },
     {
       "button_id": "btn_scared",
@@ -1239,7 +1239,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/scared.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ce3301151d5cec7d3411970151bb4e6e892b955a4ae37dadb9bfb69693de4e00"
+      "sha256": "b637292cf980eefc10cd3a922ea306914b133470a7274908ccd7a3abe26b6db3"
     },
     {
       "button_id": "btn_happy",
@@ -1247,7 +1247,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/happy.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1a04edbab1a981db8fb77592e942728901218f3e1549be4e8a4797522d5bb5f8"
+      "sha256": "5e0976f51c4bc81442df2ba0bdebc9d13d0e9801ba83dc8554f7d318045a7d11"
     },
     {
       "button_id": "btn_sad",
@@ -1255,7 +1255,7 @@
       "fitzgerald_category": "feeling",
       "icon_uri": "assets/symbols/feelings/sad.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "9240bb46e0d2cf1f8b1331694258b7ddcda5ec341153bb5ab8dca2969feb6863"
+      "sha256": "99e2816e4a1f698eb831464861250af379e93f720067147cae38beed6041e0ca"
     },
     {
       "button_id": "btn_food_folder",
@@ -1263,7 +1263,7 @@
       "fitzgerald_category": "food_nav",
       "icon_uri": "assets/symbols/folders/food.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "fbb53e94381f58d56217b4bb28dd00ec08d57c5f82962bb82d5de00ecdecd542"
+      "sha256": "07eb7229e7fa2f4158215669cf3af6d4be1829ae78fcfcda2bf033a419689ebb"
     },
     {
       "button_id": "btn_places_folder",
@@ -1271,7 +1271,7 @@
       "fitzgerald_category": "places_nav",
       "icon_uri": "assets/symbols/folders/places.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d0864598e4c7823088cd8ee78329c308d3dcce88918bfb98fa4b26aa577b0dc7"
+      "sha256": "5b7f1172669641f226f27b3d75ed1868a003f55cadaace52baea7ea8ff7e6c82"
     },
     {
       "button_id": "btn_people_folder",
@@ -1279,7 +1279,7 @@
       "fitzgerald_category": "people_nav",
       "icon_uri": "assets/symbols/folders/people.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "5d0870a7416b147aa5b74b5dd35158a3fdfb281327b659d3dd8f789767bd80b2"
+      "sha256": "58ae90e3b7ba91da935fcae9120985e40814c585d0fb1975bf00ff61dc0092b7"
     },
     {
       "button_id": "btn_activities_folder",
@@ -1287,7 +1287,7 @@
       "fitzgerald_category": "activities_nav",
       "icon_uri": "assets/symbols/folders/activities.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ee93301b0ae296646a07544e753f562c3a9f65143f89885558a6b398df46e7c2"
+      "sha256": "54dc74dc4dd082c9ddab57d667a8cd0dd06e35ab32590b69e5b9caf9896e7f2b"
     },
     {
       "button_id": "btn_things_folder",
@@ -1295,7 +1295,7 @@
       "fitzgerald_category": "things_nav",
       "icon_uri": "assets/symbols/folders/things.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "581b4f6263232f43c42f24dcbf1a72f4d1f17f4df525025ca348429566f276c3"
+      "sha256": "40f2172e191d90e156a747d7e9ab76bea68d07be43b379b5de66d5db5163a2f9"
     },
     {
       "button_id": "btn_feelings_folder",
@@ -1303,7 +1303,7 @@
       "fitzgerald_category": "feelings_nav",
       "icon_uri": "assets/symbols/folders/feelings.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4e8480ead304787bb7816698380f55404a40f858d8a4ea4c13f058eb1b9328ac"
+      "sha256": "d3b087c38f52b88ded58bedb138df69aeaba50e731733a8f9682003b2fd0a719"
     },
     {
       "button_id": "btn_time_folder",
@@ -1311,7 +1311,7 @@
       "fitzgerald_category": "time_nav",
       "icon_uri": "assets/symbols/folders/time.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "901335ac3531a8ac5039784f3074f0beeb23d0631c0c26baa33dbc82f0b65153"
+      "sha256": "6022fab34911dd4b95f4dc41b7e778433b4b424f85c0af8cb7aa8ebc0baa646b"
     },
     {
       "button_id": "btn_mom",
@@ -1319,7 +1319,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/mom.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d32a74be085e8cf598dad059b97b8a42429b7cdaed4dbb9ed5fe35d1ab278f29"
+      "sha256": "11ea11d57833118fbd68070c8ec458467dc06d68e031b22a8732ec2107a5f2c8"
     },
     {
       "button_id": "btn_dad",
@@ -1327,7 +1327,7 @@
       "fitzgerald_category": "people",
       "icon_uri": "assets/symbols/people/dad.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "d6aaa9e10da87d94c5c2c10a1750eb8f2f4ed957d8f8230309180e42e1c9704a"
+      "sha256": "102ae93dabab13c74ae0cd11df5a6a946326349b0a1598e025709c657926a023"
     },
     {
       "button_id": "btn_home",
@@ -1335,7 +1335,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/home.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "b254508ec0d343d9e862ad6f88c7cc7f94ad968383be04596938efedb8b9572f"
+      "sha256": "e5e3fae8e5857ab120cf48a88bff8f3f5aac8de69a8e04b59710b470e887dd0f"
     },
     {
       "button_id": "btn_school",
@@ -1343,7 +1343,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/school.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "48204f6f10686ed3ddfee5cc81a9928af1516ed33109fb56385d5cfa1d765541"
+      "sha256": "855dc13e28c3dc584248cf50fcdf2f90977a3896b072165f354108fb0264fb15"
     },
     {
       "button_id": "btn_outside",
@@ -1351,7 +1351,7 @@
       "fitzgerald_category": "places",
       "icon_uri": "assets/symbols/places/outside.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "4ea34bd73e276ea9d5ddcadfccc06dba3156e34055dd5bae3c1cb144db1436cc"
+      "sha256": "41aeda55c3b8e603c6cb8567660297e058d0dd761afd2364801bd87e9c6fdbb6"
     },
     {
       "button_id": "btn_wait",
@@ -1359,7 +1359,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/wait.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "86bde0b589eb158a6bf824fff29997e7eb2a50b648b3d616b17c5b1d23e50f8e"
+      "sha256": "6bcdbd61a6a18493463eca565a290272eb1a48d8621e734cf7e61ee49b4ffc6a"
     },
     {
       "button_id": "btn_again",
@@ -1367,7 +1367,7 @@
       "fitzgerald_category": "modifier",
       "icon_uri": "assets/symbols/modifiers/again.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "353790d0dbc2e274e44592164cabf1047ccdc37d342b81cbafb410cc269c12dd"
+      "sha256": "8de1a387fa7bed207fe9d54af8ee24bc8a7b19d5038e40523443a559f1e17be3"
     },
     {
       "button_id": "btn_all_done",
@@ -1375,7 +1375,7 @@
       "fitzgerald_category": "needs",
       "icon_uri": "assets/symbols/needs/all_done.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "47c38ad9538f91e4ed663174dd560b4763b2d2f64a74124c8c6edf6dcec0550e"
+      "sha256": "e99e2143823f67813b99e38f06b5423e18d6835973686053ac919343db1ba1c5"
     },
     {
       "button_id": "btn_what",
@@ -1383,7 +1383,7 @@
       "fitzgerald_category": "question",
       "icon_uri": "assets/symbols/questions/what.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "a99c7a7f017f60116db2ad0771258c5ac8ecd74c28016fd0c02c5a6cc871d82f"
+      "sha256": "126d06c44d99efee6d9d0f37ee91ea191005ff62ea5d29ae76efec92dd06c823"
     },
     {
       "button_id": "btn_where",
@@ -1391,7 +1391,7 @@
       "fitzgerald_category": "question",
       "icon_uri": "assets/symbols/questions/where.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "cddec7a6470000b636e81b6892fbcef5904f280f1dd56d2e06e45d4cc5d30a7f"
+      "sha256": "38eb963c9ab8c36772ab5a5d300b93bc247b34be4ae752865abe87a00d627735"
     },
     {
       "button_id": "btn_who",
@@ -1399,7 +1399,7 @@
       "fitzgerald_category": "question",
       "icon_uri": "assets/symbols/questions/who.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "43b3f9c1e9bafc031d6a77fa94afe3bb230ad2f0b6d6b86a23f04611ade4791b"
+      "sha256": "f9fbb25941399c894fbcac093d2085ae78d62a269f92de7d21e59f8ab04ab439"
     },
     {
       "button_id": "btn_when",
@@ -1407,7 +1407,7 @@
       "fitzgerald_category": "question",
       "icon_uri": "assets/symbols/questions/when.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "42c7295d33bb61485f9f654e1c97fe5dcda44e502745c2d92e3ff8e497b725fc"
+      "sha256": "6bbf1fca6ee446962a0f7722419c0d6a35d2d718c0b26679bf392373fac3241b"
     },
     {
       "button_id": "btn_why",
@@ -1415,7 +1415,7 @@
       "fitzgerald_category": "question",
       "icon_uri": "assets/symbols/questions/why.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "ead684e9f81370aea0849e7900b0bf601727e3565e33a176dc3378da1202958e"
+      "sha256": "126d06c44d99efee6d9d0f37ee91ea191005ff62ea5d29ae76efec92dd06c823"
     },
     {
       "button_id": "btn_how",
@@ -1423,7 +1423,7 @@
       "fitzgerald_category": "question",
       "icon_uri": "assets/symbols/questions/how.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "f89c2740e5fdeed12ad6004f2f202925fea2ddeff7f91fbe0c0a42cf921266fa"
+      "sha256": "d8389db19bfb31c26319e68bd8bd43d5cb67d345a615064b8c19ade04ea2fea8"
     },
     {
       "button_id": "btn_here",
@@ -1431,7 +1431,7 @@
       "fitzgerald_category": "modifier",
       "icon_uri": "assets/symbols/modifiers/here.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "bc320206417be91626a51a5342e30f0a84d6cb114c880bffeb9cf79d77693cfe"
+      "sha256": "38eb963c9ab8c36772ab5a5d300b93bc247b34be4ae752865abe87a00d627735"
     },
     {
       "button_id": "btn_that",
@@ -1439,7 +1439,7 @@
       "fitzgerald_category": "pronoun",
       "icon_uri": "assets/symbols/pronouns/that.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1b287abe0250a2f33d0b4506236804b5b846c397f19ced7c49d017fcca4ddc4b"
+      "sha256": "0e61c92b4730cc5cc17c5c6a3a2fc1585e158f51a6068a7372ce8f33793d3d6f"
     },
     {
       "button_id": "btn_body_folder",
@@ -1447,7 +1447,7 @@
       "fitzgerald_category": "body_nav",
       "icon_uri": "assets/symbols/folders/body.png",
       "license": "Apache-2.0 / Permissive Open AAC Symbol",
-      "sha256": "1f1aec47f637ab7965d4766d67e1ba5eff9f6a2fd2b692cf91850ab06851af31"
+      "sha256": "ddb521eff9e8be4bec27a4cc30a034323d31510cc14d9e7ffee0e941ce07c878"
     }
   ]
 }

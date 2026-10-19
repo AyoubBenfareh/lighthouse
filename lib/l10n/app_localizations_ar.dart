@@ -1044,6 +1044,148 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get recordVoiceClear => 'إزالة التسجيل';
+
+  @override
+  String get userProfilesTitle => 'ملفات المستخدمين';
+
+  @override
+  String get userProfilesSubtitle => 'تبديل أو إدارة ملفات التواصل';
+
+  @override
+  String get userProfilesDescription =>
+      'إدارة ملفات مستخدمين مستقلة للمتواصلين أو الطلاب أو أفراد الأسرة. يحتفظ كل ملف بإعدادات صوتية وخيارات وصول ومفردات مستقلة.';
+
+  @override
+  String get addNewProfile => 'إضافة ملف جديد';
+
+  @override
+  String get createProfileTitle => 'إنشاء ملف شخصي';
+
+  @override
+  String get profileNameLabel => 'اسم الملف الشخصي';
+
+  @override
+  String get profileNameHint => 'مثلاً: مايا، كريم، ليو';
+
+  @override
+  String editProfileTitle(String name) {
+    return 'تعديل الملف الشخصي: $name';
+  }
+
+  @override
+  String deleteProfileTitle(String name) {
+    return 'حذف الملف الشخصي \"$name\"؟';
+  }
+
+  @override
+  String get deleteProfileConfirm =>
+      'سيؤدي هذا إلى حذف هذا الملف وإعداداته المخصصة نهائياً. لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String switchedToProfile(String name) {
+    return 'تم التبديل إلى الملف: $name';
+  }
+
+  @override
+  String get activeBadge => 'نشط';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get deleteProfile => 'حذف الملف الشخصي';
+
+  @override
+  String get activateProfile => 'تفعيل الملف الشخصي';
+
+  @override
+  String get saveAction => 'حفظ';
+
+  @override
+  String get deleteAction => 'حذف';
+
+  @override
+  String get createAction => 'إنشاء';
+
+  @override
+  String get speechOutputLanguage => 'لغة إخراج الصوت';
+
+  @override
+  String matchesInterfaceLanguage(String lang) {
+    return 'تطابق لغة الواجهة ($lang)';
+  }
+
+  @override
+  String get speechSpeed => 'سرعة الكلام';
+
+  @override
+  String get speechPitch => 'طبقة الصوت';
+
+  @override
+  String get speechVolume => 'مستوى صوت الكلام';
+
+  @override
+  String get highContrastBoard => 'لوحة عالية التباين';
+
+  @override
+  String get highContrastBoardSubtitle => 'حدود متباينة لوضوح الرؤية';
+
+  @override
+  String get sectionAiAssistance => 'المساعدة الذكية (AI)';
+
+  @override
+  String get aiPredictionBar => 'شريط التوقع الذكي';
+
+  @override
+  String get aiPredictionBarSubtitle =>
+      'عرض اقتراحات الكلمات التالية وبناء الجمل دون إنترنت';
+
+  @override
+  String get sectionSwitchAccessibility =>
+      'الوصول بمفتاح التبديل (Switch Access)';
+
+  @override
+  String get accessMethod => 'طريقة الوصول';
+
+  @override
+  String get accessDirectTouch => 'اللمس المباشر';
+
+  @override
+  String get accessSwitchSingle => 'مفتاح واحد (مسح تلقائي)';
+
+  @override
+  String get accessSwitchDual => 'مفتاحان (خطوة وتحديد)';
+
+  @override
+  String get autoScanDwellTime => 'زمن المسح التلقائي';
+
+  @override
+  String get aiAssistantTitle => 'المساعد النصي والمترجم الذكي';
+
+  @override
+  String get aiAssistantInputHint => 'اكتب كلمات أو عبارة مختصرة...';
+
+  @override
+  String get aiSuggestionsHeader => 'اقتراحات الجمل (المس للنطق أو النسخ):';
+
+  @override
+  String get translateTo => 'ترجمة إلى: ';
+
+  @override
+  String get speakSentence => 'نطق الجملة';
+
+  @override
+  String get aiCommunicationAssistantTooltip => 'مساعد التواصل الذكي';
+
+  @override
+  String get switchStep => 'خطوة (مسافة)';
+
+  @override
+  String get switchSelect => 'تحديد (إدخال)';
+
+  @override
+  String get symbolLicenseNotice =>
+      'الرموز: Open AAC Symbols و Material Symbols. الترخيص: Apache 2.0 (جاهز للاستخدام التجاري، مفتوح المصدر).';
 }
 
 /// The translations for Arabic, as used in Algeria (`ar_DZ`).
@@ -2086,4 +2228,145 @@ class AppLocalizationsArDz extends AppLocalizationsAr {
 
   @override
   String get recordVoiceClear => 'نحّي التسجيل';
+
+  @override
+  String get userProfilesTitle => 'ملفات المستخدمين';
+
+  @override
+  String get userProfilesSubtitle => 'بدل ولا سيّر بروفيلات التواصل';
+
+  @override
+  String get userProfilesDescription =>
+      'سيّر بروفيلات مستقلة للمتواصلين، التلاميذ، ولا أفراد العائلة. كل بروفيل عندو إعدادات الصوت، وطريقة الاستعمال، والكلمات الخاصة بيه.';
+
+  @override
+  String get addNewProfile => 'زيد بروفيل جديد';
+
+  @override
+  String get createProfileTitle => 'دير بروفيل جديد';
+
+  @override
+  String get profileNameLabel => 'اسم البروفيل';
+
+  @override
+  String get profileNameHint => 'مثلاً: مايا، كريم، ليو';
+
+  @override
+  String editProfileTitle(String name) {
+    return 'عدّل البروفيل: $name';
+  }
+
+  @override
+  String deleteProfileTitle(String name) {
+    return 'تمحي البروفيل \"$name\"؟';
+  }
+
+  @override
+  String get deleteProfileConfirm =>
+      'هذا الشي راح يمسح هذا البروفيل وإعداداتو نهائياً. ما تقدرش ترجع فيه.';
+
+  @override
+  String switchedToProfile(String name) {
+    return 'بدلت للبروفيل: $name';
+  }
+
+  @override
+  String get activeBadge => 'نشط';
+
+  @override
+  String get editProfile => 'عدّل البروفيل';
+
+  @override
+  String get deleteProfile => 'امحي البروفيل';
+
+  @override
+  String get activateProfile => 'فعّل البروفيل';
+
+  @override
+  String get saveAction => 'احفظ';
+
+  @override
+  String get deleteAction => 'امحي';
+
+  @override
+  String get createAction => 'دير';
+
+  @override
+  String get speechOutputLanguage => 'لغة نطق الصوت';
+
+  @override
+  String matchesInterfaceLanguage(String lang) {
+    return 'يطابق لغة الواجهة ($lang)';
+  }
+
+  @override
+  String get speechSpeed => 'سرعة الهضرة';
+
+  @override
+  String get speechPitch => 'نغمة الصوت';
+
+  @override
+  String get speechVolume => 'قوة الصوت';
+
+  @override
+  String get highContrastBoard => 'طابلو عالي التباين';
+
+  @override
+  String get highContrastBoardSubtitle => 'حواشي واضحة ومتباينة للرؤية الساهلة';
+
+  @override
+  String get sectionAiAssistance => 'المساعدة الذكية (AI)';
+
+  @override
+  String get aiPredictionBar => 'شريط التوقعات الذكي';
+
+  @override
+  String get aiPredictionBarSubtitle =>
+      'ورّي اقتراحات الكلمات التالية وتكوين الجمل بلا إنترنت';
+
+  @override
+  String get sectionSwitchAccessibility => 'الوصول بالمفتاح (Switch Access)';
+
+  @override
+  String get accessMethod => 'طريقة الدخول';
+
+  @override
+  String get accessDirectTouch => 'لمس مباشر';
+
+  @override
+  String get accessSwitchSingle => 'مفتاح واحد (مسح تلقائي)';
+
+  @override
+  String get accessSwitchDual => 'زوج مفاتيح (خطوة وتحديد)';
+
+  @override
+  String get autoScanDwellTime => 'وقت المسح التلقائي';
+
+  @override
+  String get aiAssistantTitle => 'المساعد النصي والمترجم الذكي';
+
+  @override
+  String get aiAssistantInputHint => 'اكتب كلمات، اختصار، ولا جملة ناقصة...';
+
+  @override
+  String get aiSuggestionsHeader => 'اقتراحات الجمل (اضغط باه تنطق ولا تنسخ):';
+
+  @override
+  String get translateTo => 'ترجم لـ: ';
+
+  @override
+  String get speakSentence => 'انطق الجملة';
+
+  @override
+  String get aiCommunicationAssistantTooltip => 'مساعد التواصل الذكي';
+
+  @override
+  String get switchStep => 'خطوة (مسافة)';
+
+  @override
+  String get switchSelect => 'تحديد (دخول)';
+
+  @override
+  String get symbolLicenseNotice =>
+      'الرموز: Open AAC Symbols و Material Symbols. الترخيص: Apache 2.0 (صالح للاستعمال التجاري، مفتوح المصدر).';
 }

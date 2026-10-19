@@ -45,6 +45,9 @@ class VectorSymbolProvider implements SymbolProvider {
     }
     if (key.contains('help')) return Icons.help;
     if (key.contains('stop')) return Icons.pan_tool;
+    if (key.contains('break')) return Icons.free_breakfast;
+    if (key.contains('all_done') || key.contains('done')) return Icons.task_alt;
+    if (key.contains('wait')) return Icons.hourglass_empty;
     if (key.contains('more') || key.contains('again')) return Icons.add_circle;
     if (key.contains('play') || key.contains('toy') || key.contains('game')) {
       return Icons.sports_esports;
@@ -65,6 +68,10 @@ class VectorSymbolProvider implements SymbolProvider {
     if (key.contains('thank')) return Icons.thumb_up;
     if (key.contains('please')) return Icons.volunteer_activism;
     if (key.contains('sorry')) return Icons.back_hand;
+    if (key.contains('where')) return Icons.location_on;
+    if (key.contains('who')) return Icons.person_search;
+    if (key.contains('when')) return Icons.event;
+    if (key.contains('what') || key.contains('why') || key.contains('how')) return Icons.help_outline;
     if (key.contains('folder') || key.contains('nav')) return Icons.folder;
     if (key.contains('car')) return Icons.directions_car;
     if (key.contains('bus')) return Icons.directions_bus;

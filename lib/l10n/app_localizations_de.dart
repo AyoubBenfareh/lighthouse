@@ -1051,4 +1051,149 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recordVoiceClear => 'Entfernen recording';
+
+  @override
+  String get userProfilesTitle => 'Benutzerprofile';
+
+  @override
+  String get userProfilesSubtitle =>
+      'Kommunikationsprofile wechseln oder verwalten';
+
+  @override
+  String get userProfilesDescription =>
+      'Verwalten Sie unabhängige Benutzerprofile für Kommunikatoren, Schüler oder Familienmitglieder. Jedes Profil behält getrennte Spracheinstellungen, Zugangsmethoden und Vokabular.';
+
+  @override
+  String get addNewProfile => 'Neues Profil hinzufügen';
+
+  @override
+  String get createProfileTitle => 'Profil erstellen';
+
+  @override
+  String get profileNameLabel => 'Profilname';
+
+  @override
+  String get profileNameHint => 'z. B. Maya, Karim, Leo';
+
+  @override
+  String editProfileTitle(String name) {
+    return 'Profil bearbeiten: $name';
+  }
+
+  @override
+  String deleteProfileTitle(String name) {
+    return 'Profil \"$name\" löschen?';
+  }
+
+  @override
+  String get deleteProfileConfirm =>
+      'Dadurch wird dieses Profil und seine benutzerdefinierten Einstellungen dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.';
+
+  @override
+  String switchedToProfile(String name) {
+    return 'Zu Profil gewechselt: $name';
+  }
+
+  @override
+  String get activeBadge => 'AKTIV';
+
+  @override
+  String get editProfile => 'Profil bearbeiten';
+
+  @override
+  String get deleteProfile => 'Profil löschen';
+
+  @override
+  String get activateProfile => 'Profil aktivieren';
+
+  @override
+  String get saveAction => 'Speichern';
+
+  @override
+  String get deleteAction => 'Löschen';
+
+  @override
+  String get createAction => 'Erstellen';
+
+  @override
+  String get speechOutputLanguage => 'Sprachausgabe-Sprache';
+
+  @override
+  String matchesInterfaceLanguage(String lang) {
+    return 'Entspricht der Benutzeroberfläche ($lang)';
+  }
+
+  @override
+  String get speechSpeed => 'Sprechgeschwindigkeit';
+
+  @override
+  String get speechPitch => 'Tonhöhe';
+
+  @override
+  String get speechVolume => 'Sprachlautstärke';
+
+  @override
+  String get highContrastBoard => 'Kontrastreiches Raster';
+
+  @override
+  String get highContrastBoardSubtitle =>
+      'Verbesserte Ränder für klare visuelle Erkennung';
+
+  @override
+  String get sectionAiAssistance => 'KI-Unterstützung';
+
+  @override
+  String get aiPredictionBar => 'KI-Vorhersageleiste';
+
+  @override
+  String get aiPredictionBarSubtitle =>
+      'Offline-Vorschläge für nächste Wörter und Satzbau anzeigen';
+
+  @override
+  String get sectionSwitchAccessibility => 'Taster-Bedienung (Switch Access)';
+
+  @override
+  String get accessMethod => 'Zugangsmethode';
+
+  @override
+  String get accessDirectTouch => 'Direkte Berührung';
+
+  @override
+  String get accessSwitchSingle => 'Einzeltaster (Automatisches Scannen)';
+
+  @override
+  String get accessSwitchDual => 'Zweitaster (Schritt & Auswahl)';
+
+  @override
+  String get autoScanDwellTime => 'Verweildauer für Auto-Scan';
+
+  @override
+  String get aiAssistantTitle => 'KI-Textassistent & Übersetzer';
+
+  @override
+  String get aiAssistantInputHint =>
+      'Wörter, Stichworte oder unvollständige Sätze eingeben...';
+
+  @override
+  String get aiSuggestionsHeader =>
+      'Satzvorschläge (Tippen zum Sprechen oder Kopieren):';
+
+  @override
+  String get translateTo => 'Übersetzen nach: ';
+
+  @override
+  String get speakSentence => 'Satz sprechen';
+
+  @override
+  String get aiCommunicationAssistantTooltip => 'KI-Kommunikationsassistent';
+
+  @override
+  String get switchStep => 'SCHRITT (Leertaste)';
+
+  @override
+  String get switchSelect => 'AUSWÄHLEN (Eingabe)';
+
+  @override
+  String get symbolLicenseNotice =>
+      'Symbole: Open AAC Symbols & Material Symbols. Lizenz: Apache 2.0 (kommerziell nutzbar, permissives Open-Source).';
 }

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../i18n/locale_registry.dart';
+import '../../l10n/app_localizations.dart';
 import '../../logic/ai/ai.dart';
 import '../../models/models.dart';
 import '../../state/state.dart';
@@ -35,6 +36,8 @@ class PredictionBar extends ConsumerWidget {
     final tokens = ref.watch(utteranceProvider);
     final locale = Localizations.localeOf(context);
     final langCode = LocaleRegistry.codeForLocale(locale);
+    final l10n =
+        Localizations.of<AppLocalizations>(context, AppLocalizations);
 
     // Predict next candidate words based on preceding tokens
     final candidateWords = _wordPredictor.predictNextWords(
@@ -66,7 +69,8 @@ class PredictionBar extends ConsumerWidget {
           // AI indicator & text typing shortcut
           IconButton(
             icon: const Icon(Icons.auto_awesome, color: LhColors.amber, size: 20),
-            tooltip: 'AI Communication Assistant',
+            tooltip: l10n?.aiCommunicationAssistantTooltip ??
+                'AI Communication Assistant',
             onPressed: () => TextAssistantSheet.show(context, ref, board),
           ),
           const VerticalDivider(width: 8, indent: 8, endIndent: 8),
@@ -95,7 +99,7 @@ class PredictionBar extends ConsumerWidget {
                         // Convert expanded sentence into speech or display
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('AI Suggestion: $expandedSentence'),
+                            content: Text(expandedSentence!),
                             duration: const Duration(seconds: 2),
                           ),
                         );

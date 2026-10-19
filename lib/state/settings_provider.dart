@@ -66,6 +66,11 @@ class SettingsNotifier extends _$SettingsNotifier {
     state = AsyncData(_current.copyWith(voicePitch: pitch));
   }
 
+  Future<void> setVoiceVolume(double volume) async {
+    await ref.read(settingsRepositoryProvider).setVoiceVolume(volume);
+    state = AsyncData(_current.copyWith(voiceVolume: volume));
+  }
+
   Future<void> setHighContrast(bool value) async {
     await ref.read(settingsRepositoryProvider).setHighContrast(value);
     state = AsyncData(_current.copyWith(highContrast: value));

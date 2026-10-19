@@ -28,6 +28,7 @@ class UserProfile {
     this.speechLocale,
     this.voiceRate = 1.0,
     this.voicePitch = 1.0,
+    this.voiceVolume = 1.0,
     this.ttsMode = TtsMode.on,
     this.accessMethod = AccessMethod.directTouch,
     this.dwellMs = 0,
@@ -55,6 +56,7 @@ class UserProfile {
 
   final double voiceRate;
   final double voicePitch;
+  final double voiceVolume;
   final TtsMode ttsMode;
   final AccessMethod accessMethod;
   final int dwellMs;
@@ -80,6 +82,7 @@ class UserProfile {
     bool clearSpeechLocale = false,
     double? voiceRate,
     double? voicePitch,
+    double? voiceVolume,
     TtsMode? ttsMode,
     AccessMethod? accessMethod,
     int? dwellMs,
@@ -107,6 +110,7 @@ class UserProfile {
           clearSpeechLocale ? null : (speechLocale ?? this.speechLocale),
       voiceRate: voiceRate ?? this.voiceRate,
       voicePitch: voicePitch ?? this.voicePitch,
+      voiceVolume: voiceVolume ?? this.voiceVolume,
       ttsMode: ttsMode ?? this.ttsMode,
       accessMethod: accessMethod ?? this.accessMethod,
       dwellMs: dwellMs ?? this.dwellMs,
@@ -133,6 +137,7 @@ class UserProfile {
       if (speechLocale != null) 'speech_locale': speechLocale,
       'voice_rate': voiceRate,
       'voice_pitch': voicePitch,
+      'voice_volume': voiceVolume,
       'tts_mode': ttsMode.toJson(),
       'access_method': accessMethod.toJson(),
       'dwell_ms': dwellMs,
@@ -158,6 +163,7 @@ class UserProfile {
       speechLocale: json['speech_locale'] as String?,
       voiceRate: (json['voice_rate'] as num?)?.toDouble() ?? 1.0,
       voicePitch: (json['voice_pitch'] as num?)?.toDouble() ?? 1.0,
+      voiceVolume: (json['voice_volume'] as num?)?.toDouble() ?? 1.0,
       ttsMode: TtsMode.tryParse(json['tts_mode'] as String?) ?? TtsMode.on,
       accessMethod:
           AccessMethod.tryParse(json['access_method'] as String?),

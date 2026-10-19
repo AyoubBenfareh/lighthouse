@@ -42,6 +42,7 @@ class SettingsState {
     this.speechLocaleOverride,
     this.voiceRate = 1.0,
     this.voicePitch = 1.0,
+    this.voiceVolume = 1.0,
     this.highContrast = false,
     this.enableAiPrediction = false,
     this.accessMethod = AccessMethod.directTouch,
@@ -60,6 +61,7 @@ class SettingsState {
     speechLocaleOverride: null,
     voiceRate: 1.0,
     voicePitch: 1.0,
+    voiceVolume: 1.0,
     highContrast: false,
     enableAiPrediction: false,
     accessMethod: AccessMethod.directTouch,
@@ -87,6 +89,9 @@ class SettingsState {
 
   /// Speech pitch multiplier (0.5 to 2.0).
   final double voicePitch;
+
+  /// Speech output volume (0.0 to 1.0).
+  final double voiceVolume;
 
   /// Accessibility high-contrast theme flag.
   final bool highContrast;
@@ -122,6 +127,7 @@ class SettingsState {
     bool clearSpeechLocaleOverride = false,
     double? voiceRate,
     double? voicePitch,
+    double? voiceVolume,
     bool? highContrast,
     bool? enableAiPrediction,
     AccessMethod? accessMethod,
@@ -142,6 +148,7 @@ class SettingsState {
           : (speechLocaleOverride ?? this.speechLocaleOverride),
       voiceRate: voiceRate ?? this.voiceRate,
       voicePitch: voicePitch ?? this.voicePitch,
+      voiceVolume: voiceVolume ?? this.voiceVolume,
       highContrast: highContrast ?? this.highContrast,
       enableAiPrediction: enableAiPrediction ?? this.enableAiPrediction,
       accessMethod: accessMethod ?? this.accessMethod,
@@ -164,6 +171,7 @@ class SettingsRepository {
   static const _keySpeechLocale = 'settings.speech_locale_override';
   static const _keyVoiceRate = 'settings.voice_rate';
   static const _keyVoicePitch = 'settings.voice_pitch';
+  static const _keyVoiceVolume = 'settings.voice_volume';
   static const _keyHighContrast = 'settings.high_contrast';
   static const _keyEnableAiPrediction = 'settings.enable_ai_prediction';
   static const _keyAccessMethod = 'settings.access_method';
@@ -195,6 +203,8 @@ class SettingsRepository {
       voiceRate: p.getDouble(_keyVoiceRate) ?? SettingsState.defaults.voiceRate,
       voicePitch:
           p.getDouble(_keyVoicePitch) ?? SettingsState.defaults.voicePitch,
+      voiceVolume:
+          p.getDouble(_keyVoiceVolume) ?? SettingsState.defaults.voiceVolume,
       highContrast:
           p.getBool(_keyHighContrast) ?? SettingsState.defaults.highContrast,
       enableAiPrediction: p.getBool(_keyEnableAiPrediction) ??
@@ -267,6 +277,11 @@ class SettingsRepository {
   Future<void> setVoicePitch(double pitch) async {
     final p = await _prefs();
     await p.setDouble(_keyVoicePitch, pitch);
+  }
+
+  Future<void> setVoiceVolume(double volume) async {
+    final p = await _prefs();
+    await p.setDouble(_keyVoiceVolume, volume);
   }
 
   Future<void> setHighContrast(bool value) async {

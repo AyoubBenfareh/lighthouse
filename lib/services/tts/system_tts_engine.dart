@@ -6,6 +6,7 @@
 /// See docs/adr/0004-tts-strategy.md.
 library;
 
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter_tts/flutter_tts.dart';
@@ -14,23 +15,61 @@ import 'tts_engine.dart';
 
 class SystemTTSEngine implements TTSEngine {
   SystemTTSEngine() : _backend = FlutterTts() {
-    // Make speak() resolve only when the utterance finishes, not when it is
-    // merely dispatched. The sentence replay routes tokens one at a time and
-    // awaits each (ADR 0010); without this, a system-voice token (e.g. the
-    // English "to" connector with no bundled clip) would return immediately and
-    // overlap the next bundled clip.
     _backend.awaitSpeakCompletion(true);
+    _initEngine();
   }
 
   final FlutterTts _backend;
   String? _currentLanguageTag;
+  double _volume = 1.0;
+  double _rate = 1.0;
+  double _pitch = 1.0;
 
-  Future<void> setRate(double rate) async {
-    await _backend.setSpeechRate(rate.clamp(0.1, 2.0));
+  Future<void> _initEngine() async {
+    try {
+      if (Platform.isIOS) {
+        await _backend.setIosAudioCategory(
+          IosTextToSpeechAudioCategory.playback,
+          [
+            IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+            IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+            IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+          ],
+          IosTextToSpeechAudioMode.defaultMode,
+        );
+        await _backend.setSharedInstance(true);
+      }
+      if (Platform.isAndroid) {
+        await _backend.setQueueMode(0); // flush mode: latest utterance wins
+      }
+      await _backend.setVolume(_volume);
+      await _backend.setSpeechRate(_rate);
+      await _backend.setPitch(_pitch);
+    } catch (_) {}
   }
 
+  @override
+  Future<void> setVolume(double volume) async {
+    _volume = volume.clamp(0.0, 1.0);
+    try {
+      await _backend.setVolume(_volume);
+    } catch (_) {}
+  }
+
+  @override
+  Future<void> setRate(double rate) async {
+    _rate = rate.clamp(0.1, 2.0);
+    try {
+      await _backend.setSpeechRate(_rate);
+    } catch (_) {}
+  }
+
+  @override
   Future<void> setPitch(double pitch) async {
-    await _backend.setPitch(pitch.clamp(0.5, 2.0));
+    _pitch = pitch.clamp(0.5, 2.0);
+    try {
+      await _backend.setPitch(_pitch);
+    } catch (_) {}
   }
 
   /// Returns true if an exact dialect voice (e.g. ar-DZ) exists on device,
@@ -47,16 +86,49 @@ class SystemTTSEngine implements TTSEngine {
     return false;
   }
 
-  @override
-  Future<void> speak(String text, {required Locale locale}) async {
+  Future<void> _configureLanguage(Locale locale) async {
     final tag = _bcp47Tag(locale);
-    if (tag != _currentLanguageTag) {
+    try {
+      // 1. Try exact requested tag (e.g., 'ar-DZ', 'de-DE', 'en-US')
       final res = await _backend.setLanguage(tag);
-      if (res != 1 && locale.countryCode != null) {
-        // Fallback to base language (e.g. ar-DZ -> ar)
-        await _backend.setLanguage(locale.languageCode);
+      if (res == 1) {
+        _currentLanguageTag = tag;
+        return;
+      }
+      // 2. If dialect failed, try base language code (e.g., 'ar', 'de', 'en')
+      if (locale.countryCode != null) {
+        final baseRes = await _backend.setLanguage(locale.languageCode);
+        if (baseRes == 1) {
+          _currentLanguageTag = locale.languageCode;
+          return;
+        }
+      }
+      // 3. For Arabic, search available voices for standard Arabic fallback (e.g. ar-XA, ar-SA, ara)
+      if (locale.languageCode == 'ar') {
+        final available = await _backend.getLanguages;
+        if (available is List) {
+          for (final entry in available) {
+            final entryStr = entry?.toString().toLowerCase() ?? '';
+            if (entryStr.startsWith('ar') || entryStr.startsWith('ara')) {
+              await _backend.setLanguage(entry.toString());
+              _currentLanguageTag = entry.toString();
+              return;
+            }
+          }
+        }
       }
       _currentLanguageTag = tag;
+    } catch (_) {
+      _currentLanguageTag = tag;
+    }
+  }
+
+  @override
+  Future<void> speak(String text, {required Locale locale}) async {
+    if (text.trim().isEmpty) return;
+    final tag = _bcp47Tag(locale);
+    if (tag != _currentLanguageTag) {
+      await _configureLanguage(locale);
     }
     // Latest-wins: stop any in-flight utterance before starting this one.
     await _backend.stop();
@@ -65,10 +137,13 @@ class SystemTTSEngine implements TTSEngine {
 
   @override
   Future<void> speakSequence(List<String> texts, {required Locale locale}) async {
-    // System TTS is text-agnostic, so the whole sentence is one synthesized
-    // utterance (which also gives natural prosody). Used only when no bundled
-    // clip covers a token (ADR 0010).
-    await speak(texts.join(' '), locale: locale);
+    // Speak full sentence as ONE single continuous synthesized utterance.
+    // Provides natural Arabic and Algerian Darija prosody, smooth rhythm,
+    // and zero inter-word pause without repeated engine initialization.
+    final sentence = texts.join(' ').trim();
+    if (sentence.isNotEmpty) {
+      await speak(sentence, locale: locale);
+    }
   }
 
   @override

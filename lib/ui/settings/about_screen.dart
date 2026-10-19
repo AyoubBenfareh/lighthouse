@@ -147,10 +147,6 @@ class AboutScreen extends StatelessWidget {
 class _Credits extends StatelessWidget {
   const _Credits();
 
-  static const String _symbolCredit =
-      'Symbols: Open AAC Symbols & Material Symbols. '
-      'License: Apache 2.0 (Commercial-ready, permissive open-source).';
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -166,10 +162,10 @@ class _Credits extends StatelessWidget {
           const SizedBox(height: 8),
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 520),
-            child: const Text(
-              _symbolCredit,
+            child: Text(
+              l10n.symbolLicenseNotice,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Atkinson Hyperlegible',
                 fontSize: 15,
                 height: 1.45,

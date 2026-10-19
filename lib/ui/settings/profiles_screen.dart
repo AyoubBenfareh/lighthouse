@@ -4,6 +4,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../models/user_profile.dart';
 import '../../state/profile_provider.dart';
 import '../../state/settings_provider.dart';
@@ -15,25 +16,30 @@ class ProfilesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n =
+        Localizations.of<AppLocalizations>(context, AppLocalizations);
     final profilesAsync = ref.watch(profileListProvider);
     final activeProfileAsync = ref.watch(activeProfileProvider);
 
     return Scaffold(
-      appBar: lhAppBar(context, title: 'User Profiles'),
+      appBar: lhAppBar(context,
+          title: l10n?.userProfilesTitle ?? 'User Profiles'),
       body: profilesAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text('Error loading profiles: $err')),
+        error: (err, stack) =>
+            Center(child: Text('Error loading profiles: $err')),
         data: (profiles) {
           final active = activeProfileAsync.valueOrNull;
           return SafeArea(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 12),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
                   child: Text(
-                    'Manage independent user profiles for communicators, students, or family members. Each profile retains isolated speech settings, access preferences, and vocabulary.',
-                    style: TextStyle(
+                    l10n?.userProfilesDescription ??
+                        'Manage independent user profiles for communicators, students, or family members. Each profile retains isolated speech settings, access preferences, and vocabulary.',
+                    style: const TextStyle(
                       fontSize: 14,
                       color: LhColors.ink2,
                       height: 1.4,
@@ -56,7 +62,8 @@ class ProfilesScreen extends ConsumerWidget {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Switched to profile: ${profile.name}'),
+                            content: Text(l10n?.switchedToProfile(profile.name) ??
+                                'Switched to profile: ${profile.name}'),
                             duration: const Duration(seconds: 2),
                           ),
                         );
@@ -73,7 +80,7 @@ class ProfilesScreen extends ConsumerWidget {
                 FilledButton.icon(
                   onPressed: () => _showCreateDialog(context, ref),
                   icon: const Icon(Icons.person_add_rounded),
-                  label: const Text('Add New Profile'),
+                  label: Text(l10n?.addNewProfile ?? 'Add New Profile'),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
@@ -90,21 +97,23 @@ class ProfilesScreen extends ConsumerWidget {
   }
 
   void _showCreateDialog(BuildContext context, WidgetRef ref) {
+    final l10n =
+        Localizations.of<AppLocalizations>(context, AppLocalizations);
     final controller = TextEditingController();
     showDialog<void>(
       context: context,
       builder: (dialogCtx) => AlertDialog(
-        title: const Text('Create Profile'),
+        title: Text(l10n?.createProfileTitle ?? 'Create Profile'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: controller,
               autofocus: true,
-              decoration: const InputDecoration(
-                labelText: 'Profile Name',
-                hintText: 'e.g., Maya, Karim, Leo',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: l10n?.profileNameLabel ?? 'Profile Name',
+                hintText: l10n?.profileNameHint ?? 'e.g., Maya, Karim, Leo',
+                border: const OutlineInputBorder(),
               ),
             ),
           ],
@@ -112,7 +121,7 @@ class ProfilesScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogCtx).pop(),
-            child: const Text('Cancel'),
+            child: Text(l10n?.cancel ?? 'Cancel'),
           ),
           FilledButton(
             onPressed: () async {
@@ -124,7 +133,7 @@ class ProfilesScreen extends ConsumerWidget {
                 if (dialogCtx.mounted) Navigator.of(dialogCtx).pop();
               }
             },
-            child: const Text('Create'),
+            child: Text(l10n?.createAction ?? 'Create'),
           ),
         ],
       ),
@@ -133,6 +142,8 @@ class ProfilesScreen extends ConsumerWidget {
 
   void _showEditDialog(
       BuildContext context, WidgetRef ref, UserProfile profile) {
+    final l10n =
+        Localizations.of<AppLocalizations>(context, AppLocalizations);
     final nameCtrl = TextEditingController(text: profile.name);
     double rate = profile.voiceRate;
     double pitch = profile.voicePitch;
@@ -142,7 +153,8 @@ class ProfilesScreen extends ConsumerWidget {
       context: context,
       builder: (dialogCtx) => StatefulBuilder(
         builder: (ctx, setState) => AlertDialog(
-          title: Text('Edit Profile: ${profile.name}'),
+          title: Text(l10n?.editProfileTitle(profile.name) ??
+              'Edit Profile: ${profile.name}'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -150,13 +162,13 @@ class ProfilesScreen extends ConsumerWidget {
               children: [
                 TextField(
                   controller: nameCtrl,
-                  decoration: const InputDecoration(
-                    labelText: 'Profile Name',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n?.profileNameLabel ?? 'Profile Name',
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text('Speech Rate: ${(rate * 100).toInt()}%'),
+                Text('${l10n?.speechSpeed ?? 'Speech Speed'}: ${(rate * 100).toInt()}%'),
                 Slider(
                   value: rate,
                   min: 0.5,
@@ -164,7 +176,7 @@ class ProfilesScreen extends ConsumerWidget {
                   divisions: 15,
                   onChanged: (v) => setState(() => rate = v),
                 ),
-                Text('Speech Pitch: ${(pitch * 100).toInt()}%'),
+                Text('${l10n?.speechPitch ?? 'Speech Pitch'}: ${(pitch * 100).toInt()}%'),
                 Slider(
                   value: pitch,
                   min: 0.5,
@@ -174,7 +186,7 @@ class ProfilesScreen extends ConsumerWidget {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('High Contrast Grid'),
+                  title: Text(l10n?.highContrastBoard ?? 'High-Contrast Board'),
                   value: highContrast,
                   onChanged: (v) => setState(() => highContrast = v),
                 ),
@@ -184,7 +196,7 @@ class ProfilesScreen extends ConsumerWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogCtx).pop(),
-              child: const Text('Cancel'),
+              child: Text(l10n?.cancel ?? 'Cancel'),
             ),
             FilledButton(
               onPressed: () async {
@@ -200,7 +212,7 @@ class ProfilesScreen extends ConsumerWidget {
                     .updateActiveProfile(updated);
                 if (dialogCtx.mounted) Navigator.of(dialogCtx).pop();
               },
-              child: const Text('Save'),
+              child: Text(l10n?.saveAction ?? 'Save'),
             ),
           ],
         ),
@@ -210,17 +222,19 @@ class ProfilesScreen extends ConsumerWidget {
 
   void _confirmDelete(
       BuildContext context, WidgetRef ref, UserProfile profile) {
+    final l10n =
+        Localizations.of<AppLocalizations>(context, AppLocalizations);
     showDialog<void>(
       context: context,
       builder: (dialogCtx) => AlertDialog(
-        title: Text('Delete Profile "${profile.name}"?'),
-        content: const Text(
-          'This will permanently delete this profile and its custom settings. This action cannot be undone.',
-        ),
+        title: Text(l10n?.deleteProfileTitle(profile.name) ??
+            'Delete Profile "${profile.name}"?'),
+        content: Text(l10n?.deleteProfileConfirm ??
+            'This will permanently delete this profile and its custom settings. This action cannot be undone.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogCtx).pop(),
-            child: const Text('Cancel'),
+            child: Text(l10n?.cancel ?? 'Cancel'),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: Colors.red),
@@ -230,7 +244,7 @@ class ProfilesScreen extends ConsumerWidget {
                   .deleteProfile(profile.id);
               if (dialogCtx.mounted) Navigator.of(dialogCtx).pop();
             },
-            child: const Text('Delete'),
+            child: Text(l10n?.deleteAction ?? 'Delete'),
           ),
         ],
       ),
@@ -255,6 +269,8 @@ class _ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n =
+        Localizations.of<AppLocalizations>(context, AppLocalizations);
     return Card(
       elevation: isActive ? 2 : 0,
       shape: RoundedRectangleBorder(
@@ -308,9 +324,9 @@ class _ProfileCard extends StatelessWidget {
                             color: LhColors.brown,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Text(
-                            'ACTIVE',
-                            style: TextStyle(
+                          child: Text(
+                            l10n?.activeBadge ?? 'ACTIVE',
+                            style: const TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -322,8 +338,8 @@ class _ProfileCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Access: ${profile.accessMethod.name} • Speed: ${(profile.voiceRate * 100).toInt()}%'
-                    '${profile.highContrast ? ' • High-Contrast' : ''}',
+                    '${l10n?.accessMethod ?? 'Access'}: ${profile.accessMethod.name} • ${l10n?.speechSpeed ?? 'Speed'}: ${(profile.voiceRate * 100).toInt()}%'
+                    '${profile.highContrast ? ' • ${l10n?.highContrastBoard ?? 'High-Contrast'}' : ''}',
                     style: const TextStyle(
                       fontSize: 12,
                       color: LhColors.ink2,
@@ -334,21 +350,21 @@ class _ProfileCard extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(Icons.edit_outlined, size: 20),
-              tooltip: 'Edit Profile',
+              tooltip: l10n?.editProfile ?? 'Edit Profile',
               onPressed: onEdit,
             ),
             if (onDelete != null)
               IconButton(
                 icon: const Icon(Icons.delete_outline,
                     size: 20, color: Colors.redAccent),
-                tooltip: 'Delete Profile',
+                tooltip: l10n?.deleteProfile ?? 'Delete Profile',
                 onPressed: onDelete,
               ),
             if (!isActive)
               IconButton(
                 icon: const Icon(Icons.check_circle_outline,
                     color: LhColors.brown),
-                tooltip: 'Activate Profile',
+                tooltip: l10n?.activateProfile ?? 'Activate Profile',
                 onPressed: onSelect,
               ),
           ],

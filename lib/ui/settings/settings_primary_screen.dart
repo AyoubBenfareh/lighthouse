@@ -58,8 +58,8 @@ class SettingsPrimaryScreen extends ConsumerWidget {
             LhSectionLabel(l10n.sectionYourChildsBoard),
             LhSettingsRow(
               icon: Icons.people_outline_rounded,
-              title: 'User Profiles',
-              subtitle: 'Switch or manage communicator profiles',
+              title: l10n.userProfilesTitle,
+              subtitle: l10n.userProfilesSubtitle,
               onTap: () => _openGated(context, const ProfilesScreen()),
             ),
             LhSettingsRow(
