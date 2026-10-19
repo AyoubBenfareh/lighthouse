@@ -16,6 +16,7 @@ import '../logic/logic.dart';
 import '../models/models.dart';
 import '../services/services.dart';
 import '../state/state.dart';
+import 'keyboard/smart_keyboard_screen.dart';
 import 'theme/lighthouse_theme.dart';
 
 class SentenceBar extends ConsumerWidget {
@@ -84,6 +85,12 @@ class SentenceBar extends ConsumerWidget {
                 ),
               ),
               SizedBox(width: compact ? 2 : 4),
+              _Control(
+                icon: Icons.keyboard_outlined,
+                tooltip: 'Keyboard',
+                compact: compact,
+                onPressed: () => SmartKeyboardScreen.show(context, ref),
+              ),
               _Control(
                 icon: Icons.backspace_outlined,
                 tooltip: l10n.sentenceBackspace,

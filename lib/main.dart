@@ -229,6 +229,110 @@ class _BoardScreen extends ConsumerWidget {
           ),
           actions: [
             IconButton(
+              tooltip: 'Smart AAC Keyboard',
+              icon: const Icon(Icons.keyboard_outlined),
+              onPressed: () => SmartKeyboardScreen.show(context, ref),
+            ),
+            PopupMenuButton<String>(
+              tooltip: 'Switch Board',
+              icon: const Icon(Icons.grid_view_outlined),
+              onSelected: (targetId) async {
+                final registry = await ref.read(boardRegistryProvider.future);
+                final loaded = await registry.tryLoad(targetId);
+                if (loaded != null) {
+                  if (targetId == 'core_main') {
+                    ref.read(boardStackProvider.notifier).resetToRoot();
+                  } else {
+                    ref.read(boardStackProvider.notifier).push(loaded);
+                  }
+                }
+              },
+              itemBuilder: (ctx) => [
+                const PopupMenuItem(
+                  value: 'core_main',
+                  child: Row(
+                    children: [
+                      Icon(Icons.home_outlined, color: LhColors.brown),
+                      SizedBox(width: 8),
+                      Text('Home Core (الرئيسية)'),
+                    ],
+                  ),
+                ),
+                const PopupMenuDivider(),
+                const PopupMenuItem(
+                  value: PersonalBoardId.myFamily,
+                  child: Row(
+                    children: [
+                      Icon(Icons.family_restroom, color: LhColors.amberDeep),
+                      SizedBox(width: 8),
+                      Text('My Family (عائلتي)'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: PersonalBoardId.myFriends,
+                  child: Row(
+                    children: [
+                      Icon(Icons.people_outline, color: LhColors.amberDeep),
+                      SizedBox(width: 8),
+                      Text('My Friends (أصدقائي)'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: PersonalBoardId.myThings,
+                  child: Row(
+                    children: [
+                      Icon(Icons.backpack_outlined, color: LhColors.amberDeep),
+                      SizedBox(width: 8),
+                      Text('My Things (أشيائي)'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: PersonalBoardId.myFavoriteFood,
+                  child: Row(
+                    children: [
+                      Icon(Icons.restaurant, color: LhColors.amberDeep),
+                      SizedBox(width: 8),
+                      Text('My Favorite Food (طعامي المفضل)'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: PersonalBoardId.myPlaces,
+                  child: Row(
+                    children: [
+                      Icon(Icons.place_outlined, color: LhColors.amberDeep),
+                      SizedBox(width: 8),
+                      Text('My Places (أماكني)'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: PersonalBoardId.myActivities,
+                  child: Row(
+                    children: [
+                      Icon(Icons.sports_soccer, color: LhColors.amberDeep),
+                      SizedBox(width: 8),
+                      Text('My Activities (نشاطاتي)'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            IconButton(
+              tooltip: 'New Personal Card',
+              icon: const Icon(Icons.person_add_alt_1_outlined),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const PersonalCardEditorScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
               key: tourArrangeKey,
               tooltip: AppLocalizations.of(context).editBoardTooltip,
               icon: const Icon(Icons.dashboard_customize_outlined),
@@ -404,6 +508,16 @@ class _BoardView extends ConsumerWidget {
     WidgetRef ref,
     AACButton button,
   ) async {
+    if (button.id.startsWith('btn_add_card_')) {
+      final boardId = button.id.replaceFirst('btn_add_card_', '');
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => PersonalCardEditorScreen(initialBoardId: boardId),
+        ),
+      );
+      return;
+    }
+
     if (button.type == AACButtonType.folder) {
       await _handleFolderTap(context, ref, button);
       return;

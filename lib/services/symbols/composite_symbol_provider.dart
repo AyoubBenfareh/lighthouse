@@ -7,6 +7,7 @@ library;
 import 'package:flutter/widgets.dart';
 
 import 'asset_symbol_provider.dart';
+import 'data_uri_symbol_provider.dart';
 import 'file_symbol_provider.dart';
 import 'symbol_provider.dart';
 import 'vector_symbol_provider.dart';
@@ -15,6 +16,7 @@ class CompositeSymbolProvider implements SymbolProvider {
   CompositeSymbolProvider({List<SymbolProvider>? providers})
       : providers = providers ??
             const [
+              DataUriSymbolProvider(),
               FileSymbolProvider(),
               AssetSymbolProvider(),
               VectorSymbolProvider(),

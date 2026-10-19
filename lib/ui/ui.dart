@@ -21,4 +21,6 @@ export 'tour/tour_overlay.dart';
 export 'ai/prediction_bar.dart';
 export 'ai/text_assistant_sheet.dart';
 export 'a11y/switch_scanner.dart';
+export 'cards/personal_card_editor_screen.dart';
+export 'keyboard/smart_keyboard_screen.dart';
 export 'widgets/restart_widget.dart';

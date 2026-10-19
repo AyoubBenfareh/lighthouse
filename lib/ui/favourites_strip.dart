@@ -52,17 +52,20 @@ class FavouritesStrip extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favs = ref.watch(homeFavouritesProvider).valueOrNull ?? const [];
-    if (favs.isEmpty) return const SizedBox.shrink();
+    final personalFavs = ref.watch(favoritePersonalCardsProvider);
+    final personalButtons = personalFavs.map((c) => c.toAacButton()).toList();
+    final allFavs = [...personalButtons, ...favs];
+    if (allFavs.isEmpty) return const SizedBox.shrink();
 
     return SizedBox(
       height: height,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        itemCount: favs.length,
+        itemCount: allFavs.length,
         separatorBuilder: (_, __) => const SizedBox(width: 8),
         itemBuilder: (context, i) => _FavTile(
-          button: favs[i],
+          button: allFavs[i],
           onTap: onTap,
           onLongPress: onLongPress,
           colorKey: colorKey,

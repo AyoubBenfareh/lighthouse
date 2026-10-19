@@ -5,6 +5,7 @@ library;
 
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'symbol_provider.dart';
@@ -23,7 +24,11 @@ class FileSymbolProvider implements SymbolProvider {
 
   @override
   bool canHandle(String uri) {
-    if (uri.isEmpty || uri.startsWith('assets/') || uri.startsWith('symbol://')) {
+    if (kIsWeb) return false;
+    if (uri.isEmpty ||
+        uri.startsWith('assets/') ||
+        uri.startsWith('symbol://') ||
+        uri.startsWith('data:')) {
       return false;
     }
     return uri.startsWith('/') || uri.contains(Platform.pathSeparator);

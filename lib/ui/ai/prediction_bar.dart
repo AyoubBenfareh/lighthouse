@@ -17,6 +17,7 @@ import '../../l10n/app_localizations.dart';
 import '../../logic/ai/ai.dart';
 import '../../models/models.dart';
 import '../../state/state.dart';
+import '../keyboard/smart_keyboard_screen.dart';
 import '../theme/lighthouse_theme.dart';
 import 'text_assistant_sheet.dart';
 
@@ -46,6 +47,22 @@ class PredictionBar extends ConsumerWidget {
       limit: 4,
     );
 
+    final personalCards = ref.watch(personalCardsProvider).valueOrNull ?? const [];
+    final personalButtons = personalCards.map((c) => c.toAacButton()).toList();
+
+    final mergedCandidates = <AACButton>[];
+    for (final pb in personalButtons) {
+      if (!mergedCandidates.any((c) => c.label == pb.label)) {
+        mergedCandidates.add(pb);
+      }
+      if (mergedCandidates.length >= 2) break;
+    }
+    for (final cw in candidateWords) {
+      if (!mergedCandidates.any((c) => c.label == cw.label)) {
+        mergedCandidates.add(cw);
+      }
+    }
+
     // If 2 or more words are in the sentence bar, offer an expanded sentence candidate
     String? expandedSentence;
     if (tokens.length >= 2) {
@@ -72,6 +89,11 @@ class PredictionBar extends ConsumerWidget {
             tooltip: l10n?.aiCommunicationAssistantTooltip ??
                 'AI Communication Assistant',
             onPressed: () => TextAssistantSheet.show(context, ref, board),
+          ),
+          IconButton(
+            icon: const Icon(Icons.keyboard_outlined, color: LhColors.brown, size: 20),
+            tooltip: 'Smart AAC Keyboard',
+            onPressed: () => SmartKeyboardScreen.show(context, ref),
           ),
           const VerticalDivider(width: 8, indent: 8, endIndent: 8),
           Expanded(
@@ -108,7 +130,7 @@ class PredictionBar extends ConsumerWidget {
                   ),
                   const SizedBox(width: 8),
                 ],
-                for (final btn in candidateWords) ...[
+                for (final btn in mergedCandidates) ...[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 3),
                     child: ActionChip(
