@@ -39,15 +39,15 @@ class AboutScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/brand/lighthouse-mark.png',
+                    'assets/brand/nuritalk_emblem.png',
                     height: 96,
-                    semanticLabel: 'Lighthouse AAC',
+                    semanticLabel: 'NūriTalk',
                     errorBuilder: (context, error, stack) =>
                         const SizedBox(height: 96),
                   ),
                   const SizedBox(height: 16),
                   const Text(
-                    'Lighthouse AAC',
+                    'NūriTalk',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Atkinson Hyperlegible',
@@ -115,7 +115,7 @@ class AboutScreen extends StatelessWidget {
     if (!context.mounted) return;
     showLicensePage(
       context: context,
-      applicationName: 'Lighthouse AAC',
+      applicationName: 'NūriTalk',
       applicationVersion: info.version,
     );
   }

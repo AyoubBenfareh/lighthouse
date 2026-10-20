@@ -189,7 +189,7 @@ dev_dependencies:
 flutter_launcher_icons:
   image_path: "tools/branding/app-icon-1024.png"
   android: "ic_launcher"
-  adaptive_icon_background: "#1F3A44"
+  adaptive_icon_background: "#0A2540"
   adaptive_icon_foreground: "tools/branding/app-icon-foreground-1024.png"
   # The foreground PNG already bakes in the safe-zone padding (mark at
   # ~55% so the beam tip lands just inside the 66% circle). The package
@@ -284,3 +284,6 @@ flutter:
         - asset: assets/fonts/AtkinsonHyperlegible-BoldItalic.ttf
           weight: 700
           style: italic
+
+dependency_overrides:
+  shared_preferences_android: 2.4.1
