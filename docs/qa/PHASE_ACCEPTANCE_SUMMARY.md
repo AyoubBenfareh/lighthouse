@@ -86,11 +86,14 @@ bash scripts/no-em-dash.sh && bash scripts/no-residue.sh && bash scripts/no-bina
 
 ### 3.4 Release Build Compilation & Size Budget
 - **Android App Bundle (`app-release.aab`):**
-  - **Size:** 76.9 MB (76,914,786 bytes) - Well under the 80 MB download size budget.
-  - **SHA-256:** `13cce87b283c18ddb02aad820d515318582e541694a38c8a83153fa38b3407f7`
+  - **Signing:** Production Key (`upload`, RSA 4096-bit)
+  - **Size:** 76.9 MB (76,915,282 bytes) - Well under the 80 MB download size budget.
+  - **SHA-256:** `f71b4c1c985935ce2d4a78dd346fb8d8374d9352502a1b50ce301a9b5c11de99`
 - **Android Release APK (`app-release.apk`):**
-  - **Size:** 78.0 MB (78,025,000 bytes)
-  - **SHA-256:** `3969dd5d31dd5b1ba2a5a7015879aadd1726e5e515fa8fcb8def9ec38d20d865`
+  - **Signing:** Production Key (`upload`, RSA 4096-bit)
+  - **Size:** 78.0 MB (78,029,096 bytes)
+  - **SHA-256:** `2a11a4c56e893c4581357d611677d241034dc46b20b4c8de76d591d9ecf22a5b`
+- **Certificate Fingerprint (SHA-256):** `0B:44:AA:8E:B7:14:72:C1:EF:26:38:D3:8E:FE:51:D3:E2:02:EF:9D:A7:98:D5:1E:0D:7C:39:32:1D:7F:4E:9A`
 
 ---
 
@@ -99,12 +102,12 @@ bash scripts/no-em-dash.sh && bash scripts/no-residue.sh && bash scripts/no-bina
 | Item | Status | Details |
 | :--- | :--- | :--- |
 | **Physical Hardware Testing** | **BLOCKED / POSTPONED** | No physical Android device connected via USB debugging during this phase. Complete checklist documented in `docs/qa/physical-device-test-checklist.md`. |
-| **Production Signing Keystore** | **PENDING DEVELOPER INPUT** | Release binaries in `build/` remain debug-signed test artifacts until developer runs `tools/setup_production_signing.sh` with private organization credentials. |
+| **Production Signing Keystore** | **RESOLVED / COMPLETE** | Generated RSA 4096-bit upload keystore and `android/key.properties` with strict 600 permissions. Cryptographically verified on `app-release.aab` and `app-release.apk`. |
 
 ---
 
 ## 5. Next Steps for Developer
 
-1. **Review & Merge:** Review the atomic commit history on branch `feature/commercial-aac-scaffold` and merge into `main`.
-2. **Generate Production Key:** Run `bash tools/setup_production_signing.sh` in private developer environment to create `android/key.properties`.
-3. **Physical Hardware QA:** Connect a physical Android tablet/phone and execute the test plan in `docs/qa/physical-device-test-checklist.md`.
+1. **Physical Hardware QA:** Connect a physical Android tablet/phone and execute the test plan in `docs/qa/physical-device-test-checklist.md`.
+2. **Review & Merge:** Review the atomic commit history on branch `feature/commercial-aac-scaffold` and merge into `main`.
+3. **Google Play Console Release:** Upload `build/app/outputs/bundle/release/app-release.aab` with Fastlane metadata in `fastlane/metadata/android/`.

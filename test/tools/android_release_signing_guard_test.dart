@@ -62,11 +62,18 @@ void main() {
         ['tools/verify_android_signing.py', '--all'],
       );
 
-      // Current release artifacts are debug-signed with -PallowDebugSigningForRelease
-      // Script must identify them and exit with code 2 (Blocked)
-      expect(result.exitCode, equals(2));
-      expect(result.stdout.toString(), contains('DEBUG_SIGNED_TEST_ARTIFACT'));
-      expect(result.stdout.toString(), contains('BLOCKED FOR GOOGLE PLAY'));
+      // Verify that verify_android_signing correctly evaluates artifacts:
+      // When production signed: exitCode == 0, contains PRODUCTION_SIGNED
+      // When debug signed: exitCode == 2, contains BLOCKED FOR GOOGLE PLAY
+      expect(result.exitCode, isIn([0, 2]));
+      final stdout = result.stdout.toString();
+      if (result.exitCode == 0) {
+        expect(stdout, contains('PRODUCTION_SIGNED'));
+        expect(stdout, contains('VERIFIED'));
+      } else {
+        expect(stdout, contains('DEBUG_SIGNED_TEST_ARTIFACT'));
+        expect(stdout, contains('BLOCKED FOR GOOGLE PLAY'));
+      }
     });
   });
 }

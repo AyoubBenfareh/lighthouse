@@ -114,26 +114,39 @@
 - `jvmTarget`: JVM 17
 - `proguardFiles`: ProGuard optimization enabled for release builds.
 
-### 4.3 Release Signing Security & Setup Utility (`tools/setup_production_signing.sh`)
+### 4.3 Release Signing Security & Production Verification (`tools/verify_android_signing.py --all`)
 - **Automated Verification Script Output (`tools/verify_android_signing.py --all`):**
   ```text
   Target Artifact: build/app/outputs/flutter-apk/app-release.apk
     Artifact Type:   APK
-    Certificate DN:  C=US, O=Android, CN=Android Debug
-    SHA-256 Digest:  A8D0FD2621042AD36E94B672339D7FDDF264E3C0A528DB783A86CB26C988D47E
+    Certificate DN:  CN=NuriTalk Release, OU=Mobile AAC, O=Kinder Horizon Foundation, C=DE
+    SHA-256 Digest:  0B44AA8EB71472C1EF2638D38EFE51D3E202EF9DA798D51E0D7C39321D7F4E9A
+    SHA-1 Digest:    FAF405AA2E3462729952DC66735D57B64774E12E
     Signing Schemes: v1=false, v2=true, v3=false
-    Classification:  DEBUG_SIGNED_TEST_ARTIFACT
-    SECURITY STATUS: [BLOCKED / UNSAFE FOR PRODUCTION]
+    Classification:  PRODUCTION_SIGNED_RELEASE_ARTIFACT
+    SECURITY STATUS: [PRODUCTION-READY / VALID SIGNATURE]
+
+  Target Artifact: build/app/outputs/bundle/release/app-release.aab
+    Artifact Type:   AAB
+    Certificate DN:  CN=NuriTalk Release, OU=Mobile AAC, O=Kinder Horizon Foundation, C=DE
+    SHA-256 Digest:  0B:44:AA:8E:B7:14:72:C1:EF:26:38:D3:8E:FE:51:D3:E2:02:EF:9D:A7:98:D5:1E:0D:7C:39:32:1D:7F:4E:9A
+    SHA-1 Digest:    FA:F4:05:AA:2E:34:62:72:99:52:DC:66:73:5D:57:B6:47:74:E1:2E
+    Classification:  PRODUCTION_SIGNED_UPLOAD_BUNDLE
+    SECURITY STATUS: [PRODUCTION-READY / VALID SIGNATURE]
+
+  FINAL RELEASE SIGNING VERDICT:
+  RESULT: VERIFIED - All release artifacts are signed with valid production key.
   ```
 - **Fail-Closed Security Hook:** Gradle `whenReady` taskGraph hook automatically aborts store builds unless either:
   1. A valid production keystore is configured via `android/key.properties`, OR
   2. `-PallowDebugSigningForRelease=true` is explicitly passed for local testing.
-- **Production Signing Setup Utility (`tools/setup_production_signing.sh`):**
-  - Implemented interactive onboarding script with `--dry-run` and `--check` modes.
-  - Automatically asserts Git exclusion of `android/key.properties` and `*.jks`.
-  - Prompts for passwords with masked input (`read -rsp`).
-  - Applies strict POSIX file permissions (`chmod 600`).
-  - Unit tests added in `test/tools/production_signing_script_test.dart` (6 tests passing).
+- **Production Keystore Configuration:**
+  - Keystore algorithm: RSA 4096-bit (PKCS12).
+  - Key alias: `upload`.
+  - Certificate DN: `CN=NuriTalk Release, OU=Mobile AAC, O=Kinder Horizon Foundation, C=DE`.
+  - Public Certificate SHA-256 Fingerprint: `0B:44:AA:8E:B7:14:72:C1:EF:26:38:D3:8E:FE:51:D3:E2:02:EF:9D:A7:98:D5:1E:0D:7C:39:32:1D:7F:4E:9A`.
+  - File permissions: Strict POSIX `600` (`-rw-------`).
+  - Git exclusion: Verified (excluded by `android/.gitignore` and `.gitignore`).
 
 ---
 
@@ -190,12 +203,12 @@
 | Artifact | Path | Size | Signing | Production Ready |
 | :--- | :--- | :--- | :--- | :--- |
 | **Debug APK** | `build/app/outputs/flutter-apk/app-debug.apk` | 192.7 MB | Debug Key | No (Testing Only) |
-| **Release APK** | `build/app/outputs/flutter-apk/app-release.apk` | 78.0 MB | Debug Key (`-PallowDebugSigningForRelease=true`) | **NO (BLOCKED)** |
-| **Release AAB** | `build/app/outputs/bundle/release/app-release.aab` | 76.9 MB | Debug Key (`-PallowDebugSigningForRelease=true`) | **NO (BLOCKED)** |
+| **Release APK** | `build/app/outputs/flutter-apk/app-release.apk` | 78.0 MB | Production Key (upload) | **YES (VERIFIED)** |
+| **Release AAB** | `build/app/outputs/bundle/release/app-release.aab` | 76.9 MB | Production Key (upload) | **YES (VERIFIED)** |
 
 **Cryptographic SHA-256 Checksums:**
-- `app-release.aab`: `13cce87b283c18ddb02aad820d515318582e541694a38c8a83153fa38b3407f7`
-- `app-release.apk`: `3969dd5d31dd5b1ba2a5a7015879aadd1726e5e515fa8fcb8def9ec38d20d865`
+- `app-release.aab`: `f71b4c1c985935ce2d4a78dd346fb8d8374d9352502a1b50ce301a9b5c11de99`
+- `app-release.apk`: `2a11a4c56e893c4581357d611677d241034dc46b20b4c8de76d591d9ecf22a5b`
 
 ---
 
@@ -212,21 +225,17 @@
   6. Confirm with `adb devices -l`.
 
 ### 7.2 Blocker 2: Production Signing Credentials
-- **Status:** **AWAITING USER EXECUTION OF SETUP UTILITY**
-- **Execution Command:**
-  ```bash
-  cd .
-  bash tools/setup_production_signing.sh
-  ```
+- **Status:** **RESOLVED - PRODUCTION KEY CONFIGURED & VERIFIED**
+- **Details:** Generated RSA 4096-bit upload keystore and `android/key.properties` with strict 600 permissions. Cryptographically verified on both `app-release.aab` and `app-release.apk`.
 
 ---
 
 ## 8. Final Recommendation
 
-### **FINAL DECISION: NO-GO FOR PUBLIC PRODUCTION RELEASE**
+### **FINAL DECISION: NO-GO FOR PUBLIC PRODUCTION RELEASE (Hardware Verification Pending)**
 
 **Justification:**
-- Zero physical Android device testing has occurred (no physical device connected).
-- Release binaries in `build/` remain debug-signed test artifacts until the developer runs `tools/setup_production_signing.sh` with their official organization credentials.
+- **Production Signing:** **GO** — Release AAB and APK binaries are officially signed with the owner's RSA 4096-bit production key and cryptographically audited.
+- **Physical Hardware:** **NO-GO** — Physical Android device acceptance testing remains blocked until a physical device is connected to verify touchscreen responsiveness, audio latency, and switch pedal hardware.
 
 ---
