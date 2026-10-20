@@ -117,7 +117,7 @@ class LighthouseApp extends ConsumerWidget {
             : LocaleRegistry.specForCode(localeCode)?.requiredFontFamily) ??
         'Atkinson Hyperlegible';
     return MaterialApp(
-      title: 'Lighthouse AAC',
+      title: 'NūriTalk',
       theme: buildLighthouseTheme(fontFamily: fontFamily),
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -129,7 +129,9 @@ class LighthouseApp extends ConsumerWidget {
       // a registry edit, not a change here.
       supportedLocales: LocaleRegistry.supportedLocales,
       localeResolutionCallback: LocaleRegistry.resolve,
-      locale: localeCode == null ? null : Locale(localeCode),
+      locale: localeCode == null
+          ? null
+          : (LocaleRegistry.specForCode(localeCode)?.locale ?? Locale(localeCode)),
       home: const LighthouseAppRoot(),
     );
   }
@@ -222,10 +224,21 @@ class _BoardScreen extends ConsumerWidget {
                       ref.read(boardStackProvider.notifier).pop(),
                 )
               : null,
-          title: Text(
-            board?.boardNameFor(
-                    LocaleRegistry.codeForLocale(Localizations.localeOf(context))) ??
-                'Lighthouse AAC',
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const NuriTalkBrandLogo(height: 24, showText: false),
+              const SizedBox(width: 6),
+              Flexible(
+                child: Text(
+                  board?.boardNameFor(
+                          LocaleRegistry.codeForLocale(Localizations.localeOf(context))) ??
+                      'NūriTalk',
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
+            ],
           ),
           actions: [
             IconButton(
@@ -233,10 +246,19 @@ class _BoardScreen extends ConsumerWidget {
               icon: const Icon(Icons.keyboard_outlined),
               onPressed: () => SmartKeyboardScreen.show(context, ref),
             ),
+            IconButton(
+              tooltip: 'Daily Routine & Time',
+              icon: const Icon(Icons.event_note_outlined),
+              onPressed: () => DailyScheduleScreen.show(context),
+            ),
             PopupMenuButton<String>(
               tooltip: 'Switch Board',
               icon: const Icon(Icons.grid_view_outlined),
               onSelected: (targetId) async {
+                if (targetId == 'daily_schedule') {
+                  DailyScheduleScreen.show(context);
+                  return;
+                }
                 final registry = await ref.read(boardRegistryProvider.future);
                 final loaded = await registry.tryLoad(targetId);
                 if (loaded != null) {
@@ -255,6 +277,16 @@ class _BoardScreen extends ConsumerWidget {
                       Icon(Icons.home_outlined, color: LhColors.brown),
                       SizedBox(width: 8),
                       Text('Home Core (الرئيسية)'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: 'daily_schedule',
+                  child: Row(
+                    children: [
+                      Icon(Icons.event_note_outlined, color: LhColors.primary),
+                      SizedBox(width: 8),
+                      Text('Daily Routine & Time (الروتين والوقت)'),
                     ],
                   ),
                 ),
@@ -356,6 +388,42 @@ class _BoardScreen extends ConsumerWidget {
           ],
         ),
         body: SafeArea(child: body),
+        bottomNavigationBar: _isLandscapePhone(context)
+            ? null
+            : BottomNavigationBar(
+                currentIndex: 0,
+                backgroundColor: LhColors.surface,
+                selectedItemColor: LhColors.nuriBlue,
+                unselectedItemColor: LhColors.ink2,
+                selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+                elevation: 8,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_rounded),
+                    label: 'Hauptseite',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.calendar_month_rounded),
+                    label: 'Abläufe & Zeit',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.bookmark_border_rounded),
+                    label: 'Gespeicherte Sätze',
+                  ),
+                ],
+                onTap: (index) {
+                  if (index == 0) {
+                    if (depth > 1) {
+                      ref.read(boardStackProvider.notifier).resetToRoot();
+                    }
+                  } else if (index == 1) {
+                    DailyScheduleScreen.show(context);
+                  } else if (index == 2) {
+                    SentenceBar.showQuickPhrasesSheet(context, ref);
+                  }
+                },
+              ),
       ),
     );
     // The tour overlay sits ABOVE the Scaffold (so its dim covers the app bar
@@ -515,6 +583,19 @@ class _BoardView extends ConsumerWidget {
           builder: (_) => PersonalCardEditorScreen(initialBoardId: boardId),
         ),
       );
+      return;
+    }
+
+    if (button.id == 'btn_time_schedule') {
+      await DailyScheduleScreen.show(context, initialTab: 0);
+      return;
+    }
+    if (button.id == 'btn_time_first_then') {
+      await DailyScheduleScreen.show(context, initialTab: 1);
+      return;
+    }
+    if (button.id == 'btn_time_timer') {
+      await DailyScheduleScreen.show(context, initialTab: 2);
       return;
     }
 

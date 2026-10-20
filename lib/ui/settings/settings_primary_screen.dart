@@ -7,6 +7,7 @@
 /// two taps.
 library;
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
@@ -87,6 +88,20 @@ class SettingsPrimaryScreen extends ConsumerWidget {
               subtitle: l10n.importBoardPackSubtitle,
               trailing: LhRowTrailing.none,
               onTap: () => _importBoardPack(context, ref),
+            ),
+            LhSettingsRow(
+              icon: Icons.backup_outlined,
+              title: 'Backup Everything (النسخ الاحتياطي الكامل)',
+              subtitle: 'Export all profiles, personal cards, daily schedules, and settings',
+              trailing: LhRowTrailing.none,
+              onTap: () => _exportFullBackup(context, ref),
+            ),
+            LhSettingsRow(
+              icon: Icons.settings_backup_restore_outlined,
+              title: 'Restore Backup (استعادة النسخة الاحتياطية)',
+              subtitle: 'Restore profiles, personal cards, daily schedules, and settings from a file',
+              trailing: LhRowTrailing.none,
+              onTap: () => _importFullBackup(context, ref),
             ),
 
             LhSectionLabel(l10n.sectionHowAppBehaves),
@@ -435,6 +450,114 @@ class SettingsPrimaryScreen extends ConsumerWidget {
         try {
           await tempFile.delete();
         } catch (_) {/* best-effort */}
+      }
+    }
+  }
+
+  Future<void> _exportFullBackup(BuildContext context, WidgetRef ref) async {
+    if (!await _passesGate(context) || !context.mounted) return;
+    final box = context.findRenderObject() as RenderBox?;
+    final origin = box != null
+        ? box.localToGlobal(Offset.zero) & box.size
+        : const Rect.fromLTWH(0, 0, 100, 100);
+
+    File? tempFile;
+    try {
+      final backupService = AACBackupService(
+        profileStore: ref.read(profileStoreProvider),
+        settingsRepo: ref.read(settingsRepositoryProvider),
+        personalCardStore: ref.read(personalCardStoreProvider),
+        dailyScheduleStore: ref.read(dailyScheduleStoreProvider),
+      );
+      final bundle = await backupService.createBackupBundle();
+      final jsonStr = const JsonEncoder.withIndent('  ').convert(bundle);
+      final tempDir = Directory.systemTemp;
+      final dateStr = DateTime.now().toIso8601String().replaceAll(':', '-');
+      tempFile = File('${tempDir.path}/aac_backup_$dateStr.json');
+      await tempFile.writeAsString(jsonStr);
+
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(tempFile.path)],
+          subject: 'NūriTalk AAC Complete Backup',
+          sharePositionOrigin: origin,
+        ),
+      );
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            duration: Duration(seconds: 3),
+            content: Text('Could not create backup bundle.'),
+          ),
+        );
+      }
+    } finally {
+      if (tempFile != null && tempFile.existsSync()) {
+        try {
+          await tempFile.delete();
+        } catch (_) {}
+      }
+    }
+  }
+
+  Future<void> _importFullBackup(BuildContext context, WidgetRef ref) async {
+    if (!await _passesGate(context) || !context.mounted) return;
+    const jsonGroup = XTypeGroup(
+      label: 'AAC Backup',
+      extensions: ['json'],
+      mimeTypes: ['application/json'],
+      uniformTypeIdentifiers: ['public.json'],
+    );
+    final picked = await openFile(acceptedTypeGroups: [jsonGroup]);
+    if (!context.mounted || picked == null) return;
+
+    try {
+      final file = File(picked.path);
+      final jsonStr = await file.readAsString();
+      final bundle = jsonDecode(jsonStr);
+      if (bundle is! Map<String, dynamic>) {
+        throw const FormatException('Invalid backup JSON structure');
+      }
+
+      final backupService = AACBackupService(
+        profileStore: ref.read(profileStoreProvider),
+        settingsRepo: ref.read(settingsRepositoryProvider),
+        personalCardStore: ref.read(personalCardStoreProvider),
+        dailyScheduleStore: ref.read(dailyScheduleStoreProvider),
+      );
+      final result = await backupService.restoreBackupBundle(bundle);
+      if (!context.mounted) return;
+
+      if (result.success) {
+        ref.invalidate(profileListProvider);
+        ref.invalidate(activeProfileProvider);
+        ref.invalidate(personalCardsProvider);
+        ref.invalidate(dailyScheduleProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 4),
+            content: Text(
+              'Backup restored: ${result.profilesRestored} profiles, ${result.cardsRestored} cards, ${result.schedulesRestored} routines.',
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 4),
+            content: Text(result.errorMessage ?? 'Restore failed.'),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 3),
+            content: Text('Could not restore backup: $e'),
+          ),
+        );
       }
     }
   }
