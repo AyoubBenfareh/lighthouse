@@ -29,7 +29,7 @@ void main() {
       final result = Process.runSync('bash', [scriptPath, '--help']);
       expect(result.exitCode, equals(0));
       final out = result.stdout.toString();
-      expect(out, contains('NūriTalk — Android Production Signing Setup Utility'));
+      expect(out, contains('NūriTalk - Android Production Signing Setup Utility'));
       expect(out, contains('--dry-run'));
       expect(out, contains('--check'));
       expect(out, contains('SECURITY GUARANTEES:'));

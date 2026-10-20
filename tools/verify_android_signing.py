@@ -13,6 +13,7 @@ Usage:
 import argparse
 import os
 import re
+import shutil
 import subprocess
 import sys
 
@@ -25,24 +26,36 @@ KNOWN_DEBUG_SHA256 = "A8:D0:FD:26:21:04:2A:D3:6E:94:B6:72:33:9D:7F:DD:F2:64:E3:C
 
 def find_apksigner():
     """Finds apksigner binary from Android SDK or PATH."""
-    android_sdk = os.environ.get("ANDROID_HOME") or os.environ.get("ANDROID_SDK_ROOT") or "/home/ayoubbenfareh/android-sdk"
-    build_tools_dir = os.path.join(android_sdk, "build-tools")
-    if os.path.isdir(build_tools_dir):
-        versions = sorted(os.listdir(build_tools_dir), reverse=True)
-        for v in versions:
-            candidate = os.path.join(build_tools_dir, v, "apksigner")
-            if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
-                return candidate
-    return "apksigner"
+    candidate_sdk = os.environ.get("ANDROID_HOME") or os.environ.get("ANDROID_SDK_ROOT")
+    if not candidate_sdk:
+        home = os.environ.get("HOME")
+        if home and os.path.isdir(os.path.join(home, "android-sdk")):
+            candidate_sdk = os.path.join(home, "android-sdk")
+    if candidate_sdk:
+        build_tools_dir = os.path.join(candidate_sdk, "build-tools")
+        if os.path.isdir(build_tools_dir):
+            versions = sorted(os.listdir(build_tools_dir), reverse=True)
+            for v in versions:
+                candidate = os.path.join(build_tools_dir, v, "apksigner")
+                if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+                    return candidate
+    return shutil.which("apksigner") or "apksigner"
 
 
 def find_keytool():
     """Finds keytool from JDK or PATH."""
-    jdk_dir = os.environ.get("JAVA_HOME") or "/home/ayoubbenfareh/.jdk/jdk-21.0.12.1+1"
-    candidate = os.path.join(jdk_dir, "bin", "keytool")
-    if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
-        return candidate
-    return "keytool"
+    jdk_dir = os.environ.get("JAVA_HOME")
+    if not jdk_dir:
+        home = os.environ.get("HOME")
+        if home:
+            fallback = os.path.join(home, ".jdk", "jdk-21.0.12.1+1")
+            if os.path.isdir(fallback):
+                jdk_dir = fallback
+    if jdk_dir:
+        candidate = os.path.join(jdk_dir, "bin", "keytool")
+        if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+            return candidate
+    return shutil.which("keytool") or "keytool"
 
 
 def inspect_apk(apk_path, apksigner_cmd):

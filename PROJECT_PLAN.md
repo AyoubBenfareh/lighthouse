@@ -22,7 +22,7 @@ An in-depth technical, architectural, and legal evaluation was conducted across 
 | **Arabic & RTL Support** | **Production-ready**: `Directionality`, Cairo OFL font, PositionedDirectional layout tests | None (English only) | None (English only) | Extensive translations (`ar-SA`, `ar-EG`), RTL CSS | None (English only) |
 | **German Support** | Architecture-ready via `LocaleRegistry` | None | None | Extensive translations (`de-DE`) | None |
 | **TTS Strategy** | **Multi-tier composite**: Bundled clips + System TTS + Piper stub | System TTS (`flutter_tts`) | System TTS (`flutter_tts`) | System / Web Speech API | Native TTS (`expo-speech`) |
-| **Prediction / AI** | On-device Contextual Bandit (Thompson Sampling, Beta-Gamma) | Drift SQLite Bigram weights | Hardcoded English rule heuristics | Web search / predictive phrases | Cloud Anthropic API (requires paid key) + offline bigram |
+| **Prediction / AI** | On-device Contextual Bandit (Thompson Sampling, Beta-Gamma) | Drift SQLite Bigram weights | Hardcoded English rule heuristics | Web search / predictive phrases | Cloud LLM API (requires paid key) + offline bigram |
 | **Motor Planning Stability** | **Absolute**: Grid coordinates frozen; uses visual "glow" | Core design principle, but adds prediction strip | Basic static grid | Configurable grid | Static grid + prediction strip |
 | **Asset Licensing Status** | Bundled ARASAAC (`CC BY-NC-SA 4.0`), Cairo/Atkinson (`OFL`) | ARASAAC via online API | Missing asset commit | Crowdsourced & ARASAAC | Static vector symbols |
 | **Commercial Viability** | **High** (MIT code; requires asset swap/isolation) | **Incompatible** (GPL-3.0 copyleft) | **Incompatible** (Unlicensed) | **Incompatible** (GPL-3.0 copyleft) | **High** (MIT code; RN stack) |
@@ -65,7 +65,7 @@ To maintain strict commercial viability and prevent copyright contamination, fea
 │ (GPL-3.0 - NO CODE COPY)│     │ (Unlicensed - NO COPY)  │     │ (MIT - Reference/Port)  │
 │ - Multi-child profiles  │     │ - Telegraphic Phrase    │     │ - Cold-start AAC bigram │
 │ - OBF (Open Board) I/O  │     │   Expansion heuristics  │     │   vocabulary matrices   │
-│ - Switch-access scanning│     │ - Arabic/German/English │     │ - Claude prompt schema  │
+│ - Switch-access scanning│     │ - Arabic/German/English │     │ - LLM prompt schema     │
 │ - Bigram frequency DB   │     │   syntactic engines     │     │   adapted to Local SLM  │
 └─────────────────────────┘     └─────────────────────────┘     └─────────────────────────┘
 ```

@@ -1,12 +1,12 @@
 # ACC2 / NūriTalk — Comprehensive Quality Assurance & Pre-Flight Audit Report
 
-**Project:** `/home/ayoubbenfareh/Projects/ACC2`  
+**Project:** `.`  
 **Date:** October 19, 2026  
 **Auditor:** Lead Flutter Engineer & AAC Accessibility Specialist  
 **Build Status:** Clean Debug APK Built (`193 MB`)  
 **Automated Test Suite:** **747 / 747 Passed (100% Pass Rate, 0 Failures, 0 Errors)**  
 **Static Code Analysis:** **0 Errors, 0 Warnings** (`flutter analyze --no-fatal-infos`)  
-**APK Output Location:** [`/home/ayoubbenfareh/Projects/ACC2/build/app/outputs/flutter-apk/app-debug.apk`](file:///home/ayoubbenfareh/Projects/ACC2/build/app/outputs/flutter-apk/app-debug.apk)
+**APK Output Location:** [`./build/app/outputs/flutter-apk/app-debug.apk`](file://./build/app/outputs/flutter-apk/app-debug.apk)
 
 ---
 
@@ -71,7 +71,7 @@ During the QA audit, three functional defects and architectural inconsistencies 
    - Smart keyboard touch keys: $\ge 44 \times 44\text{ dp}$.
 2. **Switch Access Support:**
    - Single-switch and dual-switch scanning paradigms (`AccessMethod.switchSingle` / `AccessMethod.switchDual`) render high-contrast $3.5\text{px}$ amber borders around focused tiles.
-   - Verified via [`test/ui/switch_access_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/ui/switch_access_test.dart).
+   - Verified via [`test/ui/switch_access_test.dart`](file://./test/ui/switch_access_test.dart).
 3. **Screen Reader (TalkBack) Semantics:**
    - Every interactive icon button features explicit `tooltip` and semantic label attributes.
    - Visual schedule activities announce category, completion state, and scheduled time.
@@ -91,7 +91,7 @@ During the QA audit, three functional defects and architectural inconsistencies 
 
 ## 6. Automated Test Results
 
-The full test suite was executed via `/home/ayoubbenfareh/flutter/bin/flutter test --reporter=compact`:
+The full test suite was executed via `flutter test --reporter=compact`:
 
 ```
 ========================================================================
@@ -106,11 +106,11 @@ Runtime: 25.4 seconds
 
 ### Key Test Coverage Highlights
 
-- [`test/ui/e2e_communication_qa_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/ui/e2e_communication_qa_test.dart) — Full E2E QA communication flow, schedule expressions, First/Then, timer, multilingual resolution, and backup round-trip.
-- [`test/services/board_backup_restore_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/services/board_backup_restore_test.dart) — AACBackupService backup bundle serialization and deserialization across cards, routines, profiles, and settings.
-- [`test/rtl_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/rtl_test.dart) & [`test/darija_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/darija_test.dart) — Arabic and Algerian Darija RTL layout, directional badges, and Cairo font resolution.
-- [`test/ui/switch_access_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/ui/switch_access_test.dart) — Switch navigation scanning and focus borders.
-- [`test/audio/clip_coverage_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/audio/clip_coverage_test.dart) — Audio clip coverage for bundled core vocabulary (ADR 0004).
+- [`test/ui/e2e_communication_qa_test.dart`](file://./test/ui/e2e_communication_qa_test.dart) — Full E2E QA communication flow, schedule expressions, First/Then, timer, multilingual resolution, and backup round-trip.
+- [`test/services/board_backup_restore_test.dart`](file://./test/services/board_backup_restore_test.dart) — AACBackupService backup bundle serialization and deserialization across cards, routines, profiles, and settings.
+- [`test/rtl_test.dart`](file://./test/rtl_test.dart) & [`test/darija_test.dart`](file://./test/darija_test.dart) — Arabic and Algerian Darija RTL layout, directional badges, and Cairo font resolution.
+- [`test/ui/switch_access_test.dart`](file://./test/ui/switch_access_test.dart) — Switch navigation scanning and focus borders.
+- [`test/audio/clip_coverage_test.dart`](file://./test/audio/clip_coverage_test.dart) — Audio clip coverage for bundled core vocabulary (ADR 0004).
 
 ---
 
@@ -134,23 +134,23 @@ Because this audit was executed in a headless Linux workstation environment with
 ### A. Deploy to Physical Android Device via ADB
 ```bash
 # 1. Connect physical device with USB debugging enabled
-/home/ayoubbenfareh/android-sdk/platform-tools/adb devices
+adb devices
 
 # 2. Install the debug APK
-/home/ayoubbenfareh/android-sdk/platform-tools/adb install -r /home/ayoubbenfareh/Projects/ACC2/build/app/outputs/flutter-apk/app-debug.apk
+adb install -r ./build/app/outputs/flutter-apk/app-debug.apk
 
 # 3. Launch the app directly on the device
-/home/ayoubbenfareh/android-sdk/platform-tools/adb shell am start -n com.lighthouse.aac/com.lighthouse.aac.MainActivity
+adb shell am start -n com.lighthouse.aac/com.lighthouse.aac.MainActivity
 ```
 
 ### B. Run the App via Flutter CLI
 ```bash
-cd /home/ayoubbenfareh/Projects/ACC2
-/home/ayoubbenfareh/flutter/bin/flutter run -d <device-id>
+cd .
+flutter run -d <device-id>
 ```
 
 ### C. Run the Complete Test Suite
 ```bash
-cd /home/ayoubbenfareh/Projects/ACC2
-/home/ayoubbenfareh/flutter/bin/flutter test --reporter=compact
+cd .
+flutter test --reporter=compact
 ```

@@ -1,4 +1,4 @@
-# NūriTalk / ACC2 — Android Physical-Device Validation Checklist
+# NūriTalk / ACC2  -  Android Physical-Device Validation Checklist
 
 **Document Version:** 1.0.0  
 **Date:** October 19, 2026  
@@ -13,14 +13,14 @@
 ## Instructions for Caregivers, Clinicians & QA Testers
 
 This checklist must be executed on real physical Android hardware (minimum 1 tablet and 1 smartphone). Do not execute these tests in a headless emulator. Mark each test item with:
-- **PASS** — Verified with evidence on physical device.
-- **FAIL** — Defect observed (record device model, Android OS version, and exact repro steps).
-- **BLOCKED** — Missing hardware requirement (e.g. physical switch pedals).
-- **NOT TESTED** — Verification pending.
+- **PASS**  -  Verified with evidence on physical device.
+- **FAIL**  -  Defect observed (record device model, Android OS version, and exact repro steps).
+- **BLOCKED**  -  Missing hardware requirement (e.g. physical switch pedals).
+- **NOT TESTED**  -  Verification pending.
 
 ---
 
-## Phase 1 — Android Build, Installation & Permissions
+## Phase 1  -  Android Build, Installation & Permissions
 
 | Test ID | Test Case | Target Requirement | Status | Device & Notes |
 | :--- | :--- | :--- | :---: | :--- |
@@ -31,7 +31,7 @@ This checklist must be executed on real physical Android hardware (minimum 1 tab
 
 ---
 
-## Phase 2 — AAC Communication & Motor-Planning Validation
+## Phase 2  -  AAC Communication & Motor-Planning Validation
 
 | Test ID | Test Case | Target Requirement | Status | Device & Notes |
 | :--- | :--- | :--- | :---: | :--- |
@@ -47,7 +47,7 @@ This checklist must be executed on real physical Android hardware (minimum 1 tab
 
 ---
 
-## Phase 3 — Multilingual Validation (Arabic, Darija, German, English)
+## Phase 3  -  Multilingual Validation (Arabic, Darija, German, English)
 
 | Test ID | Test Case | Target Requirement | Status | Device & Notes |
 | :--- | :--- | :--- | :---: | :--- |
@@ -61,7 +61,7 @@ This checklist must be executed on real physical Android hardware (minimum 1 tab
 
 ---
 
-## Phase 4 — Accessibility, WCAG Compliance & Assistive Tech
+## Phase 4  -  Accessibility, WCAG Compliance & Assistive Tech
 
 > [!NOTE]
 > **WCAG Criteria Distinction:**
@@ -78,11 +78,11 @@ This checklist must be executed on real physical Android hardware (minimum 1 tab
 | **PHY-25** | **Physical Bluetooth HID Switch** | Connect Ablenet Blue2 or Pretorian Bluetooth pedal; verify key events (Space/Enter/1/2) trigger scan steps. | **BLOCKED** | Physical switch hardware required. |
 | **PHY-26** | **High-Contrast Theme** | Activating high-contrast setting renders pure black high-contrast outlines and maximum-contrast text. | **PASS** | Verified in `profiles_screen_test.dart`. |
 | **PHY-27** | **Reduced Motion** | Enabling Android "Remove animations" disables pulse glows and smooth timer animations safely. | **PASS** | Adheres to `MediaQuery.disableAnimations`. |
-| **PHY-28** | **Display Scaling & Font Size** | Setting Android system font size to Largest (130%–150%) does not clip button labels or break grid layout. | **NOT TESTED** | Physical device settings adjustment required. |
+| **PHY-28** | **Display Scaling & Font Size** | Setting Android system font size to Largest (130%-150%) does not clip button labels or break grid layout. | **NOT TESTED** | Physical device settings adjustment required. |
 
 ---
 
-## Phase 5 — Daily Routines, Timers & Caregiver Features
+## Phase 5  -  Daily Routines, Timers & Caregiver Features
 
 | Test ID | Test Case | Target Requirement | Status | Device & Notes |
 | :--- | :--- | :--- | :---: | :--- |
@@ -97,7 +97,7 @@ This checklist must be executed on real physical Android hardware (minimum 1 tab
 
 ---
 
-## Phase 6 — Offline Safety, Privacy & Resilience
+## Phase 6  -  Offline Safety, Privacy & Resilience
 
 | Test ID | Test Case | Target Requirement | Status | Device & Notes |
 | :--- | :--- | :--- | :---: | :--- |
@@ -109,7 +109,7 @@ This checklist must be executed on real physical Android hardware (minimum 1 tab
 
 ---
 
-## Phase 7 — Performance Benchmarking Plan
+## Phase 7  -  Performance Benchmarking Plan
 
 | Benchmark Metric | Target Threshold | Measurement Tool | Physical Device Result |
 | :--- | :--- | :--- | :---: |

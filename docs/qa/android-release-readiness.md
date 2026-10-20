@@ -1,6 +1,6 @@
-# NūriTalk / ACC2 — Android Release Readiness Report
+# NūriTalk / ACC2  -  Android Release Readiness Report
 
-**Project:** `/home/ayoubbenfareh/Projects/ACC2`  
+**Project:** `.`  
 **Date:** October 19, 2026  
 **Auditor / Lead Engineer:** Senior Flutter Engineer & AAC Accessibility Specialist  
 **Application ID:** `org.kinderhorizon.lighthouse`  
@@ -15,7 +15,7 @@ This report establishes the technical quality, accessibility compliance, and rel
 
 All automated verification gates have succeeded with a **100% pass rate across 747 unit, service, widget, and integration tests**. Both standalone APK binaries and a production-grade Android App Bundle have been compiled and verified on disk.
 
-In adherence to communication safety and QA integrity standards, **no physical-device testing has been fabricated**. Because no physical Android hardware was connected to the development host workstation during this session, hardware digitizer latency, real-world acoustic speech clarity, and physical Bluetooth HID switch pedals are explicitly documented as **NOT TESTED** or **BLOCKED**, accompanied by an actionable physical validation checklist in [`docs/qa/physical-device-test-checklist.md`](file:///home/ayoubbenfareh/Projects/ACC2/docs/qa/physical-device-test-checklist.md).
+In adherence to communication safety and QA integrity standards, **no physical-device testing has been fabricated**. Because no physical Android hardware was connected to the development host workstation during this session, hardware digitizer latency, real-world acoustic speech clarity, and physical Bluetooth HID switch pedals are explicitly documented as **NOT TESTED** or **BLOCKED**, accompanied by an actionable physical validation checklist in [`docs/qa/physical-device-test-checklist.md`](file://./docs/qa/physical-device-test-checklist.md).
 
 ---
 
@@ -61,30 +61,30 @@ Result: 751 / 751 passed (100% pass rate, 0 failures, 0 errors, 25.1s runtime)
 
 ### Key Automated Verification Suites
 
-1. **End-to-End AAC QA & Daily Schedules:** [`test/ui/e2e_communication_qa_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/ui/e2e_communication_qa_test.dart)
+1. **End-to-End AAC QA & Daily Schedules:** [`test/ui/e2e_communication_qa_test.dart`](file://./test/ui/e2e_communication_qa_test.dart)
    - Daily schedule activity selection and one-tap intent expressions committed to Sentence Bar.
    - First/Then board pairs current activity with upcoming reward and generates spoken audio transition cues.
    - Visual countdown timer runs, pauses, resets, and displays accessible preset choices.
    - Multilingual text directionality and Cairo font typography verified for Arabic and Algerian Darija.
-2. **Complete Backup & Restore Round-Trip:** [`test/services/board_backup_restore_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/services/board_backup_restore_test.dart)
+2. **Complete Backup & Restore Round-Trip:** [`test/services/board_backup_restore_test.dart`](file://./test/services/board_backup_restore_test.dart)
    - Verifies serialization and deserialization of all child profiles, personal photo cards, daily routines, and access settings.
    - Handles corrupted or malformed JSON bundles gracefully without crashing.
-3. **Arabic & Algerian Darija RTL Rendering:** [`test/rtl_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/rtl_test.dart) & [`test/darija_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/darija_test.dart)
+3. **Arabic & Algerian Darija RTL Rendering:** [`test/rtl_test.dart`](file://./test/rtl_test.dart) & [`test/darija_test.dart`](file://./test/darija_test.dart)
    - Asserts correct `TextDirection.rtl` propagation throughout the widget hierarchy.
    - Verifies that directional badges and folders mirror appropriately without flipping Latin brand wordmarks.
-4. **Switch Accessibility & Focus Styling:** [`test/ui/switch_access_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/ui/switch_access_test.dart)
+4. **Switch Accessibility & Focus Styling:** [`test/ui/switch_access_test.dart`](file://./test/ui/switch_access_test.dart)
    - Single-switch and dual-switch navigation engines verified with $3.5\text{px}$ amber focus borders.
-5. **ADR 0004 Audio Manifest & Core Clip Coverage:** [`test/audio/clip_coverage_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/audio/clip_coverage_test.dart)
+5. **ADR 0004 Audio Manifest & Core Clip Coverage:** [`test/audio/clip_coverage_test.dart`](file://./test/audio/clip_coverage_test.dart)
    - Every core vocabulary button contains a verified pre-rendered audio asset to guarantee instant offline speech.
 
 ---
 
 ## 4. Device Detection Results
 
-- **Command Executed:** `/home/ayoubbenfareh/android-sdk/platform-tools/adb devices`
+- **Command Executed:** `adb devices`
 - **Output:** `List of devices attached` (Empty)
 - **Status:** **BLOCKED (No physical Android hardware attached via USB or Wi-Fi)**
-- **Audit Decision:** In compliance with rule 6 and safety requirements, **no physical-device testing has been fabricated**. All hardware-dependent checks are designated as **NOT TESTED** and scheduled for manual tester sign-off using [`docs/qa/physical-device-test-checklist.md`](file:///home/ayoubbenfareh/Projects/ACC2/docs/qa/physical-device-test-checklist.md).
+- **Audit Decision:** In compliance with rule 6 and safety requirements, **no physical-device testing has been fabricated**. All hardware-dependent checks are designated as **NOT TESTED** and scheduled for manual tester sign-off using [`docs/qa/physical-device-test-checklist.md`](file://./docs/qa/physical-device-test-checklist.md).
 
 ---
 
@@ -209,13 +209,13 @@ For testers, clinicians, and families installing the Release Candidate directly 
 ```bash
 # 1. Enable USB Debugging in Android Developer Options on device
 # 2. Verify connection
-/home/ayoubbenfareh/android-sdk/platform-tools/adb devices
+adb devices
 
 # 3. Install the release APK directly
-/home/ayoubbenfareh/android-sdk/platform-tools/adb install -r /home/ayoubbenfareh/Projects/ACC2/build/app/outputs/flutter-apk/app-release.apk
+adb install -r ./build/app/outputs/flutter-apk/app-release.apk
 
 # 4. Launch the application
-/home/ayoubbenfareh/android-sdk/platform-tools/adb shell am start -n org.kinderhorizon.lighthouse/com.lighthouse.aac.MainActivity
+adb shell am start -n org.kinderhorizon.lighthouse/com.lighthouse.aac.MainActivity
 ```
 
 ### Option B: Sideload via USB / Google Drive / Local Storage
@@ -234,6 +234,6 @@ For testers, clinicians, and families installing the Release Candidate directly 
 - **Technical Readiness:** **READY (100%)**
   - Clean compile, 0 analysis errors, 747/747 automated tests passing, release APK (72 MB) and release AAB (71 MB) verified on disk.
 - **Physical Verification:** **CONDITIONAL ON HARDWARE SIGN-OFF**
-  - Requires physical execution of [`docs/qa/physical-device-test-checklist.md`](file:///home/ayoubbenfareh/Projects/ACC2/docs/qa/physical-device-test-checklist.md) on at least one physical tablet and one physical smartphone before general release.
+  - Requires physical execution of [`docs/qa/physical-device-test-checklist.md`](file://./docs/qa/physical-device-test-checklist.md) on at least one physical tablet and one physical smartphone before general release.
 - **Production Distribution:** **BLOCKED ON PRODUCTION KEYSTORE**
   - Production `.jks` required for public Google Play Store upload.

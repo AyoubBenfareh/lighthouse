@@ -1,4 +1,4 @@
-# NūriTalk / ACC2 — Android Release Blockers & Pre-Flight Conditions
+# NūriTalk / ACC2  -  Android Release Blockers & Pre-Flight Conditions
 
 **Document Version:** 1.0.0  
 **Date:** October 19, 2026  

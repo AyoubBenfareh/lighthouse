@@ -1,6 +1,6 @@
 # NūriTalk / ACC2 — Phase B: Autonomous Flutter Integration & Production Readiness Report
 
-**Project:** `/home/ayoubbenfareh/Projects/ACC2`  
+**Project:** `.`  
 **Execution Mode:** Fully Autonomous  
 **Date:** October 19, 2026  
 **Status:** **COMPLETE & PRODUCTION-READY**  
@@ -11,7 +11,7 @@
 
 ## Executive Summary
 
-Phase B transforms NūriTalk from a standalone interactive web/HTML demonstration into a fully integrated, accessible, offline-first production AAC application directly within the Flutter codebase (`/home/ayoubbenfareh/Projects/ACC2`). 
+Phase B transforms NūriTalk from a standalone interactive web/HTML demonstration into a fully integrated, accessible, offline-first production AAC application directly within the Flutter codebase (`.`). 
 
 All required modules have been engineered, integrated with existing state management (Riverpod) and theme systems (`LighthouseTheme`), covered by automated unit, service, and widget test suites, and packaged into a deployable Android binary.
 
@@ -141,22 +141,22 @@ flutter test --reporter=compact
 1. **Deploying to an Android Device via USB / Wi-Fi**:
    ```bash
    # Ensure developer options and USB debugging are enabled
-   /home/ayoubbenfareh/android-sdk/platform-tools/adb devices
+   adb devices
    
    # Install the compiled debug APK directly
-   /home/ayoubbenfareh/android-sdk/platform-tools/adb install -r build/app/outputs/flutter-apk/app-debug.apk
+   adb install -r build/app/outputs/flutter-apk/app-debug.apk
    ```
 
 2. **Running via Flutter Toolchain**:
    ```bash
-   cd /home/ayoubbenfareh/Projects/ACC2
-   /home/ayoubbenfareh/flutter/bin/flutter run -d <device-id>
+   cd .
+   flutter run -d <device-id>
    ```
 
 3. **Running the Automated Test Suite**:
    ```bash
-   cd /home/ayoubbenfareh/Projects/ACC2
-   /home/ayoubbenfareh/flutter/bin/flutter test
+   cd .
+   flutter test
    ```
 
 ---

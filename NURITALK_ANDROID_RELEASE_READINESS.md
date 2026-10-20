@@ -14,7 +14,7 @@
 
 ### 1.1 Hardware Scan & ADB Subsystem Audit
 - **Timestamp:** 2026-10-20T17:56:45+02:00
-- **ADB Query:** `/home/ayoubbenfareh/android-sdk/platform-tools/adb devices -l`
+- **ADB Query:** `adb devices -l`
   - Output: `List of devices attached` (Empty)
 - **USB Bus Scan (`lsusb`):**
   - Bus 001: Genesys Logic Hub, C-Media Audio, Wireless Adapter, Mystic Light
@@ -141,7 +141,7 @@
 
 ### Bug #1: Date-Boundary Schedule Persistence Bug in Backup/Restore
 - **Symptom:** On date rollover (Oct 19 to Oct 20), `loadSchedule` defaulted to today's date (`2026-10-20`). When restoring schedules, if today's date had not been explicitly saved yet, `DailyScheduleStore` overwrote user routines with the factory starter schedule.
-- **Fix Applied:** Updated `DailyScheduleStore.loadSchedule` in [`daily_schedule_store.dart`](file:///home/ayoubbenfareh/Projects/ACC2/lib/services/schedule/daily_schedule_store.dart#L730-L770) to safely fall back to the most recently saved schedule when no explicit date is requested.
+- **Fix Applied:** Updated `DailyScheduleStore.loadSchedule` in [`daily_schedule_store.dart`](file://./lib/services/schedule/daily_schedule_store.dart#L730-L770) to safely fall back to the most recently saved schedule when no explicit date is requested.
 - **Verification:** Both `board_backup_restore_test.dart` and `e2e_communication_qa_test.dart` pass cleanly.
 
 ### Hardening #2: Offline Backup & Data Persistence Resilience Audit
@@ -151,27 +151,27 @@
   3. *Missing/Unknown Category Mappings:* `PersonalCardCategory.normalize` and `ScheduleActivityCategory.normalize` map null, empty, or unknown categories safely to `custom`/`routine`.
   4. *Oversized Image Protection:* Enforced 5 MB maximum attachment limits on `saveCardImage` and sanitized massive inline base64 URIs to prevent OutOfMemory crashes.
   5. *Self-Healing Storage:* When corrupted JSON files are detected on disk, `DailyScheduleStore` and `PersonalCardStore` archive the corrupted file with a `.corrupt_<timestamp>` suffix and safely seed healthy starter defaults.
-- **Verification:** 14/14 tests in [`board_backup_restore_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/services/board_backup_restore_test.dart) pass cleanly.
+- **Verification:** 14/14 tests in [`board_backup_restore_test.dart`](file://./test/services/board_backup_restore_test.dart) pass cleanly.
 
 ### Hardening #3: Switch Scanning & TalkBack Accessibility Audit
 - **Accessibility Improvements:**
-  1. *Touch Targets:* Enhanced action buttons across [`DailyScheduleScreen`](file:///home/ayoubbenfareh/Projects/ACC2/lib/ui/schedule/daily_schedule_screen.dart) and [`ManageElementsScreen`](file:///home/ayoubbenfareh/Projects/ACC2/lib/ui/schedule/manage_elements_screen.dart) to enforce a minimum touch target constraint of $\ge 48\times 48\,\text{dp}$ in accordance with WCAG 2.1 AA and Android Accessibility guidelines.
+  1. *Touch Targets:* Enhanced action buttons across [`DailyScheduleScreen`](file://./lib/ui/schedule/daily_schedule_screen.dart) and [`ManageElementsScreen`](file://./lib/ui/schedule/manage_elements_screen.dart) to enforce a minimum touch target constraint of $\ge 48\times 48\,\text{dp}$ in accordance with WCAG 2.1 AA and Android Accessibility guidelines.
   2. *TalkBack / Screen Reader Semantics:* Added explicit `Semantics` wrappers with clean announcements (`excludeSemantics: true` where appropriate) on keyboard special keys (Shift, Space, Backspace, 123/ABC), predictive candidate chips, schedule activities, and routine toggle switches.
   3. *Switch Scanning Invariants:* Verified single-switch automatic dwell timer and dual-switch manual step-and-select operations across the interface.
-- **Verification:** 4/4 tests in [`test/ui/accessibility_switch_scanning_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/ui/accessibility_switch_scanning_test.dart) pass cleanly.
+- **Verification:** 4/4 tests in [`test/ui/accessibility_switch_scanning_test.dart`](file://./test/ui/accessibility_switch_scanning_test.dart) pass cleanly.
 
 ### Hardening #4: ProGuard / R8 Native Plugin & Asset Integrity Audit
 - **Optimizations Verified:**
-  1. *JNI / Reflection Retention:* Configured comprehensive rules in [`android/app/proguard-rules.pro`](file:///home/ayoubbenfareh/Projects/ACC2/android/app/proguard-rules.pro) preserving `flutter_tts`, `isar_community` C++ bindings, `just_audio`, `record`, and Kotlin coroutine reflection attributes.
+  1. *JNI / Reflection Retention:* Configured comprehensive rules in [`android/app/proguard-rules.pro`](file://./android/app/proguard-rules.pro) preserving `flutter_tts`, `isar_community` C++ bindings, `just_audio`, `record`, and Kotlin coroutine reflection attributes.
   2. *Symbol Asset Manifest Coverage:* Verified `assets/symbols/manifest.json` against all 48-tile core grids and supplementary activities (0 missing or orphaned symbol files, 100% SHA-256 match).
-- **Verification:** [`test/tools/android_proguard_rules_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/tools/android_proguard_rules_test.dart) and [`test/assets/manifest_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/assets/manifest_test.dart) pass cleanly.
+- **Verification:** [`test/tools/android_proguard_rules_test.dart`](file://./test/tools/android_proguard_rules_test.dart) and [`test/assets/manifest_test.dart`](file://./test/assets/manifest_test.dart) pass cleanly.
 
 ### Hardening #5: Offline Open-Source Licensing & Attribution Audit
 - **Legal & Attribution Compliance:**
-  1. *LicenseRegistry Bundling:* Verified that non-package licenses (`Atkinson Hyperlegible`, `Cairo`, `Open AAC Symbols (Apache-2.0)`, and `Google Cloud Text-to-Speech`) are registered at startup via [`registerBundledLicenses()`](file:///home/ayoubbenfareh/Projects/ACC2/lib/config/licenses.dart) and loaded entirely from offline assets.
+  1. *LicenseRegistry Bundling:* Verified that non-package licenses (`Atkinson Hyperlegible`, `Cairo`, `Open AAC Symbols (Apache-2.0)`, and `Google Cloud Text-to-Speech`) are registered at startup via [`registerBundledLicenses()`](file://./lib/config/licenses.dart) and loaded entirely from offline assets.
   2. *Commercial & Free Use Terms:* Confirmed that all symbols in `assets/symbols/` are licensed under Apache 2.0 with zero Non-Commercial (NC) restrictions, ensuring unrestricted distribution.
   3. *In-App Presentation:* Harmonized `AboutScreen` and `showLicensePage` to display the official application title `NūriTalk` with the approved emblem.
-- **Verification:** [`test/config/licenses_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/config/licenses_test.dart) and [`test/ui/settings/about_screen_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/ui/settings/about_screen_test.dart) pass cleanly.
+- **Verification:** [`test/config/licenses_test.dart`](file://./test/config/licenses_test.dart) and [`test/ui/settings/about_screen_test.dart`](file://./test/ui/settings/about_screen_test.dart) pass cleanly.
 
 ### Hardening #6: Multilingual Speech Synthesis (TTS) & Dialect Fallback Audit
 - **Speech Engine Reliability:**
@@ -181,7 +181,7 @@
   4. *Parameter Bounds Clamping:* Enforced strict safety clamping on volume ($[0.0, 1.0]$), speech rate ($[0.1, 2.0]$), and pitch ($[0.5, 2.0]$).
   5. *Fault-Tolerant Platform Channels:* Hardened `SystemTTSEngine` initialization, `speak`, `stop`, and `dispose` with comprehensive try/catch guards, preventing app crashes if system audio services are disconnected or fail.
   6. *Composite Engine Supersession:* Verified `FallbackTTSEngine` monotonic generation tokens, ensuring in-flight sequence playback immediately cancels when interrupted by subsequent child taps or stop events.
-- **Verification:** 8/8 tests in [`test/services/tts/multilingual_tts_verification_test.dart`](file:///home/ayoubbenfareh/Projects/ACC2/test/services/tts/multilingual_tts_verification_test.dart) pass cleanly.
+- **Verification:** 8/8 tests in [`test/services/tts/multilingual_tts_verification_test.dart`](file://./test/services/tts/multilingual_tts_verification_test.dart) pass cleanly.
 
 ---
 
@@ -209,13 +209,13 @@
   3. Go to **Settings > System > Developer Options** and enable **USB Debugging**.
   4. Connect the device to your PC with a USB cable.
   5. When prompted on the device screen (*"Allow USB debugging?"*), check *"Always allow from this computer"* and tap **Allow**.
-  6. Confirm with `/home/ayoubbenfareh/android-sdk/platform-tools/adb devices -l`.
+  6. Confirm with `adb devices -l`.
 
 ### 7.2 Blocker 2: Production Signing Credentials
 - **Status:** **AWAITING USER EXECUTION OF SETUP UTILITY**
 - **Execution Command:**
   ```bash
-  cd /home/ayoubbenfareh/Projects/ACC2
+  cd .
   bash tools/setup_production_signing.sh
   ```
 

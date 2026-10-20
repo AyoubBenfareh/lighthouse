@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# setup_production_signing.sh — NūriTalk Android Production Signing Setup Utility
+# setup_production_signing.sh - NūriTalk Android Production Signing Setup Utility
 #
 # Guides secure generation of an Android production upload keystore and
 # configures the gitignored `android/key.properties` file for release builds.
@@ -23,7 +23,7 @@ DEFAULT_ALIAS="upload"
 
 show_help() {
   cat <<'EOF'
-NūriTalk — Android Production Signing Setup Utility
+NūriTalk - Android Production Signing Setup Utility
 
 USAGE:
   bash tools/setup_production_signing.sh [OPTIONS]
@@ -68,8 +68,8 @@ check_prerequisites() {
     keytool_bin="$(command -v keytool)"
   elif [ -n "${JAVA_HOME:-}" ] && [ -x "${JAVA_HOME}/bin/keytool" ]; then
     keytool_bin="${JAVA_HOME}/bin/keytool"
-  elif [ -x "/home/ayoubbenfareh/.jdk/jdk-21.0.12.1+1/bin/keytool" ]; then
-    keytool_bin="/home/ayoubbenfareh/.jdk/jdk-21.0.12.1+1/bin/keytool"
+  elif [ -n "${HOME:-}" ] && [ -x "${HOME}/.jdk/jdk-21.0.12.1+1/bin/keytool" ]; then
+    keytool_bin="${HOME}/.jdk/jdk-21.0.12.1+1/bin/keytool"
   fi
 
   if [ -z "${keytool_bin}" ]; then
@@ -103,7 +103,7 @@ check_prerequisites() {
 
 run_check() {
   echo "================================================================================"
-  echo "NūriTalk — Android Signing Configuration Audit"
+  echo "NūriTalk - Android Signing Configuration Audit"
   echo "================================================================================"
 
   echo -n "[*] Checking pre-requisites... "
@@ -147,7 +147,7 @@ run_check() {
 
 run_dry_run() {
   echo "================================================================================"
-  echo "NūriTalk — Production Signing Setup [DRY-RUN MODE]"
+  echo "NūriTalk - Production Signing Setup [DRY-RUN MODE]"
   echo "================================================================================"
   echo "[i] Running all pre-flight checks without modifying files or prompting for secrets..."
 
@@ -178,7 +178,7 @@ run_dry_run() {
 
 run_interactive() {
   echo "================================================================================"
-  echo "NūriTalk — Interactive Production Signing Setup"
+  echo "NūriTalk - Interactive Production Signing Setup"
   echo "================================================================================"
   echo "This tool will guide you through generating the Android production upload"
   echo "keystore and configuring android/key.properties."

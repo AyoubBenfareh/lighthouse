@@ -956,7 +956,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tourGlowBody =>
-      'Lighthouse hebt passende nächste Wörter sanft hervor – ohne die Tasten zu verschieben.';
+      'Lighthouse hebt passende nächste Wörter sanft hervor, ohne die Tasten zu verschieben.';
 
   @override
   String get tourFoldersTitle => 'Themen-Ordner';

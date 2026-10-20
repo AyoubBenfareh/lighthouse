@@ -1,6 +1,6 @@
 # ACC2 — User Acceptance & Accessibility Audit Report
 
-**Project:** `/home/ayoubbenfareh/Projects/ACC2`  
+**Project:** `.`  
 **Evaluation Target:** Android Build on Android API 34 (`x86_64` Emulator & Physical Target Validation)  
 **Base Commit:** `09bf022`  
 **Generated APK:** `build/app/outputs/flutter-apk/app-debug.apk` (193 MB)  
@@ -151,7 +151,7 @@ To install and test this build on your Android phone, follow these steps:
    - Accept the *"Allow USB debugging?"* prompt on your phone screen.
 3. **Run the install command from this repository:**
    ```bash
-   /home/ayoubbenfareh/android-sdk/platform-tools/adb install -r /home/ayoubbenfareh/Projects/ACC2/build/app/outputs/flutter-apk/app-debug.apk
+   adb install -r ./build/app/outputs/flutter-apk/app-debug.apk
    ```
 4. **Launch Lighthouse ACC on your phone:**
    - Open the **Lighthouse** app from your app drawer.
@@ -159,7 +159,7 @@ To install and test this build on your Android phone, follow these steps:
 ### Option B: Transfer APK File Directly
 
 1. **Locate the APK:**
-   - File path: `/home/ayoubbenfareh/Projects/ACC2/build/app/outputs/flutter-apk/app-debug.apk`
+   - File path: `./build/app/outputs/flutter-apk/app-debug.apk`
 2. **Send to phone:**
    - Transfer via Google Drive, Telegram Saved Messages, USB file transfer, or local network.
 3. **Install on phone:**
