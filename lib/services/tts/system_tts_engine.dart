@@ -15,7 +15,6 @@ import 'tts_engine.dart';
 
 class SystemTTSEngine implements TTSEngine {
   SystemTTSEngine() : _backend = FlutterTts() {
-    _backend.awaitSpeakCompletion(true);
     _initEngine();
   }
 
@@ -27,6 +26,7 @@ class SystemTTSEngine implements TTSEngine {
 
   Future<void> _initEngine() async {
     try {
+      await _backend.awaitSpeakCompletion(true);
       if (Platform.isIOS) {
         await _backend.setIosAudioCategory(
           IosTextToSpeechAudioCategory.playback,
@@ -126,13 +126,15 @@ class SystemTTSEngine implements TTSEngine {
   @override
   Future<void> speak(String text, {required Locale locale}) async {
     if (text.trim().isEmpty) return;
-    final tag = _bcp47Tag(locale);
-    if (tag != _currentLanguageTag) {
-      await _configureLanguage(locale);
-    }
-    // Latest-wins: stop any in-flight utterance before starting this one.
-    await _backend.stop();
-    await _backend.speak(text);
+    try {
+      final tag = _bcp47Tag(locale);
+      if (tag != _currentLanguageTag) {
+        await _configureLanguage(locale);
+      }
+      // Latest-wins: stop any in-flight utterance before starting this one.
+      await _backend.stop();
+      await _backend.speak(text);
+    } catch (_) {}
   }
 
   @override
@@ -150,28 +152,34 @@ class SystemTTSEngine implements TTSEngine {
   Future<bool> canSpeak(String text, {required Locale locale}) async {
     // System TTS is text-agnostic: it can speak anything the OS has a voice
     // for in this locale.
-    final available = await _backend.getLanguages;
-    if (available is! List) return false;
-    final tag = _bcp47Tag(locale).toLowerCase();
-    final lang = locale.languageCode.toLowerCase();
-    for (final entry in available) {
-      final tagOnPlatform = entry?.toString().toLowerCase() ?? '';
-      if (tagOnPlatform == tag) return true;
-      if (tagOnPlatform.startsWith('$lang-') || tagOnPlatform == lang) {
-        return true;
+    try {
+      final available = await _backend.getLanguages;
+      if (available is! List) return false;
+      final tag = _bcp47Tag(locale).toLowerCase();
+      final lang = locale.languageCode.toLowerCase();
+      for (final entry in available) {
+        final tagOnPlatform = entry?.toString().toLowerCase() ?? '';
+        if (tagOnPlatform == tag) return true;
+        if (tagOnPlatform.startsWith('$lang-') || tagOnPlatform == lang) {
+          return true;
+        }
       }
-    }
+    } catch (_) {}
     return false;
   }
 
   @override
   Future<void> stop() async {
-    await _backend.stop();
+    try {
+      await _backend.stop();
+    } catch (_) {}
   }
 
   @override
   Future<void> dispose() async {
-    await _backend.stop();
+    try {
+      await _backend.stop();
+    } catch (_) {}
   }
 
   static String _bcp47Tag(Locale locale) {
