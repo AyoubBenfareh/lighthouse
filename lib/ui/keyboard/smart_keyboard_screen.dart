@@ -388,59 +388,146 @@ class _SmartKeyboardScreenState extends ConsumerState<SmartKeyboardScreen> {
     final hasText = text.trim().isNotEmpty;
 
     return Container(
-      margin: const EdgeInsets.all(12),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: LhColors.surface,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: LhColors.line, width: 1.5),
-        boxShadow: LhShadows.card,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: LhColors.nuriSky, width: 2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: TextField(
-              controller: _controller,
-              focusNode: _focusNode,
-              textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: LhColors.ink,
-              ),
-              decoration: const InputDecoration(
-                hintText: 'Type words or tap suggestions...',
-                hintStyle: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                  color: LhColors.ink3,
+          // Spacious multi-line text input area
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 64, maxHeight: 110),
+            child: SingleChildScrollView(
+              reverse: true, // Auto-scroll to end as user types
+              child: TextField(
+                controller: _controller,
+                focusNode: _focusNode,
+                textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  color: LhColors.nuriNavy,
+                  height: 1.35,
                 ),
-                border: InputBorder.none,
-                isDense: true,
+                decoration: const InputDecoration(
+                  hintText: 'Tippe hier oder wähle Wortvorschläge...',
+                  hintStyle: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal,
+                    color: LhColors.ink3,
+                  ),
+                  border: InputBorder.none,
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero,
+                ),
               ),
             ),
           ),
-          IconButton(
-            icon: const Icon(Icons.backspace_outlined),
-            tooltip: 'Backspace',
-            onPressed: hasText ? _backspace : null,
-          ),
-          IconButton(
-            icon: const Icon(Icons.close),
-            tooltip: 'Clear',
-            onPressed: hasText ? _clear : null,
-          ),
-          const SizedBox(width: 4),
-          FilledButton.icon(
-            icon: const Icon(Icons.volume_up, size: 20),
-            label: const Text('Speak'),
-            style: FilledButton.styleFrom(
-              backgroundColor: hasText ? LhColors.brown : LhColors.line2,
-              foregroundColor: hasText ? Colors.white : LhColors.ink3,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            ),
-            onPressed: hasText ? _speak : null,
+          const SizedBox(height: 8),
+          // Actions row: Clear, Backspace, Copy, and prominent Speaker button
+          Row(
+            children: [
+              if (hasText) ...[
+                // Clear button
+                Semantics(
+                  label: 'Clear text',
+                  button: true,
+                  excludeSemantics: true,
+                  child: InkWell(
+                    onTap: _clear,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: LhColors.cream2,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.close_rounded, size: 16, color: LhColors.ink2),
+                          SizedBox(width: 4),
+                          Text(
+                            'Löschen',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: LhColors.ink2,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Backspace button
+                Semantics(
+                  label: 'Backspace',
+                  button: true,
+                  excludeSemantics: true,
+                  child: Tooltip(
+                    message: 'Backspace',
+                    child: InkWell(
+                      onTap: _backspace,
+                      borderRadius: BorderRadius.circular(16),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: LhColors.cream2,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: const Icon(Icons.backspace_outlined, size: 16, color: LhColors.ink2),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+              const Spacer(),
+              // Apply / Finish check button
+              TextButton.icon(
+                icon: const Icon(Icons.check, size: 18),
+                label: const Text('Fertig'),
+                style: TextButton.styleFrom(
+                  foregroundColor: LhColors.nuriTeal,
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                ),
+                onPressed: _commitAndReturn,
+              ),
+              const SizedBox(width: 6),
+              // Prominent Blue Speaker Button matching mockup
+              FilledButton.icon(
+                icon: const Icon(Icons.volume_up_rounded, size: 20),
+                label: const Text(
+                  'Speak',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                ),
+                style: FilledButton.styleFrom(
+                  backgroundColor: hasText ? LhColors.nuriBlue : LhColors.line2,
+                  foregroundColor: hasText ? Colors.white : LhColors.ink3,
+                  elevation: hasText ? 2 : 0,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                onPressed: hasText ? _speak : null,
+              ),
+            ],
           ),
         ],
       ),
@@ -487,52 +574,56 @@ class _SmartKeyboardScreenState extends ConsumerState<SmartKeyboardScreen> {
             ? LhColors.amberLine
             : LhColors.line2;
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(14),
-      onTap: () => _insertSuggestion(item),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: borderColor, width: 1.5),
-          boxShadow: LhShadows.tileRest,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (isCard) ...[
-              if (item.iconUri != null && item.iconUri!.isNotEmpty) ...[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CompositeSymbolProvider.defaultInstance.buildSymbol(
-                      context,
-                      uri: item.iconUri!,
-                      label: item.text,
+    return Semantics(
+      label: 'Suggestion: ${item.text}',
+      button: true,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: () => _insertSuggestion(item),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: borderColor, width: 1.5),
+            boxShadow: LhShadows.tileRest,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (isCard) ...[
+                if (item.iconUri != null && item.iconUri!.isNotEmpty) ...[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CompositeSymbolProvider.defaultInstance.buildSymbol(
+                        context,
+                        uri: item.iconUri!,
+                        label: item.text,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 6),
-              ] else ...[
-                const Icon(Icons.star, size: 16, color: LhColors.amberDeep),
+                  const SizedBox(width: 6),
+                ] else ...[
+                  const Icon(Icons.star, size: 16, color: LhColors.amberDeep),
+                  const SizedBox(width: 6),
+                ],
+              ] else if (isPhrase) ...[
+                const Icon(Icons.chat_bubble_outline, size: 14, color: LhColors.brown),
                 const SizedBox(width: 6),
               ],
-            ] else if (isPhrase) ...[
-              const Icon(Icons.chat_bubble_outline, size: 14, color: LhColors.brown),
-              const SizedBox(width: 6),
-            ],
-            Text(
-              item.text,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: isCard ? FontWeight.bold : FontWeight.w600,
-                color: LhColors.ink,
+              Text(
+                item.text,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: isCard ? FontWeight.bold : FontWeight.w600,
+                  color: LhColors.ink,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -695,24 +786,42 @@ class _SmartKeyboardScreenState extends ConsumerState<SmartKeyboardScreen> {
     required VoidCallback onTap,
     bool isSpecial = false,
   }) {
+    String semanticLabel = label;
+    if (label == 'Space') {
+      semanticLabel = 'Space';
+    } else if (label == '⌫') {
+      semanticLabel = 'Backspace';
+    } else if (label == '⇧' || label == '⬆') {
+      semanticLabel = 'Shift';
+    } else if (label == '?123') {
+      semanticLabel = 'Numbers and symbols';
+    } else if (label == 'ABC') {
+      semanticLabel = 'Letters';
+    }
+
     return Padding(
       padding: const EdgeInsets.all(2.5),
-      child: Material(
-        color: isSpecial ? LhColors.cream : LhColors.surface,
-        borderRadius: BorderRadius.circular(10),
-        elevation: 1,
-        child: InkWell(
+      child: Semantics(
+        label: semanticLabel,
+        button: true,
+        excludeSemantics: true,
+        child: Material(
+          color: isSpecial ? LhColors.cream : LhColors.surface,
           borderRadius: BorderRadius.circular(10),
-          onTap: onTap,
-          child: Center(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: isSpecial ? 16 : 22,
-                  fontWeight: FontWeight.bold,
-                  color: isSpecial ? LhColors.brown : LhColors.ink,
+          elevation: 1,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: onTap,
+            child: Center(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: isSpecial ? 16 : 22,
+                    fontWeight: FontWeight.bold,
+                    color: isSpecial ? LhColors.brown : LhColors.ink,
+                  ),
                 ),
               ),
             ),

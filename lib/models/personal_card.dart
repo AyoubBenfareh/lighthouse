@@ -28,6 +28,24 @@ abstract final class PersonalCardCategory {
     actions,
     custom,
   ];
+
+  /// Checks if [category] matches any known standard category.
+  static bool isValid(String? category) {
+    if (category == null) return false;
+    return all.contains(category.toLowerCase().trim());
+  }
+
+  /// Normalizes [category], mapping null, empty, or unrecognized values safely to [custom].
+  static String normalize(String? category) {
+    if (category == null || category.trim().isEmpty) {
+      return custom;
+    }
+    final normalized = category.toLowerCase().trim();
+    if (all.contains(normalized)) {
+      return normalized;
+    }
+    return custom;
+  }
 }
 
 /// Standard personal board IDs.
@@ -161,13 +179,19 @@ class PersonalCard {
       };
 
   factory PersonalCard.fromJson(Map<String, dynamic> json) {
+    var imageUri = json['image_uri']?.toString() ?? '';
+    // Guard against corrupted or oversized inline base64 attachments (>5MB)
+    if (imageUri.startsWith('data:') && imageUri.length > 5 * 1024 * 1024) {
+      imageUri = 'assets/symbols/things/star.png';
+    }
+
     return PersonalCard(
-      id: json['id'] as String,
-      profileId: json['profile_id'] as String? ?? 'default',
-      name: json['name'] as String? ?? '',
-      speechText: json['speech_text'] as String? ?? '',
-      category: json['category'] as String? ?? PersonalCardCategory.custom,
-      imageUri: json['image_uri'] as String? ?? '',
+      id: json['id']?.toString() ?? 'card_${DateTime.now().millisecondsSinceEpoch}',
+      profileId: json['profile_id']?.toString() ?? 'default',
+      name: json['name']?.toString() ?? '',
+      speechText: json['speech_text']?.toString() ?? '',
+      category: PersonalCardCategory.normalize(json['category']?.toString()),
+      imageUri: imageUri,
       labelsByLocale: (json['labels_by_locale'] as Map<String, dynamic>?)?.map(
             (k, v) => MapEntry(k, v.toString()),
           ) ??
@@ -180,7 +204,7 @@ class PersonalCard {
               ?.map((e) => e.toString())
               .toList() ??
           const [],
-      isFavorite: json['is_favorite'] as bool? ?? false,
+      isFavorite: json['is_favorite'] == true,
       sortOrder: (json['sort_order'] as num?)?.toInt() ?? 0,
       createdAt: json['created_at'] != null
           ? DateTime.tryParse(json['created_at'].toString()) ?? DateTime.now()

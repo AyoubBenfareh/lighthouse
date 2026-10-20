@@ -19,6 +19,9 @@ class PersonalCardStore {
 
   final Directory? _baseDirOverride;
 
+  /// Maximum allowed byte size for imported or attached photos (5 MB).
+  static const int maxImageByteSize = 5 * 1024 * 1024;
+
   /// In-memory cache keyed by profile ID.
   final Map<String, List<PersonalCard>> _memCache = {};
 
@@ -139,9 +142,28 @@ class PersonalCardStore {
         return initial;
       }
 
-      final raw = await file.readAsString();
-      final decoded = jsonDecode(raw);
-      if (decoded is! List) return const [];
+      dynamic decoded;
+      try {
+        final raw = await file.readAsString();
+        decoded = jsonDecode(raw);
+      } catch (err) {
+        debugPrint('PersonalCardStore: detected corrupt personal_cards.json: $err. Archiving and resetting.');
+        try {
+          final corruptBackup = File('${file.path}.corrupt_${DateTime.now().millisecondsSinceEpoch}');
+          await file.copy(corruptBackup.path);
+        } catch (_) {}
+        final initial = _defaultStarterCards(profileId);
+        await saveAllCards(profileId, initial);
+        _memCache[profileId] = initial;
+        return initial;
+      }
+
+      if (decoded is! List) {
+        final initial = _defaultStarterCards(profileId);
+        await saveAllCards(profileId, initial);
+        _memCache[profileId] = initial;
+        return initial;
+      }
 
       final list = <PersonalCard>[];
       for (final item in decoded) {
@@ -206,12 +228,19 @@ class PersonalCardStore {
   }
 
   /// Saves image bytes to disk (mobile) or base64 (web) and returns the resulting URI.
+  /// Throws [ArgumentError] if [bytes] exceeds [maxImageByteSize] (5MB).
   Future<String> saveCardImage({
     required String profileId,
     required String cardId,
     required Uint8List bytes,
     String mimeType = 'image/jpeg',
   }) async {
+    if (bytes.length > maxImageByteSize) {
+      throw ArgumentError(
+        'Image file size (${bytes.length} bytes) exceeds the maximum allowed limit of ${maxImageByteSize} bytes (5MB).',
+      );
+    }
+
     if (kIsWeb || _baseDirOverride == null && kIsWeb) {
       final base64Data = base64Encode(bytes);
       return 'data:$mimeType;base64,$base64Data';

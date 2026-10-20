@@ -181,6 +181,9 @@ class LocaleRegistry {
     return specForCode(locale.languageCode) ?? specForCode(fallback.languageCode)!;
   }
 
+  /// Whether a given locale has RTL text direction.
+  static bool isRtl(Locale locale) => specForLocale(locale).isRtl;
+
   /// `MaterialApp.localeResolutionCallback`. Matches dialect/country first,
   /// then base language code; anything unsupported resolves to [fallback].
   static Locale resolve(Locale? device, Iterable<Locale> supported) {

@@ -156,34 +156,34 @@ class UserProfile {
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(
-      id: json['id'] as String,
-      name: json['name'] as String? ?? 'User',
-      avatarUri: json['avatar_uri'] as String?,
-      interfaceLocale: json['interface_locale'] as String?,
-      speechLocale: json['speech_locale'] as String?,
+      id: json['id']?.toString() ?? 'user_${DateTime.now().millisecondsSinceEpoch}',
+      name: json['name']?.toString() ?? 'User',
+      avatarUri: json['avatar_uri']?.toString(),
+      interfaceLocale: json['interface_locale']?.toString(),
+      speechLocale: json['speech_locale']?.toString(),
       voiceRate: (json['voice_rate'] as num?)?.toDouble() ?? 1.0,
       voicePitch: (json['voice_pitch'] as num?)?.toDouble() ?? 1.0,
       voiceVolume: (json['voice_volume'] as num?)?.toDouble() ?? 1.0,
-      ttsMode: TtsMode.tryParse(json['tts_mode'] as String?) ?? TtsMode.on,
+      ttsMode: TtsMode.tryParse(json['tts_mode']?.toString()) ?? TtsMode.on,
       accessMethod:
-          AccessMethod.tryParse(json['access_method'] as String?),
-      dwellMs: json['dwell_ms'] as int? ?? 0,
-      highContrast: json['high_contrast'] as bool? ?? false,
-      gridColumns: json['grid_columns'] as int?,
-      gridRows: json['grid_rows'] as int?,
-      glowStyle: GlowStyle.tryParse(json['glow_style'] as String?) ??
+          AccessMethod.tryParse(json['access_method']?.toString()),
+      dwellMs: (json['dwell_ms'] as num?)?.toInt() ?? 0,
+      highContrast: json['high_contrast'] == true,
+      gridColumns: (json['grid_columns'] as num?)?.toInt(),
+      gridRows: (json['grid_rows'] as num?)?.toInt(),
+      glowStyle: GlowStyle.tryParse(json['glow_style']?.toString()) ??
           GlowStyle.halo,
       hitboxMagnitude:
-          HitboxMagnitude.tryParse(json['hitbox_magnitude'] as String?) ??
+          HitboxMagnitude.tryParse(json['hitbox_magnitude']?.toString()) ??
               HitboxMagnitude.subtle,
-      autoReturnToHome: json['auto_return_to_home'] as bool? ?? true,
-      hideTileText: json['hide_tile_text'] as bool? ?? false,
-      hidePictogram: json['hide_pictogram'] as bool? ?? false,
+      autoReturnToHome: json['auto_return_to_home'] != false,
+      hideTileText: json['hide_tile_text'] == true,
+      hidePictogram: json['hide_pictogram'] == true,
       createdAt: json['created_at'] != null
-          ? DateTime.tryParse(json['created_at'] as String) ?? DateTime.now()
+          ? DateTime.tryParse(json['created_at'].toString()) ?? DateTime.now()
           : DateTime.now(),
       updatedAt: json['updated_at'] != null
-          ? DateTime.tryParse(json['updated_at'] as String) ?? DateTime.now()
+          ? DateTime.tryParse(json['updated_at'].toString()) ?? DateTime.now()
           : DateTime.now(),
     );
   }
