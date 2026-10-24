@@ -1,0 +1,1806 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'app_database.dart';
+
+// ignore_for_file: type=lint
+class $ProgressRowsTable extends ProgressRows
+    with TableInfo<$ProgressRowsTable, ProgressRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ProgressRowsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _starsMeta = const VerificationMeta('stars');
+  @override
+  late final GeneratedColumn<int> stars = GeneratedColumn<int>(
+    'stars',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _xpMeta = const VerificationMeta('xp');
+  @override
+  late final GeneratedColumn<int> xp = GeneratedColumn<int>(
+    'xp',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _unlockedWorldsMeta = const VerificationMeta(
+    'unlockedWorlds',
+  );
+  @override
+  late final GeneratedColumn<String> unlockedWorlds = GeneratedColumn<String>(
+    'unlocked_worlds',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('arabic,manners'),
+  );
+  static const VerificationMeta _completedGamesMeta = const VerificationMeta(
+    'completedGames',
+  );
+  @override
+  late final GeneratedColumn<String> completedGames = GeneratedColumn<String>(
+    'completed_games',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _mapVisitedMeta = const VerificationMeta(
+    'mapVisited',
+  );
+  @override
+  late final GeneratedColumn<bool> mapVisited = GeneratedColumn<bool>(
+    'map_visited',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("map_visited" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    stars,
+    xp,
+    unlockedWorlds,
+    completedGames,
+    mapVisited,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'progress_rows';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ProgressRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('stars')) {
+      context.handle(
+        _starsMeta,
+        stars.isAcceptableOrUnknown(data['stars']!, _starsMeta),
+      );
+    }
+    if (data.containsKey('xp')) {
+      context.handle(_xpMeta, xp.isAcceptableOrUnknown(data['xp']!, _xpMeta));
+    }
+    if (data.containsKey('unlocked_worlds')) {
+      context.handle(
+        _unlockedWorldsMeta,
+        unlockedWorlds.isAcceptableOrUnknown(
+          data['unlocked_worlds']!,
+          _unlockedWorldsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('completed_games')) {
+      context.handle(
+        _completedGamesMeta,
+        completedGames.isAcceptableOrUnknown(
+          data['completed_games']!,
+          _completedGamesMeta,
+        ),
+      );
+    }
+    if (data.containsKey('map_visited')) {
+      context.handle(
+        _mapVisitedMeta,
+        mapVisited.isAcceptableOrUnknown(data['map_visited']!, _mapVisitedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ProgressRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ProgressRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      stars: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}stars'],
+      )!,
+      xp: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}xp'],
+      )!,
+      unlockedWorlds: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}unlocked_worlds'],
+      )!,
+      completedGames: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}completed_games'],
+      )!,
+      mapVisited: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}map_visited'],
+      )!,
+    );
+  }
+
+  @override
+  $ProgressRowsTable createAlias(String alias) {
+    return $ProgressRowsTable(attachedDatabase, alias);
+  }
+}
+
+class ProgressRow extends DataClass implements Insertable<ProgressRow> {
+  final int id;
+  final int stars;
+  final int xp;
+  final String unlockedWorlds;
+  final String completedGames;
+  final bool mapVisited;
+  const ProgressRow({
+    required this.id,
+    required this.stars,
+    required this.xp,
+    required this.unlockedWorlds,
+    required this.completedGames,
+    required this.mapVisited,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['stars'] = Variable<int>(stars);
+    map['xp'] = Variable<int>(xp);
+    map['unlocked_worlds'] = Variable<String>(unlockedWorlds);
+    map['completed_games'] = Variable<String>(completedGames);
+    map['map_visited'] = Variable<bool>(mapVisited);
+    return map;
+  }
+
+  ProgressRowsCompanion toCompanion(bool nullToAbsent) {
+    return ProgressRowsCompanion(
+      id: Value(id),
+      stars: Value(stars),
+      xp: Value(xp),
+      unlockedWorlds: Value(unlockedWorlds),
+      completedGames: Value(completedGames),
+      mapVisited: Value(mapVisited),
+    );
+  }
+
+  factory ProgressRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ProgressRow(
+      id: serializer.fromJson<int>(json['id']),
+      stars: serializer.fromJson<int>(json['stars']),
+      xp: serializer.fromJson<int>(json['xp']),
+      unlockedWorlds: serializer.fromJson<String>(json['unlockedWorlds']),
+      completedGames: serializer.fromJson<String>(json['completedGames']),
+      mapVisited: serializer.fromJson<bool>(json['mapVisited']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'stars': serializer.toJson<int>(stars),
+      'xp': serializer.toJson<int>(xp),
+      'unlockedWorlds': serializer.toJson<String>(unlockedWorlds),
+      'completedGames': serializer.toJson<String>(completedGames),
+      'mapVisited': serializer.toJson<bool>(mapVisited),
+    };
+  }
+
+  ProgressRow copyWith({
+    int? id,
+    int? stars,
+    int? xp,
+    String? unlockedWorlds,
+    String? completedGames,
+    bool? mapVisited,
+  }) => ProgressRow(
+    id: id ?? this.id,
+    stars: stars ?? this.stars,
+    xp: xp ?? this.xp,
+    unlockedWorlds: unlockedWorlds ?? this.unlockedWorlds,
+    completedGames: completedGames ?? this.completedGames,
+    mapVisited: mapVisited ?? this.mapVisited,
+  );
+  ProgressRow copyWithCompanion(ProgressRowsCompanion data) {
+    return ProgressRow(
+      id: data.id.present ? data.id.value : this.id,
+      stars: data.stars.present ? data.stars.value : this.stars,
+      xp: data.xp.present ? data.xp.value : this.xp,
+      unlockedWorlds: data.unlockedWorlds.present
+          ? data.unlockedWorlds.value
+          : this.unlockedWorlds,
+      completedGames: data.completedGames.present
+          ? data.completedGames.value
+          : this.completedGames,
+      mapVisited: data.mapVisited.present
+          ? data.mapVisited.value
+          : this.mapVisited,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProgressRow(')
+          ..write('id: $id, ')
+          ..write('stars: $stars, ')
+          ..write('xp: $xp, ')
+          ..write('unlockedWorlds: $unlockedWorlds, ')
+          ..write('completedGames: $completedGames, ')
+          ..write('mapVisited: $mapVisited')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, stars, xp, unlockedWorlds, completedGames, mapVisited);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ProgressRow &&
+          other.id == this.id &&
+          other.stars == this.stars &&
+          other.xp == this.xp &&
+          other.unlockedWorlds == this.unlockedWorlds &&
+          other.completedGames == this.completedGames &&
+          other.mapVisited == this.mapVisited);
+}
+
+class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
+  final Value<int> id;
+  final Value<int> stars;
+  final Value<int> xp;
+  final Value<String> unlockedWorlds;
+  final Value<String> completedGames;
+  final Value<bool> mapVisited;
+  const ProgressRowsCompanion({
+    this.id = const Value.absent(),
+    this.stars = const Value.absent(),
+    this.xp = const Value.absent(),
+    this.unlockedWorlds = const Value.absent(),
+    this.completedGames = const Value.absent(),
+    this.mapVisited = const Value.absent(),
+  });
+  ProgressRowsCompanion.insert({
+    this.id = const Value.absent(),
+    this.stars = const Value.absent(),
+    this.xp = const Value.absent(),
+    this.unlockedWorlds = const Value.absent(),
+    this.completedGames = const Value.absent(),
+    this.mapVisited = const Value.absent(),
+  });
+  static Insertable<ProgressRow> custom({
+    Expression<int>? id,
+    Expression<int>? stars,
+    Expression<int>? xp,
+    Expression<String>? unlockedWorlds,
+    Expression<String>? completedGames,
+    Expression<bool>? mapVisited,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (stars != null) 'stars': stars,
+      if (xp != null) 'xp': xp,
+      if (unlockedWorlds != null) 'unlocked_worlds': unlockedWorlds,
+      if (completedGames != null) 'completed_games': completedGames,
+      if (mapVisited != null) 'map_visited': mapVisited,
+    });
+  }
+
+  ProgressRowsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? stars,
+    Value<int>? xp,
+    Value<String>? unlockedWorlds,
+    Value<String>? completedGames,
+    Value<bool>? mapVisited,
+  }) {
+    return ProgressRowsCompanion(
+      id: id ?? this.id,
+      stars: stars ?? this.stars,
+      xp: xp ?? this.xp,
+      unlockedWorlds: unlockedWorlds ?? this.unlockedWorlds,
+      completedGames: completedGames ?? this.completedGames,
+      mapVisited: mapVisited ?? this.mapVisited,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (stars.present) {
+      map['stars'] = Variable<int>(stars.value);
+    }
+    if (xp.present) {
+      map['xp'] = Variable<int>(xp.value);
+    }
+    if (unlockedWorlds.present) {
+      map['unlocked_worlds'] = Variable<String>(unlockedWorlds.value);
+    }
+    if (completedGames.present) {
+      map['completed_games'] = Variable<String>(completedGames.value);
+    }
+    if (mapVisited.present) {
+      map['map_visited'] = Variable<bool>(mapVisited.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProgressRowsCompanion(')
+          ..write('id: $id, ')
+          ..write('stars: $stars, ')
+          ..write('xp: $xp, ')
+          ..write('unlockedWorlds: $unlockedWorlds, ')
+          ..write('completedGames: $completedGames, ')
+          ..write('mapVisited: $mapVisited')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BadgeRowsTable extends BadgeRows
+    with TableInfo<$BadgeRowsTable, BadgeRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $BadgeRowsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _earnedAtMeta = const VerificationMeta(
+    'earnedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> earnedAt = GeneratedColumn<DateTime>(
+    'earned_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, earnedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'badge_rows';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<BadgeRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('earned_at')) {
+      context.handle(
+        _earnedAtMeta,
+        earnedAt.isAcceptableOrUnknown(data['earned_at']!, _earnedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_earnedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BadgeRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return BadgeRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      earnedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}earned_at'],
+      )!,
+    );
+  }
+
+  @override
+  $BadgeRowsTable createAlias(String alias) {
+    return $BadgeRowsTable(attachedDatabase, alias);
+  }
+}
+
+class BadgeRow extends DataClass implements Insertable<BadgeRow> {
+  final String id;
+  final DateTime earnedAt;
+  const BadgeRow({required this.id, required this.earnedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['earned_at'] = Variable<DateTime>(earnedAt);
+    return map;
+  }
+
+  BadgeRowsCompanion toCompanion(bool nullToAbsent) {
+    return BadgeRowsCompanion(id: Value(id), earnedAt: Value(earnedAt));
+  }
+
+  factory BadgeRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return BadgeRow(
+      id: serializer.fromJson<String>(json['id']),
+      earnedAt: serializer.fromJson<DateTime>(json['earnedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'earnedAt': serializer.toJson<DateTime>(earnedAt),
+    };
+  }
+
+  BadgeRow copyWith({String? id, DateTime? earnedAt}) =>
+      BadgeRow(id: id ?? this.id, earnedAt: earnedAt ?? this.earnedAt);
+  BadgeRow copyWithCompanion(BadgeRowsCompanion data) {
+    return BadgeRow(
+      id: data.id.present ? data.id.value : this.id,
+      earnedAt: data.earnedAt.present ? data.earnedAt.value : this.earnedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BadgeRow(')
+          ..write('id: $id, ')
+          ..write('earnedAt: $earnedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, earnedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BadgeRow &&
+          other.id == this.id &&
+          other.earnedAt == this.earnedAt);
+}
+
+class BadgeRowsCompanion extends UpdateCompanion<BadgeRow> {
+  final Value<String> id;
+  final Value<DateTime> earnedAt;
+  final Value<int> rowid;
+  const BadgeRowsCompanion({
+    this.id = const Value.absent(),
+    this.earnedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  BadgeRowsCompanion.insert({
+    required String id,
+    required DateTime earnedAt,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       earnedAt = Value(earnedAt);
+  static Insertable<BadgeRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? earnedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (earnedAt != null) 'earned_at': earnedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  BadgeRowsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? earnedAt,
+    Value<int>? rowid,
+  }) {
+    return BadgeRowsCompanion(
+      id: id ?? this.id,
+      earnedAt: earnedAt ?? this.earnedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (earnedAt.present) {
+      map['earned_at'] = Variable<DateTime>(earnedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BadgeRowsCompanion(')
+          ..write('id: $id, ')
+          ..write('earnedAt: $earnedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ProfileRowsTable extends ProfileRows
+    with TableInfo<$ProfileRowsTable, ProfileRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ProfileRowsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _displayNameMeta = const VerificationMeta(
+    'displayName',
+  );
+  @override
+  late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
+    'display_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _avatarIndexMeta = const VerificationMeta(
+    'avatarIndex',
+  );
+  @override
+  late final GeneratedColumn<int> avatarIndex = GeneratedColumn<int>(
+    'avatar_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _localeCodeMeta = const VerificationMeta(
+    'localeCode',
+  );
+  @override
+  late final GeneratedColumn<String> localeCode = GeneratedColumn<String>(
+    'locale_code',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('en'),
+  );
+  static const VerificationMeta _onboardingCompleteMeta =
+      const VerificationMeta('onboardingComplete');
+  @override
+  late final GeneratedColumn<bool> onboardingComplete = GeneratedColumn<bool>(
+    'onboarding_complete',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("onboarding_complete" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _audioEnabledMeta = const VerificationMeta(
+    'audioEnabled',
+  );
+  @override
+  late final GeneratedColumn<bool> audioEnabled = GeneratedColumn<bool>(
+    'audio_enabled',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("audio_enabled" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  static const VerificationMeta _reducedMotionMeta = const VerificationMeta(
+    'reducedMotion',
+  );
+  @override
+  late final GeneratedColumn<bool> reducedMotion = GeneratedColumn<bool>(
+    'reduced_motion',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("reduced_motion" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _sessionRemindersMeta = const VerificationMeta(
+    'sessionReminders',
+  );
+  @override
+  late final GeneratedColumn<bool> sessionReminders = GeneratedColumn<bool>(
+    'session_reminders',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("session_reminders" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    displayName,
+    avatarIndex,
+    localeCode,
+    onboardingComplete,
+    audioEnabled,
+    reducedMotion,
+    sessionReminders,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'profile_rows';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ProfileRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('display_name')) {
+      context.handle(
+        _displayNameMeta,
+        displayName.isAcceptableOrUnknown(
+          data['display_name']!,
+          _displayNameMeta,
+        ),
+      );
+    }
+    if (data.containsKey('avatar_index')) {
+      context.handle(
+        _avatarIndexMeta,
+        avatarIndex.isAcceptableOrUnknown(
+          data['avatar_index']!,
+          _avatarIndexMeta,
+        ),
+      );
+    }
+    if (data.containsKey('locale_code')) {
+      context.handle(
+        _localeCodeMeta,
+        localeCode.isAcceptableOrUnknown(data['locale_code']!, _localeCodeMeta),
+      );
+    }
+    if (data.containsKey('onboarding_complete')) {
+      context.handle(
+        _onboardingCompleteMeta,
+        onboardingComplete.isAcceptableOrUnknown(
+          data['onboarding_complete']!,
+          _onboardingCompleteMeta,
+        ),
+      );
+    }
+    if (data.containsKey('audio_enabled')) {
+      context.handle(
+        _audioEnabledMeta,
+        audioEnabled.isAcceptableOrUnknown(
+          data['audio_enabled']!,
+          _audioEnabledMeta,
+        ),
+      );
+    }
+    if (data.containsKey('reduced_motion')) {
+      context.handle(
+        _reducedMotionMeta,
+        reducedMotion.isAcceptableOrUnknown(
+          data['reduced_motion']!,
+          _reducedMotionMeta,
+        ),
+      );
+    }
+    if (data.containsKey('session_reminders')) {
+      context.handle(
+        _sessionRemindersMeta,
+        sessionReminders.isAcceptableOrUnknown(
+          data['session_reminders']!,
+          _sessionRemindersMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ProfileRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ProfileRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      displayName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}display_name'],
+      )!,
+      avatarIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}avatar_index'],
+      )!,
+      localeCode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}locale_code'],
+      )!,
+      onboardingComplete: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}onboarding_complete'],
+      )!,
+      audioEnabled: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}audio_enabled'],
+      )!,
+      reducedMotion: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}reduced_motion'],
+      )!,
+      sessionReminders: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}session_reminders'],
+      )!,
+    );
+  }
+
+  @override
+  $ProfileRowsTable createAlias(String alias) {
+    return $ProfileRowsTable(attachedDatabase, alias);
+  }
+}
+
+class ProfileRow extends DataClass implements Insertable<ProfileRow> {
+  final int id;
+  final String displayName;
+  final int avatarIndex;
+  final String localeCode;
+  final bool onboardingComplete;
+  final bool audioEnabled;
+  final bool reducedMotion;
+  final bool sessionReminders;
+  const ProfileRow({
+    required this.id,
+    required this.displayName,
+    required this.avatarIndex,
+    required this.localeCode,
+    required this.onboardingComplete,
+    required this.audioEnabled,
+    required this.reducedMotion,
+    required this.sessionReminders,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['display_name'] = Variable<String>(displayName);
+    map['avatar_index'] = Variable<int>(avatarIndex);
+    map['locale_code'] = Variable<String>(localeCode);
+    map['onboarding_complete'] = Variable<bool>(onboardingComplete);
+    map['audio_enabled'] = Variable<bool>(audioEnabled);
+    map['reduced_motion'] = Variable<bool>(reducedMotion);
+    map['session_reminders'] = Variable<bool>(sessionReminders);
+    return map;
+  }
+
+  ProfileRowsCompanion toCompanion(bool nullToAbsent) {
+    return ProfileRowsCompanion(
+      id: Value(id),
+      displayName: Value(displayName),
+      avatarIndex: Value(avatarIndex),
+      localeCode: Value(localeCode),
+      onboardingComplete: Value(onboardingComplete),
+      audioEnabled: Value(audioEnabled),
+      reducedMotion: Value(reducedMotion),
+      sessionReminders: Value(sessionReminders),
+    );
+  }
+
+  factory ProfileRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ProfileRow(
+      id: serializer.fromJson<int>(json['id']),
+      displayName: serializer.fromJson<String>(json['displayName']),
+      avatarIndex: serializer.fromJson<int>(json['avatarIndex']),
+      localeCode: serializer.fromJson<String>(json['localeCode']),
+      onboardingComplete: serializer.fromJson<bool>(json['onboardingComplete']),
+      audioEnabled: serializer.fromJson<bool>(json['audioEnabled']),
+      reducedMotion: serializer.fromJson<bool>(json['reducedMotion']),
+      sessionReminders: serializer.fromJson<bool>(json['sessionReminders']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'displayName': serializer.toJson<String>(displayName),
+      'avatarIndex': serializer.toJson<int>(avatarIndex),
+      'localeCode': serializer.toJson<String>(localeCode),
+      'onboardingComplete': serializer.toJson<bool>(onboardingComplete),
+      'audioEnabled': serializer.toJson<bool>(audioEnabled),
+      'reducedMotion': serializer.toJson<bool>(reducedMotion),
+      'sessionReminders': serializer.toJson<bool>(sessionReminders),
+    };
+  }
+
+  ProfileRow copyWith({
+    int? id,
+    String? displayName,
+    int? avatarIndex,
+    String? localeCode,
+    bool? onboardingComplete,
+    bool? audioEnabled,
+    bool? reducedMotion,
+    bool? sessionReminders,
+  }) => ProfileRow(
+    id: id ?? this.id,
+    displayName: displayName ?? this.displayName,
+    avatarIndex: avatarIndex ?? this.avatarIndex,
+    localeCode: localeCode ?? this.localeCode,
+    onboardingComplete: onboardingComplete ?? this.onboardingComplete,
+    audioEnabled: audioEnabled ?? this.audioEnabled,
+    reducedMotion: reducedMotion ?? this.reducedMotion,
+    sessionReminders: sessionReminders ?? this.sessionReminders,
+  );
+  ProfileRow copyWithCompanion(ProfileRowsCompanion data) {
+    return ProfileRow(
+      id: data.id.present ? data.id.value : this.id,
+      displayName: data.displayName.present
+          ? data.displayName.value
+          : this.displayName,
+      avatarIndex: data.avatarIndex.present
+          ? data.avatarIndex.value
+          : this.avatarIndex,
+      localeCode: data.localeCode.present
+          ? data.localeCode.value
+          : this.localeCode,
+      onboardingComplete: data.onboardingComplete.present
+          ? data.onboardingComplete.value
+          : this.onboardingComplete,
+      audioEnabled: data.audioEnabled.present
+          ? data.audioEnabled.value
+          : this.audioEnabled,
+      reducedMotion: data.reducedMotion.present
+          ? data.reducedMotion.value
+          : this.reducedMotion,
+      sessionReminders: data.sessionReminders.present
+          ? data.sessionReminders.value
+          : this.sessionReminders,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProfileRow(')
+          ..write('id: $id, ')
+          ..write('displayName: $displayName, ')
+          ..write('avatarIndex: $avatarIndex, ')
+          ..write('localeCode: $localeCode, ')
+          ..write('onboardingComplete: $onboardingComplete, ')
+          ..write('audioEnabled: $audioEnabled, ')
+          ..write('reducedMotion: $reducedMotion, ')
+          ..write('sessionReminders: $sessionReminders')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    displayName,
+    avatarIndex,
+    localeCode,
+    onboardingComplete,
+    audioEnabled,
+    reducedMotion,
+    sessionReminders,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ProfileRow &&
+          other.id == this.id &&
+          other.displayName == this.displayName &&
+          other.avatarIndex == this.avatarIndex &&
+          other.localeCode == this.localeCode &&
+          other.onboardingComplete == this.onboardingComplete &&
+          other.audioEnabled == this.audioEnabled &&
+          other.reducedMotion == this.reducedMotion &&
+          other.sessionReminders == this.sessionReminders);
+}
+
+class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
+  final Value<int> id;
+  final Value<String> displayName;
+  final Value<int> avatarIndex;
+  final Value<String> localeCode;
+  final Value<bool> onboardingComplete;
+  final Value<bool> audioEnabled;
+  final Value<bool> reducedMotion;
+  final Value<bool> sessionReminders;
+  const ProfileRowsCompanion({
+    this.id = const Value.absent(),
+    this.displayName = const Value.absent(),
+    this.avatarIndex = const Value.absent(),
+    this.localeCode = const Value.absent(),
+    this.onboardingComplete = const Value.absent(),
+    this.audioEnabled = const Value.absent(),
+    this.reducedMotion = const Value.absent(),
+    this.sessionReminders = const Value.absent(),
+  });
+  ProfileRowsCompanion.insert({
+    this.id = const Value.absent(),
+    this.displayName = const Value.absent(),
+    this.avatarIndex = const Value.absent(),
+    this.localeCode = const Value.absent(),
+    this.onboardingComplete = const Value.absent(),
+    this.audioEnabled = const Value.absent(),
+    this.reducedMotion = const Value.absent(),
+    this.sessionReminders = const Value.absent(),
+  });
+  static Insertable<ProfileRow> custom({
+    Expression<int>? id,
+    Expression<String>? displayName,
+    Expression<int>? avatarIndex,
+    Expression<String>? localeCode,
+    Expression<bool>? onboardingComplete,
+    Expression<bool>? audioEnabled,
+    Expression<bool>? reducedMotion,
+    Expression<bool>? sessionReminders,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (displayName != null) 'display_name': displayName,
+      if (avatarIndex != null) 'avatar_index': avatarIndex,
+      if (localeCode != null) 'locale_code': localeCode,
+      if (onboardingComplete != null) 'onboarding_complete': onboardingComplete,
+      if (audioEnabled != null) 'audio_enabled': audioEnabled,
+      if (reducedMotion != null) 'reduced_motion': reducedMotion,
+      if (sessionReminders != null) 'session_reminders': sessionReminders,
+    });
+  }
+
+  ProfileRowsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? displayName,
+    Value<int>? avatarIndex,
+    Value<String>? localeCode,
+    Value<bool>? onboardingComplete,
+    Value<bool>? audioEnabled,
+    Value<bool>? reducedMotion,
+    Value<bool>? sessionReminders,
+  }) {
+    return ProfileRowsCompanion(
+      id: id ?? this.id,
+      displayName: displayName ?? this.displayName,
+      avatarIndex: avatarIndex ?? this.avatarIndex,
+      localeCode: localeCode ?? this.localeCode,
+      onboardingComplete: onboardingComplete ?? this.onboardingComplete,
+      audioEnabled: audioEnabled ?? this.audioEnabled,
+      reducedMotion: reducedMotion ?? this.reducedMotion,
+      sessionReminders: sessionReminders ?? this.sessionReminders,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (displayName.present) {
+      map['display_name'] = Variable<String>(displayName.value);
+    }
+    if (avatarIndex.present) {
+      map['avatar_index'] = Variable<int>(avatarIndex.value);
+    }
+    if (localeCode.present) {
+      map['locale_code'] = Variable<String>(localeCode.value);
+    }
+    if (onboardingComplete.present) {
+      map['onboarding_complete'] = Variable<bool>(onboardingComplete.value);
+    }
+    if (audioEnabled.present) {
+      map['audio_enabled'] = Variable<bool>(audioEnabled.value);
+    }
+    if (reducedMotion.present) {
+      map['reduced_motion'] = Variable<bool>(reducedMotion.value);
+    }
+    if (sessionReminders.present) {
+      map['session_reminders'] = Variable<bool>(sessionReminders.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProfileRowsCompanion(')
+          ..write('id: $id, ')
+          ..write('displayName: $displayName, ')
+          ..write('avatarIndex: $avatarIndex, ')
+          ..write('localeCode: $localeCode, ')
+          ..write('onboardingComplete: $onboardingComplete, ')
+          ..write('audioEnabled: $audioEnabled, ')
+          ..write('reducedMotion: $reducedMotion, ')
+          ..write('sessionReminders: $sessionReminders')
+          ..write(')'))
+        .toString();
+  }
+}
+
+abstract class _$AppDatabase extends GeneratedDatabase {
+  _$AppDatabase(QueryExecutor e) : super(e);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  late final $ProgressRowsTable progressRows = $ProgressRowsTable(this);
+  late final $BadgeRowsTable badgeRows = $BadgeRowsTable(this);
+  late final $ProfileRowsTable profileRows = $ProfileRowsTable(this);
+  @override
+  Iterable<TableInfo<Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+  @override
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+    progressRows,
+    badgeRows,
+    profileRows,
+  ];
+}
+
+typedef $$ProgressRowsTableCreateCompanionBuilder =
+    ProgressRowsCompanion Function({
+      Value<int> id,
+      Value<int> stars,
+      Value<int> xp,
+      Value<String> unlockedWorlds,
+      Value<String> completedGames,
+      Value<bool> mapVisited,
+    });
+typedef $$ProgressRowsTableUpdateCompanionBuilder =
+    ProgressRowsCompanion Function({
+      Value<int> id,
+      Value<int> stars,
+      Value<int> xp,
+      Value<String> unlockedWorlds,
+      Value<String> completedGames,
+      Value<bool> mapVisited,
+    });
+
+class $$ProgressRowsTableFilterComposer
+    extends Composer<_$AppDatabase, $ProgressRowsTable> {
+  $$ProgressRowsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get stars => $composableBuilder(
+    column: $table.stars,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get xp => $composableBuilder(
+    column: $table.xp,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get unlockedWorlds => $composableBuilder(
+    column: $table.unlockedWorlds,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get completedGames => $composableBuilder(
+    column: $table.completedGames,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get mapVisited => $composableBuilder(
+    column: $table.mapVisited,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ProgressRowsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ProgressRowsTable> {
+  $$ProgressRowsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get stars => $composableBuilder(
+    column: $table.stars,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get xp => $composableBuilder(
+    column: $table.xp,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get unlockedWorlds => $composableBuilder(
+    column: $table.unlockedWorlds,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get completedGames => $composableBuilder(
+    column: $table.completedGames,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get mapVisited => $composableBuilder(
+    column: $table.mapVisited,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ProgressRowsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ProgressRowsTable> {
+  $$ProgressRowsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get stars =>
+      $composableBuilder(column: $table.stars, builder: (column) => column);
+
+  GeneratedColumn<int> get xp =>
+      $composableBuilder(column: $table.xp, builder: (column) => column);
+
+  GeneratedColumn<String> get unlockedWorlds => $composableBuilder(
+    column: $table.unlockedWorlds,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get completedGames => $composableBuilder(
+    column: $table.completedGames,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get mapVisited => $composableBuilder(
+    column: $table.mapVisited,
+    builder: (column) => column,
+  );
+}
+
+class $$ProgressRowsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ProgressRowsTable,
+          ProgressRow,
+          $$ProgressRowsTableFilterComposer,
+          $$ProgressRowsTableOrderingComposer,
+          $$ProgressRowsTableAnnotationComposer,
+          $$ProgressRowsTableCreateCompanionBuilder,
+          $$ProgressRowsTableUpdateCompanionBuilder,
+          (
+            ProgressRow,
+            BaseReferences<_$AppDatabase, $ProgressRowsTable, ProgressRow>,
+          ),
+          ProgressRow,
+          PrefetchHooks Function()
+        > {
+  $$ProgressRowsTableTableManager(_$AppDatabase db, $ProgressRowsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ProgressRowsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ProgressRowsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ProgressRowsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> stars = const Value.absent(),
+                Value<int> xp = const Value.absent(),
+                Value<String> unlockedWorlds = const Value.absent(),
+                Value<String> completedGames = const Value.absent(),
+                Value<bool> mapVisited = const Value.absent(),
+              }) => ProgressRowsCompanion(
+                id: id,
+                stars: stars,
+                xp: xp,
+                unlockedWorlds: unlockedWorlds,
+                completedGames: completedGames,
+                mapVisited: mapVisited,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> stars = const Value.absent(),
+                Value<int> xp = const Value.absent(),
+                Value<String> unlockedWorlds = const Value.absent(),
+                Value<String> completedGames = const Value.absent(),
+                Value<bool> mapVisited = const Value.absent(),
+              }) => ProgressRowsCompanion.insert(
+                id: id,
+                stars: stars,
+                xp: xp,
+                unlockedWorlds: unlockedWorlds,
+                completedGames: completedGames,
+                mapVisited: mapVisited,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ProgressRowsTable, ProgressRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $ProgressRowsTable,
+                    ProgressRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ProgressRowsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ProgressRowsTable,
+      ProgressRow,
+      $$ProgressRowsTableFilterComposer,
+      $$ProgressRowsTableOrderingComposer,
+      $$ProgressRowsTableAnnotationComposer,
+      $$ProgressRowsTableCreateCompanionBuilder,
+      $$ProgressRowsTableUpdateCompanionBuilder,
+      (
+        ProgressRow,
+        BaseReferences<_$AppDatabase, $ProgressRowsTable, ProgressRow>,
+      ),
+      ProgressRow,
+      PrefetchHooks Function()
+    >;
+typedef $$BadgeRowsTableCreateCompanionBuilder = BadgeRowsCompanion Function({
+  required String id,
+  required DateTime earnedAt,
+  Value<int> rowid,
+});
+typedef $$BadgeRowsTableUpdateCompanionBuilder = BadgeRowsCompanion Function({
+  Value<String> id,
+  Value<DateTime> earnedAt,
+  Value<int> rowid,
+});
+
+class $$BadgeRowsTableFilterComposer
+    extends Composer<_$AppDatabase, $BadgeRowsTable> {
+  $$BadgeRowsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get earnedAt => $composableBuilder(
+    column: $table.earnedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$BadgeRowsTableOrderingComposer
+    extends Composer<_$AppDatabase, $BadgeRowsTable> {
+  $$BadgeRowsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get earnedAt => $composableBuilder(
+    column: $table.earnedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$BadgeRowsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $BadgeRowsTable> {
+  $$BadgeRowsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get earnedAt =>
+      $composableBuilder(column: $table.earnedAt, builder: (column) => column);
+}
+
+class $$BadgeRowsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $BadgeRowsTable,
+          BadgeRow,
+          $$BadgeRowsTableFilterComposer,
+          $$BadgeRowsTableOrderingComposer,
+          $$BadgeRowsTableAnnotationComposer,
+          $$BadgeRowsTableCreateCompanionBuilder,
+          $$BadgeRowsTableUpdateCompanionBuilder,
+          (BadgeRow, BaseReferences<_$AppDatabase, $BadgeRowsTable, BadgeRow>),
+          BadgeRow,
+          PrefetchHooks Function()
+        > {
+  $$BadgeRowsTableTableManager(_$AppDatabase db, $BadgeRowsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$BadgeRowsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$BadgeRowsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$BadgeRowsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<DateTime> earnedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) => BadgeRowsCompanion(id: id, earnedAt: earnedAt, rowid: rowid),
+          createCompanionCallback:
+              ({
+                required String id,
+                required DateTime earnedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => BadgeRowsCompanion.insert(
+                id: id,
+                earnedAt: earnedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$BadgeRowsTable, BadgeRow>(table),
+                  BaseReferences<_$AppDatabase, $BadgeRowsTable, BadgeRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$BadgeRowsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $BadgeRowsTable,
+      BadgeRow,
+      $$BadgeRowsTableFilterComposer,
+      $$BadgeRowsTableOrderingComposer,
+      $$BadgeRowsTableAnnotationComposer,
+      $$BadgeRowsTableCreateCompanionBuilder,
+      $$BadgeRowsTableUpdateCompanionBuilder,
+      (BadgeRow, BaseReferences<_$AppDatabase, $BadgeRowsTable, BadgeRow>),
+      BadgeRow,
+      PrefetchHooks Function()
+    >;
+typedef $$ProfileRowsTableCreateCompanionBuilder =
+    ProfileRowsCompanion Function({
+      Value<int> id,
+      Value<String> displayName,
+      Value<int> avatarIndex,
+      Value<String> localeCode,
+      Value<bool> onboardingComplete,
+      Value<bool> audioEnabled,
+      Value<bool> reducedMotion,
+      Value<bool> sessionReminders,
+    });
+typedef $$ProfileRowsTableUpdateCompanionBuilder =
+    ProfileRowsCompanion Function({
+      Value<int> id,
+      Value<String> displayName,
+      Value<int> avatarIndex,
+      Value<String> localeCode,
+      Value<bool> onboardingComplete,
+      Value<bool> audioEnabled,
+      Value<bool> reducedMotion,
+      Value<bool> sessionReminders,
+    });
+
+class $$ProfileRowsTableFilterComposer
+    extends Composer<_$AppDatabase, $ProfileRowsTable> {
+  $$ProfileRowsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get avatarIndex => $composableBuilder(
+    column: $table.avatarIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get localeCode => $composableBuilder(
+    column: $table.localeCode,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get onboardingComplete => $composableBuilder(
+    column: $table.onboardingComplete,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get audioEnabled => $composableBuilder(
+    column: $table.audioEnabled,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get reducedMotion => $composableBuilder(
+    column: $table.reducedMotion,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get sessionReminders => $composableBuilder(
+    column: $table.sessionReminders,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ProfileRowsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ProfileRowsTable> {
+  $$ProfileRowsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get avatarIndex => $composableBuilder(
+    column: $table.avatarIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get localeCode => $composableBuilder(
+    column: $table.localeCode,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get onboardingComplete => $composableBuilder(
+    column: $table.onboardingComplete,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get audioEnabled => $composableBuilder(
+    column: $table.audioEnabled,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get reducedMotion => $composableBuilder(
+    column: $table.reducedMotion,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get sessionReminders => $composableBuilder(
+    column: $table.sessionReminders,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ProfileRowsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ProfileRowsTable> {
+  $$ProfileRowsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get avatarIndex => $composableBuilder(
+    column: $table.avatarIndex,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get localeCode => $composableBuilder(
+    column: $table.localeCode,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get onboardingComplete => $composableBuilder(
+    column: $table.onboardingComplete,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get audioEnabled => $composableBuilder(
+    column: $table.audioEnabled,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get reducedMotion => $composableBuilder(
+    column: $table.reducedMotion,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get sessionReminders => $composableBuilder(
+    column: $table.sessionReminders,
+    builder: (column) => column,
+  );
+}
+
+class $$ProfileRowsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ProfileRowsTable,
+          ProfileRow,
+          $$ProfileRowsTableFilterComposer,
+          $$ProfileRowsTableOrderingComposer,
+          $$ProfileRowsTableAnnotationComposer,
+          $$ProfileRowsTableCreateCompanionBuilder,
+          $$ProfileRowsTableUpdateCompanionBuilder,
+          (
+            ProfileRow,
+            BaseReferences<_$AppDatabase, $ProfileRowsTable, ProfileRow>,
+          ),
+          ProfileRow,
+          PrefetchHooks Function()
+        > {
+  $$ProfileRowsTableTableManager(_$AppDatabase db, $ProfileRowsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ProfileRowsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ProfileRowsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ProfileRowsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> displayName = const Value.absent(),
+                Value<int> avatarIndex = const Value.absent(),
+                Value<String> localeCode = const Value.absent(),
+                Value<bool> onboardingComplete = const Value.absent(),
+                Value<bool> audioEnabled = const Value.absent(),
+                Value<bool> reducedMotion = const Value.absent(),
+                Value<bool> sessionReminders = const Value.absent(),
+              }) => ProfileRowsCompanion(
+                id: id,
+                displayName: displayName,
+                avatarIndex: avatarIndex,
+                localeCode: localeCode,
+                onboardingComplete: onboardingComplete,
+                audioEnabled: audioEnabled,
+                reducedMotion: reducedMotion,
+                sessionReminders: sessionReminders,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> displayName = const Value.absent(),
+                Value<int> avatarIndex = const Value.absent(),
+                Value<String> localeCode = const Value.absent(),
+                Value<bool> onboardingComplete = const Value.absent(),
+                Value<bool> audioEnabled = const Value.absent(),
+                Value<bool> reducedMotion = const Value.absent(),
+                Value<bool> sessionReminders = const Value.absent(),
+              }) => ProfileRowsCompanion.insert(
+                id: id,
+                displayName: displayName,
+                avatarIndex: avatarIndex,
+                localeCode: localeCode,
+                onboardingComplete: onboardingComplete,
+                audioEnabled: audioEnabled,
+                reducedMotion: reducedMotion,
+                sessionReminders: sessionReminders,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ProfileRowsTable, ProfileRow>(table),
+                  BaseReferences<_$AppDatabase, $ProfileRowsTable, ProfileRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ProfileRowsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ProfileRowsTable,
+      ProfileRow,
+      $$ProfileRowsTableFilterComposer,
+      $$ProfileRowsTableOrderingComposer,
+      $$ProfileRowsTableAnnotationComposer,
+      $$ProfileRowsTableCreateCompanionBuilder,
+      $$ProfileRowsTableUpdateCompanionBuilder,
+      (
+        ProfileRow,
+        BaseReferences<_$AppDatabase, $ProfileRowsTable, ProfileRow>,
+      ),
+      ProfileRow,
+      PrefetchHooks Function()
+    >;
+
+class $AppDatabaseManager {
+  final _$AppDatabase _db;
+  $AppDatabaseManager(this._db);
+  $$ProgressRowsTableTableManager get progressRows =>
+      $$ProgressRowsTableTableManager(_db, _db.progressRows);
+  $$BadgeRowsTableTableManager get badgeRows =>
+      $$BadgeRowsTableTableManager(_db, _db.badgeRows);
+  $$ProfileRowsTableTableManager get profileRows =>
+      $$ProfileRowsTableTableManager(_db, _db.profileRows);
+}

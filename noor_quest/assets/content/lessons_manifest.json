@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "reviewStatus": "pending_educator_review",
+  "lessons": [
+    {
+      "id": "arabic_letters_v1",
+      "topic": "Arabic letter recognition",
+      "ageRange": [6, 10],
+      "status": "pending_educator_review"
+    },
+    {
+      "id": "wudu_sequence_v1",
+      "topic": "Wudu introductory sequence",
+      "ageRange": [6, 10],
+      "status": "pending_educator_review",
+      "notes": "Commonly taught sequence; madhhab variations flagged in-app."
+    },
+    {
+      "id": "good_manners_v1",
+      "topic": "Everyday akhlaq scenarios",
+      "ageRange": [6, 10],
+      "status": "pending_educator_review"
+    }
+  ]
+}
