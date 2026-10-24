@@ -1,0 +1,117 @@
+{
+  "@@locale": "en",
+  "appTitle": "Noor Quest",
+  "appTitleArabic": "مغامرات نور",
+  "splashTagline": "An adventure of light and learning",
+  "chooseLanguage": "Choose your language",
+  "languageEnglish": "English",
+  "languageArabic": "العربية",
+  "languageGerman": "Deutsch",
+  "continueLabel": "Continue",
+  "createProfile": "Create your adventurer",
+  "pickAvatar": "Pick an avatar",
+  "adventurerName": "Adventurer name (optional)",
+  "nameHint": "Noor Friend",
+  "startAdventure": "Start adventure",
+  "welcomeHome": "Welcome, {name}!",
+  "@welcomeHome": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "starsCount": "{count} stars",
+  "@starsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "xpCount": "{count} XP",
+  "@xpCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "play": "Play",
+  "openMap": "Open world map",
+  "achievements": "Achievements",
+  "parentArea": "Parent area",
+  "noorGreeting": "Hi! I'm Noor, your glowing lantern friend. Let's explore!",
+  "worldMapTitle": "Adventure Map",
+  "worldArabic": "Arabic Alphabet Island",
+  "worldPrayer": "Prayer City",
+  "worldGarden": "Garden of Islam",
+  "worldManners": "Village of Good Manners",
+  "worldQuran": "Quran Oasis",
+  "comingSoon": "Coming soon",
+  "locked": "Locked",
+  "playGame": "Play",
+  "back": "Back",
+  "home": "Home",
+  "next": "Next",
+  "retry": "Try again",
+  "greatJob": "Great job!",
+  "almost": "Almost — try again!",
+  "correct": "Correct!",
+  "victoryTitle": "You did it!",
+  "starsEarned": "You earned {count} stars",
+  "@starsEarned": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "xpEarned": "+{count} XP",
+  "@xpEarned": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "backToMap": "Back to map",
+  "playAgain": "Play again",
+  "arabicLettersTitle": "Arabic Letter Adventure",
+  "arabicLettersHint": "Which letter does this start with?",
+  "hearWord": "Hear word",
+  "wuduTitle": "Wudu Sequence Challenge",
+  "wuduHint": "Put the wudu steps in the right order",
+  "wuduCheck": "Check order",
+  "wuduExplanation": "This is a learning activity using a commonly taught introductory sequence. Schools of thought may differ on details. Always ask a trusted teacher for religious guidance.",
+  "mannersTitle": "Good Manners Adventure",
+  "mannersHint": "What would you do?",
+  "parentGateTitle": "Parents only",
+  "parentGatePrompt": "What is {a} + {b}?",
+  "@parentGatePrompt": {
+    "placeholders": {
+      "a": {"type": "int"},
+      "b": {"type": "int"}
+    }
+  },
+  "parentGateWrong": "Not quite — ask a parent to help.",
+  "parentProgress": "Progress overview",
+  "parentLanguage": "App language",
+  "parentAudio": "Speak words aloud",
+  "parentReducedMotion": "Reduce animations",
+  "parentReset": "Reset all progress",
+  "parentResetConfirm": "Erase stars, XP, unlocks, and badges? This cannot be undone.",
+  "parentCancel": "Cancel",
+  "parentConfirm": "Reset",
+  "parentReminders": "Session reminders (local only)",
+  "parentRemindersHint": "Gentle local reminders — no accounts, no cloud.",
+  "parentExternalLinks": "External links",
+  "parentPrivacyNote": "Noor Quest is offline-first. No child accounts, ads, or tracking in this MVP.",
+  "badgeFirstStar": "First Star",
+  "badgeLetterLearner": "Letter Learner",
+  "badgeWuduExplorer": "Wudu Explorer",
+  "badgeKindHeart": "Kind Heart",
+  "badgeMapTraveler": "Map Traveler",
+  "badgeStarCollector": "Star Collector",
+  "noBadgesYet": "Complete activities to earn badges!",
+  "roundOf": "Round {current} of {total}",
+  "@roundOf": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "lessonComplete": "Lesson complete!",
+  "starsAreRewards": "Stars are educational rewards — not spiritual merit.",
+  "skip": "Skip"
+}
