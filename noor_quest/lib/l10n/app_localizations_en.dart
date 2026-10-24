@@ -16,6 +16,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitleArabic => 'مغامرات نور';
 
   @override
+  String get tagline => 'Play, Explore, and Learn';
+
+  @override
   String get splashTagline => 'An adventure of light and learning';
 
   @override
@@ -83,7 +86,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get worldMapTitle => 'Adventure Map';
 
   @override
-  String get worldArabic => 'Arabic Alphabet Island';
+  String get worldArabic => 'Alphabet Island';
 
   @override
   String get worldPrayer => 'Prayer City';
@@ -92,7 +95,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get worldGarden => 'Garden of Islam';
 
   @override
-  String get worldManners => 'Village of Good Manners';
+  String get worldManners => 'Manners Village';
 
   @override
   String get worldQuran => 'Quran Oasis';
@@ -147,7 +150,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playAgain => 'Play again';
 
   @override
-  String get arabicLettersTitle => 'Arabic Letter Adventure';
+  String get arabicLettersTitle => 'Letter Adventure';
 
   @override
   String get arabicLettersHint => 'Which letter does this start with?';
@@ -156,7 +159,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hearWord => 'Hear word';
 
   @override
-  String get wuduTitle => 'Wudu Sequence Challenge';
+  String get hearLetter => 'Hear letter';
+
+  @override
+  String get wuduTitle => 'Wudu Challenge';
 
   @override
   String get wuduHint => 'Put the wudu steps in the right order';
@@ -169,7 +175,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'This is a learning activity using a commonly taught introductory sequence. Schools of thought may differ on details. Always ask a trusted teacher for religious guidance.';
 
   @override
-  String get mannersTitle => 'Good Manners Adventure';
+  String get mannersTitle => 'Good Manners';
 
   @override
   String get mannersHint => 'What would you do?';
@@ -186,6 +192,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get parentGateWrong => 'Not quite — ask a parent to help.';
 
   @override
+  String get parentGatePin => 'Or enter parent PIN';
+
+  @override
+  String get parentPinHint => '4-digit PIN';
+
+  @override
+  String get parentSetPin => 'Set parent PIN';
+
+  @override
+  String get parentClearPin => 'Clear PIN';
+
+  @override
   String get parentProgress => 'Progress overview';
 
   @override
@@ -193,6 +211,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get parentAudio => 'Speak words aloud';
+
+  @override
+  String get parentSfxVolume => 'Sound effects volume';
 
   @override
   String get parentReducedMotion => 'Reduce animations';
@@ -243,6 +264,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get badgeStarCollector => 'Star Collector';
 
   @override
+  String get badgeGardenFriend => 'Garden Friend';
+
+  @override
   String get noBadgesYet => 'Complete activities to earn badges!';
 
   @override
@@ -259,4 +283,109 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get skip => 'Skip';
+
+  @override
+  String get avatarExplorer => 'Explorer';
+
+  @override
+  String get avatarDesertFox => 'Desert Fox';
+
+  @override
+  String get avatarBird => 'Sky Bird';
+
+  @override
+  String get avatarCat => 'Kind Cat';
+
+  @override
+  String get avatarStarKid => 'Star Kid';
+
+  @override
+  String get avatarGardenExplorer => 'Garden Friend';
+
+  @override
+  String get arabicPathTitle => 'Alphabet Path';
+
+  @override
+  String get arabicPathHint => 'Learn letters step by step';
+
+  @override
+  String stageLabel(int n) {
+    return 'Stage $n';
+  }
+
+  @override
+  String get traceHint => 'Trace the letter with your finger';
+
+  @override
+  String get gardenTitle => 'Garden of Islam';
+
+  @override
+  String get gardenHint => 'Learn the five pillars gently';
+
+  @override
+  String get pillarShahada => 'Faith';
+
+  @override
+  String get pillarPrayer => 'Prayer';
+
+  @override
+  String get pillarCharity => 'Charity';
+
+  @override
+  String get pillarFasting => 'Fasting';
+
+  @override
+  String get pillarHajj => 'Pilgrimage';
+
+  @override
+  String get teacherTitle => 'Noor Teacher';
+
+  @override
+  String get teacherHint => 'Offline tips from Noor';
+
+  @override
+  String get teacherOfflineOnly =>
+      'Curated offline lessons — cloud AI is disabled.';
+
+  @override
+  String get premiumTitle => 'Family+';
+
+  @override
+  String get premiumBody =>
+      'Family+ unlocks future extras. Purchases are not enabled in this build.';
+
+  @override
+  String get premiumBlocked =>
+      'In-app purchases require store credentials and owner approval.';
+
+  @override
+  String get adsDisabled => 'Ads stay off for children.';
+
+  @override
+  String get aiDisabled => 'Cloud AI requires approval and is disabled.';
+
+  @override
+  String get accountScaffold =>
+      'Parent accounts are optional scaffolding — continue offline anytime.';
+
+  @override
+  String get alreadyClaimed => 'Rewards already collected for this lesson.';
+
+  @override
+  String get routeError => 'Something went wrong with navigation.';
+
+  @override
+  String get completedLabel => 'Completed';
+
+  @override
+  String get unlockedLabel => 'Unlocked';
+
+  @override
+  String get badgesLabel => 'Badges';
+
+  @override
+  String get selectWorld => 'Tap an island to explore';
+
+  @override
+  String get privacyNicknameOnly => 'No personal info needed — nickname only.';
 }

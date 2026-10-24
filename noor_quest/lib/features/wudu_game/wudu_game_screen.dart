@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:noor_quest/l10n/app_localizations.dart';
 
 import '../../app/providers.dart';
+import '../../core/audio/sound_manager.dart';
 import '../../core/painters/geometric_bg.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/widgets/star_burst.dart';
@@ -56,8 +57,10 @@ class _WuduGameScreenState extends ConsumerState<WuduGameScreen> {
     });
     if (_isCorrect) {
       await Future<void>.delayed(const Duration(milliseconds: 800));
+      ref.read(soundManagerProvider).play(Sfx.celebrate);
       final result = await ref.read(progressRepositoryProvider).completeGame(
             gameId: 'wudu_sequence',
+            rewardKey: 'wudu_sequence_v1_complete',
             starsEarned: 3,
             xpEarned: 40,
             badgeId: 'wudu_explorer',
@@ -121,6 +124,7 @@ class _WuduGameScreenState extends ConsumerState<WuduGameScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemCount: _slots.length,
                   onReorderItem: (oldIndex, newIndex) {
+                    ref.read(soundManagerProvider).play(Sfx.drag);
                     setState(() {
                       final item = _slots.removeAt(oldIndex);
                       _slots.insert(newIndex, item);

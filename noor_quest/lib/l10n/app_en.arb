@@ -2,6 +2,7 @@
   "@@locale": "en",
   "appTitle": "Noor Quest",
   "appTitleArabic": "مغامرات نور",
+  "tagline": "Play, Explore, and Learn",
   "splashTagline": "An adventure of light and learning",
   "chooseLanguage": "Choose your language",
   "languageEnglish": "English",
@@ -14,33 +15,21 @@
   "nameHint": "Noor Friend",
   "startAdventure": "Start adventure",
   "welcomeHome": "Welcome, {name}!",
-  "@welcomeHome": {
-    "placeholders": {
-      "name": {"type": "String"}
-    }
-  },
+  "@welcomeHome": {"placeholders": {"name": {"type": "String"}}},
   "starsCount": "{count} stars",
-  "@starsCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
+  "@starsCount": {"placeholders": {"count": {"type": "int"}}},
   "xpCount": "{count} XP",
-  "@xpCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
+  "@xpCount": {"placeholders": {"count": {"type": "int"}}},
   "play": "Play",
   "openMap": "Open world map",
   "achievements": "Achievements",
   "parentArea": "Parent area",
   "noorGreeting": "Hi! I'm Noor, your glowing lantern friend. Let's explore!",
   "worldMapTitle": "Adventure Map",
-  "worldArabic": "Arabic Alphabet Island",
+  "worldArabic": "Alphabet Island",
   "worldPrayer": "Prayer City",
   "worldGarden": "Garden of Islam",
-  "worldManners": "Village of Good Manners",
+  "worldManners": "Manners Village",
   "worldQuran": "Quran Oasis",
   "comingSoon": "Coming soon",
   "locked": "Locked",
@@ -54,40 +43,33 @@
   "correct": "Correct!",
   "victoryTitle": "You did it!",
   "starsEarned": "You earned {count} stars",
-  "@starsEarned": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
+  "@starsEarned": {"placeholders": {"count": {"type": "int"}}},
   "xpEarned": "+{count} XP",
-  "@xpEarned": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
+  "@xpEarned": {"placeholders": {"count": {"type": "int"}}},
   "backToMap": "Back to map",
   "playAgain": "Play again",
-  "arabicLettersTitle": "Arabic Letter Adventure",
+  "arabicLettersTitle": "Letter Adventure",
   "arabicLettersHint": "Which letter does this start with?",
   "hearWord": "Hear word",
-  "wuduTitle": "Wudu Sequence Challenge",
+  "hearLetter": "Hear letter",
+  "wuduTitle": "Wudu Challenge",
   "wuduHint": "Put the wudu steps in the right order",
   "wuduCheck": "Check order",
   "wuduExplanation": "This is a learning activity using a commonly taught introductory sequence. Schools of thought may differ on details. Always ask a trusted teacher for religious guidance.",
-  "mannersTitle": "Good Manners Adventure",
+  "mannersTitle": "Good Manners",
   "mannersHint": "What would you do?",
   "parentGateTitle": "Parents only",
   "parentGatePrompt": "What is {a} + {b}?",
-  "@parentGatePrompt": {
-    "placeholders": {
-      "a": {"type": "int"},
-      "b": {"type": "int"}
-    }
-  },
+  "@parentGatePrompt": {"placeholders": {"a": {"type": "int"}, "b": {"type": "int"}}},
   "parentGateWrong": "Not quite — ask a parent to help.",
+  "parentGatePin": "Or enter parent PIN",
+  "parentPinHint": "4-digit PIN",
+  "parentSetPin": "Set parent PIN",
+  "parentClearPin": "Clear PIN",
   "parentProgress": "Progress overview",
   "parentLanguage": "App language",
   "parentAudio": "Speak words aloud",
+  "parentSfxVolume": "Sound effects volume",
   "parentReducedMotion": "Reduce animations",
   "parentReset": "Reset all progress",
   "parentResetConfirm": "Erase stars, XP, unlocks, and badges? This cannot be undone.",
@@ -103,15 +85,45 @@
   "badgeKindHeart": "Kind Heart",
   "badgeMapTraveler": "Map Traveler",
   "badgeStarCollector": "Star Collector",
+  "badgeGardenFriend": "Garden Friend",
   "noBadgesYet": "Complete activities to earn badges!",
   "roundOf": "Round {current} of {total}",
-  "@roundOf": {
-    "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
-    }
-  },
+  "@roundOf": {"placeholders": {"current": {"type": "int"}, "total": {"type": "int"}}},
   "lessonComplete": "Lesson complete!",
   "starsAreRewards": "Stars are educational rewards — not spiritual merit.",
-  "skip": "Skip"
+  "skip": "Skip",
+  "avatarExplorer": "Explorer",
+  "avatarDesertFox": "Desert Fox",
+  "avatarBird": "Sky Bird",
+  "avatarCat": "Kind Cat",
+  "avatarStarKid": "Star Kid",
+  "avatarGardenExplorer": "Garden Friend",
+  "arabicPathTitle": "Alphabet Path",
+  "arabicPathHint": "Learn letters step by step",
+  "stageLabel": "Stage {n}",
+  "@stageLabel": {"placeholders": {"n": {"type": "int"}}},
+  "traceHint": "Trace the letter with your finger",
+  "gardenTitle": "Garden of Islam",
+  "gardenHint": "Learn the five pillars gently",
+  "pillarShahada": "Faith",
+  "pillarPrayer": "Prayer",
+  "pillarCharity": "Charity",
+  "pillarFasting": "Fasting",
+  "pillarHajj": "Pilgrimage",
+  "teacherTitle": "Noor Teacher",
+  "teacherHint": "Offline tips from Noor",
+  "teacherOfflineOnly": "Curated offline lessons — cloud AI is disabled.",
+  "premiumTitle": "Family+",
+  "premiumBody": "Family+ unlocks future extras. Purchases are not enabled in this build.",
+  "premiumBlocked": "In-app purchases require store credentials and owner approval.",
+  "adsDisabled": "Ads stay off for children.",
+  "aiDisabled": "Cloud AI requires approval and is disabled.",
+  "accountScaffold": "Parent accounts are optional scaffolding — continue offline anytime.",
+  "alreadyClaimed": "Rewards already collected for this lesson.",
+  "routeError": "Something went wrong with navigation.",
+  "completedLabel": "Completed",
+  "unlockedLabel": "Unlocked",
+  "badgesLabel": "Badges",
+  "selectWorld": "Tap an island to explore",
+  "privacyNicknameOnly": "No personal info needed — nickname only."
 }

@@ -19,6 +19,7 @@ class AchievementsScreen extends ConsumerWidget {
       'kind_heart' => l10n.badgeKindHeart,
       'map_traveler' => l10n.badgeMapTraveler,
       'star_collector' => l10n.badgeStarCollector,
+      'garden_friend' => l10n.badgeGardenFriend,
       _ => id,
     };
   }
@@ -31,6 +32,7 @@ class AchievementsScreen extends ConsumerWidget {
       'kind_heart' => Icons.favorite_rounded,
       'map_traveler' => Icons.map_rounded,
       'star_collector' => Icons.auto_awesome_rounded,
+      'garden_friend' => Icons.local_florist_rounded,
       _ => Icons.emoji_events_rounded,
     };
   }

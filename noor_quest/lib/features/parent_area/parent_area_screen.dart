@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:noor_quest/l10n/app_localizations.dart';
 
 import '../../app/providers.dart';
+import '../../core/audio/sound_manager.dart';
 import '../../core/painters/geometric_bg.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/widgets/star_burst.dart';
@@ -32,6 +33,38 @@ class ParentAreaScreen extends ConsumerWidget {
     );
     if (ok == true) {
       await ref.read(progressRepositoryProvider).resetAll();
+      ref.read(soundManagerProvider).play(Sfx.unlock);
+    }
+  }
+
+  Future<void> _setPin(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context);
+    final ctrl = TextEditingController();
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.parentSetPin),
+        content: TextField(
+          controller: ctrl,
+          keyboardType: TextInputType.number,
+          obscureText: true,
+          maxLength: 4,
+          decoration: InputDecoration(hintText: l10n.parentPinHint),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.parentCancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.continueLabel),
+          ),
+        ],
+      ),
+    );
+    if (ok == true && ctrl.text.trim().length >= 4) {
+      await ref.read(progressRepositoryProvider).setParentPin(ctrl.text.trim());
     }
   }
 
@@ -40,13 +73,17 @@ class ParentAreaScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final profile = ref.watch(profileProvider).value;
     final progress = ref.watch(progressProvider).value;
+    final sound = ref.watch(soundManagerProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.parentArea),
+        title: Text(l10n.parentArea, maxLines: 1, overflow: TextOverflow.ellipsis),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => context.go('/home'),
+          onPressed: () {
+            ref.read(parentUnlockedProvider.notifier).state = false;
+            context.go('/home');
+          },
         ),
       ),
       body: GeometricBackground(
@@ -61,18 +98,15 @@ class ParentAreaScreen extends ConsumerWidget {
                   ),
             ),
             const SizedBox(height: 8),
-            StarsXpBar(
-              stars: progress?.stars ?? 0,
-              xp: progress?.xp ?? 0,
-            ),
+            StarsXpBar(stars: progress?.stars ?? 0, xp: progress?.xp ?? 0),
             const SizedBox(height: 8),
             Text(
-              'Completed: ${((progress?.completedGames ?? {}).isEmpty) ? '—' : (progress?.completedGames ?? {}).join(', ')}',
+              '${l10n.completedLabel}: ${(progress?.completedGames ?? {}).isEmpty ? '—' : (progress?.completedGames ?? {}).join(', ')}',
             ),
             Text(
-              'Unlocked: ${(progress?.unlockedWorlds ?? {}).join(', ')}',
+              '${l10n.unlockedLabel}: ${(progress?.unlockedWorlds ?? {}).join(', ')}',
             ),
-            Text('Badges: ${(progress?.badges ?? {}).length}'),
+            Text('${l10n.badgesLabel}: ${(progress?.badges ?? {}).length}'),
             const Divider(height: 32),
             Text(
               l10n.parentLanguage,
@@ -96,9 +130,20 @@ class ParentAreaScreen extends ConsumerWidget {
             SwitchListTile(
               title: Text(l10n.parentAudio),
               value: profile?.audioEnabled ?? true,
-              onChanged: (v) => ref
-                  .read(progressRepositoryProvider)
-                  .updatePrefs(audioEnabled: v),
+              onChanged: (v) {
+                sound.enabled = v;
+                ref.read(progressRepositoryProvider).updatePrefs(audioEnabled: v);
+              },
+            ),
+            ListTile(
+              title: Text(l10n.parentSfxVolume),
+              subtitle: Slider(
+                value: profile?.sfxVolume ?? 0.8,
+                onChanged: (v) {
+                  sound.volume = v;
+                  ref.read(progressRepositoryProvider).updatePrefs(sfxVolume: v);
+                },
+              ),
             ),
             SwitchListTile(
               title: Text(l10n.parentReducedMotion),
@@ -116,42 +161,24 @@ class ParentAreaScreen extends ConsumerWidget {
                   .updatePrefs(sessionReminders: v),
             ),
             const Divider(height: 32),
-            Text(
-              l10n.parentExternalLinks,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+            OutlinedButton(
+              onPressed: () => _setPin(context, ref),
+              child: Text(l10n.parentSetPin),
             ),
+            if (profile?.hasParentPin ?? false)
+              TextButton(
+                onPressed: () =>
+                    ref.read(progressRepositoryProvider).clearParentPin(),
+                child: Text(l10n.parentClearPin),
+              ),
+            OutlinedButton(
+              onPressed: () => context.push('/premium'),
+              child: Text(l10n.premiumTitle),
+            ),
+            const SizedBox(height: 12),
+            Text(l10n.parentPrivacyNote),
             const SizedBox(height: 8),
-            OutlinedButton.icon(
-              onPressed: () {
-                showDialog<void>(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: Text(l10n.parentExternalLinks),
-                    content: const Text(
-                      'Parent-gated external links open only after this gate. '
-                      'Example (not opened automatically in MVP): '
-                      'https://www.islamicity.org\n\n'
-                      'Child gameplay has no external links.',
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(ctx),
-                        child: Text(l10n.continueLabel),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              icon: const Icon(Icons.open_in_new_rounded),
-              label: const Text('Educational resource (external)'),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              l10n.parentPrivacyNote,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            Text(l10n.accountScaffold),
             const SizedBox(height: 24),
             BigKidButton(
               label: l10n.parentReset,
@@ -165,4 +192,3 @@ class ParentAreaScreen extends ConsumerWidget {
     );
   }
 }
-

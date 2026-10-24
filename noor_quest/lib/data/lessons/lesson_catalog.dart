@@ -308,5 +308,6 @@ abstract final class LessonCatalog {
     'kind_heart',
     'map_traveler',
     'star_collector',
+    'garden_friend',
   ];
 }

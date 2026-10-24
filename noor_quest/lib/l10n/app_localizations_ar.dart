@@ -16,6 +16,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appTitleArabic => 'مغامرات نور';
 
   @override
+  String get tagline => 'العب، اكتشف، وتعلّم';
+
+  @override
   String get splashTagline => 'مغامرة نورٍ وتعلّم';
 
   @override
@@ -146,7 +149,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get playAgain => 'العب مرة أخرى';
 
   @override
-  String get arabicLettersTitle => 'مغامرة الحروف العربية';
+  String get arabicLettersTitle => 'مغامرة الحروف';
 
   @override
   String get arabicLettersHint => 'بأي حرف تبدأ هذه الكلمة؟';
@@ -155,7 +158,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hearWord => 'استمع للكلمة';
 
   @override
-  String get wuduTitle => 'تحدي ترتيب الوضوء';
+  String get hearLetter => 'استمع للحرف';
+
+  @override
+  String get wuduTitle => 'تحدي الوضوء';
 
   @override
   String get wuduHint => 'رتّب خطوات الوضوء بالترتيب الصحيح';
@@ -168,7 +174,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'هذا نشاط تعليمي يستخدم تسلسلًا تمهيديًا شائع التدريس. قد تختلف المذاهب في التفاصيل. اسأل معلمًا موثوقًا للإرشاد الديني.';
 
   @override
-  String get mannersTitle => 'مغامرة الأخلاق الحسنة';
+  String get mannersTitle => 'الأخلاق الحسنة';
 
   @override
   String get mannersHint => 'ماذا تفعل؟';
@@ -185,6 +191,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get parentGateWrong => 'ليس تمامًا — اطلب مساعدة أحد الوالدين.';
 
   @override
+  String get parentGatePin => 'أو أدخل رمز الوالدين';
+
+  @override
+  String get parentPinHint => 'رمز من 4 أرقام';
+
+  @override
+  String get parentSetPin => 'تعيين رمز الوالدين';
+
+  @override
+  String get parentClearPin => 'مسح الرمز';
+
+  @override
   String get parentProgress => 'نظرة على التقدّم';
 
   @override
@@ -192,6 +210,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get parentAudio => 'نطق الكلمات بصوت عالٍ';
+
+  @override
+  String get parentSfxVolume => 'مستوى المؤثرات الصوتية';
 
   @override
   String get parentReducedMotion => 'تقليل الحركة';
@@ -242,6 +263,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get badgeStarCollector => 'جامع النجوم';
 
   @override
+  String get badgeGardenFriend => 'صديق الحديقة';
+
+  @override
   String get noBadgesYet => 'أكمل الأنشطة لكسب الشارات!';
 
   @override
@@ -257,4 +281,109 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get skip => 'تخطي';
+
+  @override
+  String get avatarExplorer => 'المستكشف';
+
+  @override
+  String get avatarDesertFox => 'ثعلب الصحراء';
+
+  @override
+  String get avatarBird => 'طائر السماء';
+
+  @override
+  String get avatarCat => 'القط اللطيف';
+
+  @override
+  String get avatarStarKid => 'طفل النجمة';
+
+  @override
+  String get avatarGardenExplorer => 'صديق الحديقة';
+
+  @override
+  String get arabicPathTitle => 'مسار الحروف';
+
+  @override
+  String get arabicPathHint => 'تعلّم الحروف خطوة بخطوة';
+
+  @override
+  String stageLabel(int n) {
+    return 'المرحلة $n';
+  }
+
+  @override
+  String get traceHint => 'تتبّع الحرف بإصبعك';
+
+  @override
+  String get gardenTitle => 'حديقة الإسلام';
+
+  @override
+  String get gardenHint => 'تعرّف على أركان الإسلام بلطف';
+
+  @override
+  String get pillarShahada => 'الشهادة';
+
+  @override
+  String get pillarPrayer => 'الصلاة';
+
+  @override
+  String get pillarCharity => 'الزكاة';
+
+  @override
+  String get pillarFasting => 'الصيام';
+
+  @override
+  String get pillarHajj => 'الحج';
+
+  @override
+  String get teacherTitle => 'معلّم نور';
+
+  @override
+  String get teacherHint => 'نصائح من نور دون اتصال';
+
+  @override
+  String get teacherOfflineOnly =>
+      'دروس مختارة دون اتصال — الذكاء السحابي معطّل.';
+
+  @override
+  String get premiumTitle => 'عائلي+';
+
+  @override
+  String get premiumBody =>
+      'عائلي+ يفتح ميزات مستقبلية. الشراء غير مفعّل في هذا الإصدار.';
+
+  @override
+  String get premiumBlocked =>
+      'المشتريات داخل التطبيق تحتاج اعتماد المتجر وموافقة المالك.';
+
+  @override
+  String get adsDisabled => 'الإعلانات معطّلة للأطفال.';
+
+  @override
+  String get aiDisabled => 'الذكاء السحابي يحتاج موافقة وهو معطّل.';
+
+  @override
+  String get accountScaffold =>
+      'حسابات الوالدين اختيارية — يمكن المتابعة دون اتصال دائمًا.';
+
+  @override
+  String get alreadyClaimed => 'تم جمع مكافآت هذا الدرس مسبقًا.';
+
+  @override
+  String get routeError => 'حدث خطأ في التنقّل.';
+
+  @override
+  String get completedLabel => 'مكتمل';
+
+  @override
+  String get unlockedLabel => 'مفتوح';
+
+  @override
+  String get badgesLabel => 'الشارات';
+
+  @override
+  String get selectWorld => 'اضغط على جزيرة للاستكشاف';
+
+  @override
+  String get privacyNicknameOnly => 'لا حاجة لمعلومات شخصية — لقب فقط.';
 }

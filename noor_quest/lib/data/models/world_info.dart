@@ -28,7 +28,7 @@ class WorldInfo {
   static const all = <WorldInfo>[
     WorldInfo(
       id: WorldId.arabic,
-      routeGame: '/game/arabic',
+      routeGame: '/game/arabic-path',
       playable: true,
       comingSoon: false,
       mapX: 0.18,
@@ -46,9 +46,9 @@ class WorldInfo {
     ),
     WorldInfo(
       id: WorldId.garden,
-      routeGame: null,
-      playable: false,
-      comingSoon: true,
+      routeGame: '/game/garden',
+      playable: true,
+      comingSoon: false,
       mapX: 0.78,
       mapY: 0.42,
       accent: 0xFF7BC47F,

@@ -1,6 +1,6 @@
 import 'package:flutter_tts/flutter_tts.dart';
 
-/// Optional on-device speech for ordinary vocabulary — degrades gracefully.
+/// Optional on-device speech. Letter/vocab learning audio is always Arabic.
 class SpeechService {
   SpeechService() : _tts = FlutterTts();
 
@@ -9,7 +9,7 @@ class SpeechService {
 
   Future<void> init() async {
     try {
-      await _tts.setSpeechRate(0.42);
+      await _tts.setSpeechRate(0.40);
       await _tts.setVolume(1.0);
       await _tts.setPitch(1.05);
       _ready = true;
@@ -18,7 +18,7 @@ class SpeechService {
     }
   }
 
-  Future<void> speak(String text, {required String localeCode}) async {
+  Future<void> speakUi(String text, {required String localeCode}) async {
     if (!_ready || text.trim().isEmpty) return;
     try {
       final lang = switch (localeCode) {
@@ -28,8 +28,17 @@ class SpeechService {
       };
       await _tts.setLanguage(lang);
       await _tts.speak(text);
+    } catch (_) {}
+  }
+
+  /// Always Arabic — independent of UI language.
+  Future<void> speakArabicLearning(String arabicText) async {
+    if (!_ready || arabicText.trim().isEmpty) return;
+    try {
+      await _tts.setLanguage('ar');
+      await _tts.speak(arabicText);
     } catch (_) {
-      // Graceful degrade — no speech available.
+      // Graceful degrade when Arabic voice pack missing.
     }
   }
 

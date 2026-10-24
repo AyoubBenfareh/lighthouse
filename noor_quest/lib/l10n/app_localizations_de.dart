@@ -16,6 +16,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get appTitleArabic => 'مغامرات نور';
 
   @override
+  String get tagline => 'Spielen, Entdecken und Lernen';
+
+  @override
   String get splashTagline => 'Ein Abenteuer aus Licht und Lernen';
 
   @override
@@ -83,7 +86,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get worldMapTitle => 'Abenteuerkarte';
 
   @override
-  String get worldArabic => 'Insel des arabischen Alphabets';
+  String get worldArabic => 'Alphabet-Insel';
 
   @override
   String get worldPrayer => 'Gebetsstadt';
@@ -92,7 +95,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get worldGarden => 'Garten des Islam';
 
   @override
-  String get worldManners => 'Dorf der guten Manieren';
+  String get worldManners => 'Dorf der Manieren';
 
   @override
   String get worldQuran => 'Koran-Oase';
@@ -147,7 +150,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get playAgain => 'Nochmal spielen';
 
   @override
-  String get arabicLettersTitle => 'Arabisches Buchstabenabenteuer';
+  String get arabicLettersTitle => 'Buchstabenabenteuer';
 
   @override
   String get arabicLettersHint => 'Mit welchem Buchstaben beginnt das?';
@@ -156,7 +159,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hearWord => 'Wort anhören';
 
   @override
-  String get wuduTitle => 'Wudu-Reihenfolge';
+  String get hearLetter => 'Buchstaben anhören';
+
+  @override
+  String get wuduTitle => 'Wudu-Challenge';
 
   @override
   String get wuduHint => 'Ordne die Wudu-Schritte richtig';
@@ -169,7 +175,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Dies ist eine Lernaktivität mit einer häufig gelehrten Einführungssequenz. Rechtsschulen können in Details abweichen. Frage eine vertrauenswürdige Lehrperson für religiöse Orientierung.';
 
   @override
-  String get mannersTitle => 'Abenteuer guter Manieren';
+  String get mannersTitle => 'Gute Manieren';
 
   @override
   String get mannersHint => 'Was würdest du tun?';
@@ -186,6 +192,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get parentGateWrong => 'Nicht ganz — bitte einen Elternteil um Hilfe.';
 
   @override
+  String get parentGatePin => 'Oder Eltern-PIN eingeben';
+
+  @override
+  String get parentPinHint => '4-stellige PIN';
+
+  @override
+  String get parentSetPin => 'Eltern-PIN setzen';
+
+  @override
+  String get parentClearPin => 'PIN löschen';
+
+  @override
   String get parentProgress => 'Fortschrittsübersicht';
 
   @override
@@ -193,6 +211,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get parentAudio => 'Wörter laut aussprechen';
+
+  @override
+  String get parentSfxVolume => 'Lautstärke der Effekte';
 
   @override
   String get parentReducedMotion => 'Animationen reduzieren';
@@ -243,6 +264,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get badgeStarCollector => 'Sternensammler';
 
   @override
+  String get badgeGardenFriend => 'Gartenfreund';
+
+  @override
   String get noBadgesYet =>
       'Schließe Aktivitäten ab, um Abzeichen zu verdienen!';
 
@@ -260,4 +284,111 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get skip => 'Überspringen';
+
+  @override
+  String get avatarExplorer => 'Entdecker';
+
+  @override
+  String get avatarDesertFox => 'Wüstenfuchs';
+
+  @override
+  String get avatarBird => 'Himmelsvogel';
+
+  @override
+  String get avatarCat => 'Liebevolle Katze';
+
+  @override
+  String get avatarStarKid => 'Sternenkind';
+
+  @override
+  String get avatarGardenExplorer => 'Gartenfreund';
+
+  @override
+  String get arabicPathTitle => 'Alphabet-Pfad';
+
+  @override
+  String get arabicPathHint => 'Buchstaben Schritt für Schritt lernen';
+
+  @override
+  String stageLabel(int n) {
+    return 'Stufe $n';
+  }
+
+  @override
+  String get traceHint => 'Zeichne den Buchstaben mit dem Finger nach';
+
+  @override
+  String get gardenTitle => 'Garten des Islam';
+
+  @override
+  String get gardenHint => 'Lerne die fünf Säulen behutsam kennen';
+
+  @override
+  String get pillarShahada => 'Glaubensbekenntnis';
+
+  @override
+  String get pillarPrayer => 'Gebet';
+
+  @override
+  String get pillarCharity => 'Almosen';
+
+  @override
+  String get pillarFasting => 'Fasten';
+
+  @override
+  String get pillarHajj => 'Pilgerfahrt';
+
+  @override
+  String get teacherTitle => 'Noor Lehrer';
+
+  @override
+  String get teacherHint => 'Offline-Tipps von Noor';
+
+  @override
+  String get teacherOfflineOnly =>
+      'Kuratierte Offline-Lektionen — Cloud-KI ist deaktiviert.';
+
+  @override
+  String get premiumTitle => 'Familie+';
+
+  @override
+  String get premiumBody =>
+      'Familie+ schaltet zukünftige Extras frei. Käufe sind in diesem Build nicht aktiv.';
+
+  @override
+  String get premiumBlocked =>
+      'In-App-Käufe brauchen Store-Zugangsdaten und Freigabe des Eigentümers.';
+
+  @override
+  String get adsDisabled => 'Werbung bleibt für Kinder aus.';
+
+  @override
+  String get aiDisabled => 'Cloud-KI braucht Freigabe und ist deaktiviert.';
+
+  @override
+  String get accountScaffold =>
+      'Elternkonten sind optional — offline weitermachen geht immer.';
+
+  @override
+  String get alreadyClaimed =>
+      'Belohnungen für diese Lektion wurden schon eingesammelt.';
+
+  @override
+  String get routeError => 'Bei der Navigation ist etwas schiefgelaufen.';
+
+  @override
+  String get completedLabel => 'Abgeschlossen';
+
+  @override
+  String get unlockedLabel => 'Freigeschaltet';
+
+  @override
+  String get badgesLabel => 'Abzeichen';
+
+  @override
+  String get selectWorld => 'Tippe eine Insel zum Erkunden';
+
+  @override
+  String get privacyNicknameOnly =>
+      'Keine persönlichen Daten nötig — nur Spitzname.';
 }

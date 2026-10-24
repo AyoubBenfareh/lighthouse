@@ -49,7 +49,7 @@ class $ProgressRowsTable extends ProgressRows
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultValue: const Constant('arabic,manners'),
+    defaultValue: const Constant('arabic,manners,garden'),
   );
   static const VerificationMeta _completedGamesMeta = const VerificationMeta(
     'completedGames',
@@ -78,6 +78,18 @@ class $ProgressRowsTable extends ProgressRows
     ),
     defaultValue: const Constant(false),
   );
+  static const VerificationMeta _arabicStagesMeta = const VerificationMeta(
+    'arabicStages',
+  );
+  @override
+  late final GeneratedColumn<String> arabicStages = GeneratedColumn<String>(
+    'arabic_stages',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('stage_1'),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -86,6 +98,7 @@ class $ProgressRowsTable extends ProgressRows
     unlockedWorlds,
     completedGames,
     mapVisited,
+    arabicStages,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -135,6 +148,15 @@ class $ProgressRowsTable extends ProgressRows
         mapVisited.isAcceptableOrUnknown(data['map_visited']!, _mapVisitedMeta),
       );
     }
+    if (data.containsKey('arabic_stages')) {
+      context.handle(
+        _arabicStagesMeta,
+        arabicStages.isAcceptableOrUnknown(
+          data['arabic_stages']!,
+          _arabicStagesMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -168,6 +190,10 @@ class $ProgressRowsTable extends ProgressRows
         DriftSqlType.bool,
         data['${effectivePrefix}map_visited'],
       )!,
+      arabicStages: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}arabic_stages'],
+      )!,
     );
   }
 
@@ -184,6 +210,9 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
   final String unlockedWorlds;
   final String completedGames;
   final bool mapVisited;
+
+  /// V2: comma-separated stage ids unlocked on Arabic pathway.
+  final String arabicStages;
   const ProgressRow({
     required this.id,
     required this.stars,
@@ -191,6 +220,7 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
     required this.unlockedWorlds,
     required this.completedGames,
     required this.mapVisited,
+    required this.arabicStages,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -201,6 +231,7 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
     map['unlocked_worlds'] = Variable<String>(unlockedWorlds);
     map['completed_games'] = Variable<String>(completedGames);
     map['map_visited'] = Variable<bool>(mapVisited);
+    map['arabic_stages'] = Variable<String>(arabicStages);
     return map;
   }
 
@@ -212,6 +243,7 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
       unlockedWorlds: Value(unlockedWorlds),
       completedGames: Value(completedGames),
       mapVisited: Value(mapVisited),
+      arabicStages: Value(arabicStages),
     );
   }
 
@@ -227,6 +259,7 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
       unlockedWorlds: serializer.fromJson<String>(json['unlockedWorlds']),
       completedGames: serializer.fromJson<String>(json['completedGames']),
       mapVisited: serializer.fromJson<bool>(json['mapVisited']),
+      arabicStages: serializer.fromJson<String>(json['arabicStages']),
     );
   }
   @override
@@ -239,6 +272,7 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
       'unlockedWorlds': serializer.toJson<String>(unlockedWorlds),
       'completedGames': serializer.toJson<String>(completedGames),
       'mapVisited': serializer.toJson<bool>(mapVisited),
+      'arabicStages': serializer.toJson<String>(arabicStages),
     };
   }
 
@@ -249,6 +283,7 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
     String? unlockedWorlds,
     String? completedGames,
     bool? mapVisited,
+    String? arabicStages,
   }) => ProgressRow(
     id: id ?? this.id,
     stars: stars ?? this.stars,
@@ -256,6 +291,7 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
     unlockedWorlds: unlockedWorlds ?? this.unlockedWorlds,
     completedGames: completedGames ?? this.completedGames,
     mapVisited: mapVisited ?? this.mapVisited,
+    arabicStages: arabicStages ?? this.arabicStages,
   );
   ProgressRow copyWithCompanion(ProgressRowsCompanion data) {
     return ProgressRow(
@@ -271,6 +307,9 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
       mapVisited: data.mapVisited.present
           ? data.mapVisited.value
           : this.mapVisited,
+      arabicStages: data.arabicStages.present
+          ? data.arabicStages.value
+          : this.arabicStages,
     );
   }
 
@@ -282,14 +321,22 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
           ..write('xp: $xp, ')
           ..write('unlockedWorlds: $unlockedWorlds, ')
           ..write('completedGames: $completedGames, ')
-          ..write('mapVisited: $mapVisited')
+          ..write('mapVisited: $mapVisited, ')
+          ..write('arabicStages: $arabicStages')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, stars, xp, unlockedWorlds, completedGames, mapVisited);
+  int get hashCode => Object.hash(
+    id,
+    stars,
+    xp,
+    unlockedWorlds,
+    completedGames,
+    mapVisited,
+    arabicStages,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -299,7 +346,8 @@ class ProgressRow extends DataClass implements Insertable<ProgressRow> {
           other.xp == this.xp &&
           other.unlockedWorlds == this.unlockedWorlds &&
           other.completedGames == this.completedGames &&
-          other.mapVisited == this.mapVisited);
+          other.mapVisited == this.mapVisited &&
+          other.arabicStages == this.arabicStages);
 }
 
 class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
@@ -309,6 +357,7 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
   final Value<String> unlockedWorlds;
   final Value<String> completedGames;
   final Value<bool> mapVisited;
+  final Value<String> arabicStages;
   const ProgressRowsCompanion({
     this.id = const Value.absent(),
     this.stars = const Value.absent(),
@@ -316,6 +365,7 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
     this.unlockedWorlds = const Value.absent(),
     this.completedGames = const Value.absent(),
     this.mapVisited = const Value.absent(),
+    this.arabicStages = const Value.absent(),
   });
   ProgressRowsCompanion.insert({
     this.id = const Value.absent(),
@@ -324,6 +374,7 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
     this.unlockedWorlds = const Value.absent(),
     this.completedGames = const Value.absent(),
     this.mapVisited = const Value.absent(),
+    this.arabicStages = const Value.absent(),
   });
   static Insertable<ProgressRow> custom({
     Expression<int>? id,
@@ -332,6 +383,7 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
     Expression<String>? unlockedWorlds,
     Expression<String>? completedGames,
     Expression<bool>? mapVisited,
+    Expression<String>? arabicStages,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -340,6 +392,7 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
       if (unlockedWorlds != null) 'unlocked_worlds': unlockedWorlds,
       if (completedGames != null) 'completed_games': completedGames,
       if (mapVisited != null) 'map_visited': mapVisited,
+      if (arabicStages != null) 'arabic_stages': arabicStages,
     });
   }
 
@@ -350,6 +403,7 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
     Value<String>? unlockedWorlds,
     Value<String>? completedGames,
     Value<bool>? mapVisited,
+    Value<String>? arabicStages,
   }) {
     return ProgressRowsCompanion(
       id: id ?? this.id,
@@ -358,6 +412,7 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
       unlockedWorlds: unlockedWorlds ?? this.unlockedWorlds,
       completedGames: completedGames ?? this.completedGames,
       mapVisited: mapVisited ?? this.mapVisited,
+      arabicStages: arabicStages ?? this.arabicStages,
     );
   }
 
@@ -382,6 +437,9 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
     if (mapVisited.present) {
       map['map_visited'] = Variable<bool>(mapVisited.value);
     }
+    if (arabicStages.present) {
+      map['arabic_stages'] = Variable<String>(arabicStages.value);
+    }
     return map;
   }
 
@@ -393,7 +451,8 @@ class ProgressRowsCompanion extends UpdateCompanion<ProgressRow> {
           ..write('xp: $xp, ')
           ..write('unlockedWorlds: $unlockedWorlds, ')
           ..write('completedGames: $completedGames, ')
-          ..write('mapVisited: $mapVisited')
+          ..write('mapVisited: $mapVisited, ')
+          ..write('arabicStages: $arabicStages')
           ..write(')'))
         .toString();
   }
@@ -717,6 +776,42 @@ class $ProfileRowsTable extends ProfileRows
     ),
     defaultValue: const Constant(false),
   );
+  static const VerificationMeta _parentPinHashMeta = const VerificationMeta(
+    'parentPinHash',
+  );
+  @override
+  late final GeneratedColumn<String> parentPinHash = GeneratedColumn<String>(
+    'parent_pin_hash',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _sfxVolumeMeta = const VerificationMeta(
+    'sfxVolume',
+  );
+  @override
+  late final GeneratedColumn<double> sfxVolume = GeneratedColumn<double>(
+    'sfx_volume',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.8),
+  );
+  static const VerificationMeta _entitlementMeta = const VerificationMeta(
+    'entitlement',
+  );
+  @override
+  late final GeneratedColumn<String> entitlement = GeneratedColumn<String>(
+    'entitlement',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('free'),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -727,6 +822,9 @@ class $ProfileRowsTable extends ProfileRows
     audioEnabled,
     reducedMotion,
     sessionReminders,
+    parentPinHash,
+    sfxVolume,
+    entitlement,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -803,6 +901,30 @@ class $ProfileRowsTable extends ProfileRows
         ),
       );
     }
+    if (data.containsKey('parent_pin_hash')) {
+      context.handle(
+        _parentPinHashMeta,
+        parentPinHash.isAcceptableOrUnknown(
+          data['parent_pin_hash']!,
+          _parentPinHashMeta,
+        ),
+      );
+    }
+    if (data.containsKey('sfx_volume')) {
+      context.handle(
+        _sfxVolumeMeta,
+        sfxVolume.isAcceptableOrUnknown(data['sfx_volume']!, _sfxVolumeMeta),
+      );
+    }
+    if (data.containsKey('entitlement')) {
+      context.handle(
+        _entitlementMeta,
+        entitlement.isAcceptableOrUnknown(
+          data['entitlement']!,
+          _entitlementMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -844,6 +966,18 @@ class $ProfileRowsTable extends ProfileRows
         DriftSqlType.bool,
         data['${effectivePrefix}session_reminders'],
       )!,
+      parentPinHash: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}parent_pin_hash'],
+      )!,
+      sfxVolume: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}sfx_volume'],
+      )!,
+      entitlement: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}entitlement'],
+      )!,
     );
   }
 
@@ -862,6 +996,13 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
   final bool audioEnabled;
   final bool reducedMotion;
   final bool sessionReminders;
+
+  /// Optional parent PIN hash (simple local gate). Empty = math gate only.
+  final String parentPinHash;
+  final double sfxVolume;
+
+  /// free | family_plus (entitlement stub; no live IAP).
+  final String entitlement;
   const ProfileRow({
     required this.id,
     required this.displayName,
@@ -871,6 +1012,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
     required this.audioEnabled,
     required this.reducedMotion,
     required this.sessionReminders,
+    required this.parentPinHash,
+    required this.sfxVolume,
+    required this.entitlement,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -883,6 +1027,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
     map['audio_enabled'] = Variable<bool>(audioEnabled);
     map['reduced_motion'] = Variable<bool>(reducedMotion);
     map['session_reminders'] = Variable<bool>(sessionReminders);
+    map['parent_pin_hash'] = Variable<String>(parentPinHash);
+    map['sfx_volume'] = Variable<double>(sfxVolume);
+    map['entitlement'] = Variable<String>(entitlement);
     return map;
   }
 
@@ -896,6 +1043,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
       audioEnabled: Value(audioEnabled),
       reducedMotion: Value(reducedMotion),
       sessionReminders: Value(sessionReminders),
+      parentPinHash: Value(parentPinHash),
+      sfxVolume: Value(sfxVolume),
+      entitlement: Value(entitlement),
     );
   }
 
@@ -913,6 +1063,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
       audioEnabled: serializer.fromJson<bool>(json['audioEnabled']),
       reducedMotion: serializer.fromJson<bool>(json['reducedMotion']),
       sessionReminders: serializer.fromJson<bool>(json['sessionReminders']),
+      parentPinHash: serializer.fromJson<String>(json['parentPinHash']),
+      sfxVolume: serializer.fromJson<double>(json['sfxVolume']),
+      entitlement: serializer.fromJson<String>(json['entitlement']),
     );
   }
   @override
@@ -927,6 +1080,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
       'audioEnabled': serializer.toJson<bool>(audioEnabled),
       'reducedMotion': serializer.toJson<bool>(reducedMotion),
       'sessionReminders': serializer.toJson<bool>(sessionReminders),
+      'parentPinHash': serializer.toJson<String>(parentPinHash),
+      'sfxVolume': serializer.toJson<double>(sfxVolume),
+      'entitlement': serializer.toJson<String>(entitlement),
     };
   }
 
@@ -939,6 +1095,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
     bool? audioEnabled,
     bool? reducedMotion,
     bool? sessionReminders,
+    String? parentPinHash,
+    double? sfxVolume,
+    String? entitlement,
   }) => ProfileRow(
     id: id ?? this.id,
     displayName: displayName ?? this.displayName,
@@ -948,6 +1107,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
     audioEnabled: audioEnabled ?? this.audioEnabled,
     reducedMotion: reducedMotion ?? this.reducedMotion,
     sessionReminders: sessionReminders ?? this.sessionReminders,
+    parentPinHash: parentPinHash ?? this.parentPinHash,
+    sfxVolume: sfxVolume ?? this.sfxVolume,
+    entitlement: entitlement ?? this.entitlement,
   );
   ProfileRow copyWithCompanion(ProfileRowsCompanion data) {
     return ProfileRow(
@@ -973,6 +1135,13 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
       sessionReminders: data.sessionReminders.present
           ? data.sessionReminders.value
           : this.sessionReminders,
+      parentPinHash: data.parentPinHash.present
+          ? data.parentPinHash.value
+          : this.parentPinHash,
+      sfxVolume: data.sfxVolume.present ? data.sfxVolume.value : this.sfxVolume,
+      entitlement: data.entitlement.present
+          ? data.entitlement.value
+          : this.entitlement,
     );
   }
 
@@ -986,7 +1155,10 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
           ..write('onboardingComplete: $onboardingComplete, ')
           ..write('audioEnabled: $audioEnabled, ')
           ..write('reducedMotion: $reducedMotion, ')
-          ..write('sessionReminders: $sessionReminders')
+          ..write('sessionReminders: $sessionReminders, ')
+          ..write('parentPinHash: $parentPinHash, ')
+          ..write('sfxVolume: $sfxVolume, ')
+          ..write('entitlement: $entitlement')
           ..write(')'))
         .toString();
   }
@@ -1001,6 +1173,9 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
     audioEnabled,
     reducedMotion,
     sessionReminders,
+    parentPinHash,
+    sfxVolume,
+    entitlement,
   );
   @override
   bool operator ==(Object other) =>
@@ -1013,7 +1188,10 @@ class ProfileRow extends DataClass implements Insertable<ProfileRow> {
           other.onboardingComplete == this.onboardingComplete &&
           other.audioEnabled == this.audioEnabled &&
           other.reducedMotion == this.reducedMotion &&
-          other.sessionReminders == this.sessionReminders);
+          other.sessionReminders == this.sessionReminders &&
+          other.parentPinHash == this.parentPinHash &&
+          other.sfxVolume == this.sfxVolume &&
+          other.entitlement == this.entitlement);
 }
 
 class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
@@ -1025,6 +1203,9 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
   final Value<bool> audioEnabled;
   final Value<bool> reducedMotion;
   final Value<bool> sessionReminders;
+  final Value<String> parentPinHash;
+  final Value<double> sfxVolume;
+  final Value<String> entitlement;
   const ProfileRowsCompanion({
     this.id = const Value.absent(),
     this.displayName = const Value.absent(),
@@ -1034,6 +1215,9 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
     this.audioEnabled = const Value.absent(),
     this.reducedMotion = const Value.absent(),
     this.sessionReminders = const Value.absent(),
+    this.parentPinHash = const Value.absent(),
+    this.sfxVolume = const Value.absent(),
+    this.entitlement = const Value.absent(),
   });
   ProfileRowsCompanion.insert({
     this.id = const Value.absent(),
@@ -1044,6 +1228,9 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
     this.audioEnabled = const Value.absent(),
     this.reducedMotion = const Value.absent(),
     this.sessionReminders = const Value.absent(),
+    this.parentPinHash = const Value.absent(),
+    this.sfxVolume = const Value.absent(),
+    this.entitlement = const Value.absent(),
   });
   static Insertable<ProfileRow> custom({
     Expression<int>? id,
@@ -1054,6 +1241,9 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
     Expression<bool>? audioEnabled,
     Expression<bool>? reducedMotion,
     Expression<bool>? sessionReminders,
+    Expression<String>? parentPinHash,
+    Expression<double>? sfxVolume,
+    Expression<String>? entitlement,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1064,6 +1254,9 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
       if (audioEnabled != null) 'audio_enabled': audioEnabled,
       if (reducedMotion != null) 'reduced_motion': reducedMotion,
       if (sessionReminders != null) 'session_reminders': sessionReminders,
+      if (parentPinHash != null) 'parent_pin_hash': parentPinHash,
+      if (sfxVolume != null) 'sfx_volume': sfxVolume,
+      if (entitlement != null) 'entitlement': entitlement,
     });
   }
 
@@ -1076,6 +1269,9 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
     Value<bool>? audioEnabled,
     Value<bool>? reducedMotion,
     Value<bool>? sessionReminders,
+    Value<String>? parentPinHash,
+    Value<double>? sfxVolume,
+    Value<String>? entitlement,
   }) {
     return ProfileRowsCompanion(
       id: id ?? this.id,
@@ -1086,6 +1282,9 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
       audioEnabled: audioEnabled ?? this.audioEnabled,
       reducedMotion: reducedMotion ?? this.reducedMotion,
       sessionReminders: sessionReminders ?? this.sessionReminders,
+      parentPinHash: parentPinHash ?? this.parentPinHash,
+      sfxVolume: sfxVolume ?? this.sfxVolume,
+      entitlement: entitlement ?? this.entitlement,
     );
   }
 
@@ -1116,6 +1315,15 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
     if (sessionReminders.present) {
       map['session_reminders'] = Variable<bool>(sessionReminders.value);
     }
+    if (parentPinHash.present) {
+      map['parent_pin_hash'] = Variable<String>(parentPinHash.value);
+    }
+    if (sfxVolume.present) {
+      map['sfx_volume'] = Variable<double>(sfxVolume.value);
+    }
+    if (entitlement.present) {
+      map['entitlement'] = Variable<String>(entitlement.value);
+    }
     return map;
   }
 
@@ -1129,7 +1337,314 @@ class ProfileRowsCompanion extends UpdateCompanion<ProfileRow> {
           ..write('onboardingComplete: $onboardingComplete, ')
           ..write('audioEnabled: $audioEnabled, ')
           ..write('reducedMotion: $reducedMotion, ')
-          ..write('sessionReminders: $sessionReminders')
+          ..write('sessionReminders: $sessionReminders, ')
+          ..write('parentPinHash: $parentPinHash, ')
+          ..write('sfxVolume: $sfxVolume, ')
+          ..write('entitlement: $entitlement')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RewardEventRowsTable extends RewardEventRows
+    with TableInfo<$RewardEventRowsTable, RewardEventRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RewardEventRowsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _rewardKeyMeta = const VerificationMeta(
+    'rewardKey',
+  );
+  @override
+  late final GeneratedColumn<String> rewardKey = GeneratedColumn<String>(
+    'reward_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _starsMeta = const VerificationMeta('stars');
+  @override
+  late final GeneratedColumn<int> stars = GeneratedColumn<int>(
+    'stars',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _xpMeta = const VerificationMeta('xp');
+  @override
+  late final GeneratedColumn<int> xp = GeneratedColumn<int>(
+    'xp',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _grantedAtMeta = const VerificationMeta(
+    'grantedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> grantedAt = GeneratedColumn<DateTime>(
+    'granted_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [rewardKey, stars, xp, grantedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'reward_event_rows';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RewardEventRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('reward_key')) {
+      context.handle(
+        _rewardKeyMeta,
+        rewardKey.isAcceptableOrUnknown(data['reward_key']!, _rewardKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_rewardKeyMeta);
+    }
+    if (data.containsKey('stars')) {
+      context.handle(
+        _starsMeta,
+        stars.isAcceptableOrUnknown(data['stars']!, _starsMeta),
+      );
+    }
+    if (data.containsKey('xp')) {
+      context.handle(_xpMeta, xp.isAcceptableOrUnknown(data['xp']!, _xpMeta));
+    }
+    if (data.containsKey('granted_at')) {
+      context.handle(
+        _grantedAtMeta,
+        grantedAt.isAcceptableOrUnknown(data['granted_at']!, _grantedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_grantedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {rewardKey};
+  @override
+  RewardEventRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RewardEventRow(
+      rewardKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}reward_key'],
+      )!,
+      stars: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}stars'],
+      )!,
+      xp: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}xp'],
+      )!,
+      grantedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}granted_at'],
+      )!,
+    );
+  }
+
+  @override
+  $RewardEventRowsTable createAlias(String alias) {
+    return $RewardEventRowsTable(attachedDatabase, alias);
+  }
+}
+
+class RewardEventRow extends DataClass implements Insertable<RewardEventRow> {
+  final String rewardKey;
+  final int stars;
+  final int xp;
+  final DateTime grantedAt;
+  const RewardEventRow({
+    required this.rewardKey,
+    required this.stars,
+    required this.xp,
+    required this.grantedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['reward_key'] = Variable<String>(rewardKey);
+    map['stars'] = Variable<int>(stars);
+    map['xp'] = Variable<int>(xp);
+    map['granted_at'] = Variable<DateTime>(grantedAt);
+    return map;
+  }
+
+  RewardEventRowsCompanion toCompanion(bool nullToAbsent) {
+    return RewardEventRowsCompanion(
+      rewardKey: Value(rewardKey),
+      stars: Value(stars),
+      xp: Value(xp),
+      grantedAt: Value(grantedAt),
+    );
+  }
+
+  factory RewardEventRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RewardEventRow(
+      rewardKey: serializer.fromJson<String>(json['rewardKey']),
+      stars: serializer.fromJson<int>(json['stars']),
+      xp: serializer.fromJson<int>(json['xp']),
+      grantedAt: serializer.fromJson<DateTime>(json['grantedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'rewardKey': serializer.toJson<String>(rewardKey),
+      'stars': serializer.toJson<int>(stars),
+      'xp': serializer.toJson<int>(xp),
+      'grantedAt': serializer.toJson<DateTime>(grantedAt),
+    };
+  }
+
+  RewardEventRow copyWith({
+    String? rewardKey,
+    int? stars,
+    int? xp,
+    DateTime? grantedAt,
+  }) => RewardEventRow(
+    rewardKey: rewardKey ?? this.rewardKey,
+    stars: stars ?? this.stars,
+    xp: xp ?? this.xp,
+    grantedAt: grantedAt ?? this.grantedAt,
+  );
+  RewardEventRow copyWithCompanion(RewardEventRowsCompanion data) {
+    return RewardEventRow(
+      rewardKey: data.rewardKey.present ? data.rewardKey.value : this.rewardKey,
+      stars: data.stars.present ? data.stars.value : this.stars,
+      xp: data.xp.present ? data.xp.value : this.xp,
+      grantedAt: data.grantedAt.present ? data.grantedAt.value : this.grantedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RewardEventRow(')
+          ..write('rewardKey: $rewardKey, ')
+          ..write('stars: $stars, ')
+          ..write('xp: $xp, ')
+          ..write('grantedAt: $grantedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(rewardKey, stars, xp, grantedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RewardEventRow &&
+          other.rewardKey == this.rewardKey &&
+          other.stars == this.stars &&
+          other.xp == this.xp &&
+          other.grantedAt == this.grantedAt);
+}
+
+class RewardEventRowsCompanion extends UpdateCompanion<RewardEventRow> {
+  final Value<String> rewardKey;
+  final Value<int> stars;
+  final Value<int> xp;
+  final Value<DateTime> grantedAt;
+  final Value<int> rowid;
+  const RewardEventRowsCompanion({
+    this.rewardKey = const Value.absent(),
+    this.stars = const Value.absent(),
+    this.xp = const Value.absent(),
+    this.grantedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RewardEventRowsCompanion.insert({
+    required String rewardKey,
+    this.stars = const Value.absent(),
+    this.xp = const Value.absent(),
+    required DateTime grantedAt,
+    this.rowid = const Value.absent(),
+  }) : rewardKey = Value(rewardKey),
+       grantedAt = Value(grantedAt);
+  static Insertable<RewardEventRow> custom({
+    Expression<String>? rewardKey,
+    Expression<int>? stars,
+    Expression<int>? xp,
+    Expression<DateTime>? grantedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (rewardKey != null) 'reward_key': rewardKey,
+      if (stars != null) 'stars': stars,
+      if (xp != null) 'xp': xp,
+      if (grantedAt != null) 'granted_at': grantedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RewardEventRowsCompanion copyWith({
+    Value<String>? rewardKey,
+    Value<int>? stars,
+    Value<int>? xp,
+    Value<DateTime>? grantedAt,
+    Value<int>? rowid,
+  }) {
+    return RewardEventRowsCompanion(
+      rewardKey: rewardKey ?? this.rewardKey,
+      stars: stars ?? this.stars,
+      xp: xp ?? this.xp,
+      grantedAt: grantedAt ?? this.grantedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (rewardKey.present) {
+      map['reward_key'] = Variable<String>(rewardKey.value);
+    }
+    if (stars.present) {
+      map['stars'] = Variable<int>(stars.value);
+    }
+    if (xp.present) {
+      map['xp'] = Variable<int>(xp.value);
+    }
+    if (grantedAt.present) {
+      map['granted_at'] = Variable<DateTime>(grantedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RewardEventRowsCompanion(')
+          ..write('rewardKey: $rewardKey, ')
+          ..write('stars: $stars, ')
+          ..write('xp: $xp, ')
+          ..write('grantedAt: $grantedAt, ')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -1141,6 +1656,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ProgressRowsTable progressRows = $ProgressRowsTable(this);
   late final $BadgeRowsTable badgeRows = $BadgeRowsTable(this);
   late final $ProfileRowsTable profileRows = $ProfileRowsTable(this);
+  late final $RewardEventRowsTable rewardEventRows = $RewardEventRowsTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1149,6 +1667,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     progressRows,
     badgeRows,
     profileRows,
+    rewardEventRows,
   ];
 }
 
@@ -1160,6 +1679,7 @@ typedef $$ProgressRowsTableCreateCompanionBuilder =
       Value<String> unlockedWorlds,
       Value<String> completedGames,
       Value<bool> mapVisited,
+      Value<String> arabicStages,
     });
 typedef $$ProgressRowsTableUpdateCompanionBuilder =
     ProgressRowsCompanion Function({
@@ -1169,6 +1689,7 @@ typedef $$ProgressRowsTableUpdateCompanionBuilder =
       Value<String> unlockedWorlds,
       Value<String> completedGames,
       Value<bool> mapVisited,
+      Value<String> arabicStages,
     });
 
 class $$ProgressRowsTableFilterComposer
@@ -1207,6 +1728,11 @@ class $$ProgressRowsTableFilterComposer
 
   ColumnFilters<bool> get mapVisited => $composableBuilder(
     column: $table.mapVisited,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get arabicStages => $composableBuilder(
+    column: $table.arabicStages,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -1249,6 +1775,11 @@ class $$ProgressRowsTableOrderingComposer
     column: $table.mapVisited,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get arabicStages => $composableBuilder(
+    column: $table.arabicStages,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ProgressRowsTableAnnotationComposer
@@ -1281,6 +1812,11 @@ class $$ProgressRowsTableAnnotationComposer
 
   GeneratedColumn<bool> get mapVisited => $composableBuilder(
     column: $table.mapVisited,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get arabicStages => $composableBuilder(
+    column: $table.arabicStages,
     builder: (column) => column,
   );
 }
@@ -1322,6 +1858,7 @@ class $$ProgressRowsTableTableManager
                 Value<String> unlockedWorlds = const Value.absent(),
                 Value<String> completedGames = const Value.absent(),
                 Value<bool> mapVisited = const Value.absent(),
+                Value<String> arabicStages = const Value.absent(),
               }) => ProgressRowsCompanion(
                 id: id,
                 stars: stars,
@@ -1329,6 +1866,7 @@ class $$ProgressRowsTableTableManager
                 unlockedWorlds: unlockedWorlds,
                 completedGames: completedGames,
                 mapVisited: mapVisited,
+                arabicStages: arabicStages,
               ),
           createCompanionCallback:
               ({
@@ -1338,6 +1876,7 @@ class $$ProgressRowsTableTableManager
                 Value<String> unlockedWorlds = const Value.absent(),
                 Value<String> completedGames = const Value.absent(),
                 Value<bool> mapVisited = const Value.absent(),
+                Value<String> arabicStages = const Value.absent(),
               }) => ProgressRowsCompanion.insert(
                 id: id,
                 stars: stars,
@@ -1345,6 +1884,7 @@ class $$ProgressRowsTableTableManager
                 unlockedWorlds: unlockedWorlds,
                 completedGames: completedGames,
                 mapVisited: mapVisited,
+                arabicStages: arabicStages,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -1529,6 +2069,9 @@ typedef $$ProfileRowsTableCreateCompanionBuilder =
       Value<bool> audioEnabled,
       Value<bool> reducedMotion,
       Value<bool> sessionReminders,
+      Value<String> parentPinHash,
+      Value<double> sfxVolume,
+      Value<String> entitlement,
     });
 typedef $$ProfileRowsTableUpdateCompanionBuilder =
     ProfileRowsCompanion Function({
@@ -1540,6 +2083,9 @@ typedef $$ProfileRowsTableUpdateCompanionBuilder =
       Value<bool> audioEnabled,
       Value<bool> reducedMotion,
       Value<bool> sessionReminders,
+      Value<String> parentPinHash,
+      Value<double> sfxVolume,
+      Value<String> entitlement,
     });
 
 class $$ProfileRowsTableFilterComposer
@@ -1588,6 +2134,21 @@ class $$ProfileRowsTableFilterComposer
 
   ColumnFilters<bool> get sessionReminders => $composableBuilder(
     column: $table.sessionReminders,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get parentPinHash => $composableBuilder(
+    column: $table.parentPinHash,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get sfxVolume => $composableBuilder(
+    column: $table.sfxVolume,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get entitlement => $composableBuilder(
+    column: $table.entitlement,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -1640,6 +2201,21 @@ class $$ProfileRowsTableOrderingComposer
     column: $table.sessionReminders,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get parentPinHash => $composableBuilder(
+    column: $table.parentPinHash,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get sfxVolume => $composableBuilder(
+    column: $table.sfxVolume,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get entitlement => $composableBuilder(
+    column: $table.entitlement,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ProfileRowsTableAnnotationComposer
@@ -1688,6 +2264,19 @@ class $$ProfileRowsTableAnnotationComposer
     column: $table.sessionReminders,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get parentPinHash => $composableBuilder(
+    column: $table.parentPinHash,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get sfxVolume =>
+      $composableBuilder(column: $table.sfxVolume, builder: (column) => column);
+
+  GeneratedColumn<String> get entitlement => $composableBuilder(
+    column: $table.entitlement,
+    builder: (column) => column,
+  );
 }
 
 class $$ProfileRowsTableTableManager
@@ -1729,6 +2318,9 @@ class $$ProfileRowsTableTableManager
                 Value<bool> audioEnabled = const Value.absent(),
                 Value<bool> reducedMotion = const Value.absent(),
                 Value<bool> sessionReminders = const Value.absent(),
+                Value<String> parentPinHash = const Value.absent(),
+                Value<double> sfxVolume = const Value.absent(),
+                Value<String> entitlement = const Value.absent(),
               }) => ProfileRowsCompanion(
                 id: id,
                 displayName: displayName,
@@ -1738,6 +2330,9 @@ class $$ProfileRowsTableTableManager
                 audioEnabled: audioEnabled,
                 reducedMotion: reducedMotion,
                 sessionReminders: sessionReminders,
+                parentPinHash: parentPinHash,
+                sfxVolume: sfxVolume,
+                entitlement: entitlement,
               ),
           createCompanionCallback:
               ({
@@ -1749,6 +2344,9 @@ class $$ProfileRowsTableTableManager
                 Value<bool> audioEnabled = const Value.absent(),
                 Value<bool> reducedMotion = const Value.absent(),
                 Value<bool> sessionReminders = const Value.absent(),
+                Value<String> parentPinHash = const Value.absent(),
+                Value<double> sfxVolume = const Value.absent(),
+                Value<String> entitlement = const Value.absent(),
               }) => ProfileRowsCompanion.insert(
                 id: id,
                 displayName: displayName,
@@ -1758,6 +2356,9 @@ class $$ProfileRowsTableTableManager
                 audioEnabled: audioEnabled,
                 reducedMotion: reducedMotion,
                 sessionReminders: sessionReminders,
+                parentPinHash: parentPinHash,
+                sfxVolume: sfxVolume,
+                entitlement: entitlement,
               ),
           withReferenceMapper: (p0) => p0
               .map(
@@ -1793,6 +2394,202 @@ typedef $$ProfileRowsTableProcessedTableManager =
       ProfileRow,
       PrefetchHooks Function()
     >;
+typedef $$RewardEventRowsTableCreateCompanionBuilder =
+    RewardEventRowsCompanion Function({
+      required String rewardKey,
+      Value<int> stars,
+      Value<int> xp,
+      required DateTime grantedAt,
+      Value<int> rowid,
+    });
+typedef $$RewardEventRowsTableUpdateCompanionBuilder =
+    RewardEventRowsCompanion Function({
+      Value<String> rewardKey,
+      Value<int> stars,
+      Value<int> xp,
+      Value<DateTime> grantedAt,
+      Value<int> rowid,
+    });
+
+class $$RewardEventRowsTableFilterComposer
+    extends Composer<_$AppDatabase, $RewardEventRowsTable> {
+  $$RewardEventRowsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get rewardKey => $composableBuilder(
+    column: $table.rewardKey,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get stars => $composableBuilder(
+    column: $table.stars,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get xp => $composableBuilder(
+    column: $table.xp,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get grantedAt => $composableBuilder(
+    column: $table.grantedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$RewardEventRowsTableOrderingComposer
+    extends Composer<_$AppDatabase, $RewardEventRowsTable> {
+  $$RewardEventRowsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get rewardKey => $composableBuilder(
+    column: $table.rewardKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get stars => $composableBuilder(
+    column: $table.stars,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get xp => $composableBuilder(
+    column: $table.xp,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get grantedAt => $composableBuilder(
+    column: $table.grantedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$RewardEventRowsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RewardEventRowsTable> {
+  $$RewardEventRowsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get rewardKey =>
+      $composableBuilder(column: $table.rewardKey, builder: (column) => column);
+
+  GeneratedColumn<int> get stars =>
+      $composableBuilder(column: $table.stars, builder: (column) => column);
+
+  GeneratedColumn<int> get xp =>
+      $composableBuilder(column: $table.xp, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get grantedAt =>
+      $composableBuilder(column: $table.grantedAt, builder: (column) => column);
+}
+
+class $$RewardEventRowsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $RewardEventRowsTable,
+          RewardEventRow,
+          $$RewardEventRowsTableFilterComposer,
+          $$RewardEventRowsTableOrderingComposer,
+          $$RewardEventRowsTableAnnotationComposer,
+          $$RewardEventRowsTableCreateCompanionBuilder,
+          $$RewardEventRowsTableUpdateCompanionBuilder,
+          (
+            RewardEventRow,
+            BaseReferences<
+              _$AppDatabase,
+              $RewardEventRowsTable,
+              RewardEventRow
+            >,
+          ),
+          RewardEventRow,
+          PrefetchHooks Function()
+        > {
+  $$RewardEventRowsTableTableManager(
+    _$AppDatabase db,
+    $RewardEventRowsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RewardEventRowsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RewardEventRowsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RewardEventRowsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> rewardKey = const Value.absent(),
+                Value<int> stars = const Value.absent(),
+                Value<int> xp = const Value.absent(),
+                Value<DateTime> grantedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => RewardEventRowsCompanion(
+                rewardKey: rewardKey,
+                stars: stars,
+                xp: xp,
+                grantedAt: grantedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String rewardKey,
+                Value<int> stars = const Value.absent(),
+                Value<int> xp = const Value.absent(),
+                required DateTime grantedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => RewardEventRowsCompanion.insert(
+                rewardKey: rewardKey,
+                stars: stars,
+                xp: xp,
+                grantedAt: grantedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$RewardEventRowsTable, RewardEventRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $RewardEventRowsTable,
+                    RewardEventRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$RewardEventRowsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $RewardEventRowsTable,
+      RewardEventRow,
+      $$RewardEventRowsTableFilterComposer,
+      $$RewardEventRowsTableOrderingComposer,
+      $$RewardEventRowsTableAnnotationComposer,
+      $$RewardEventRowsTableCreateCompanionBuilder,
+      $$RewardEventRowsTableUpdateCompanionBuilder,
+      (
+        RewardEventRow,
+        BaseReferences<_$AppDatabase, $RewardEventRowsTable, RewardEventRow>,
+      ),
+      RewardEventRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -1803,4 +2600,6 @@ class $AppDatabaseManager {
       $$BadgeRowsTableTableManager(_db, _db.badgeRows);
   $$ProfileRowsTableTableManager get profileRows =>
       $$ProfileRowsTableTableManager(_db, _db.profileRows);
+  $$RewardEventRowsTableTableManager get rewardEventRows =>
+      $$RewardEventRowsTableTableManager(_db, _db.rewardEventRows);
 }

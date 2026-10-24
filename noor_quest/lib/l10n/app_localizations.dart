@@ -112,6 +112,12 @@ abstract class AppLocalizations {
   /// **'مغامرات نور'**
   String get appTitleArabic;
 
+  /// No description provided for @tagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Play, Explore, and Learn'**
+  String get tagline;
+
   /// No description provided for @splashTagline.
   ///
   /// In en, this message translates to:
@@ -235,7 +241,7 @@ abstract class AppLocalizations {
   /// No description provided for @worldArabic.
   ///
   /// In en, this message translates to:
-  /// **'Arabic Alphabet Island'**
+  /// **'Alphabet Island'**
   String get worldArabic;
 
   /// No description provided for @worldPrayer.
@@ -253,7 +259,7 @@ abstract class AppLocalizations {
   /// No description provided for @worldManners.
   ///
   /// In en, this message translates to:
-  /// **'Village of Good Manners'**
+  /// **'Manners Village'**
   String get worldManners;
 
   /// No description provided for @worldQuran.
@@ -355,7 +361,7 @@ abstract class AppLocalizations {
   /// No description provided for @arabicLettersTitle.
   ///
   /// In en, this message translates to:
-  /// **'Arabic Letter Adventure'**
+  /// **'Letter Adventure'**
   String get arabicLettersTitle;
 
   /// No description provided for @arabicLettersHint.
@@ -370,10 +376,16 @@ abstract class AppLocalizations {
   /// **'Hear word'**
   String get hearWord;
 
+  /// No description provided for @hearLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'Hear letter'**
+  String get hearLetter;
+
   /// No description provided for @wuduTitle.
   ///
   /// In en, this message translates to:
-  /// **'Wudu Sequence Challenge'**
+  /// **'Wudu Challenge'**
   String get wuduTitle;
 
   /// No description provided for @wuduHint.
@@ -397,7 +409,7 @@ abstract class AppLocalizations {
   /// No description provided for @mannersTitle.
   ///
   /// In en, this message translates to:
-  /// **'Good Manners Adventure'**
+  /// **'Good Manners'**
   String get mannersTitle;
 
   /// No description provided for @mannersHint.
@@ -424,6 +436,30 @@ abstract class AppLocalizations {
   /// **'Not quite — ask a parent to help.'**
   String get parentGateWrong;
 
+  /// No description provided for @parentGatePin.
+  ///
+  /// In en, this message translates to:
+  /// **'Or enter parent PIN'**
+  String get parentGatePin;
+
+  /// No description provided for @parentPinHint.
+  ///
+  /// In en, this message translates to:
+  /// **'4-digit PIN'**
+  String get parentPinHint;
+
+  /// No description provided for @parentSetPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Set parent PIN'**
+  String get parentSetPin;
+
+  /// No description provided for @parentClearPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear PIN'**
+  String get parentClearPin;
+
   /// No description provided for @parentProgress.
   ///
   /// In en, this message translates to:
@@ -441,6 +477,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Speak words aloud'**
   String get parentAudio;
+
+  /// No description provided for @parentSfxVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound effects volume'**
+  String get parentSfxVolume;
 
   /// No description provided for @parentReducedMotion.
   ///
@@ -532,6 +574,12 @@ abstract class AppLocalizations {
   /// **'Star Collector'**
   String get badgeStarCollector;
 
+  /// No description provided for @badgeGardenFriend.
+  ///
+  /// In en, this message translates to:
+  /// **'Garden Friend'**
+  String get badgeGardenFriend;
+
   /// No description provided for @noBadgesYet.
   ///
   /// In en, this message translates to:
@@ -561,6 +609,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Skip'**
   String get skip;
+
+  /// No description provided for @avatarExplorer.
+  ///
+  /// In en, this message translates to:
+  /// **'Explorer'**
+  String get avatarExplorer;
+
+  /// No description provided for @avatarDesertFox.
+  ///
+  /// In en, this message translates to:
+  /// **'Desert Fox'**
+  String get avatarDesertFox;
+
+  /// No description provided for @avatarBird.
+  ///
+  /// In en, this message translates to:
+  /// **'Sky Bird'**
+  String get avatarBird;
+
+  /// No description provided for @avatarCat.
+  ///
+  /// In en, this message translates to:
+  /// **'Kind Cat'**
+  String get avatarCat;
+
+  /// No description provided for @avatarStarKid.
+  ///
+  /// In en, this message translates to:
+  /// **'Star Kid'**
+  String get avatarStarKid;
+
+  /// No description provided for @avatarGardenExplorer.
+  ///
+  /// In en, this message translates to:
+  /// **'Garden Friend'**
+  String get avatarGardenExplorer;
+
+  /// No description provided for @arabicPathTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Alphabet Path'**
+  String get arabicPathTitle;
+
+  /// No description provided for @arabicPathHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn letters step by step'**
+  String get arabicPathHint;
+
+  /// No description provided for @stageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Stage {n}'**
+  String stageLabel(int n);
+
+  /// No description provided for @traceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Trace the letter with your finger'**
+  String get traceHint;
+
+  /// No description provided for @gardenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Garden of Islam'**
+  String get gardenTitle;
+
+  /// No description provided for @gardenHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn the five pillars gently'**
+  String get gardenHint;
+
+  /// No description provided for @pillarShahada.
+  ///
+  /// In en, this message translates to:
+  /// **'Faith'**
+  String get pillarShahada;
+
+  /// No description provided for @pillarPrayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer'**
+  String get pillarPrayer;
+
+  /// No description provided for @pillarCharity.
+  ///
+  /// In en, this message translates to:
+  /// **'Charity'**
+  String get pillarCharity;
+
+  /// No description provided for @pillarFasting.
+  ///
+  /// In en, this message translates to:
+  /// **'Fasting'**
+  String get pillarFasting;
+
+  /// No description provided for @pillarHajj.
+  ///
+  /// In en, this message translates to:
+  /// **'Pilgrimage'**
+  String get pillarHajj;
+
+  /// No description provided for @teacherTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Noor Teacher'**
+  String get teacherTitle;
+
+  /// No description provided for @teacherHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline tips from Noor'**
+  String get teacherHint;
+
+  /// No description provided for @teacherOfflineOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Curated offline lessons — cloud AI is disabled.'**
+  String get teacherOfflineOnly;
+
+  /// No description provided for @premiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Family+'**
+  String get premiumTitle;
+
+  /// No description provided for @premiumBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Family+ unlocks future extras. Purchases are not enabled in this build.'**
+  String get premiumBody;
+
+  /// No description provided for @premiumBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app purchases require store credentials and owner approval.'**
+  String get premiumBlocked;
+
+  /// No description provided for @adsDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads stay off for children.'**
+  String get adsDisabled;
+
+  /// No description provided for @aiDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cloud AI requires approval and is disabled.'**
+  String get aiDisabled;
+
+  /// No description provided for @accountScaffold.
+  ///
+  /// In en, this message translates to:
+  /// **'Parent accounts are optional scaffolding — continue offline anytime.'**
+  String get accountScaffold;
+
+  /// No description provided for @alreadyClaimed.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards already collected for this lesson.'**
+  String get alreadyClaimed;
+
+  /// No description provided for @routeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong with navigation.'**
+  String get routeError;
+
+  /// No description provided for @completedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completedLabel;
+
+  /// No description provided for @unlockedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocked'**
+  String get unlockedLabel;
+
+  /// No description provided for @badgesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Badges'**
+  String get badgesLabel;
+
+  /// No description provided for @selectWorld.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap an island to explore'**
+  String get selectWorld;
+
+  /// No description provided for @privacyNicknameOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'No personal info needed — nickname only.'**
+  String get privacyNicknameOnly;
 }
 
 class _AppLocalizationsDelegate

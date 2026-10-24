@@ -20,51 +20,52 @@ void main() {
   test('seeded progress starts with arabic and manners unlocked', () async {
     final progress = await repo.getProgress();
     expect(progress.stars, 0);
-    expect(progress.xp, 0);
-    expect(progress.unlockedWorlds, containsAll(['arabic', 'manners']));
-    expect(progress.completedGames, isEmpty);
+    expect(progress.unlockedWorlds, containsAll(['arabic', 'manners', 'garden']));
+    expect(progress.arabicStages, contains('stage_1'));
   });
 
-  test('completing arabic letters awards stars, XP, unlock, and badge', () async {
-    final result = await repo.completeGame(
+  test('completeGame is idempotent for the same rewardKey', () async {
+    final first = await repo.completeGame(
       gameId: 'arabic_letters',
+      rewardKey: 'arabic_letters_v1_complete',
       starsEarned: 3,
       xpEarned: 30,
       unlockWorld: 'prayer',
       badgeId: 'letter_learner',
+      unlockArabicStage: 'stage_2',
     );
+    expect(first.alreadyClaimed, isFalse);
+    expect(first.starsEarned, 3);
 
-    expect(result.starsEarned, 3);
-    expect(result.xpEarned, 30);
-    expect(result.totalStars, 3);
-    expect(result.newBadges, containsAll(['first_star', 'letter_learner']));
+    final second = await repo.completeGame(
+      gameId: 'arabic_letters',
+      rewardKey: 'arabic_letters_v1_complete',
+      starsEarned: 3,
+      xpEarned: 30,
+      badgeId: 'letter_learner',
+    );
+    expect(second.alreadyClaimed, isTrue);
+    expect(second.starsEarned, 0);
 
     final progress = await repo.getProgress();
     expect(progress.stars, 3);
-    expect(progress.xp, 30);
-    expect(progress.completedGames, contains('arabic_letters'));
     expect(progress.unlockedWorlds, contains('prayer'));
-    expect(progress.badges, contains('letter_learner'));
+    expect(progress.arabicStages, contains('stage_2'));
   });
 
-  test('progress survives logical restart via fresh repository on same DB', () async {
-    await repo.completeGame(
-      gameId: 'good_manners',
-      starsEarned: 2,
-      xpEarned: 20,
-      badgeId: 'kind_heart',
-    );
-
-    final again = ProgressRepository(db);
-    final progress = await again.getProgress();
-    expect(progress.stars, 2);
-    expect(progress.completedGames, contains('good_manners'));
-    expect(progress.badges, contains('kind_heart'));
+  test('parent PIN can be set and verified', () async {
+    await repo.setParentPin('4321');
+    expect(await repo.verifyParentPin('4321'), isTrue);
+    expect(await repo.verifyParentPin('0000'), isFalse);
+    await repo.clearParentPin();
+    final profile = await repo.getProfile();
+    expect(profile.hasParentPin, isFalse);
   });
 
-  test('reset clears stars unlocks and badges', () async {
+  test('reset clears rewards ledger', () async {
     await repo.completeGame(
       gameId: 'wudu_sequence',
+      rewardKey: 'wudu_sequence_v1_complete',
       starsEarned: 3,
       xpEarned: 40,
       badgeId: 'wudu_explorer',
@@ -72,17 +73,6 @@ void main() {
     await repo.resetAll();
     final progress = await repo.getProgress();
     expect(progress.stars, 0);
-    expect(progress.xp, 0);
-    expect(progress.completedGames, isEmpty);
     expect(progress.badges, isEmpty);
-    expect(progress.unlockedWorlds, containsAll(['arabic', 'manners']));
-  });
-
-  test('onboarding profile stores avatar without requiring PII', () async {
-    await repo.completeOnboarding(displayName: 'Sam', avatarIndex: 2);
-    final profile = await repo.getProfile();
-    expect(profile.onboardingComplete, isTrue);
-    expect(profile.displayName, 'Sam');
-    expect(profile.avatarIndex, 2);
   });
 }

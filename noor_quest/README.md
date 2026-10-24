@@ -1,4 +1,6 @@
-# Noor Quest — مغامرات نور
+# Noor Quest — مغامرات نور (V2)
+
+Tagline: **Play, Explore, and Learn** / العب، اكتشف، وتعلّم
 
 Offline Islamic educational adventure for Muslim children (ages 6–10).
 
@@ -6,7 +8,17 @@ Built with **Flutter + Flame + Riverpod + GoRouter + Drift/SQLite** and ARB loca
 
 This app lives in `noor_quest/` so it does not overwrite the existing Lighthouse AAC project at the repository root.
 
-## Features (MVP)
+## Features (V2)
+
+- Professional logo + launcher icons
+- Illustrated adventure map with distinct islands
+- 6 distinct avatars + richer Noor mascot
+- Non-musical SFX + Arabic letter/vocab pronunciation
+- Reward idempotency + parent PIN / route protection
+- Arabic pathway stages, Garden pillars intro, offline Noor Teacher
+- Premium/ads/AI scaffolding (disabled — no paid services)
+
+## Features (MVP retained)
 
 - Splash, language selection, child avatar profile (no PII)
 - Adventure home with **Noor** lantern companion (CustomPainter)

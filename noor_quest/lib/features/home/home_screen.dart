@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noor_quest/l10n/app_localizations.dart';
 
 import '../../app/providers.dart';
+import '../../core/audio/sound_manager.dart';
+import '../../core/avatars/avatar_painter.dart';
+import '../../core/brand/logo_mark.dart';
 import '../../core/painters/geometric_bg.dart';
 import '../../core/painters/noor_lantern_painter.dart';
 import '../../core/theme/app_colors.dart';
@@ -22,9 +26,18 @@ class HomeScreen extends ConsumerWidget {
         : 'Friend';
     final reduced = profile?.reducedMotion ?? false;
 
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+
     return Scaffold(
       body: GeometricBackground(
         topColor: AppColors.softTurquoise,
+        variant: BgVariant.sky,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -32,15 +45,22 @@ class HomeScreen extends ConsumerWidget {
               children: [
                 Row(
                   children: [
+                    const LogoMark(size: 44),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         l10n.welcomeHome(name),
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w800,
                               color: AppColors.royalPurple,
                             ),
                       ),
                     ),
+                    if (profile != null)
+                      AvatarBadge(index: profile.avatarIndex, size: 48),
+                    const SizedBox(width: 8),
                     StarsXpBar(
                       stars: progress?.stars ?? 0,
                       xp: progress?.xp ?? 0,
@@ -48,12 +68,13 @@ class HomeScreen extends ConsumerWidget {
                   ],
                 ),
                 const Spacer(),
-                AnimatedNoorLantern(size: 200, reducedMotion: reduced),
-                const SizedBox(height: 16),
+                AnimatedNoorLantern(size: 190, reducedMotion: reduced),
+                const SizedBox(height: 12),
                 Container(
+                  width: double.infinity,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.88),
+                    color: Colors.white.withValues(alpha: 0.9),
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: Text(
@@ -62,7 +83,7 @@ class HomeScreen extends ConsumerWidget {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6),
                 Text(
                   l10n.starsAreRewards,
                   textAlign: TextAlign.center,
@@ -74,27 +95,45 @@ class HomeScreen extends ConsumerWidget {
                 BigKidButton(
                   label: l10n.openMap,
                   icon: Icons.map_rounded,
-                  onPressed: () => context.push('/map'),
+                  onPressed: () {
+                    ref.read(soundManagerProvider).play(Sfx.transition);
+                    context.push('/map');
+                  },
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () => context.push('/achievements'),
-                        icon: const Icon(Icons.emoji_events_rounded),
-                        label: Text(l10n.achievements),
+                        onPressed: () {
+                          ref.read(soundManagerProvider).play(Sfx.tap);
+                          context.push('/teacher');
+                        },
+                        icon: const Icon(Icons.school_rounded),
+                        label: Text(l10n.teacherTitle, maxLines: 1, overflow: TextOverflow.ellipsis),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () => context.push('/parent-gate'),
-                        icon: const Icon(Icons.family_restroom_rounded),
-                        label: Text(l10n.parentArea),
+                        onPressed: () {
+                          ref.read(soundManagerProvider).play(Sfx.tap);
+                          context.push('/achievements');
+                        },
+                        icon: const Icon(Icons.emoji_events_rounded),
+                        label: Text(l10n.achievements, maxLines: 1, overflow: TextOverflow.ellipsis),
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(height: 8),
+                TextButton.icon(
+                  onPressed: () {
+                    ref.read(soundManagerProvider).play(Sfx.tap);
+                    context.push('/parent-gate');
+                  },
+                  icon: const Icon(Icons.family_restroom_rounded),
+                  label: Text(l10n.parentArea),
                 ),
               ],
             ),

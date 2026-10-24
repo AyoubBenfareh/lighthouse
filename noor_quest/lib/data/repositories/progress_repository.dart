@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:drift/drift.dart';
 
 import '../database/app_database.dart';
@@ -11,6 +14,7 @@ class ProgressSnapshot {
     required this.completedGames,
     required this.badges,
     required this.mapVisited,
+    required this.arabicStages,
   });
 
   final int stars;
@@ -19,6 +23,7 @@ class ProgressSnapshot {
   final Set<String> completedGames;
   final Set<String> badges;
   final bool mapVisited;
+  final Set<String> arabicStages;
 }
 
 class ProfileSnapshot {
@@ -30,6 +35,9 @@ class ProfileSnapshot {
     required this.audioEnabled,
     required this.reducedMotion,
     required this.sessionReminders,
+    required this.parentPinHash,
+    required this.sfxVolume,
+    required this.entitlement,
   });
 
   final String displayName;
@@ -39,6 +47,11 @@ class ProfileSnapshot {
   final bool audioEnabled;
   final bool reducedMotion;
   final bool sessionReminders;
+  final String parentPinHash;
+  final double sfxVolume;
+  final String entitlement;
+
+  bool get hasParentPin => parentPinHash.isNotEmpty;
 }
 
 class ProgressRepository {
@@ -49,59 +62,25 @@ class ProgressRepository {
   Stream<ProgressSnapshot> watchProgress() {
     return _db.select(_db.progressRows).watchSingle().asyncMap((row) async {
       final badges = await _db.select(_db.badgeRows).get();
-      return ProgressSnapshot(
-        stars: row.stars,
-        xp: row.xp,
-        unlockedWorlds: _split(row.unlockedWorlds),
-        completedGames: _split(row.completedGames),
-        badges: badges.map((b) => b.id).toSet(),
-        mapVisited: row.mapVisited,
-      );
+      return _mapProgress(row, badges);
     });
   }
 
   Stream<ProfileSnapshot> watchProfile() {
-    return _db.select(_db.profileRows).watchSingle().map(
-          (row) => ProfileSnapshot(
-            displayName: row.displayName,
-            avatarIndex: row.avatarIndex,
-            localeCode: row.localeCode,
-            onboardingComplete: row.onboardingComplete,
-            audioEnabled: row.audioEnabled,
-            reducedMotion: row.reducedMotion,
-            sessionReminders: row.sessionReminders,
-          ),
-        );
+    return _db.select(_db.profileRows).watchSingle().map(_mapProfile);
   }
 
   Future<ProgressSnapshot> getProgress() async {
-    final row = await (_db.select(_db.progressRows)
-          ..where((t) => t.id.equals(1)))
+    final row = await (_db.select(_db.progressRows)..where((t) => t.id.equals(1)))
         .getSingle();
     final badges = await _db.select(_db.badgeRows).get();
-    return ProgressSnapshot(
-      stars: row.stars,
-      xp: row.xp,
-      unlockedWorlds: _split(row.unlockedWorlds),
-      completedGames: _split(row.completedGames),
-      badges: badges.map((b) => b.id).toSet(),
-      mapVisited: row.mapVisited,
-    );
+    return _mapProgress(row, badges);
   }
 
   Future<ProfileSnapshot> getProfile() async {
-    final row = await (_db.select(_db.profileRows)
-          ..where((t) => t.id.equals(1)))
+    final row = await (_db.select(_db.profileRows)..where((t) => t.id.equals(1)))
         .getSingle();
-    return ProfileSnapshot(
-      displayName: row.displayName,
-      avatarIndex: row.avatarIndex,
-      localeCode: row.localeCode,
-      onboardingComplete: row.onboardingComplete,
-      audioEnabled: row.audioEnabled,
-      reducedMotion: row.reducedMotion,
-      sessionReminders: row.sessionReminders,
-    );
+    return _mapProfile(row);
   }
 
   Future<void> setLocale(String code) async {
@@ -127,19 +106,38 @@ class ProgressRepository {
     bool? audioEnabled,
     bool? reducedMotion,
     bool? sessionReminders,
+    double? sfxVolume,
   }) async {
     await (_db.update(_db.profileRows)..where((t) => t.id.equals(1))).write(
       ProfileRowsCompanion(
-        audioEnabled: audioEnabled == null
-            ? const Value.absent()
-            : Value(audioEnabled),
-        reducedMotion: reducedMotion == null
-            ? const Value.absent()
-            : Value(reducedMotion),
+        audioEnabled:
+            audioEnabled == null ? const Value.absent() : Value(audioEnabled),
+        reducedMotion:
+            reducedMotion == null ? const Value.absent() : Value(reducedMotion),
         sessionReminders: sessionReminders == null
             ? const Value.absent()
             : Value(sessionReminders),
+        sfxVolume: sfxVolume == null ? const Value.absent() : Value(sfxVolume),
       ),
+    );
+  }
+
+  Future<void> setParentPin(String pin) async {
+    final hash = _hashPin(pin);
+    await (_db.update(_db.profileRows)..where((t) => t.id.equals(1))).write(
+      ProfileRowsCompanion(parentPinHash: Value(hash)),
+    );
+  }
+
+  Future<bool> verifyParentPin(String pin) async {
+    final profile = await getProfile();
+    if (!profile.hasParentPin) return false;
+    return profile.parentPinHash == _hashPin(pin);
+  }
+
+  Future<void> clearParentPin() async {
+    await (_db.update(_db.profileRows)..where((t) => t.id.equals(1))).write(
+      const ProfileRowsCompanion(parentPinHash: Value('')),
     );
   }
 
@@ -150,33 +148,64 @@ class ProgressRepository {
     await _maybeAwardBadge('map_traveler');
   }
 
-  /// Awards educational stars/XP only — never spiritual merit.
+  /// Idempotent rewards: same [rewardKey] never grants stars/XP twice.
   Future<VictoryResult> completeGame({
     required String gameId,
+    required String rewardKey,
     required int starsEarned,
     required int xpEarned,
     String? unlockWorld,
     String? badgeId,
+    String? unlockArabicStage,
   }) async {
+    final existing = await (_db.select(_db.rewardEventRows)
+          ..where((t) => t.rewardKey.equals(rewardKey)))
+        .getSingleOrNull();
     final current = await getProgress();
+
+    if (existing != null) {
+      return VictoryResult(
+        starsEarned: 0,
+        xpEarned: 0,
+        totalStars: current.stars,
+        totalXp: current.xp,
+        newBadges: const [],
+        alreadyClaimed: true,
+      );
+    }
+
     final games = {...current.completedGames, gameId};
     final worlds = {...current.unlockedWorlds};
     if (unlockWorld != null) worlds.add(unlockWorld);
-
-    // Completing letters unlocks prayer; manners already unlocked at start.
-    if (gameId == 'arabic_letters') worlds.add('prayer');
+    if (gameId == 'arabic_letters' || gameId.startsWith('arabic_stage_')) {
+      worlds.add('prayer');
+      worlds.add('garden');
+    }
+    final stages = {...current.arabicStages};
+    if (unlockArabicStage != null) stages.add(unlockArabicStage);
 
     final newStars = current.stars + starsEarned;
     final newXp = current.xp + xpEarned;
 
-    await (_db.update(_db.progressRows)..where((t) => t.id.equals(1))).write(
-      ProgressRowsCompanion(
-        stars: Value(newStars),
-        xp: Value(newXp),
-        completedGames: Value(games.join(',')),
-        unlockedWorlds: Value(worlds.join(',')),
-      ),
-    );
+    await _db.transaction(() async {
+      await _db.into(_db.rewardEventRows).insert(
+            RewardEventRowsCompanion.insert(
+              rewardKey: rewardKey,
+              stars: Value(starsEarned),
+              xp: Value(xpEarned),
+              grantedAt: DateTime.now(),
+            ),
+          );
+      await (_db.update(_db.progressRows)..where((t) => t.id.equals(1))).write(
+        ProgressRowsCompanion(
+          stars: Value(newStars),
+          xp: Value(newXp),
+          completedGames: Value(games.join(',')),
+          unlockedWorlds: Value(worlds.join(',')),
+          arabicStages: Value(stages.join(',')),
+        ),
+      );
+    });
 
     final awarded = <String>[];
     if (newStars > 0 && !current.badges.contains('first_star')) {
@@ -198,6 +227,7 @@ class ProgressRepository {
       totalStars: newStars,
       totalXp: newXp,
       newBadges: awarded,
+      alreadyClaimed: false,
     );
   }
 
@@ -206,12 +236,14 @@ class ProgressRepository {
       const ProgressRowsCompanion(
         stars: Value(0),
         xp: Value(0),
-        unlockedWorlds: Value('arabic,manners'),
+        unlockedWorlds: Value('arabic,manners,garden'),
         completedGames: Value(''),
         mapVisited: Value(false),
+        arabicStages: Value('stage_1'),
       ),
     );
     await _db.delete(_db.badgeRows).go();
+    await _db.delete(_db.rewardEventRows).go();
   }
 
   Future<void> _maybeAwardBadge(String id) async {
@@ -227,9 +259,44 @@ class ProgressRepository {
         );
   }
 
+  ProgressSnapshot _mapProgress(ProgressRow row, List<BadgeRow> badges) {
+    return ProgressSnapshot(
+      stars: row.stars,
+      xp: row.xp,
+      unlockedWorlds: _split(row.unlockedWorlds),
+      completedGames: _split(row.completedGames),
+      badges: badges.map((b) => b.id).toSet(),
+      mapVisited: row.mapVisited,
+      arabicStages: _split(row.arabicStages),
+    );
+  }
+
+  ProfileSnapshot _mapProfile(ProfileRow row) {
+    return ProfileSnapshot(
+      displayName: row.displayName,
+      avatarIndex: row.avatarIndex,
+      localeCode: row.localeCode,
+      onboardingComplete: row.onboardingComplete,
+      audioEnabled: row.audioEnabled,
+      reducedMotion: row.reducedMotion,
+      sessionReminders: row.sessionReminders,
+      parentPinHash: row.parentPinHash,
+      sfxVolume: row.sfxVolume,
+      entitlement: row.entitlement,
+    );
+  }
+
+  String _hashPin(String pin) {
+    return sha256.convert(utf8.encode('noor-quest-pin:$pin')).toString();
+  }
+
   Set<String> _split(String raw) {
     if (raw.trim().isEmpty) return {};
-    return raw.split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).toSet();
+    return raw
+        .split(',')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toSet();
   }
 }
 
@@ -240,6 +307,7 @@ class VictoryResult {
     required this.totalStars,
     required this.totalXp,
     required this.newBadges,
+    this.alreadyClaimed = false,
   });
 
   final int starsEarned;
@@ -247,4 +315,5 @@ class VictoryResult {
   final int totalStars;
   final int totalXp;
   final List<String> newBadges;
+  final bool alreadyClaimed;
 }

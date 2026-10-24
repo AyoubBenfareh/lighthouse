@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:noor_quest/l10n/app_localizations.dart';
 
 import '../../app/providers.dart';
+import '../../core/audio/sound_manager.dart';
 import '../../core/painters/map_painter.dart';
+import '../../core/painters/noor_lantern_painter.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/widgets/star_burst.dart';
 import '../../data/models/world_info.dart';
@@ -20,14 +22,13 @@ class _AdventureMapScreenState extends ConsumerState<AdventureMapScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _anim;
   WorldInfo? _selected;
+  final _scroll = TransformationController();
 
   @override
   void initState() {
     super.initState();
-    _anim = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 4),
-    )..repeat();
+    _anim = AnimationController(vsync: this, duration: const Duration(seconds: 8))
+      ..repeat();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(progressRepositoryProvider).markMapVisited();
     });
@@ -36,16 +37,26 @@ class _AdventureMapScreenState extends ConsumerState<AdventureMapScreen>
   @override
   void dispose() {
     _anim.dispose();
+    _scroll.dispose();
     super.dispose();
   }
 
-  String _title(AppLocalizations l10n, WorldId id) {
-    return switch (id) {
-      WorldId.arabic => l10n.worldArabic,
-      WorldId.prayer => l10n.worldPrayer,
-      WorldId.garden => l10n.worldGarden,
-      WorldId.manners => l10n.worldManners,
-      WorldId.quran => l10n.worldQuran,
+  String _title(AppLocalizations l10n, WorldId id) => switch (id) {
+        WorldId.arabic => l10n.worldArabic,
+        WorldId.prayer => l10n.worldPrayer,
+        WorldId.garden => l10n.worldGarden,
+        WorldId.manners => l10n.worldManners,
+        WorldId.quran => l10n.worldQuran,
+      };
+
+  String? _routeFor(WorldInfo world) {
+    if (world.comingSoon) return null;
+    return switch (world.id) {
+      WorldId.arabic => '/game/arabic-path',
+      WorldId.prayer => '/game/wudu',
+      WorldId.garden => '/game/garden',
+      WorldId.manners => '/game/manners',
+      WorldId.quran => null,
     };
   }
 
@@ -58,14 +69,18 @@ class _AdventureMapScreenState extends ConsumerState<AdventureMapScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.worldMapTitle),
+        title: Text(
+          l10n.worldMapTitle,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () => context.go('/home'),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12),
+            padding: const EdgeInsetsDirectional.only(end: 12),
             child: StarsXpBar(
               stars: progress?.stars ?? 0,
               xp: progress?.xp ?? 0,
@@ -76,52 +91,85 @@ class _AdventureMapScreenState extends ConsumerState<AdventureMapScreen>
       body: Column(
         children: [
           Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return AnimatedBuilder(
-                  animation: _anim,
-                  builder: (context, _) {
-                    return Stack(
-                      children: [
-                        Positioned.fill(
-                          child: CustomPaint(
-                            painter: AdventureMapPainter(
-                              t: reduced ? 0 : _anim.value,
+            child: InteractiveViewer(
+              transformationController: _scroll,
+              minScale: 0.9,
+              maxScale: 1.8,
+              child: AnimatedBuilder(
+                animation: _anim,
+                builder: (context, _) {
+                  return LayoutBuilder(
+                    builder: (context, constraints) {
+                      final w = constraints.maxWidth;
+                      final h = constraints.maxHeight.clamp(420.0, 900.0);
+                      return SizedBox(
+                        width: w,
+                        height: h,
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: CustomPaint(
+                                painter: AdventureMapPainter(
+                                  t: reduced ? 0 : _anim.value,
+                                ),
+                              ),
                             ),
-                          ),
+                            Positioned(
+                              left: w * 0.42,
+                              top: h * 0.48,
+                              child: IgnorePointer(
+                                child: AnimatedNoorLantern(
+                                  size: 64,
+                                  reducedMotion: reduced,
+                                ),
+                              ),
+                            ),
+                            ...WorldInfo.all.map((world) {
+                              final locked = !world.comingSoon &&
+                                  !unlocked.contains(world.id.name);
+                              return Positioned(
+                                left: w * world.mapX - 44,
+                                top: h * world.mapY - 44,
+                                child: _IslandPin(
+                                  color: Color(world.accent),
+                                  locked: locked,
+                                  comingSoon: world.comingSoon,
+                                  selected: _selected?.id == world.id,
+                                  label: _title(l10n, world.id),
+                                  onTap: () {
+                                    ref.read(soundManagerProvider).play(Sfx.tap);
+                                    setState(() => _selected = world);
+                                  },
+                                ),
+                              );
+                            }),
+                          ],
                         ),
-                        ...WorldInfo.all.map((world) {
-                          final locked =
-                              !world.comingSoon && !unlocked.contains(world.id.name);
-                          return Positioned(
-                            left: constraints.maxWidth * world.mapX - 40,
-                            top: constraints.maxHeight * world.mapY - 40,
-                            child: _IslandPin(
-                              color: Color(world.accent),
-                              locked: locked,
-                              comingSoon: world.comingSoon,
-                              selected: _selected?.id == world.id,
-                              label: _title(l10n, world.id),
-                              onTap: () => setState(() => _selected = world),
-                            ),
-                          );
-                        }),
-                      ],
-                    );
-                  },
-                );
-              },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
           _DetailSheet(
             world: _selected,
             title: _selected == null ? null : _title(l10n, _selected!.id),
-            unlocked: _selected != null &&
-                (unlocked.contains(_selected!.id.name) || _selected!.comingSoon),
+            hint: l10n.selectWorld,
+            canPlay: _selected != null &&
+                !_selected!.comingSoon &&
+                unlocked.contains(_selected!.id.name),
+            comingSoon: _selected?.comingSoon ?? false,
+            locked: _selected != null &&
+                !_selected!.comingSoon &&
+                !unlocked.contains(_selected!.id.name),
             l10n: l10n,
             onPlay: () {
-              final route = _selected?.routeGame;
-              if (route != null) context.push(route);
+              final route = _selected == null ? null : _routeFor(_selected!);
+              if (route != null) {
+                ref.read(soundManagerProvider).play(Sfx.transition);
+                context.push(route);
+              }
             },
           ),
         ],
@@ -155,10 +203,14 @@ class _IslandPin extends StatelessWidget {
         children: [
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            width: selected ? 84 : 72,
-            height: selected ? 84 : 72,
+            width: selected ? 88 : 76,
+            height: selected ? 88 : 76,
             decoration: BoxDecoration(
-              color: color,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [color, Color.lerp(color, Colors.white, 0.35)!],
+              ),
               shape: BoxShape.circle,
               border: Border.all(
                 color: selected ? AppColors.royalPurple : Colors.white,
@@ -166,9 +218,9 @@ class _IslandPin extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: color.withValues(alpha: 0.5),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  color: color.withValues(alpha: 0.45),
+                  blurRadius: 14,
+                  offset: const Offset(0, 5),
                 ),
               ],
             ),
@@ -179,12 +231,12 @@ class _IslandPin extends StatelessWidget {
                       ? Icons.lock_rounded
                       : Icons.explore_rounded,
               color: AppColors.darkText,
-              size: 32,
+              size: 34,
             ),
           ),
           const SizedBox(height: 4),
           SizedBox(
-            width: 100,
+            width: 110,
             child: Text(
               label,
               textAlign: TextAlign.center,
@@ -192,10 +244,7 @@ class _IslandPin extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: AppColors.darkText,
-                    shadows: const [
-                      Shadow(color: Colors.white, blurRadius: 6),
-                    ],
+                    shadows: const [Shadow(color: Colors.white, blurRadius: 6)],
                   ),
             ),
           ),
@@ -209,38 +258,30 @@ class _DetailSheet extends StatelessWidget {
   const _DetailSheet({
     required this.world,
     required this.title,
-    required this.unlocked,
+    required this.hint,
+    required this.canPlay,
+    required this.comingSoon,
+    required this.locked,
     required this.l10n,
     required this.onPlay,
   });
 
   final WorldInfo? world;
   final String? title;
-  final bool unlocked;
+  final String hint;
+  final bool canPlay;
+  final bool comingSoon;
+  final bool locked;
   final AppLocalizations l10n;
   final VoidCallback onPlay;
 
   @override
   Widget build(BuildContext context) {
-    if (world == null) {
-      return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(20),
-        color: Colors.white.withValues(alpha: 0.92),
-        child: Text(
-          l10n.worldMapTitle,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-      );
-    }
-
-    final canPlay = world!.playable && unlocked && !world!.comingSoon;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
+        color: Colors.white.withValues(alpha: 0.96),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
         boxShadow: [
           BoxShadow(
@@ -254,33 +295,30 @@ class _DetailSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            title ?? '',
+            title ?? hint,
             textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w800,
                   color: AppColors.royalPurple,
                 ),
           ),
-          const SizedBox(height: 8),
-          if (world!.comingSoon)
-            Text(
-              l10n.comingSoon,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium,
-            )
-          else if (!unlocked)
-            Text(
-              l10n.locked,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          const SizedBox(height: 12),
-          if (canPlay)
+          if (comingSoon) ...[
+            const SizedBox(height: 8),
+            Text(l10n.comingSoon, textAlign: TextAlign.center),
+          ] else if (locked) ...[
+            const SizedBox(height: 8),
+            Text(l10n.locked, textAlign: TextAlign.center),
+          ],
+          if (canPlay) ...[
+            const SizedBox(height: 12),
             BigKidButton(
               label: l10n.playGame,
               icon: Icons.play_arrow_rounded,
               onPressed: onPlay,
             ),
+          ],
         ],
       ),
     );

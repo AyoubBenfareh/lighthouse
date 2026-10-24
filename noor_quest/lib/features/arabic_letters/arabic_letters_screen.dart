@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:noor_quest/l10n/app_localizations.dart';
 
 import '../../app/providers.dart';
+import '../../core/audio/sound_manager.dart';
 import '../../core/painters/geometric_bg.dart';
 import '../../core/painters/object_painters.dart';
 import '../../core/theme/app_colors.dart';
@@ -56,6 +57,7 @@ class _ArabicLettersScreenState extends ConsumerState<ArabicLettersScreen> {
     final item = _rounds[_index];
     final l10n = AppLocalizations.of(context);
     if (letter == item.letter) {
+      ref.read(soundManagerProvider).play(Sfx.correct);
       setState(() {
         _feedback = l10n.correct;
         _stars += 1;
@@ -75,6 +77,7 @@ class _ArabicLettersScreenState extends ConsumerState<ArabicLettersScreen> {
         });
       }
     } else {
+      ref.read(soundManagerProvider).play(Sfx.incorrect);
       setState(() => _feedback = l10n.almost);
       await Future<void>.delayed(const Duration(milliseconds: 600));
       if (mounted) setState(() => _feedback = null);
@@ -82,12 +85,15 @@ class _ArabicLettersScreenState extends ConsumerState<ArabicLettersScreen> {
   }
 
   Future<void> _finish() async {
+    ref.read(soundManagerProvider).play(Sfx.celebrate);
     final result = await ref.read(progressRepositoryProvider).completeGame(
           gameId: 'arabic_letters',
+          rewardKey: 'arabic_letters_v1_complete',
           starsEarned: _stars.clamp(1, 6),
           xpEarned: 30,
           unlockWorld: 'prayer',
           badgeId: 'letter_learner',
+          unlockArabicStage: 'stage_2',
         );
     if (!mounted) return;
     context.go(
@@ -102,15 +108,18 @@ class _ArabicLettersScreenState extends ConsumerState<ArabicLettersScreen> {
     );
   }
 
-  Future<void> _speak() async {
+  Future<void> _speakWord() async {
     final profile = ref.read(profileProvider).value;
     if (profile?.audioEnabled == false) return;
-    final locale = profile?.localeCode ?? 'en';
     final item = _rounds[_index];
-    await ref.read(speechServiceProvider).speak(
-          locale == 'ar' ? item.wordAr : item.wordFor(locale),
-          localeCode: locale == 'ar' ? 'ar' : locale,
-        );
+    await ref.read(speechServiceProvider).speakArabicLearning(item.wordAr);
+  }
+
+  Future<void> _speakLetter() async {
+    final profile = ref.read(profileProvider).value;
+    if (profile?.audioEnabled == false) return;
+    final item = _rounds[_index];
+    await ref.read(speechServiceProvider).speakArabicLearning(item.letterNameAr);
   }
 
   @override
@@ -165,10 +174,20 @@ class _ArabicLettersScreenState extends ConsumerState<ArabicLettersScreen> {
                       item.wordFor(locale),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    TextButton.icon(
-                      onPressed: _speak,
-                      icon: const Icon(Icons.volume_up_rounded),
-                      label: Text(l10n.hearWord),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton.icon(
+                          onPressed: _speakLetter,
+                          icon: const Icon(Icons.record_voice_over_rounded),
+                          label: Text(l10n.hearLetter),
+                        ),
+                        TextButton.icon(
+                          onPressed: _speakWord,
+                          icon: const Icon(Icons.volume_up_rounded),
+                          label: Text(l10n.hearWord),
+                        ),
+                      ],
                     ),
                     if (_feedback != null)
                       Padding(

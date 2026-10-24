@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:noor_quest/l10n/app_localizations.dart';
 
 import '../../app/providers.dart';
+import '../../core/audio/sound_manager.dart';
 import '../../core/painters/geometric_bg.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/widgets/star_burst.dart';
@@ -30,6 +31,7 @@ class _MannersGameScreenState extends ConsumerState<MannersGameScreen> {
     final l10n = AppLocalizations.of(context);
     final locale = ref.read(localeProvider).languageCode;
     final correct = choice == scenario.correctIndex;
+    ref.read(soundManagerProvider).play(correct ? Sfx.correct : Sfx.incorrect);
     setState(() {
       _answered = true;
       _picked = choice;
@@ -42,8 +44,10 @@ class _MannersGameScreenState extends ConsumerState<MannersGameScreen> {
 
   Future<void> _next() async {
     if (_index >= LessonCatalog.mannersScenarios.length - 1) {
+      ref.read(soundManagerProvider).play(Sfx.celebrate);
       final result = await ref.read(progressRepositoryProvider).completeGame(
             gameId: 'good_manners',
+            rewardKey: 'good_manners_v1_complete',
             starsEarned: _stars.clamp(1, 5),
             xpEarned: 35,
             badgeId: 'kind_heart',
